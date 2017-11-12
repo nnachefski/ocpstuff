@@ -1,0 +1,10 @@
+﻿ansible all -m shell -a "yum remove -y openshift* atomic*"
+ansible all -m shell -a 'rm -rf /etc/origin/*'
+ansible all -m shell -a 'rm -rf /etc/sysconfig/atomic*'
+ansible all -m shell -a "rm -rf /root/.kube"
+ansible etcd -m shell -a "yum remove -y etcd"
+ansible etcd -m shell -a "rm -rf /var/lib/etcd"
+ansible etcd -m shell -a "rm -rf /etc/etcd"
+ansible etcd -m shell -a "rm -rf /var/lib/origin"
+ansible etcd -m shell -a "systemctl stop docker && rm -rf /var/lib/docker && systemctl start docker"
+ansible all -m yum -a "name=atomic-openshift-utils state=latest"

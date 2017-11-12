@@ -1,0 +1,27 @@
+﻿#oc adm policy add-scc-to-group anyuid system:admins
+
+
+cd ~
+oc new-project tensorflow
+oc new-app gcr.io/tensorflow/tensorflow:latest-gpu-py3
+
+
+oc new-project ml-on-ocp
+#cd ~; rm -rf ml-on-ocp; git clone https://github.com/nnachefski/ml-on-ocp.git; cd ml-on-ocp
+oc adm policy add-scc-to-user anyuid -z default
+#oc adm policy add-scc-to-user privileged -z default
+#oc annotate ns ml-on-ocp openshift.io/scc=privileged --overwrite
+oc new-app . --name=jupyter
+
+
+
+
+
+
+oc new-project ocp-ml-demos
+cd ~; rm -rf ocp-ml-demos; git clone https://github.com/nnachefski/ocp-ml-demos.git; cd ocp-ml-demos
+oc adm policy add-scc-to-user anyuid -z default
+oc new-app . --name=nmo --build-env=[]
+
+
+oc new-app . --name=mnist

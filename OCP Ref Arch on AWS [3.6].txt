@@ -1,0 +1,147 @@
+﻿### created and maintained by nick@redhat.com
+https://access.redhat.com/documentation/en-us/reference_architectures/2017/html/deploying_openshift_container_platform_3.5_on_amazon_web_services/deploying_openshift#Provision-Ansible
+
+
+#create the ssh config and set perms
+cat <<EOF > ~/.ssh/config
+Host bastion
+     HostName                 bastion.openshiftdemo.com
+     User                     ec2-user
+     StrictHostKeyChecking    no
+     ProxyCommand             none
+     CheckHostIP              no
+     ForwardAgent             yes
+     IdentityFile             ~/nick-west2.pem
+
+
+Host *.openshiftdemo.com
+     ProxyCommand             ssh ec2-user@bastion -W %h:%p
+     user                     ec2-user
+     IdentityFile             ~/nick-west2.pem
+EOF
+
+
+subscription-manager repos --disable=*
+subscription-manager repos --enable rhel-7-server-rpms
+subscription-manager repos --enable rhel-7-server-optional-rpms
+subscription-manager repos --enable rhel-7-server-ose-3.6-rpms
+subscription-manager repos --enable rhel-7-fast-datapath-rpms
+yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+yum -y install yum-utils 
+yum-config-manager --disable epel
+yum -y install ansible atomic-openshift-utils
+yum -y install python2-pip --enablerepo=epel
+yum -y install --enablerepo=epel \
+                 python2-boto \
+                 python2-boto3 \
+                 pyOpenSSL \
+                 git \
+                 python-netaddr \
+                 python-click \
+                 python-httplib2
+
+
+pip install boto3
+yum -y install ansible pyOpenSSL python-cryptography python-lxml
+
+
+ssh-keygen
+
+
+# set IAM tokens env var and set perms
+cat <<EOF > /etc/profile.d/aws.sh
+export AWS_SECRET_ACCESS_KEY=0HtJT4q9wWruUhtBF+lyzeTSOGkshGbA+k8n0grZ
+export AWS_ACCESS_KEY_ID=AKIAISCH2NH62FPZ3YQQ
+EOF
+chmod +x /etc/profile.d/aws.sh
+source /etc/profile.d/aws.sh
+
+
+#clone the codebase
+cd ~
+git clone https://github.com/openshift/openshift-ansible-contrib.git 
+cd openshift-ansible-contrib/reference-architecture/aws-ansible
+
+
+#kick off the install (Atomic)
+./ose-on-aws.py \
+--stack-name=ocppoc \
+--region=us-west-2 \
+--public-hosted-zone=openshiftdemo.com \
+--rhsm-user=nnachefs@redhat.com \
+--rhsm-password=whyn0w0rk13 \
+--rhsm-pool="Red Hat OpenShift Container Platform, Standard, 2-Core" \
+#--rhsm-pool="60 Day Supported OpenShift Enterprise, 2 Cores Evaluation" \
+--github-client-secret=d55c512fabd2c3297e6e5d318d7420c953feef8b \
+--github-client-id=c6a690268fe37f640760 \
+--github-organization=ocptt \
+--ami=ami-67389007 \
+--containerized=true \
+--deployment-type=openshift-enterprise \
+--keypair=nick-west2 \
+#--byo-bastion=true --bastion-sg=sg-c5d5a4be \
+#--bastion-instance-type=t2.large \
+#--create-key=yes --key-path=~/.ssh/id_rsa.pub \
+
+
+AMIs in us-west-2:
+Atomic 7- ami-67389007
+RHEL7 - ami-6f68cf0f
+CentOS 7 - ami-0c2aba6c
+CentOS Atomic - ami-fbd8bd9b
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+./ose-on-aws.py \
+--stack-name=ocppoc \
+--region=us-west-2 \
+--public-hosted-zone=openshiftdemo.com \
+--rhsm-user=nnachefs@redhat.com \
+--rhsm-password=whyn0w0rk13 \
+--rhsm-pool="Red Hat OpenShift Container Platform, Standard, 2-Core" \
+--github-client-secret=d55c512fabd2c3297e6e5d318d7420c953feef8b \
+--github-client-id=c6a690268fe37f640760 \
+--github-organization=ocptt \
+--ami=ami-67389007 \
+--containerized=true \
+--deployment-type=openshift-enterprise \
+--keypair=nick-west2
+
+
+# origin rpm
+./ose-on-aws.py \
+--stack-name=ocppoc \
+--region=us-west-2 \
+--public-hosted-zone=openshiftdemo.com \
+--github-client-secret=d55c512fabd2c3297e6e5d318d7420c953feef8b \
+--github-client-id=c6a690268fe37f640760 \
+--github-organization=ocptt \
+--ami=ami-0c2aba6c \
+--containerized=false \
+--deployment-type=origin \
+--keypair=nick-west2

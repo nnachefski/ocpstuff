@@ -1,0 +1,337 @@
+﻿# disable router sticky
+Cleanup exited processes:
+docker rm $(docker ps -q -f status=exited)
+Cleanup dangling volumes:
+docker volume rm $(docker volume ls -qf dangling=true)
+Cleanup dangling images:
+docker rmi $(docker images --filter "dangling=true" -q --no-trunc)
+
+
+
+
+## In your project:
+oc annotate route pydemo --overwrite haproxy.router.openshift.io/balance=roundrobin
+## In default project (that contains router):
+oc env dc/router ROUTER_TCP_BALANCE_SCHEME=leastconn
+oc set env dc/router ROUTER_TCP_BALANCE_SCHEME=leastconn
+
+
+
+
+
+
+wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+rpm -Uvh epel-release-latest-7.noarch.rpm
+yum install python-pip -y
+pip install awscl
+
+
+[root@ip-172-30-0-73 ~]# aws configure
+AWS Access Key ID [None]: AKIAIGG46UQUVZQ4T2FQ
+AWS Secret Access Key [None]: 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
+Default region name [None]: us-east-1
+
+
+aws ec2 describe-instances
+
+
+cd /etc/origin/master
+openssl rsa -in master.server.key -text > master.server.pem
+
+
+aws iam upload-server-certificate --server-certificate-name ocpcert --certificate-body file://master.server.crt --private-key file://master.server.pem
+
+
+aws iam upload-server-certificate --server-certificate-name mycert --certificate-body file://certificate.crt --private-key file://privatekey.pem --certificate-chain file://gd_bundle.crt
+
+
+
+
+
+
+
+
+oc get node `hostname` -o yaml
+
+
+oadm manage-node master03.ocp.nicknach.net infra03.ocp.nicknach.net node03.ocp.nicknach.net --schedulable=false; oadm manage-node master03.ocp.nicknach.net infra03.ocp.nicknach.net node03.ocp.nicknach.net --evacuate
+
+
+#re-populate image streams
+cd /usr/share/openshift/
+find examples/ -type f -exec oc create -f {} -n openshift \;
+
+
+#check registry health
+curl -v $(oc get service docker-registry --template '{{.spec.portalIP}}:{{index .spec.ports 0 "port"}}/healthz')
+
+
+#list available image streams
+oc get is -n openshift # (openshift is the “global” project.  Resources put in the project are global)
+
+
+#delete stuff
+oc delete all --all (nuke)
+oc delete all -l key=value
+
+
+#edit a route
+oc edit route/<name>
+
+
+#show docker service reg details
+oc describe svc/docker-registry
+
+
+#import some external images
+oc import-image
+
+
+# manage by label
+oadm manage-node node01.ose.nicknach.net node02.ose.nicknach.net --selector="region=infra"
+
+
+#set master to sched
+oadm manage-node master01.ose.nicknach.net --schedulable=true
+
+
+#create the reg
+oadm registry --create --service-account=registry --credentials=/etc/openshift/master/openshift-registry.kubeconfig --images='openshift3/ose-${component}:${version}' 
+--selector="region=infra" 
+--mount-host=/registry
+
+
+#add persistent vol to reg
+oc volume deploymentconfigs/docker-registry \
+      --add --overwrite --name=registry-storage --mount-path=/registry \
+      --source='{"nfs": { "server": "storage.home.nicknach.net", "path": "/home/docker-registry"}}'
+#expose docker reg as svc
+oc expose svc/docker-registry --hostname=docker-registry.apps.ose.nicknach.net
+
+
+#troubleshoot ephemeral docker container on host
+docker run -it centos /bin/sh
+
+
+# change node label
+oc label node master01.ose.nicknach.net region=infra zone=default --overwrite
+
+
+# curl the registry for status
+ansible nodes -m command -a "curl <MASTER_IP>:5000/healthz"
+
+
+# create user accounts
+htpasswd -b /etc/openshift/openshift-passwd demo demo
+
+
+As admin:
+#list pods on a given node(s)
+oadm manage-node master01.ose.nicknach.net --list-pods
+
+
+# copy the token
+cp /etc/openshift/master/admin.kubeconfig ~/.kube/config
+
+
+#get registry service info
+oc get service docker-registry
+
+
+#log back in as admin user (in case you logged admin out on master)
+oc login -u system:admin -n default
+
+
+#add role to user
+oadm policy add-role-to-user admin alice (-n project)
+
+
+# list pods running on a given node(s)
+oadm manage-node node01.example.com --list-pods
+
+
+#show available image streams
+oc get is -n openshift
+
+
+oadm prune images --keep-younger-than=0m --keep-tag-revisions=0 --confirm=true --registry-url='172.30.153.46:5000'
+
+
+On Nodes:
+#create a persistent volume (for users/apps to claim a piece of)
+cat <<EOF > persist-create.json
+{
+  "apiVersion": "v1",
+  "kind": "PersistentVolume",
+  "metadata": {
+    "name": "pv0001"
+  },
+  "spec": {
+    "capacity": {
+        "storage": "5Gi"
+    },
+    "accessModes": [ "ReadWriteOnce" ],
+    "nfs": {
+        "path": "/home/apps",
+        "server": "storage.home.nicknach.net"
+    },
+    "persistentVolumeReclaimPolicy": "Recycle"
+  }
+}
+EOF
+oc create pv -f persist-create.json
+
+
+# list available pvs on node
+oc get pv
+
+
+As client:
+# user commands
+oc login
+demo
+oc whoami -t
+docker login -u demo -p
+oc logs <DEPLOYMENT>
+oc build-logs <APP NAME>
+
+
+#export an app as a template (getting only the necessary objects)
+oc export --as-template=pydemo bc,is,svc,dc > pydemo.yaml
+
+
+# delete app by label
+oc delete all -l app=foobar
+
+
+# more options for creating new app
+oc new-app (--insecure-registry=true) --docker-image=docker.io/foobar:latest --name=foobar --loglevel=8
+
+
+# expose a service to a hostname (route)
+oc expose svc/foobar --hostname=foobar.example.com --name=foobar
+
+
+# get available PersistentVolumeClaims
+oc get pvc
+
+
+Raw Docker:
+docker export test > test.tar
+docker push foobar/testapp
+docker import -i test.tar
+
+
+curl --cacert /etc/origin/master/ca-bundle.crt https://openshift-cluster.nicknach.net:8443/healthz/ready
+
+
+curl -D - -u username:secret -k "https://ose3-master.sandbox.osecloud.com:8443/oauth/authorize?response_type=token&client_id=openshift-challenging-client" 2>&1 | grep -oP "access_token=\K[^&]*"
+
+
+docker rm $(docker ps -a -q)
+
+
+grubby --update-kernel=ALL --args="video=hyperv_fb:1920x1080"
+system-config-display --reconfig --set-resolution=1920x1080
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+________________
+Create App
+This is an example PHP-application you can use to test your OSEv3 environment.
+
+
+Here is an example:
+user@host$ oc new-app openshift/php~https://github.com/christianh814/php-example-ose3
+
+
+Things to keep in mind:
+* ose new-app Creates a new application on OSE3
+* openshift/php This tells OSEv3 to use the PHP image stream provided by OSE
+* Provide the git URL for the project
+   * Syntax is ”imagestream~source”
+
+
+Once you created the app, start your build
+user@host$ oc start-build php-example-ose3
+
+
+View the build logs if you wish. Note the -1 …this is the build number. Find the build number with oc get builds
+user@host$ oc build-logs php-example-ose3-1
+
+
+Once the build completes; create and add your route:
+user@host$ oc expose service php-example-ose3 \
+--hostname=php-example.cloudapps.example.com
+
+
+Scale up as you wish
+user@host$ oc scale --replicas=3 dc/php-example-ose3
+
+
+If you'd like to add another route (aka “alias”); then you need to specify a new name for it
+user@host$ oc expose service php-example-ose3 --name=hello-openshift \
+--hostname=hello-openshift.cloudapps.example.com
+
+
+oadm policy add-role-to-user cluster-admin <username>

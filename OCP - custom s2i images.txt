@@ -1,0 +1,162 @@
+﻿### How to make custom s2i images
+## switch to ‘openshift’ global project
+oc project openshift
+
+## docker login to registry.  obviously, use your token instead of mine.
+docker login -p qPDd2owg0OaZTUeq92BPUAK21Zdpr-Cf393k7_HLlQc -e unused -u unused  docker-registry.default.svc:5000
+
+## get build tools
+yum -y install git wget libtool 
+# get wonky package from rhel7 optional repo
+yum -y install golang-github-cpuguy83-go-md2man
+
+## create a base image using ‘oc new-build’.  obviously, use your repos instead of mine.
+oc new-build -D $'FROM rhel7.4\nRUN yum-config-manager --add-repo=http://repo.home.nicknach.net/repo/epel \nRUN yum-config-manager --add-repo=http://repo.home.nicknach.net/repo/rhel-7-server-extras-rpms \nRUN yum-config-manager --add-repo=http://repo.home.nicknach.net/repo/rhel-7-server-rpms \nRUN rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release \nRUN echo "testing…" > /etc/test.txt\n\nCMD sleep 240' --name rhel7-custom
+
+## now create the core s2i image from the customized rhel7 image
+cd ~ && rm -rf s2i-base-container
+git clone https://github.com/sclorg/s2i-base-container.git && cd s2i-base-container
+git submodule update --init
+### edit core/Dockerfile.rhel7 and change the FROM image to...
+### docker-registry.default.svc:5000/openshift/rhel7-custom:latest
+make build TARGET=rhel7 VERSIONS=core
+## wait for build to complete and take note of the image ID
+## ignore ERROR regarding ‘docker-squash’
+docker tag <IMAGE_ID> docker-registry.default.svc:5000/openshift/s2i-core-custom:latest
+docker push docker-registry.default.svc:5000/openshift/s2i-core-custom
+
+### edit base/Dockerfile.rhel7 and change the FROM image to…
+### docker-registry.default.svc:5000/openshift/s2i-core-custom:latest
+make build TARGET=rhel7 VERSIONS=base
+## wait for build to complete and take note of the image ID
+docker tag <IMAGE_ID> docker-registry.default.svc:5000/openshift/s2i-base-custom:latest
+docker push docker-registry.default.svc:5000/openshift/s2i-base-custom
+
+## now build the python 3.5 builder image
+cd ~ && rm -rf s2i-python-container
+git clone https://github.com/sclorg/s2i-python-container.git && cd s2i-python-container
+git submodule update --init
+### edit 3.5/Dockerfile.rhel7 and change the FROM image to…
+### docker-registry.default.svc:5000/openshift/s2i-base-custom
+make build TARGET=rhel7 VERSIONS=3.5
+docker tag <IMAGE_ID> docker-registry.default.svc:5000/openshift/s2i-python35-custom:latest
+docker push docker-registry.default.svc:5000/openshift/s2i-python35-custom
+
+## create a test project
+oc new-project custom-s2i-test
+## allow pull from ‘openshift’ to ‘custom-s2i-test’ 
+oc policy add-role-to-group system:image-puller system:serviceaccounts:custom-s2i-test -n openshift
+
+
+## and finally, create the app
+oc new-app s2i-python35-custom~https://github.com/nnachefski/pydemo.git --name=pydemo
+
+
+## open up the pod’s terminal after it builds/deploys and cat the /etc/test.txt file you put in the base rhel7 image.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## use OCP new-build to build custom s2i images
+### (this is hax-ish, use the preferred method above)
+
+
+# switch to ‘openshift’ global project
+oc project openshift
+
+
+# clone the code base, modify FROM image, and perform the build
+cd ~ && rm -rf s2i-base-container
+git clone https://github.com/sclorg/s2i-base-container.git && cd s2i-base-container
+mv -f core/Dockerfile.rhel7 core/Dockerfile
+sed 's/FROM rhel7/FROM openshift\/rhel7-pnc/' -i core/Dockerfile
+# cleanup, this will fail the first time
+oc delete is,bc s2i-core-pnc
+# create a build for the ‘core’ image that is based on the PNC rhel7 image
+oc new-build . --context-dir=core --name s2i-core-pnc
+## wait for it to build
+
+
+# clone the code base, modify FROM image, and perform the build
+mv -f base/Dockerfile.rhel7 base/Dockerfile
+# cleanup, this will fail the first time
+oc delete is,bc s2i-base-pnc 
+oc new-build . --context-dir=base --name s2i-base-pnc 
+## wait for it to build
+
+
+# clone the code base, modify FROM image, and perform the build
+cd ~ && rm -rf s2i-python-container
+git clone https://github.com/sclorg/s2i-python-container.git && cd s2i-python-container
+mv -f 3.5/Dockerfile.rhel7 3.5/Dockerfile
+sed 's/rhscl\/s2i-base-rhel7/openshift\/s2i-base-pnc/' -i 3.5/Dockerfile
+oc delete is,bc s2i-python-pnc 
+oc new-build . --context-dir=3.5 --name s2i-python-pnc
+
+
+## change the “Build From” image in the ‘pydemo’ buildconfig to be s2i-python-pnc
+Builds -> Builds -> pydemo -> Edit -> Build From

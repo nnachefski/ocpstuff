@@ -1,0 +1,45 @@
+﻿### created and maintained by nick@redhat.com
+### you can copy/paste this entire page (at once) into a centos7 terminal (virt or physical)
+# Go here to get the link for the desired version of oc package
+# below, set the oc binary version corresponding to the version that you want to deploy.  
+PACKAGE_LINK=https://github.com/openshift/origin/releases/download/v3.7.0-rc.0/openshift-origin-client-tools-v3.7.0-rc.0-e92d5c5-linux-64bit.tar.gz
+OCP_USER=ocpadmin
+# notice below how the console and apps endpoints are overloaded into the wildcard.  Setup this way, you just need a single wildcard DNS record pointing to this box and that’s it.
+# Ex:  *.origin.ocp.nicknach.net. → 192.168.2.69
+# if you dont have a wildcard, you can use xip DNS services.  Ex: DOMAIN=192.168.2.69.xip.io
+DOMAIN=origin.ocp.nicknach.net
+# configure the docker pool device, example here is using a secondary raw disk (“Option A”)
+DOCKER_DEV=/dev/vdb
+
+
+#### START ####
+rm -rf openshift-origin-client-tools*
+yum install wget -y; cd ~; wget $PACKAGE_LINK
+mkdir octool; tar -xzvf openshift-origin-client-tools*.tar.gz -C octool
+cp octool/openshift-origin-client-tools*/oc /usr/bin
+rm -rf octool
+sudo yum install docker -y
+sudo sed -i '/# INSECURE_REGISTRY/s/# INSECURE_REGISTRY/INSECURE_REGISTRY/' /etc/sysconfig/docker; 
+sed -i "s/--selinux-enabled/--selinux-enabled --insecure-registry\ 172\.30\.0\.0\\/16/" /etc/sysconfig/docker
+sudo cat <<EOF > /etc/sysconfig/docker-storage-setup
+DEVS=$DOCKER_DEV
+VG=docker-vg
+EOF
+sudo docker-storage-setup
+sudo systemctl enable docker --now
+
+
+oc cluster up --metrics=true --logging=true --public-hostname console.$DOMAIN --routing-suffix $DOMAIN --host-data-dir=ocpdata --host-config-dir=ocpconfig --use-existing-config
+
+
+oc login -u system:admin
+oc create user $OCP_USER; oc adm policy add-cluster-role-to-user cluster-admin $OCP_USER
+echo alias allpods=\'watch -n1 oc adm manage-node --selector="" --list-pods -owide\' > /etc/profile.d/ocp.sh
+echo alias allpodsp=\'watch -n1 oc adm manage-node --selector="region=primary" --list-pods -owide\' >> /etc/profile.d/ocp.sh
+echo export DOMAIN=$DOMAIN >> /etc/profile.d/ocp.sh
+chmod +x /etc/profile.d/ocp.sh; source /etc/profile.d/ocp.sh
+# done
+
+
+# type ‘allpods’ and watch the magic happen….
+# access https://console.$DOMAIN:8443

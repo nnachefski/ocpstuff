@@ -1,0 +1,76 @@
+﻿curl  http://gw.home.nicknach.net/ipa/config/ca.crt >> /etc/origin/master/my-ldap-ca-bundle.crt
+
+
+edit master-config.yml.  The following config will use two auth providers, htpasswd and ldap.
+  identityProviders:
+  - challenge: true
+    login: true
+    mappingMethod: claim
+    name: htpasswd_auth
+    provider:
+      apiVersion: v1
+      file: /etc/origin/master/htpasswd
+      kind: HTPasswdPasswordIdentityProvider
+  - name: "my_ldap_provider"
+    challenge: true
+    login: true
+    mappingMethod: claim
+    provider:
+      apiVersion: v1
+      kind: LDAPPasswordIdentityProvider
+      attributes:
+        id:
+        - dn
+        email:
+        - mail
+        name:
+        - cn
+        preferredUsername:
+        - uid
+      bindDN: ""
+      bindPassword: ""
+      ca: my-ldap-ca-bundle.crt
+      insecure: false
+      url: "ldap://gw.home.nicknach.net/cn=users,cn=accounts,dc=home,dc=nicknach,dc=net?uid"
+  masterCA: ca-bundle.crt
+
+
+make a file called ocp_group_sync.conf, and put this config in it.
+kind: LDAPSyncConfig
+apiVersion: v1
+url: ldap://gw.home.nicknach.net
+bindDN: "cn=Directory Manager"
+bindPassword: "welcome1"
+insecure: false
+ca: my-ldap-ca-bundle.crt
+groupUIDNameMapping:
+  "cn=openshift_admins,cn=groups,cn=accounts,dc=home,dc=nicknach,dc=net": admins
+  "cn=openshift_users,cn=groups,cn=accounts,dc=home,dc=nicknach,dc=net": authenticated
+rfc2307:
+    groupsQuery:
+        baseDN: "cn=groups,cn=accounts,dc=home,dc=nicknach,dc=net"
+        scope: sub
+        derefAliases: never
+        pageSize: 0
+        filter: (objectclass=groupOfNames)
+    groupUIDAttribute: dn
+    groupNameAttributes: [ cn ]
+    groupMembershipAttributes: [ member ]
+    usersQuery:
+        baseDN: "cn=users,cn=accounts,dc=home,dc=nicknach,dc=net"
+        scope: sub
+        derefAliases: never
+        pageSize: 0
+    userUIDAttribute: dn
+    userNameAttributes: [ uid ]
+    tolerateMemberNotFoundErrors: false
+    tolerateMemberOutOfScopeErrors: false
+
+
+now make a file called ocp_group_sync-whitelist.conf and put this config in it
+cn=openshift_admins,cn=groups,cn=accounts,dc=home,dc=nicknach,dc=net
+cn=openshift_users,cn=groups,cn=accounts,dc=home,dc=nicknach,dc=net
+
+
+then run this…
+oc adm groups sync --sync-config=ocp_group_sync.conf --confirm --whitelist=ocp_group_sync-whitelist.conf
