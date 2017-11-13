@@ -1,6 +1,7 @@
 ﻿### How to make custom s2i images
 
-## make sure your build box is subscribed to RHN and not local rpm repos, *TODO: Find out why 
+#i used 'root' on the master as my build host
+## make sure your build box is subscribed to RHN and not local rpm repos,  *TODO: fix this requirment 
 subscription-manager repos --disable="*"
 subscription-manager repos \
    --enable=rhel-7-server-rpms \
@@ -24,10 +25,10 @@ yum -y install git wget libtool
 # get wonky package from rhel7 optional repo
 yum -y install golang-github-cpuguy83-go-md2man
 
-### create a base image using ‘oc new-build’.
+### create a base image using ‘oc new-build’ and drop a test file in 
 oc new-build -D $'FROM registry.access.redhat.com/rhel7.4 \nRUN echo "testing…" > /etc/test.txt\n\nCMD sleep 60' --name rhel7-custom
 
-## now create the core s2i image from the customized rhel7 image
+## now create the 'core' s2i image from the customized rhel7 image
 cd ~ && rm -rf s2i-base-container
 git clone https://github.com/sclorg/s2i-base-container.git && cd s2i-base-container
 git submodule update --init
@@ -39,6 +40,7 @@ make build TARGET=rhel7 VERSIONS=core
 docker tag <IMAGE_ID> docker-registry.default.svc:5000/openshift/s2i-core-custom:latest
 docker push docker-registry.default.svc:5000/openshift/s2i-core-custom
 
+## now create the 'base' s2i image 
 ### edit base/Dockerfile.rhel7 and change the FROM image to…
 ### docker-registry.default.svc:5000/openshift/s2i-core-custom:latest
 make build TARGET=rhel7 VERSIONS=base
