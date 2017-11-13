@@ -11,7 +11,7 @@ yum -y install git wget libtool
 yum -y install golang-github-cpuguy83-go-md2man
 
 ## create a base image using ‘oc new-build’.  obviously, use your repos instead of mine.
-oc new-build -D $'FROM rhel7.4\nRUN yum-config-manager --add-repo=http://repo.home.nicknach.net/repo/rhel-7-server-optional-rpms \nRUN yum-config-manager --add-repo=http://repo.home.nicknach.net/repo/epel \nRUN yum-config-manager --add-repo=http://repo.home.nicknach.net/repo/rhel-7-server-extras-rpms \nRUN yum-config-manager --add-repo=http://repo.home.nicknach.net/repo/rhel-7-server-rpms \nRUN rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release \nRUN echo "testing…" > /etc/test.txt\n\nCMD sleep 240' --name rhel7-custom
+oc new-build -D $'FROM registry.access.redhat.com/rhel7.4\nRUN yum-config-manager --add-repo=http://repo.home.nicknach.net/repo/rhel-7-server-optional-rpms \nRUN yum-config-manager --add-repo=http://repo.home.nicknach.net/repo/epel \nRUN yum-config-manager --add-repo=http://repo.home.nicknach.net/repo/rhel-7-server-extras-rpms \nRUN yum-config-manager --add-repo=http://repo.home.nicknach.net/repo/rhel-7-server-rpms \nRUN rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release \nRUN echo "testing…" > /etc/test.txt\n\nCMD sleep 240' --name rhel7-custom
 
 ## now create the core s2i image from the customized rhel7 image
 cd ~ && rm -rf s2i-base-container
