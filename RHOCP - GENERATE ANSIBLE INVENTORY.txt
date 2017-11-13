@@ -134,8 +134,8 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 ##  cloud provider configs
 ##  AWS
 #openshift_cloudprovider_kind=aws
-#openshift_cloudprovider_aws_access_key=AKIAIXTA253IPXJNYL2Q
-#openshift_cloudprovider_aws_secret_key=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
+#openshift_cloudprovider_aws_access_key=
+#openshift_cloudprovider_aws_secret_key=
 ##  Openstack
 #openshift_cloudprovider_kind=openstack
 #openshift_cloudprovider_openstack_auth_url=https://controller.home.nicknach.com:35357/v2.0
