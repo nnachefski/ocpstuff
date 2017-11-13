@@ -59,10 +59,8 @@ oc new-project custom-s2i-test
 ## allow pull from ‘openshift’ to ‘custom-s2i-test’ 
 oc policy add-role-to-group system:image-puller system:serviceaccounts:custom-s2i-test -n openshift
 
-
 ## and finally, create the app
 oc new-app s2i-python35-custom~https://github.com/nnachefski/pydemo.git --name=pydemo
-
 
 ## open up the pod’s terminal after it builds/deploys and cat the /etc/test.txt file you put in the base rhel7 image.
 
