@@ -1,8 +1,20 @@
 ﻿### How to make custom s2i images
+
+## make sure your build box is subscribed to RHN and not local rpm repos, *TODO: Find out why 
+subscription-manager repos --disable="*"
+subscription-manager repos \
+   --enable=rhel-7-server-rpms \
+   --enable=rhel-7-server-extras-rpms \
+   --enable=rhel-7-server-ose-3.6-rpms \
+   --enable=rhel-7-fast-datapath-rpms \
+   --enable=rhel-7-server-optional-rpms \
+   --enable=rhel-server-rhscl-7-rpms   
+
 ## switch to ‘openshift’ global project
 oc project openshift
 
-## docker login to registry.  obviously, use your token instead of mine.
+## docker login to registry.
+## obviously, use your token instead of mine.
 docker login -p qPDd2owg0OaZTUeq92BPUAK21Zdpr-Cf393k7_HLlQc -e unused -u unused  docker-registry.default.svc:5000
 
 ## get build tools
@@ -10,9 +22,8 @@ yum -y install git wget libtool
 # get wonky package from rhel7 optional repo
 yum -y install golang-github-cpuguy83-go-md2man
 
-### create a base image using ‘oc new-build’.  obviously, use your repos instead of mine.
-#oc new-build -D $'FROM registry.access.redhat.com/rhel7.4 \nRUN yum-config-manager --add-repo=http://repo.home.nicknach.net/repo/rhel-7-server-optional-rpms \nRUN yum-config-manager --add-repo=http://repo.home.nicknach.net/repo/rhel-7-server-rpms \nRUN rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release \nRUN echo "testing…" > /etc/test.txt\n\nCMD sleep 60' --name rhel7-custom
-oc new-build -D $'FROM registry.access.redhat.com/rhel7.4 \nRUN yum-config-manager --add-repo=http://repo.home.nicknach.net/repo/epel \nRUN yum-config-manager --add-repo=http://repo.home.nicknach.net/repo/rhel-7-server-extras-rpms \nRUN yum-config-manager --add-repo=http://repo.home.nicknach.net/repo/rhel-7-server-optional-rpms \nRUN yum-config-manager --add-repo=http://repo.home.nicknach.net/repo/rhel-7-server-rpms \nRUN rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release \nRUN echo "testing…" > /etc/test.txt\n\nCMD sleep 60' --name rhel7-custom
+### create a base image using ‘oc new-build’.
+oc new-build -D $'FROM registry.access.redhat.com/rhel7.4 \nRUN echo "testing…" > /etc/test.txt\n\nCMD sleep 60' --name rhel7-custom
 
 ## now create the core s2i image from the customized rhel7 image
 cd ~ && rm -rf s2i-base-container
