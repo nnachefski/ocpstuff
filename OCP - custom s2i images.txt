@@ -10,11 +10,13 @@ subscription-manager repos \
    --enable=rhel-7-server-optional-rpms \
    --enable=rhel-server-rhscl-7-rpms   
 
+## add any local repos you might need to pull from
+yum-config-manager --add-repo=http://repo.home.nicknach.net/repo/custom-packages-repo
+
 ## switch to ‘openshift’ global project
 oc project openshift
 
-## docker login to registry.
-## obviously, use your token instead of mine.
+## docker login to registry (use your token instead of mine)
 docker login -p qPDd2owg0OaZTUeq92BPUAK21Zdpr-Cf393k7_HLlQc -e unused -u unused  docker-registry.default.svc:5000
 
 ## get build tools
