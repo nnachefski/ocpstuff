@@ -53,7 +53,7 @@ cd ~ && rm -rf s2i-python-container
 git clone https://github.com/sclorg/s2i-python-container.git && cd s2i-python-container
 git submodule update --init
 ### edit 3.5/Dockerfile.rhel7 and change the FROM image to…
-### docker-registry.default.svc:5000/openshift/s2i-base-custom
+### docker-registry.default.svc:5000/openshift/s2i-base-custom:latest
 make build TARGET=rhel7 VERSIONS=3.5
 docker tag <IMAGE_ID> docker-registry.default.svc:5000/openshift/s2i-python35-custom:latest
 docker push docker-registry.default.svc:5000/openshift/s2i-python35-custom
