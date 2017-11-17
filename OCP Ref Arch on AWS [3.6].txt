@@ -50,8 +50,8 @@ ssh-keygen
 
 # set IAM tokens env var and set perms
 cat <<EOF > /etc/profile.d/aws.sh
-export AWS_SECRET_ACCESS_KEY=0HtJT4q9wWruUhtBF+lyzeTSOGkshGbA+k8n0grZ
-export AWS_ACCESS_KEY_ID=AKIAISCH2NH62FPZ3YQQ
+export AWS_SECRET_ACCESS_KEY=
+export AWS_ACCESS_KEY_ID=
 EOF
 chmod +x /etc/profile.d/aws.sh
 source /etc/profile.d/aws.sh
