@@ -28,8 +28,8 @@ pip install awscl
 
 
 [root@ip-172-30-0-73 ~]# aws configure
-AWS Access Key ID [None]: AKIAIGG46UQUVZQ4T2FQ
-AWS Secret Access Key [None]: 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
+AWS Access Key ID [None]: 
+AWS Secret Access Key [None]: 
 Default region name [None]: us-east-1
 
 
