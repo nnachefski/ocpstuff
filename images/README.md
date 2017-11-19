@@ -27,7 +27,7 @@ oc new-build https://github.com/sclorg/s2i-base-container.git -i s2i-custom-core
 oc patch bc s2i-custom-base -p '{"spec":{"strategy":{"dockerStrategy":{"dockerfilePath": "Dockerfile.rhel7"}}}}' -n $PROJECT
 oc start-build s2i-custom-base -n $PROJECT
 
-#### # now lets build our 'builder' images for each runtime
+### # now lets build our 'builder' images for each runtime
 
 #### # python 3.5
 oc new-build https://github.com/sclorg/s2i-python-container.git -i s2i-custom-base --context-dir=3.5 --name=s2i-custom-python35 --strategy=docker -n $PROJECT
