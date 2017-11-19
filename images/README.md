@@ -44,7 +44,7 @@ oc start-build s2i-custom-python35 -n $PROJECT
 oc new-project custom-s2i-test
 
 #### # allow pull from ‘openshift’ to ‘custom-s2i-test’ 
-oc policy add-role-to-group system:image-puller system:serviceaccounts:custom-s2i-test -n openshift
+oc policy add-role-to-group system:image-puller system:serviceaccounts:custom-s2i-test -n $PROJECT
 
 #### # and finally, create the app
 oc new-app s2i-python35-custom~https://github.com/nnachefski/pydemo.git --name=pydemo
