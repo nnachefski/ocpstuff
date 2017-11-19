@@ -8,7 +8,7 @@ export $PROJECT=openshift
 ### make sure you have rhscl and optional repos enabled on all openshift build/app nodes
 subscription-manager repos --enable=rhel-7-server-rhscl-rpms --enable=rhel-7-server-optional-rpms
 
-### build the base image from a git repo (clone mine and use it to get started)
+### build the rhel7 base image from a git repo (clone mine and use it to get started)
 oc new-build https://github.com/nnachefski/ocpstuff.git --context-dir=/images/rhel7-custom --name=rhel7-custom -n $PROJECT
 
 ### now build the 'core' s2i image
