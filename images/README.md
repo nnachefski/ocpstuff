@@ -8,7 +8,7 @@ export $PROJECT=openshift
 ### make sure you have rhscl and optional repos enabled on all openshift build/app nodes
 subscription-manager repos --enable=rhel-7-server-rhscl-rpms --enable=rhel-7-server-optional-rpms
 
-### build the rhel7 base image from a git repo (clone mine and use it to get started)
+### build the base rhel7 image from a git repo (clone mine and use it to get started)
 oc new-build https://github.com/nnachefski/ocpstuff.git --context-dir=/images/rhel7-custom --name=rhel7-custom -n $PROJECT
 
 ### now build the 'core' s2i image
@@ -24,5 +24,9 @@ oc new-build https://github.com/sclorg/s2i-base-container.git -i s2i-custom-core
 oc patch bc s2i-custom-base -p '{"spec":{"strategy":{"dockerStrategy":{"dockerfilePath": "Dockerfile.rhel7"}}}}' -n $PROJECT
 oc start-build s2i-custom-base -n $PROJECT
 
-### now lets build our 'builder' images for each runtime
+## now lets build our 'builder' images for each runtime
+### python 3.5
+oc new-build https://github.com/sclorg/s2i-python-container.git -i s2i-custom-base --context-dir=3.5 --name=s2i-custom-python35 --strategy=docker -n $PROJECT
+oc patch bc s2i-custom-python35 -p '{"spec":{"strategy":{"dockerStrategy":{"dockerfilePath": "Dockerfile.rhel7"}}}}' -n $PROJECT
+oc start-build s2i-custom-python35 -n $PROJECT
 
