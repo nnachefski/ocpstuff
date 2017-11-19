@@ -1,5 +1,5 @@
 ﻿### created and maintained by nick@redhat.com
-### This script assumes you are running the install from the master node.  VANILLA RHEL 7
+### This script assumes you are running the install from the master node.  CentOS7
 ### source:
 ### https://docs.openshift.com/container-platform/3.6/install_config/install/prerequisites.html
 #
@@ -14,19 +14,14 @@ access.redhat.com
 # BEGIN
 ## do this on ALL hosts (master/infra/nodes).  copy and paste between the <BREAK>s
 ### SET THESE VARIABLES ###
-#export POOLID=8a85f9874011071c01407da00b997cb2
-export POOLID=8a85f98159eeb53d0159ef8620fd4684
-export ROOT_DOMAIN=ocp.nicknach.net
+export ROOT_DOMAIN=oso.nicknach.net
 export APPS_DOMAIN=apps.$ROOT_DOMAIN 
 export OCP_USER=nicknach
 export OCP_PASSWD=welcome1
-export RHSM_ID=nnachefs@redhat.com
-export RHSM_PW=whyn0w0rk13
 export DOCKER_DEV=/dev/vdb
 export OCP_NFS_MOUNT=/home/data/openshift
 export OCP_NFS_SERVER=storage.home.nicknach.net
 export LDAP_SERVER=gw.home.nicknach.net
-
 
 # make them persistent 
 cat <<EOF >> ~/.bashrc
@@ -34,49 +29,18 @@ export ROOT_DOMAIN=$ROOT_DOMAIN
 export APPS_DOMAIN=$APPS_DOMAIN
 export OCP_USER=$OCP_USER
 export OCP_PASSWD=$OCP_PASSWD
-export RHSM_ID=$OCP_RHSM_ID
-export RHSM_PW=$RHSM_PW
 export DOCKER_DEV=$DOCKER_DEV
 export OCP_NFS_MOUNT=$OCP_NFS_MOUNT
 export OCP_NFS_SERVER=$OCP_NFS_SERVER
 export LDAP_SERVER=$LDAP_SERVER
 EOF
 
-
-# subscribe to RHSM
-yum install subscription-manager yum-utils -y
-subscription-manager register --username=$RHSM_ID --password $RHSM_PW --force
-subscription-manager attach --pool=$POOLID
-subscription-manager repos --disable="*"
-subscription-manager repos \
-   --enable=rhel-7-server-rpms \
-   --enable=rhel-7-server-extras-rpms \
-   --enable=rhel-7-server-ose-3.6-rpms \
-   --enable=rhel-7-fast-datapath-rpms \
-#   --enable=rhel-7-server-rhscl-rpms \
-#   --enable=rhel-7-server-optional-rpms \
-#   --enable=rh-gluster-3-for-rhel-7-server-rpms \
-#   --enable=rhel-7-server-3scale-amp-2.0-rpms
-
-# Or, if you have internal repos
-#yum-config-manager --disable “*”
-#yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-rpms
-#yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-extras-rpms
-#yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-ose-3.6-rpms
-#yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-fast-datapath-rpms
-#yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rh-gluster-3-for-rhel-7-server-rpms
-#yum-config-manager --add-repo http://repo.home.nicknach.net/repo/epel
-#yum-config-manager --add-repo http://repo.home.nicknach.net/repo/cuda
-#yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-3scale-amp-2.0-rpms
-
-
 ## install some general pre-req packages 
 yum install -y yum-utils wget git net-tools bind-utils iptables-services bridge-utils bash-completion nfs-utils dstat mlocate
 
-
 ## install openshift specific pre-reqs
-yum install -y atomic-openshift-utils openshift-ansible atomic-openshift-clients
-
+#yum install -y atomic-openshift-utils openshift-ansible atomic-openshift-clients
+yum install -y 
 
 ## install docker (non-Atomic installs)
 yum install -y docker docker-logrotate
