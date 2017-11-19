@@ -18,7 +18,7 @@ yum-config-manager --add-repo=http://repo.home.nicknach.net/repo/custom-packages
 oc project openshift
 
 ## docker login to registry (use your token instead of mine)
-docker login -p qPDd2owg0OaZTUeq92BPUAK21Zdpr-Cf393k7_HLlQc -e unused -u unused  docker-registry.default.svc:5000
+#docker login -p qPDd2owg0OaZTUeq92BPUAK21Zdpr-Cf393k7_HLlQc -e unused -u unused  docker-registry.default.svc:5000
 
 ## get build tools
 yum -y install git wget libtool 
@@ -26,7 +26,11 @@ yum -y install git wget libtool
 yum -y install golang-github-cpuguy83-go-md2man
 
 ### create a base image using ‘oc new-build’ and drop a test file in 
-oc new-build -D $'FROM registry.access.redhat.com/rhel7.4 \nRUN echo "testing…" > /etc/test.txt\n\nCMD sleep 60' --name rhel7-custom
+#oc new-build -D $'FROM registry.access.redhat.com/rhel7.4 \nRUN echo "testing…" > /etc/test.txt\n\nCMD sleep 60' --name rhel7-custom
+oc new-build https://github.com/nnachefski/ocpstuff.git --context-dir=/images/rhel7-custom
+
+oc new-build https://github.com/sclorg/s2i-base-container.git -context-dir=core --help
+
 
 ## now create the 'core' s2i image from the customized rhel7 image
 cd ~ && rm -rf s2i-base-container
