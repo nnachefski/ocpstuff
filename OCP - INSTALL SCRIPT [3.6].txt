@@ -10,7 +10,6 @@ subscription.rhn.redhat.com
 registry.access.redhat.com
 access.redhat.com
 
-
 # BEGIN
 ## do this on ALL hosts (master/infra/nodes).  copy and paste between the <BREAK>s
 ### SET THESE VARIABLES ###
@@ -27,7 +26,6 @@ export OCP_NFS_MOUNT=/home/data/openshift
 export OCP_NFS_SERVER=storage.home.nicknach.net
 export LDAP_SERVER=gw.home.nicknach.net
 
-
 # make them persistent 
 cat <<EOF >> ~/.bashrc
 export ROOT_DOMAIN=$ROOT_DOMAIN
@@ -42,17 +40,16 @@ export OCP_NFS_SERVER=$OCP_NFS_SERVER
 export LDAP_SERVER=$LDAP_SERVER
 EOF
 
-
 # subscribe to RHSM
-yum install subscription-manager yum-utils -y
-subscription-manager register --username=$RHSM_ID --password $RHSM_PW --force
-subscription-manager attach --pool=$POOLID
-subscription-manager repos --disable="*"
-subscription-manager repos \
-   --enable=rhel-7-server-rpms \
-   --enable=rhel-7-server-extras-rpms \
-   --enable=rhel-7-server-ose-3.6-rpms \
-   --enable=rhel-7-fast-datapath-rpms \
+#yum install subscription-manager yum-utils -y
+#subscription-manager register --username=$RHSM_ID --password $RHSM_PW --force
+#subscription-manager attach --pool=$POOLID
+#subscription-manager repos --disable="*"
+#subscription-manager repos \
+#   --enable=rhel-7-server-rpms \
+#   --enable=rhel-7-server-extras-rpms \
+#   --enable=rhel-7-server-ose-3.6-rpms \
+#   --enable=rhel-7-fast-datapath-rpms \
 #   --enable=rhel-7-server-rhscl-rpms \
 #   --enable=rhel-7-server-optional-rpms \
 #   --enable=rh-gluster-3-for-rhel-7-server-rpms \
@@ -62,43 +59,35 @@ subscription-manager repos \
 #yum-config-manager --disable “*”
 #yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-rpms
 #yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-extras-rpms
-#yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-ose-3.6-rpms
-#yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-fast-datapath-rpms
-#yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rh-gluster-3-for-rhel-7-server-rpms
+yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-ose-3.6-rpms
+yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-fast-datapath-rpms
+yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rh-gluster-3-for-rhel-7-server-rpms
 #yum-config-manager --add-repo http://repo.home.nicknach.net/repo/epel
 #yum-config-manager --add-repo http://repo.home.nicknach.net/repo/cuda
 #yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-3scale-amp-2.0-rpms
 
-
 ## install some general pre-req packages 
 yum install -y yum-utils wget git net-tools bind-utils iptables-services bridge-utils bash-completion nfs-utils dstat mlocate
-
 
 ## install openshift specific pre-reqs
 yum install -y atomic-openshift-utils openshift-ansible atomic-openshift-clients
 
-
 ## install docker (non-Atomic installs)
 yum install -y docker docker-logrotate
 
-
 ## install gluster packages
-#yum -y install cns-deploy heketi-client
-
+yum -y install cns-deploy heketi-client
 
 ### if using 3scale
 #yum install 3scale-amp-template -y
-
 
 ## switch to a local registry mirror
 #sed -i 's/registry.access.redhat.com/registry.home.nicknach.net:5000/' /etc/sysconfig/docker
 #sed -i "/INSECURE_REGISTRY/s/--insecure-registry'/--insecure-registry registry.home.nicknach.net:5000'/" /etc/sysconfig/docker
 #sed -i '/# INSECURE_REGISTRY/s/^# //' /etc/sysconfig/docker
 
-
 #yum update -y 
 # reboot
-
 
 ## configure the docker pool device
 cat <<EOF > /etc/sysconfig/docker-storage-setup
@@ -109,7 +98,6 @@ EOF
 # and setup the storage
 docker-storage-setup
 # <BREAK>
-
 
 # On main master only now
 ## make passwordless key for ose installer usage
