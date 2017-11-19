@@ -15,6 +15,7 @@ oc new-build https://github.com/nnachefski/ocpstuff.git --context-dir=/images/rh
 
 ### now build the 'core' s2i image
 oc new-build https://github.com/sclorg/s2i-base-container.git -i rhel7-custom --context-dir=core --name=s2i-custom-core --strategy=docker -n $PROJECT
+
 ### work-around until this feature gets implemented 
 ### https://bugzilla.redhat.com/show_bug.cgi?id=1382938 
 oc patch bc s2i-custom-core -p '{"spec":{"strategy":{"dockerStrategy":{"dockerfilePath": "Dockerfile.rhel7"}}}}' -n $PROJECT
@@ -22,6 +23,7 @@ oc start-build s2i-custom-core -n openshift
 
 ### now build the 'base' s2i image
 oc new-build https://github.com/sclorg/s2i-base-container.git -i s2i-custom-core --context-dir=base --name=s2i-custom-base --strategy=docker -n $PROJECT
+
 ### work-around, see above
 oc patch bc s2i-custom-base -p '{"spec":{"strategy":{"dockerStrategy":{"dockerfilePath": "Dockerfile.rhel7"}}}}' -n $PROJECT
 oc start-build s2i-custom-base -n $PROJECT
