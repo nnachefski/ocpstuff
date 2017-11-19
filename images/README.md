@@ -8,7 +8,7 @@ export PROJECT=openshift
 #### make sure you have rhel-7-server-rhscl-rpms and rhel-7-server-optional-rpms repos enabled on all openshift build/app nodes
 
 #### # there is also a requirment that all boxes doing builds be connected to upstream RHN and not local repos (even when all necessary channels are available locally).  https://bugzilla.redhat.com/show_bug.cgi?id=1514989
-#### # work-around this by enabling your local repos but also registering the nodes and attaching a pool at the same time 
+#### # work-around this by registering the nodes and attaching a pool
 
 #### # build the base rhel7 image from a git repo (clone mine or use it directly to get started)
 oc new-build https://github.com/nnachefski/ocpstuff.git --context-dir=/images/rhel7-custom --name=rhel7-custom -n $PROJECT
