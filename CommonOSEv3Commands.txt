@@ -1,16 +1,9 @@
-﻿# disable router sticky
-Cleanup exited processes:
-
-
-# docker cleanup
+﻿# docker cleanup
 docker rm $(docker ps -q -f status=exited)
 docker volume rm $(docker volume ls -qf dangling=true)
 docker rmi $(docker images --filter "dangling=true" -q --no-trunc)
 
-
-
-
-## In your project:
+# disable router sticky
 oc annotate route pydemo --overwrite haproxy.router.openshift.io/balance=roundrobin
 ## In default project (that contains router):
 oc env dc/router ROUTER_TCP_BALANCE_SCHEME=leastconn
@@ -18,9 +11,7 @@ oc set env dc/router ROUTER_TCP_BALANCE_SCHEME=leastconn
 
 
 
-
-
-
+## upload cert to aws for use in ELBs
 wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 rpm -Uvh epel-release-latest-7.noarch.rpm
 yum install python-pip -y
