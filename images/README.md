@@ -3,7 +3,7 @@
 #### this functionality is higly desired by ops folks when maintaining custom images (and their derived s2i builders)
 
 ### using the 'openshift' project will allow others to use these images
-export $PROJECT=openshift
+export PROJECT=openshift
 
 ### make sure you have rhscl and optional repos enabled on all openshift build/app nodes
 subscription-manager repos --enable=rhel-7-server-rhscl-rpms --enable=rhel-7-server-optional-rpms
