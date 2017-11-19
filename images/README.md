@@ -47,7 +47,7 @@ oc new-project custom-s2i-test
 oc policy add-role-to-group system:image-puller system:serviceaccounts:custom-s2i-test -n $PROJECT
 
 #### # and finally, create the app
-oc new-app s2i-python35-custom~https://github.com/nnachefski/pydemo.git --name=pydemo
+oc new-app https://github.com/nnachefski/pydemo.git -i s2i-custom-python35 --name=pydemo
 
 #### # click to the terminal tab and look for the files that you added to the rhel7-custom base image
   
