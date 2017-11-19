@@ -5,7 +5,7 @@
 #### # using the 'openshift' project will allow others to use these images
 export PROJECT=openshift
 
-#### make sure you have rhel-7-server-rhscl-rpms and rhel-7-server-optional-rpms repos enabled on all openshift build/app nodes
+#### # make sure you have rhel-7-server-rhscl-rpms and rhel-7-server-optional-rpms repos enabled on all openshift build/app nodes
 
 #### # there is also a requirment that all boxes doing builds be connected to upstream RHN and not local repos (even when all necessary channels are available locally).  https://bugzilla.redhat.com/show_bug.cgi?id=1514989
 #### # work-around this by registering the nodes and attaching a pool
