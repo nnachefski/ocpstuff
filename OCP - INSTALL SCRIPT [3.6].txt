@@ -76,7 +76,7 @@ yum install -y atomic-openshift-utils openshift-ansible atomic-openshift-clients
 yum install -y docker docker-logrotate
 
 ## install gluster packages
-yum -y install cns-deploy heketi-client
+#yum -y install cns-deploy heketi-client
 
 ### if using 3scale
 #yum install 3scale-amp-template -y
@@ -97,8 +97,8 @@ WIPE_SIGNATURES=true
 EOF
 # and setup the storage
 docker-storage-setup
-# <BREAK>
 
+# <BREAK>
 # On main master only now
 ## make passwordless key for ose installer usage
 ssh-keygen
@@ -112,9 +112,8 @@ for i in `cat list.txt`; do ssh-copy-id root@$i; done
 ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/byo/config.yml
 # if you need explicitly provide a private keyfile
 --private-key ~/.ssh/nick-west2.pem
-
-
 ## verify the install was successful (oc get nodes)
+
 # <BREAK> add test user 
 ## aliases for ops
 echo alias allpods=\'watch -n1 oc adm manage-node --selector="" --list-pods -owide\' > /etc/profile.d/ocp.sh
@@ -124,7 +123,6 @@ chmod +x /etc/profile.d/ocp.sh
 oc patch ns openshift-infra -p '{"metadata": {"annotations": {"openshift.io/node-selector": "region=infra"}}}'
 ## set gluster to be the default storageclass
 oc annotate storageclass glusterfs-storage storageclass.beta.kubernetes.io/is-default-class="true"
-# <BREAK>
 ## setup group sync and run it once
 oc adm groups sync --sync-config=/root/ocp_group_sync.conf --confirm --whitelist=/root/ocp_group_sync-whitelist.conf
 ### set policies (perms) on your sync’ed groups
@@ -134,12 +132,12 @@ oc adm policy add-role-to-group basic-user authenticated
 #oc adm policy add-scc-to-group anyuid system:admins
 ## entitle the current project’s default svcaccount to run as anyuid
 #oadm policy add-scc-to-user anyuid -z default
-# <BREAK>
+
 ## setup a local htpasswd user if not using LDAP or SSO
 #htpasswd -b /etc/origin/master/htpasswd $OCP_USER $OCP_PASSWD
 ## set user to be cluster-admin role
 #oc adm policy add-cluster-role-to-user cluster-admin $OCP_USER
-# <BREAK>
+
 ## temporarily set scheduling for masters
 #oc adm manage-node --selector="region=infra" --schedulable=true
 ## create the registry manually
@@ -149,7 +147,7 @@ oc adm policy add-role-to-group basic-user authenticated
 #oc adm policy add-scc-to-user hostnetwork -z router
 #oc adm policy add-cluster-role-to-user system:router system:serviceaccount:default:router
 oc adm manage-node --selector="region=infra" --schedulable=false
-# <BREAK>
+
 ### deploying 3scale
 #yum install -y 3scale-amp-template
 #oc new-project 3scaleamp
