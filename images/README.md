@@ -2,7 +2,7 @@
 #### note that because we are linking images streams, any subsequent modifications to the rhel7-custom image will send imagechange triggers to the entire s2i chain
 #### this functionality is higly desired by ops folks when maintaining custom images (and their derivied runtimes builders)
 
-### make sure you have rhscl and options repos enabled on all nodes
+### make sure you have rhscl and options repos enabled on all openshift build/app nodes
 subscription-manager repos --enable=rhel-7-server-rhscl-rpms --enable=rhel-7-server-optional-rpms
 
 ### build the base image
