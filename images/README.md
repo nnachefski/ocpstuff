@@ -36,3 +36,18 @@ oc new-build https://github.com/sclorg/s2i-python-container.git -i s2i-custom-ba
 oc patch bc s2i-custom-python35 -p '{"spec":{"strategy":{"dockerStrategy":{"dockerfilePath": "Dockerfile.rhel7"}}}}' -n $PROJECT
 oc start-build s2i-custom-python35 -n $PROJECT
 
+#### # build whatever else runtimes you need
+
+### # now lets test with a small python/django app
+
+#### # create a test project
+oc new-project custom-s2i-test
+
+#### # allow pull from ‘openshift’ to ‘custom-s2i-test’ 
+oc policy add-role-to-group system:image-puller system:serviceaccounts:custom-s2i-test -n openshift
+
+#### # and finally, create the app
+oc new-app s2i-python35-custom~https://github.com/nnachefski/pydemo.git --name=pydemo
+
+#### # click to the terminal tab and look for the files that you added to the rhel7-custom base image
+  
