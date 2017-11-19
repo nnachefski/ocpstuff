@@ -18,9 +18,11 @@ oc new-build https://github.com/sclorg/s2i-base-container.git -i rhel7-custom --
 oc patch bc s2i-custom-core -p '{"spec":{"strategy":{"dockerStrategy":{"dockerfilePath": "Dockerfile.rhel7"}}}}' -n $PROJECT
 oc start-build s2i-custom-core -n openshift
 
-### build the 'base' s2i image
+### now build the 'base' s2i image
 oc new-build https://github.com/sclorg/s2i-base-container.git -i s2i-custom-core --context-dir=base --name=s2i-custom-base --strategy=docker -n $PROJECT
 ### work-around 
 oc patch bc s2i-custom-base -p '{"spec":{"strategy":{"dockerStrategy":{"dockerfilePath": "Dockerfile.rhel7"}}}}' -n $PROJECT
 oc start-build s2i-custom-base -n $PROJECT
+
+### now lets build our 'builder' images for each runtime
 
