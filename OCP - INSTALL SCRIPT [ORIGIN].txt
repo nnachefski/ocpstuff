@@ -43,11 +43,11 @@ yum install -y yum-utils wget git net-tools bind-utils iptables-services bridge-
 yum install -y 
 
 ## install docker (non-Atomic installs)
+rm -rf /var/lib/docker
 yum install -y docker docker-logrotate
 
-
 ## install gluster packages
-#yum -y install cns-deploy heketi-client
+yum -y install cns-deploy heketi-client
 
 
 ### if using 3scale
