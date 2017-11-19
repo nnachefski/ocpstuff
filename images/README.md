@@ -1,11 +1,11 @@
 ## How to generate an s2i image chain from a customized RHEL7 base image using native buildconfigs and imagestreams
 #### note that because we are linking images streams, any subsequent modifications to the rhel7-custom image will send imagechange triggers to the entire s2i chain
-#### this functionality is higly desired by ops folks when maintaining custom images (and their derivied runtimes builders)
+#### this functionality is higly desired by ops folks when maintaining custom images (and their derived s2i builders)
 
-### make sure you have rhscl and options repos enabled on all openshift build/app nodes
+### make sure you have rhscl and optional repos enabled on all openshift build/app nodes
 subscription-manager repos --enable=rhel-7-server-rhscl-rpms --enable=rhel-7-server-optional-rpms
 
-### build the base image
+### build the base image from a git repo (clone mine and use it to get started)
 oc new-build https://github.com/nnachefski/ocpstuff.git --context-dir=/images/rhel7-custom --name=rhel7-custom -n openshift
 
 ### now build the 'core' s2i image
