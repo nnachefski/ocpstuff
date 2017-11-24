@@ -13,7 +13,8 @@ export PROJECT=openshift
 #### # build the base rhel7 image from a git repo (clone mine or use it directly to get started)
 oc new-build https://github.com/nnachefski/ocpstuff.git --context-dir=/images/rhel7-custom --name=rhel7-custom -n $PROJECT
 
-#### # now build the 'core' s2i image
+#### # now build the 'core' s2i image.  this build will initially fail because there is no way to pass dockerfilePath on new-build
+#### # see next step for work-around
 oc new-build https://github.com/sclorg/s2i-base-container.git -i rhel7-custom --context-dir=core --name=s2i-custom-core --strategy=docker -n $PROJECT
 
 #### # Another feature is needed to allow a new-build to pass a "Dockerfile" to build (within the context-dir). 
