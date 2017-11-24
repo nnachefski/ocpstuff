@@ -38,7 +38,8 @@ oc new-build https://github.com/sclorg/s2i-python-container.git -i s2i-custom-ba
 oc patch bc s2i-custom-python35 -p '{"spec":{"strategy":{"dockerStrategy":{"dockerfilePath": "Dockerfile.rhel7"}}}}' -n $PROJECT
 oc start-build s2i-custom-python35 -n $PROJECT
 
-#### # build whatever else runtimes you need, https://github.com/sclorg
+#### # build whatever else runtimes you need
+#### # https://github.com/sclorg
 
 ### # now lets test with a small python/django app
 
