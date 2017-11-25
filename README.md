@@ -1,2 +1,2 @@
 # ocpstuff
-Written and maintained by nick nachefski
+### maintained by nachefski@gmail.com
