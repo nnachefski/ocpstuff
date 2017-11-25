@@ -1,47 +1,8 @@
-﻿# docker cleanup
-docker rm $(docker ps -q -f status=exited)
-docker volume rm $(docker volume ls -qf dangling=true)
-docker rmi $(docker images --filter "dangling=true" -q --no-trunc)
-
-# disable router sticky
+﻿# disable router sticky
 oc annotate route pydemo --overwrite haproxy.router.openshift.io/balance=roundrobin
 ## In default project (that contains router):
 oc env dc/router ROUTER_TCP_BALANCE_SCHEME=leastconn
 oc set env dc/router ROUTER_TCP_BALANCE_SCHEME=leastconn
-
-
-
-## upload cert to aws for use in ELBs
-wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-rpm -Uvh epel-release-latest-7.noarch.rpm
-yum install python-pip -y
-pip install awscl
-
-
-[root@ip-172-30-0-73 ~]# aws configure
-AWS Access Key ID [None]: 
-AWS Secret Access Key [None]: 
-Default region name [None]: us-east-1
-
-
-aws ec2 describe-instances
-
-
-cd /etc/origin/master
-openssl rsa -in master.server.key -text > master.server.pem
-
-
-aws iam upload-server-certificate --server-certificate-name ocpcert --certificate-body file://master.server.crt --private-key file://master.server.pem
-
-
-aws iam upload-server-certificate --server-certificate-name mycert --certificate-body file://certificate.crt --private-key file://privatekey.pem --certificate-chain file://gd_bundle.crt
-
-
-
-
-
-
-
 
 oc get node `hostname` -o yaml
 
