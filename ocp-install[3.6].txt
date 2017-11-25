@@ -115,24 +115,39 @@ ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/byo/config.yml
 --private-key ~/.ssh/nick-west2.pem
 ## verify the install was successful (oc get nodes)
 
-# <BREAK> add test user 
+# <BREAK> 
 ## aliases for ops
 echo alias allpods=\'watch -n1 oc adm manage-node --selector="" --list-pods -owide\' > /etc/profile.d/ocp.sh
 echo alias allpodsp=\'watch -n1 oc adm manage-node --selector="region=primary" --list-pods -owide\' >> /etc/profile.d/ocp.sh
 chmod +x /etc/profile.d/ocp.sh
+
 ## pin all the metrics pods to the infra nodes
 oc patch ns openshift-infra -p '{"metadata": {"annotations": {"openshift.io/node-selector": "region=infra"}}}'
+
 ## set gluster to be the default storageclass
 oc annotate storageclass glusterfs-storage storageclass.beta.kubernetes.io/is-default-class="true"
+
 ## setup group sync and run it once
-oc adm groups sync --sync-config=/root/ocp_group_sync.conf --confirm --whitelist=/root/ocp_group_sync-whitelist.conf
+wget 
+wget /etc/origin/master/ocp_group_sync.conf 
+oc adm groups sync --sync-config=/etc/origin/master/ocp_group_sync.conf --confirm --whitelist=/etc/origin/master/ocp_group_sync-whitelist.conf
+
 ### set policies (perms) on your sync’ed groups
 oc adm policy add-cluster-role-to-group cluster-admin admins
 oc adm policy add-role-to-group basic-user authenticated
+
 ## entitle admins group to run pods as root
 #oc adm policy add-scc-to-group anyuid system:admins
+
 ## entitle the current project’s default svcaccount to run as anyuid
 #oadm policy add-scc-to-user anyuid -z default
+
+### setup a cronjob on ansible host to prune images
+echo 'ansible all -m shell -a "docker rm \$(docker ps -q -f status=exited); docker volume rm \$(docker volume ls -qf dangling=true); docker rmi \$(docker images --filter "dangling=true" -q --no-trunc)"' >> /etc/cron.daily/ocp-image-clean.sh && chmod +x /etc/cron.daily/ocp-image-clean.sh
+
+### setup a cronjob on ansible host to sync groups
+echo 'oc adm groups sync --sync-config=/etc/origin/master/ocp_group_sync.conf --confirm --whitelist=/etc/origin/master/ocp_group_sync-whitelist.conf' > /etc/cron.daily/ocp-group-sync.sh && chmod +x /etc/cron.daily/ocp-group-sync.sh 
+
 
 ## setup a local htpasswd user if not using LDAP or SSO
 #htpasswd -b /etc/origin/master/htpasswd $OCP_USER $OCP_PASSWD
