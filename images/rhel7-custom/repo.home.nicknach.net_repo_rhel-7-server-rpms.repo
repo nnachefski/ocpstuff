@@ -1,0 +1,5 @@
+[repo.home.nicknach.net_repo_rhel-7-server-rpms]
+name=added from: http://repo.home.nicknach.net/repo/rhel-7-server-rpms
+baseurl=http://repo.home.nicknach.net/repo/rhel-7-server-rpms
+enabled=1
+gpgcheck=1
