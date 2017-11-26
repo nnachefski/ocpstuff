@@ -70,8 +70,6 @@ for i in list:
     print " - "+cmd
     os.system(cmd)
     
-    continue
-
     cmd = "docker pull %s:%s"%(i, tag)
     print " - "+cmd
     os.system(cmd)
