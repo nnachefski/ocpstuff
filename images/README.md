@@ -17,8 +17,8 @@ oc new-build https://github.com/nnachefski/ocpstuff.git --context-dir=/images/rh
 #### # see next step for work-around
 oc new-build https://github.com/sclorg/s2i-base-container.git -i rhel7-custom --context-dir=core --name=s2i-custom-core --strategy=docker -n $PROJECT
 
-#### # Another feature is needed to allow a new-build to pass a "Dockerfile" to build (within the context-dir). 
-#### # work-around by creating then patching the needed bc, https://bugzilla.redhat.com/show_bug.cgi?id=1382938 
+#### # a feature is needed to allow a new-build to pass a "Dockerfile" to build (within the context-dir). 
+#### # work-around by patching the bc, https://bugzilla.redhat.com/show_bug.cgi?id=1382938 
 oc patch bc s2i-custom-core -p '{"spec":{"strategy":{"dockerStrategy":{"dockerfilePath": "Dockerfile.rhel7"}}}}' -n $PROJECT
 oc start-build s2i-custom-core -n openshift
 
