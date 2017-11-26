@@ -1,0 +1,5 @@
+[epel]
+name=added from: http://repo.home.nicknach.net/repo/epel
+baseurl=http://repo.home.nicknach.net/repo/epel
+enabled=1
+gpgcheck=1
