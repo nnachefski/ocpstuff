@@ -1,8 +1,9 @@
 #!/usr/bin/python
 import sys,os
 
-image_dir = '/home/data'
-tag = 'latest'
+image_dir = '/tmp'
+#tag = 'latest'
+tag = 'v3.6.173.0.49'
 
 list = [
 'registry.access.redhat.com/openshift3/ose-ansible',
