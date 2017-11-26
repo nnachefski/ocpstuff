@@ -1,5 +1,5 @@
-[rhel-7-server-rhscl-rpms]
-name=added from: http://repo.home.nicknach.net/repo/rhel-7-server-rhscl-rpms
-baseurl=http://repo.home.nicknach.net/repo/rhel-7-server-rhscl-rpms
+[rhel-server-rhscl-7-rpms]
+name=added from: http://repo.home.nicknach.net/repo/rhel-server-rhscl-7-rpms
+baseurl=http://repo.home.nicknach.net/repo/rhel-server-rhscl-7-rpms
 enabled=1
 gpgcheck=1
