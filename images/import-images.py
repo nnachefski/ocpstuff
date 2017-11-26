@@ -1,8 +1,6 @@
 #!/usr/bin/python
 import sys,os
 
-#url = 'brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888'
-url = 'registry.access.redhat.com'
 image_dir = '/home/data'
 tag = 'latest'
 
