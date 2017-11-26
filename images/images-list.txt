@@ -1,6 +1,70 @@
 ﻿export TAG=v3.6.173.0.49
 
 
+# verify that the images are available 
+
+skopeo inspect docker://registry.access.redhat.com/openshift3/ose-ansible
+skopeo inspect docker://registry.access.redhat.com/openshift3/ose-cluster-capacity
+skopeo inspect docker://registry.access.redhat.com/openshift3/ose-deployer
+skopeo inspect docker://registry.access.redhat.com/openshift3/ose-docker-builder
+skopeo inspect docker://registry.access.redhat.com/openshift3/ose-docker-registry
+skopeo inspect docker://registry.access.redhat.com/openshift3/ose-egress-http-proxy
+skopeo inspect docker://registry.access.redhat.com/openshift3/ose-egress-router
+skopeo inspect docker://registry.access.redhat.com/openshift3/ose-f5-router
+skopeo inspect docker://registry.access.redhat.com/openshift3/ose-federation
+skopeo inspect docker://registry.access.redhat.com/openshift3/ose-haproxy-router
+skopeo inspect docker://registry.access.redhat.com/openshift3/ose-keepalived-ipfailover:
+skopeo inspect docker://registry.access.redhat.com/openshift3/ose-pod
+skopeo inspect docker://registry.access.redhat.com/openshift3/ose-sti-builder
+skopeo inspect docker://registry.access.redhat.com/openshift3/ose
+skopeo inspect docker://registry.access.redhat.com/openshift3/container-engine
+skopeo inspect docker://registry.access.redhat.com/openshift3/efs-provisioner
+skopeo inspect docker://registry.access.redhat.com/openshift3/node
+skopeo inspect docker://registry.access.redhat.com/openshift3/openvswitch
+
+skopeo inspect docker://registry.access.redhat.com/openshift3/logging-auth-proxy
+skopeo inspect docker://registry.access.redhat.com/openshift3/logging-curator
+skopeo inspect docker://registry.access.redhat.com/openshift3/logging-deployer
+skopeo inspect docker://registry.access.redhat.com/openshift3/logging-elasticsearch
+skopeo inspect docker://registry.access.redhat.com/openshift3/logging-fluentd
+skopeo inspect docker://registry.access.redhat.com/openshift3/logging-kibana
+skopeo inspect docker://registry.access.redhat.com/openshift3/metrics-cassandra
+skopeo inspect docker://registry.access.redhat.com/openshift3/metrics-deployer
+skopeo inspect docker://registry.access.redhat.com/openshift3/metrics-hawkular-metrics
+skopeo inspect docker://registry.access.redhat.com/openshift3/metrics-hawkular-openshift-agent:
+skopeo inspect docker://registry.access.redhat.com/openshift3/metrics-heapster
+
+skopeo inspect docker://registry.access.redhat.com/jboss-amq-6/amq63-openshift
+skopeo inspect docker://registry.access.redhat.com/jboss-datagrid-7/datagrid71-openshift
+skopeo inspect docker://registry.access.redhat.com/jboss-datagrid-7/datagrid71-client-openshift
+skopeo inspect docker://registry.access.redhat.com/jboss-datavirt-6/datavirt63-openshift
+skopeo inspect docker://registry.access.redhat.com/jboss-datavirt-6/datavirt63-driver-openshift
+skopeo inspect docker://registry.access.redhat.com/jboss-decisionserver-6/decisionserver64-openshift
+skopeo inspect docker://registry.access.redhat.com/jboss-processserver-6/processserver64-openshift
+skopeo inspect docker://registry.access.redhat.com/jboss-eap-6/eap64-openshift
+skopeo inspect docker://registry.access.redhat.com/jboss-eap-7/eap70-openshift
+skopeo inspect docker://registry.access.redhat.com/jboss-webserver-3/webserver31-tomcat7-openshift
+skopeo inspect docker://registry.access.redhat.com/jboss-webserver-3/webserver31-tomcat8-openshift
+skopeo inspect docker://registry.access.redhat.com/openshift3/jenkins-1-rhel7
+skopeo inspect docker://registry.access.redhat.com/openshift3/jenkins-2-rhel7
+skopeo inspect docker://registry.access.redhat.com/openshift3/jenkins-slave-base-rhel7
+skopeo inspect docker://registry.access.redhat.com/openshift3/jenkins-slave-maven-rhel7
+skopeo inspect docker://registry.access.redhat.com/openshift3/jenkins-slave-nodejs-rhel7
+skopeo inspect docker://registry.access.redhat.com/rhscl/mongodb-32-rhel7
+skopeo inspect docker://registry.access.redhat.com/rhscl/mysql-57-rhel7
+skopeo inspect docker://registry.access.redhat.com/rhscl/perl-524-rhel7
+skopeo inspect docker://registry.access.redhat.com/rhscl/php-56-rhel7
+skopeo inspect docker://registry.access.redhat.com/rhscl/postgresql-95-rhel7
+skopeo inspect docker://registry.access.redhat.com/rhscl/python-35-rhel7
+skopeo inspect docker://registry.access.redhat.com/redhat-sso-7/sso70-openshift
+skopeo inspect docker://registry.access.redhat.com/rhscl/ruby-24-rhel7
+skopeo inspect docker://registry.access.redhat.com/redhat-openjdk-18/openjdk18-openshift
+skopeo inspect docker://registry.access.redhat.com/redhat-sso-7/sso71-openshift
+skopeo inspect docker://registry.access.redhat.com/rhscl/nodejs-6-rhel7
+skopeo inspect docker://registry.access.redhat.com/rhscl/mariadb-101-rhel7
+
+# now start pre-fetching
+
 docker pull registry.access.redhat.com/openshift3/ose-ansible:$TAG
 docker pull registry.access.redhat.com/openshift3/ose-cluster-capacity:$TAG
 docker pull registry.access.redhat.com/openshift3/ose-deployer:$TAG
@@ -20,7 +84,6 @@ docker pull registry.access.redhat.com/openshift3/efs-provisioner:$TAG
 docker pull registry.access.redhat.com/openshift3/node:$TAG
 docker pull registry.access.redhat.com/openshift3/openvswitch:$TAG
 
-
 docker pull registry.access.redhat.com/openshift3/logging-auth-proxy:$TAG
 docker pull registry.access.redhat.com/openshift3/logging-curator:$TAG
 docker pull registry.access.redhat.com/openshift3/logging-deployer:$TAG
@@ -32,7 +95,6 @@ docker pull registry.access.redhat.com/openshift3/metrics-deployer:$TAG
 docker pull registry.access.redhat.com/openshift3/metrics-hawkular-metrics:$TAG
 docker pull registry.access.redhat.com/openshift3/metrics-hawkular-openshift-agent:$TAG
 docker pull registry.access.redhat.com/openshift3/metrics-heapster:$TAG
-
 
 docker pull registry.access.redhat.com/jboss-amq-6/amq63-openshift
 docker pull registry.access.redhat.com/jboss-datagrid-7/datagrid71-openshift
