@@ -20,7 +20,7 @@ oc new-build https://github.com/sclorg/s2i-base-container.git -i rhel7-custom --
 #### # a feature is needed to allow a new-build to pass a "Dockerfile" to build (within the context-dir). 
 #### # work-around by patching the bc, https://bugzilla.redhat.com/show_bug.cgi?id=1382938 
 oc patch bc s2i-custom-core -p '{"spec":{"strategy":{"dockerStrategy":{"dockerfilePath": "Dockerfile.rhel7"}}}}' -n $PROJECT
-oc start-build s2i-custom-core -n openshift
+oc start-build s2i-custom-core -n $PROJECT
 
 #### # now build the 'base' s2i image
 oc new-build https://github.com/sclorg/s2i-base-container.git -i s2i-custom-core --context-dir=base --name=s2i-custom-base --strategy=docker -n $PROJECT
