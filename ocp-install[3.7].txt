@@ -111,7 +111,7 @@ for i in `cat list.txt`; do ssh-copy-id root@$i; done
 # <BREAK>
 ## now run the ansible playbook to install
 ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/byo/config.yml
-# if you need explicitly provide a private keyfile
+# if you to need explicitly provide a private keyfile (like with AWS)
 --private-key ~/.ssh/nick-west2.pem
 ## verify the install was successful (oc get nodes)
 
@@ -132,7 +132,7 @@ wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/ocp_group_sync
 wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/ocp_group_sync-whitelist.conf -O /etc/origin/master/ocp_group_sync-whitelist.conf 
 oc adm groups sync --sync-config=/etc/origin/master/ocp_group_sync.conf --confirm --whitelist=/etc/origin/master/ocp_group_sync-whitelist.conf
 
-### setup a cronjob on ansible host to sync groups
+### setup a cronjob on ansible host to sync groups nightly
 echo 'oc adm groups sync --sync-config=/etc/origin/master/ocp_group_sync.conf --confirm --whitelist=/etc/origin/master/ocp_group_sync-whitelist.conf' > /etc/cron.daily/ocp-group-sync.sh && chmod +x /etc/cron.daily/ocp-group-sync.sh 
 
 ### set policies (perms) on your sync’ed groups
