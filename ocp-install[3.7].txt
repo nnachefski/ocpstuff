@@ -168,7 +168,6 @@ oc adm manage-node --selector="region=infra" --schedulable=false
 #oc new-project 3scaleamp
 #oc new-app --file /opt/amp/templates/amp.yml --param #WILDCARD_DOMAIN=apps.ocp.nicknach.net --param ADMIN_PASSWORD=welcome1
 
-
 # <BREAK>
 ## add a storage class if using dynamic provisioning
 ## for AWS
@@ -188,7 +187,6 @@ parameters:
   encrypted: "false"
 EOF
 
-
 ## for GCE
 oc create -f - <<EOF
 apiVersion: v1
@@ -201,7 +199,6 @@ parameters:
  type: pd-standard 
  zone: us-west2-b
 EOF
-
 
 # <BREAK>
 ## create PV for registry (NFS)
@@ -221,7 +218,6 @@ spec:
   persistentVolumeReclaimPolicy: Retain
 EOF
 
-
 ## OR
 ## create PV for registry (AWS)
 oc create -f - <<EOF
@@ -239,7 +235,6 @@ spec:
     volumeID: "vol-013223dd81d5b2cfa"
   persistentVolumeReclaimPolicy: Retain
 EOF
-
 
 ## OR
 ## create PV for registry (GCE)
@@ -261,7 +256,6 @@ spec:
   persistentVolumeReclaimPolicy: Delete
 EOF
 
-
 ## now create the PVC
 oc create -f - <<EOF
 apiVersion: v1
@@ -281,7 +275,6 @@ EOF
 
 ## switch the registry’s storage to our NFS-backed PV we just created
 oc volume dc docker-registry  --add --overwrite -t persistentVolumeClaim  --claim-name=registry-volume-claim --name=registry-storage
-
 
 #### Deploy metrics
 ## switch to metrics project
@@ -305,26 +298,20 @@ spec:
   persistentVolumeReclaimPolicy: Delete
 EOF
 
-
 ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/byo/openshift-cluster/openshift-metrics.yml -e openshift_metrics_install_metrics=True -e openshift_metrics_cassandra_storage_type=dynamic 
 
-
 -e openshift_metrics_cassandra_storage_type=pv
-
 
 ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/byo/openshift-cluster/openshift-metrics.yml \
 -e openshift_metrics_install_metrics=True \
 -e openshift_metrics_cassandra_pvc_size=10Gi \
 -e openshift_metrics_cassandra_storage_type=dynamic 
 
-
 # <BREAK>
 ## now once the deployer is finished and you see your pods as “Running” (watch -n1 ‘oc get pods’ also, ‘oc get events’)
 
-
 # Setup aggregated logging
 oc project logging
-
 
 # create PV for logging (NFS)
 oc create -f - <<EOF
@@ -343,16 +330,13 @@ spec:
   persistentVolumeReclaimPolicy: Delete
 EOF
 
-
 ## install logging
 ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/byo/openshift-cluster/openshift-logging.yml -e openshift_logging_install_logging=True -e openshift_logging_es_pvc_dynamic=True -e openshift_logging_es_pvc_size=10Gi
 -e openshift_logging_public_master_url=https://api.$ROOT_DOMAIN:8443 \ 
 -e openshift_logging_kibana_hostname=kibana.$APPS_DOMAIN \ 
 
-
 ## un-install logging
 ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/byo/openshift-cluster/openshift-logging.yml \
 -e openshift_logging_install_logging=False
-
 
 # done
