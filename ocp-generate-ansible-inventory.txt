@@ -111,22 +111,6 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_prometheus_alertbuffer_storage_labels={'storage': 'prometheus-alertbuffer'}
 #openshift_prometheus_alertbuffer_storage_type='pvc'
 
-### dyamic provsioner-backed OCP services
-## metrics on dynamic
-#openshift_hosted_metrics_deploy=true
-#openshift_hosted_metrics_storage_kind=dynamic
-#openshift_metrics_hawkular_nodeselector={'region':'infra'}
-#openshift_hosted_metrics_public_url=https://hawkular-metrics.$APPS_DOMAIN
-#openshift_hosted_metrics_storage_volume_size=40Gi
-#openshift_hosted_metrics_deployer_version=v3.5
-## logging on dynamic
-#openshift_hosted_logging_deploy=true
-#openshift_hosted_logging_storage_kind=dynamic
-#openshift_hosted_logging_elasticsearch_nodeselector=region=infra
-#openshift_hosted_logging_hostname=https://kibana.$APPS_DOMAIN
-#openshift_hosted_logging_storage_volume_size=30Gi
-#openshift_hosted_logging_deployer_version=v3.5
-
 ## deploy the registry on gluster
 #openshift_hosted_manage_registry=true
 #openshift_hosted_registry_selector='region=infra'
