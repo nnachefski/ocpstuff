@@ -173,7 +173,7 @@ openshift_master_default_subdomain=$APPS_DOMAIN
 
 ## nfs host, if needed.
 #[nfs]
-#nfs.$ROOT_DOMAIN
+#nfs.home.nicknach.net
 
 ## start group definitions ##
 ## load balancer
