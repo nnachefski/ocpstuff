@@ -64,7 +64,7 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_hosted_registry_storage_nfs_directory=/ocp
 #openshift_hosted_registry_storage_nfs_options='*(rw,root_squash)'
 #openshift_hosted_registry_storage_volume_name=docker-registry
-#openshift_hosted_registry_storage_volume_size=50Gi
+#openshift_hosted_registry_storage_volume_size=20Gi
 ## logging
 #openshift_logging_install_logging=true
 #openshift_logging_storage_kind=nfs
@@ -72,7 +72,7 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_logging_storage_nfs_directory=/ocp
 #openshift_logging_storage_host=nfs.home.nicknach.net
 #openshift_logging_storage_volume_name=logging
-#openshift_logging_storage_volume_size=40Gi
+#openshift_logging_storage_volume_size=10Gi
 #openshift_logging_storage_labels={'storage':'logging'}
 ## metrics
 #openshift_metrics_install_metrics=true
@@ -81,7 +81,7 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_metrics_storage_host=nfs.home.nicknach.net
 #openshift_metrics_storage_nfs_directory=/ocp
 #openshift_metrics_storage_volume_name=metrics
-#openshift_metrics_storage_volume_size=30Gi
+#openshift_metrics_storage_volume_size=15Gi
 #openshift_metrics_storage_labels={'storage':'metrics'}
 ## For prometheus
 #openshift_hosted_prometheus_deploy=true
@@ -90,7 +90,7 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_prometheus_storage_host=nfs.home.nicknach.net
 #openshift_prometheus_storage_nfs_directory=/ocp
 #openshift_prometheus_storage_volume_name=prometheus
-#openshift_prometheus_storage_volume_size=30Gi
+#openshift_prometheus_storage_volume_size=7Gi
 #openshift_prometheus_storage_labels={'storage':'prometheus'}
 #openshift_prometheus_storage_type='pvc'
 ## For prometheus-alertmanager
@@ -99,7 +99,7 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_prometheus_alertmanager_storage_host=nfs.home.nicknach.net
 #openshift_prometheus_alertmanager_storage_nfs_directory=/ocp
 #openshift_prometheus_alertmanager_storage_volume_name=prometheus-alertmanager
-#openshift_prometheus_alertmanager_storage_volume_size=15Gi
+#openshift_prometheus_alertmanager_storage_volume_size=6Gi
 #openshift_prometheus_alertmanager_storage_labels={'storage':'prometheus-alertmanager'}
 #openshift_prometheus_alertmanager_storage_type='pvc'
 ## For prometheus-alertbuffer
@@ -108,7 +108,7 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_prometheus_alertbuffer_storage_host=nfs.home.nicknach.net
 #openshift_prometheus_alertbuffer_storage_nfs_directory=/ocp
 #openshift_prometheus_alertbuffer_storage_volume_name=prometheus-alertbuffer
-#openshift_prometheus_alertbuffer_storage_volume_size=10Gi
+#openshift_prometheus_alertbuffer_storage_volume_size=5Gi
 #openshift_prometheus_alertbuffer_storage_labels={'storage':'prometheus-alertbuffer'}
 #openshift_prometheus_alertbuffer_storage_type='pvc'
 
