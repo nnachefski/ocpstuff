@@ -69,7 +69,8 @@ list = [
 for i in list:
     cmd = "skopeo inspect docker://%s"%(i)
     print " - "+cmd
-    os.system(cmd)
+    if not os.system(cmd):
+    	continue
     
     cmd = "docker pull %s:%s"%(i, tag)
     print " - "+cmd
