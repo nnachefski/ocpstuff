@@ -60,17 +60,18 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 ## registry
 #openshift_hosted_registry_storage_kind=nfs
 #openshift_hosted_registry_storage_access_modes=['ReadWriteMany']
-#openshift_hosted_registry_storage_host=nfs.home.nicknach.net
-#openshift_hosted_registry_storage_nfs_directory=/ocp
+##openshift_hosted_registry_storage_host=nfs.home.nicknach.net
 #openshift_hosted_registry_storage_nfs_options='*(rw,root_squash)'
+#openshift_hosted_registry_storage_nfs_directory=/ocp
 #openshift_hosted_registry_storage_volume_name=docker-registry
 #openshift_hosted_registry_storage_volume_size=20Gi
 ## logging
 #openshift_logging_install_logging=true
 #openshift_logging_storage_kind=nfs
 #openshift_logging_storage_access_modes=['ReadWriteOnce']
+##openshift_logging_storage_host=nfs.home.nicknach.net
+#openshift_logging_storage_nfs_options='*(rw,root_squash)'
 #openshift_logging_storage_nfs_directory=/ocp
-#openshift_logging_storage_host=nfs.home.nicknach.net
 #openshift_logging_storage_volume_name=logging
 #openshift_logging_storage_volume_size=10Gi
 #openshift_logging_storage_labels={'storage':'logging'}
@@ -78,7 +79,8 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_metrics_install_metrics=true
 #openshift_metrics_storage_kind=nfs
 #openshift_metrics_storage_access_modes=['ReadWriteOnce']
-#openshift_metrics_storage_host=nfs.home.nicknach.net
+##openshift_metrics_storage_host=nfs.home.nicknach.net
+#openshift_metrics_storage_nfs_options='*(rw,root_squash)'
 #openshift_metrics_storage_nfs_directory=/ocp
 #openshift_metrics_storage_volume_name=metrics
 #openshift_metrics_storage_volume_size=15Gi
@@ -87,7 +89,8 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_hosted_prometheus_deploy=true
 #openshift_prometheus_storage_kind=nfs
 #openshift_prometheus_storage_access_modes=['ReadWriteOnce']
-#openshift_prometheus_storage_host=nfs.home.nicknach.net
+##openshift_prometheus_storage_host=nfs.home.nicknach.net
+#openshift_prometheus_storage_nfs_options='*(rw,root_squash)'
 #openshift_prometheus_storage_nfs_directory=/ocp
 #openshift_prometheus_storage_volume_name=prometheus
 #openshift_prometheus_storage_volume_size=7Gi
@@ -96,7 +99,8 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 ## For prometheus-alertmanager
 #openshift_prometheus_alertmanager_storage_kind=nfs
 #openshift_prometheus_alertmanager_storage_access_modes=['ReadWriteOnce']
-#openshift_prometheus_alertmanager_storage_host=nfs.home.nicknach.net
+##openshift_prometheus_alertmanager_storage_host=nfs.home.nicknach.net
+#openshift_prometheus_alertmanager_storage_nfs_options='*(rw,root_squash)'
 #openshift_prometheus_alertmanager_storage_nfs_directory=/ocp
 #openshift_prometheus_alertmanager_storage_volume_name=prometheus-alertmanager
 #openshift_prometheus_alertmanager_storage_volume_size=6Gi
@@ -105,17 +109,22 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 ## For prometheus-alertbuffer
 #openshift_prometheus_alertbuffer_storage_kind=nfs
 #openshift_prometheus_alertbuffer_storage_access_modes=['ReadWriteOnce']
-#openshift_prometheus_alertbuffer_storage_host=nfs.home.nicknach.net
+##openshift_prometheus_alertbuffer_storage_host=nfs.home.nicknach.net
+#openshift_prometheus_alertbuffer_storage_nfs_options='*(rw,root_squash)'
 #openshift_prometheus_alertbuffer_storage_nfs_directory=/ocp
 #openshift_prometheus_alertbuffer_storage_volume_name=prometheus-alertbuffer
 #openshift_prometheus_alertbuffer_storage_volume_size=5Gi
 #openshift_prometheus_alertbuffer_storage_labels={'storage':'prometheus-alertbuffer'}
 #openshift_prometheus_alertbuffer_storage_type='pvc'
 
+## non-prod settings
+#openshift_disable_check=disk_availability,docker_storage,memory_availability,docker_image_availability,package_availability,package_version
+
 ## cluster stuff (uncomment for multi-master mode)
 #openshift_master_cluster_method=native
 #openshift_master_cluster_hostname=api.$ROOT_DOMAIN
 #openshift_master_cluster_public_hostname=console.$ROOT_DOMAIN
+
 
 ## deploy the registry on gluster
 #openshift_hosted_manage_registry=true
