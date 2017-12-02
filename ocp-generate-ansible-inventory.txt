@@ -171,6 +171,10 @@ openshift_master_default_subdomain=$APPS_DOMAIN
 ## adjust scheduler
 #osm_controller_args={'node-monitor-period': ['2s'], 'node-monitor-grace-period': ['16s'], 'pod-eviction-timeout': ['30s']}
 
+## nfs host, if needed.
+#[nfs]
+#nfs.$ROOT_DOMAIN
+
 ## start group definitions ##
 ## load balancer
 #[lb]
