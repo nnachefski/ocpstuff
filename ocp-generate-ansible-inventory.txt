@@ -60,8 +60,8 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 ## registry
 #openshift_hosted_registry_storage_kind=nfs
 #openshift_hosted_registry_storage_access_modes=['ReadWriteMany']
-#openshift_hosted_registry_storage_host=storage.home.nicknach.net
-#openshift_hosted_registry_storage_nfs_directory=/home/data/openshift/enterprise
+#openshift_hosted_registry_storage_host=nfs.home.nicknach.net
+#openshift_hosted_registry_storage_nfs_directory=/ocp
 #openshift_hosted_registry_storage_nfs_options='*(rw,root_squash)'
 #openshift_hosted_registry_storage_volume_name=docker-registry
 #openshift_hosted_registry_storage_volume_size=50Gi
@@ -69,8 +69,8 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_logging_install_logging=true
 #openshift_logging_storage_kind=nfs
 #openshift_logging_storage_access_modes=['ReadWriteOnce']
-#openshift_logging_storage_nfs_directory=/home/data/openshift/enterprise
-#openshift_logging_storage_host=storage.home.nicknach.net
+#openshift_logging_storage_nfs_directory=/ocp
+#openshift_logging_storage_host=nfs.home.nicknach.net
 #openshift_logging_storage_volume_name=logging
 #openshift_logging_storage_volume_size=40Gi
 #openshift_logging_storage_labels={'storage':'logging'}
@@ -78,8 +78,8 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_metrics_install_metrics=true
 #openshift_metrics_storage_kind=nfs
 #openshift_metrics_storage_access_modes=['ReadWriteOnce']
-#openshift_metrics_storage_host=storage.home.nicknach.net
-#openshift_metrics_storage_nfs_directory=/home/data/openshift/enterprise
+#openshift_metrics_storage_host=nfs.home.nicknach.net
+#openshift_metrics_storage_nfs_directory=/ocp
 #openshift_metrics_storage_volume_name=metrics
 #openshift_metrics_storage_volume_size=30Gi
 #openshift_metrics_storage_labels={'storage':'metrics'}
@@ -87,8 +87,8 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_hosted_prometheus_deploy=true
 #openshift_prometheus_storage_kind=nfs
 #openshift_prometheus_storage_access_modes=['ReadWriteOnce']
-#openshift_prometheus_storage_host=storage.home.nicknach.net
-#openshift_prometheus_storage_nfs_directory=/home/data/openshift/enterprise
+#openshift_prometheus_storage_host=nfs.home.nicknach.net
+#openshift_prometheus_storage_nfs_directory=/ocp
 #openshift_prometheus_storage_volume_name=prometheus
 #openshift_prometheus_storage_volume_size=30Gi
 #openshift_prometheus_storage_labels={'storage':'prometheus'}
@@ -97,7 +97,7 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_prometheus_alertmanager_storage_kind=nfs
 #openshift_prometheus_alertmanager_storage_access_modes=['ReadWriteOnce']
 #openshift_prometheus_alertmanager_storage_host=storage.home.nicknach.net
-#openshift_prometheus_alertmanager_storage_nfs_directory=/home/data/openshift/enterprise
+#openshift_prometheus_alertmanager_storage_nfs_directory=/ocp
 #openshift_prometheus_alertmanager_storage_volume_name=prometheus-alertmanager
 #openshift_prometheus_alertmanager_storage_volume_size=15Gi
 #openshift_prometheus_alertmanager_storage_labels={'storage':'prometheus-alertmanager'}
@@ -105,8 +105,8 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 ## For prometheus-alertbuffer
 #openshift_prometheus_alertbuffer_storage_kind=nfs
 #openshift_prometheus_alertbuffer_storage_access_modes=['ReadWriteOnce']
-#openshift_prometheus_alertbuffer_storage_host=storage.home.nicknach.net
-#openshift_prometheus_alertbuffer_storage_nfs_directory=/home/data/openshift/enterprise
+#openshift_prometheus_alertbuffer_storage_host=nfs.home.nicknach.net
+#openshift_prometheus_alertbuffer_storage_nfs_directory=/ocp
 #openshift_prometheus_alertbuffer_storage_volume_name=prometheus-alertbuffer
 #openshift_prometheus_alertbuffer_storage_volume_size=10Gi
 #openshift_prometheus_alertbuffer_storage_labels={'storage':'prometheus-alertbuffer'}
@@ -215,8 +215,6 @@ node03.$ROOT_DOMAIN openshift_node_labels="{'region': 'primary', 'zone': 'c'}"
 [new_nodes]
 ## hold for use when adding new nodes
 
-
 EOF
-
 
 # Verify that your /etc/ansible/hosts file looks good
