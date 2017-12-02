@@ -73,7 +73,7 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_logging_storage_host=storage.home.nicknach.net
 #openshift_logging_storage_volume_name=logging
 #openshift_logging_storage_volume_size=40Gi
-#openshift_logging_storage_labels={'storage': 'logging'}
+#openshift_logging_storage_labels={'storage':'logging'}
 ## metrics
 #openshift_metrics_install_metrics=true
 #openshift_metrics_storage_kind=nfs
@@ -82,7 +82,7 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_metrics_storage_nfs_directory=/home/data/openshift/enterprise
 #openshift_metrics_storage_volume_name=metrics
 #openshift_metrics_storage_volume_size=30Gi
-#openshift_metrics_storage_labels={'storage': 'metrics'}
+#openshift_metrics_storage_labels={'storage':'metrics'}
 ## For prometheus
 #openshift_hosted_prometheus_deploy=true
 #openshift_prometheus_storage_kind=nfs
@@ -91,7 +91,7 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_prometheus_storage_nfs_directory=/home/data/openshift/enterprise
 #openshift_prometheus_storage_volume_name=prometheus
 #openshift_prometheus_storage_volume_size=30Gi
-#openshift_prometheus_storage_labels={'storage': 'prometheus'}
+#openshift_prometheus_storage_labels={'storage':'prometheus'}
 #openshift_prometheus_storage_type='pvc'
 ## For prometheus-alertmanager
 #openshift_prometheus_alertmanager_storage_kind=nfs
@@ -100,7 +100,7 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_prometheus_alertmanager_storage_nfs_directory=/home/data/openshift/enterprise
 #openshift_prometheus_alertmanager_storage_volume_name=prometheus-alertmanager
 #openshift_prometheus_alertmanager_storage_volume_size=15Gi
-#openshift_prometheus_alertmanager_storage_labels={'storage': 'prometheus-alertmanager'}
+#openshift_prometheus_alertmanager_storage_labels={'storage':'prometheus-alertmanager'}
 #openshift_prometheus_alertmanager_storage_type='pvc'
 ## For prometheus-alertbuffer
 #openshift_prometheus_alertbuffer_storage_kind=nfs
@@ -109,7 +109,7 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_prometheus_alertbuffer_storage_nfs_directory=/home/data/openshift/enterprise
 #openshift_prometheus_alertbuffer_storage_volume_name=prometheus-alertbuffer
 #openshift_prometheus_alertbuffer_storage_volume_size=10Gi
-#openshift_prometheus_alertbuffer_storage_labels={'storage': 'prometheus-alertbuffer'}
+#openshift_prometheus_alertbuffer_storage_labels={'storage':'prometheus-alertbuffer'}
 #openshift_prometheus_alertbuffer_storage_type='pvc'
 
 ## deploy the registry on gluster
