@@ -15,9 +15,6 @@ deployment_type=openshift-enterprise
 #deployment_type=origin
 #containerized=true
 
-## non-prod settings
-#openshift_disable_check=disk_availability,docker_storage,memory_availability,docker_image_availability,package_availability,package_version
-
 #internal brew repos (for beta testing)
 #openshift_additional_repos=[{'id': 'ose-devel', 'name': 'ose-devel', 'baseurl': 'http://download.lab.bos.redhat.com/rcm-guest/puddles/RHAOS/AtomicOpenShift/3.6/latest/x86_64/os', 'enabled': 1, 'gpgcheck': 0}]
 #openshift_docker_additional_registries=brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888
