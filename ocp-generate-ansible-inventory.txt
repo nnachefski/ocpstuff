@@ -53,6 +53,32 @@ openshift_clock_enabled=true
 openshift_master_identity_providers=[{"name":"myipa","challenge":true,"login":true,"kind":"LDAPPasswordIdentityProvider","attributes":{"id":["dn"],"email":["mail"],"name":["cn"],"preferredUsername":["uid"]},"bindDN":"","bindPassword":"","ca":"my-ldap-ca-bundle.crt","insecure":false,"url":"ldap://$LDAP_SERVER/cn=users,cn=accounts,dc=home,dc=nicknach,dc=net?uid"}]
 openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 
+
+## Hosted  (deprecated)
+#openshift_hosted_metrics_deploy=true
+#openshift_hosted_metrics_storage_kind=nfs
+#openshift_hosted_metrics_storage_access_modes=['ReadWriteOnce']
+#openshift_hosted_metrics_storage_host=storage.home.nicknach.net
+#openshift_hosted_metrics_storage_nfs_directory=/home/data/openshift/enterprise
+#openshift_hosted_metrics_storage_nfs_options='*(rw,root_squash)'
+#openshift_hosted_metrics_storage_volume_name=metrics
+#openshift_hosted_metrics_storage_volume_size=40Gi
+## logging on nfs
+#openshift_hosted_logging_deploy=true
+#openshift_hosted_logging_storage_kind=nfs
+#openshift_hosted_logging_storage_access_modes=['ReadWriteOnce']
+#openshift_hosted_logging_storage_host=storage.home.nicknach.net
+#openshift_hosted_logging_storage_nfs_directory=/home/data/openshift/enterprise
+#openshift_hosted_logging_storage_nfs_options='*(rw,root_squash)'
+#openshift_hosted_logging_storage_volume_name=logging
+#openshift_hosted_logging_storage_volume_size=30Gi
+#openshift_hosted_logging_elasticsearch_cluster_size=1
+#openshift_hosted_logging_elasticsearch_nodeselector=region=infra
+#openshift_hosted_logging_kibana_nodeselector=region=infra
+#openshift_hosted_logging_curator-nodeselector=infra
+#openshift_hosted_logging_es-instance-ram=8G
+
+
 ### NFS-backed OCP services
 ## registry
 #openshift_hosted_registry_storage_kind=nfs
