@@ -125,7 +125,7 @@ chmod +x /etc/profile.d/ocp.sh
 oc patch ns openshift-infra -p '{"metadata": {"annotations": {"openshift.io/node-selector": "region=infra"}}}'
 
 ## set gluster to be the default storageclass
-oc annotate storageclass glusterfs-storage storageclass.beta.kubernetes.io/is-default-class="true"
+#oc annotate storageclass glusterfs-storage storageclass.beta.kubernetes.io/is-default-class="true"
 
 ## setup group sync and run it once
 wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/ocp_group_sync.conf -O /etc/origin/master/ocp_group_sync.conf
