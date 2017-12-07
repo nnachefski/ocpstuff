@@ -53,6 +53,10 @@ openshift_clock_enabled=true
 openshift_master_identity_providers=[{"name":"myipa","challenge":true,"login":true,"kind":"LDAPPasswordIdentityProvider","attributes":{"id":["dn"],"email":["mail"],"name":["cn"],"preferredUsername":["uid"]},"bindDN":"","bindPassword":"","ca":"my-ldap-ca-bundle.crt","insecure":false,"url":"ldap://$LDAP_SERVER/cn=users,cn=accounts,dc=home,dc=nicknach,dc=net?uid"}]
 openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 
+#openshift_use_openvswitch_system_container=False
+#openshift_use_node_system_container=False
+#openshift_use_master_system_container=False
+#openshift_use_etcd_system_container=False
 
 ## Hosted  (deprecated)
 #openshift_hosted_metrics_deploy=true
@@ -62,7 +66,7 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_hosted_metrics_storage_nfs_directory=/home/data/openshift/enterprise
 #openshift_hosted_metrics_storage_nfs_options='*(rw,root_squash)'
 #openshift_hosted_metrics_storage_volume_name=metrics
-#openshift_hosted_metrics_storage_volume_size=40Gi
+#openshift_hosted_metrics_storage_volume_size=20Gi
 ## logging on nfs
 #openshift_hosted_logging_deploy=true
 #openshift_hosted_logging_storage_kind=nfs
@@ -71,23 +75,22 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_hosted_logging_storage_nfs_directory=/home/data/openshift/enterprise
 #openshift_hosted_logging_storage_nfs_options='*(rw,root_squash)'
 #openshift_hosted_logging_storage_volume_name=logging
-#openshift_hosted_logging_storage_volume_size=30Gi
+#openshift_hosted_logging_storage_volume_size=10Gi
 #openshift_hosted_logging_elasticsearch_cluster_size=1
 #openshift_hosted_logging_elasticsearch_nodeselector=region=infra
 #openshift_hosted_logging_kibana_nodeselector=region=infra
-#openshift_hosted_logging_curator-nodeselector=infra
+#openshift_hosted_logging_curator-nodeselector=region=infra
 #openshift_hosted_logging_es-instance-ram=8G
-
-
-### NFS-backed OCP services
-## registry
+## registry on nfs
 #openshift_hosted_registry_storage_kind=nfs
 #openshift_hosted_registry_storage_access_modes=['ReadWriteMany']
 ##openshift_hosted_registry_storage_host=storage.home.nicknach.net
 #openshift_hosted_registry_storage_nfs_options='*(rw,root_squash)'
 #openshift_hosted_registry_storage_nfs_directory=/ocp
 #openshift_hosted_registry_storage_volume_name=docker-registry
-#openshift_hosted_registry_storage_volume_size=20Gi
+#openshift_hosted_registry_storage_volume_size=30Gi
+
+### NFS-backed OCP services
 ## logging
 #openshift_logging_install_logging=true
 #openshift_logging_storage_kind=nfs
@@ -148,10 +151,9 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_master_cluster_hostname=api.$ROOT_DOMAIN
 #openshift_master_cluster_public_hostname=console.$ROOT_DOMAIN
 
-
 ## deploy the registry on gluster
 #openshift_hosted_manage_registry=true
-#openshift_hosted_registry_selector='region=infra'
+#openshift_hosted_registry_selector=region=infra
 #openshift_hosted_registry_storage_kind=glusterfs
 
 ## gluster stuff
@@ -160,7 +162,7 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 
 ## set the router region
 #openshift_hosted_manage_router=true
-#openshift_hosted_router_selector='region=infra'
+#openshift_hosted_router_selector=region=infra
 
 ##  cloud provider configs
 ##  AWS
