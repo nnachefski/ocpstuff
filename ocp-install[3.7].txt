@@ -209,7 +209,7 @@ metadata:
   name: registry-volume
 spec:
   capacity:
-    storage: 70Gi
+    storage: 50Gi
   accessModes:
   - ReadWriteOnce
   nfs:
