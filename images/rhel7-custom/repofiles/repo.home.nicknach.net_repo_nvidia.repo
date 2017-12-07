@@ -1,0 +1,5 @@
+[nvidia]
+name=added from: http://repo.home.nicknach.net/repo/nvidia
+baseurl=http://repo.home.nicknach.net/repo/nvidia
+enabled=1
+gpgcheck=1
