@@ -266,7 +266,7 @@ metadata:
     deploymentconfig: docker-registry
 spec:
   accessModes:
-  - ReadWriteOnce
+  - ReadWriteMany
   resources:
     requests:
       storage: 50Gi

@@ -66,7 +66,7 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_hosted_metrics_storage_nfs_directory=/home/data/openshift/enterprise
 #openshift_hosted_metrics_storage_nfs_options='*(rw,root_squash)'
 #openshift_hosted_metrics_storage_volume_name=metrics
-#openshift_hosted_metrics_storage_volume_size=10Gi
+#openshift_hosted_metrics_storage_volume_size=15G
 ## logging on nfs
 #openshift_hosted_logging_deploy=true
 #openshift_hosted_logging_storage_kind=nfs
@@ -75,7 +75,7 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_hosted_logging_storage_nfs_directory=/home/data/openshift/enterprise
 #openshift_hosted_logging_storage_nfs_options='*(rw,root_squash)'
 #openshift_hosted_logging_storage_volume_name=logging
-#openshift_hosted_logging_storage_volume_size=15Gi
+#openshift_hosted_logging_storage_volume_size=10G
 ##openshift_hosted_logging_elasticsearch_cluster_size=1
 ##openshift_hosted_logging_elasticsearch_nodeselector=region=infra
 ##openshift_hosted_logging_kibana_nodeselector=region=infra
@@ -88,7 +88,15 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_hosted_registry_storage_nfs_options='*(rw,root_squash)'
 #openshift_hosted_registry_storage_nfs_directory=/ocp
 #openshift_hosted_registry_storage_volume_name=docker-registry
-#openshift_hosted_registry_storage_volume_size=20Gi
+#openshift_hosted_registry_storage_volume_size=20G
+## etcd on nfs
+#openshift_hosted_etcd_storage_kind=nfs
+#openshift_hosted_etcd_storage_nfs_directory=/ocp
+#openshift_hosted_etcd_storage_nfs_options="*(rw,root_squash,sync,no_wdelay)"
+#openshift_hosted_etcd_storage_volume_name=etcd 
+#openshift_hosted_etcd_storage_access_modes=["ReadWriteOnce"]
+#openshift_hosted_etcd_storage_volume_size=1G
+#openshift_hosted_etcd_storage_labels={'storage':'etcd'}
 
 ### NFS-backed OCP services
 ## logging
@@ -99,7 +107,7 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_logging_storage_nfs_options='*(rw,root_squash)'
 #openshift_logging_storage_nfs_directory=/ocp
 #openshift_logging_storage_volume_name=logging
-#openshift_logging_storage_volume_size=10Gi
+#openshift_logging_storage_volume_size=10G
 #openshift_logging_storage_labels={'storage':'logging'}
 ## metrics
 #openshift_metrics_install_metrics=true
@@ -109,7 +117,7 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_metrics_storage_nfs_options='*(rw,root_squash)'
 #openshift_metrics_storage_nfs_directory=/ocp
 #openshift_metrics_storage_volume_name=metrics
-#openshift_metrics_storage_volume_size=15Gi
+#openshift_metrics_storage_volume_size=15G
 #openshift_metrics_storage_labels={'storage':'metrics'}
 ## For prometheus
 #openshift_hosted_prometheus_deploy=true
@@ -119,7 +127,7 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_prometheus_storage_nfs_options='*(rw,root_squash)'
 #openshift_prometheus_storage_nfs_directory=/ocp
 #openshift_prometheus_storage_volume_name=prometheus
-#openshift_prometheus_storage_volume_size=7Gi
+#openshift_prometheus_storage_volume_size=7G
 #openshift_prometheus_storage_labels={'storage':'prometheus'}
 #openshift_prometheus_storage_type='pvc'
 ## For prometheus-alertmanager
@@ -129,7 +137,7 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_prometheus_alertmanager_storage_nfs_options='*(rw,root_squash)'
 #openshift_prometheus_alertmanager_storage_nfs_directory=/ocp
 #openshift_prometheus_alertmanager_storage_volume_name=prometheus-alertmanager
-#openshift_prometheus_alertmanager_storage_volume_size=6Gi
+#openshift_prometheus_alertmanager_storage_volume_size=6G
 #openshift_prometheus_alertmanager_storage_labels={'storage':'prometheus-alertmanager'}
 #openshift_prometheus_alertmanager_storage_type='pvc'
 ## For prometheus-alertbuffer
@@ -139,17 +147,18 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_prometheus_alertbuffer_storage_nfs_options='*(rw,root_squash)'
 #openshift_prometheus_alertbuffer_storage_nfs_directory=/ocp
 #openshift_prometheus_alertbuffer_storage_volume_name=prometheus-alertbuffer
-#openshift_prometheus_alertbuffer_storage_volume_size=5Gi
+#openshift_prometheus_alertbuffer_storage_volume_size=5G
 #openshift_prometheus_alertbuffer_storage_labels={'storage':'prometheus-alertbuffer'}
 #openshift_prometheus_alertbuffer_storage_type='pvc'
 
-## non-prod settings
+## disable checks
 #openshift_disable_check=disk_availability,docker_storage,memory_availability,docker_image_availability,package_availability,package_version
 
 ## cluster stuff (uncomment for multi-master mode)
 #openshift_master_cluster_method=native
 #openshift_master_cluster_hostname=api.$ROOT_DOMAIN
 #openshift_master_cluster_public_hostname=console.$ROOT_DOMAIN
+
 
 ## deploy the registry on gluster
 #openshift_hosted_manage_registry=true
