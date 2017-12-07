@@ -62,20 +62,20 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_hosted_metrics_deploy=true
 #openshift_hosted_metrics_storage_kind=nfs
 #openshift_hosted_metrics_storage_access_modes=['ReadWriteOnce']
-#openshift_hosted_metrics_storage_host=storage.home.nicknach.net
+##openshift_hosted_metrics_storage_host=storage.home.nicknach.net
 #openshift_hosted_metrics_storage_nfs_directory=/home/data/openshift/enterprise
 #openshift_hosted_metrics_storage_nfs_options='*(rw,root_squash)'
 #openshift_hosted_metrics_storage_volume_name=metrics
-#openshift_hosted_metrics_storage_volume_size=20Gi
+#openshift_hosted_metrics_storage_volume_size=10Gi
 ## logging on nfs
 #openshift_hosted_logging_deploy=true
 #openshift_hosted_logging_storage_kind=nfs
 #openshift_hosted_logging_storage_access_modes=['ReadWriteOnce']
-#openshift_hosted_logging_storage_host=storage.home.nicknach.net
+##openshift_hosted_logging_storage_host=storage.home.nicknach.net
 #openshift_hosted_logging_storage_nfs_directory=/home/data/openshift/enterprise
 #openshift_hosted_logging_storage_nfs_options='*(rw,root_squash)'
 #openshift_hosted_logging_storage_volume_name=logging
-#openshift_hosted_logging_storage_volume_size=10Gi
+#openshift_hosted_logging_storage_volume_size=15Gi
 #openshift_hosted_logging_elasticsearch_cluster_size=1
 #openshift_hosted_logging_elasticsearch_nodeselector=region=infra
 #openshift_hosted_logging_kibana_nodeselector=region=infra
@@ -88,7 +88,7 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_hosted_registry_storage_nfs_options='*(rw,root_squash)'
 #openshift_hosted_registry_storage_nfs_directory=/ocp
 #openshift_hosted_registry_storage_volume_name=docker-registry
-#openshift_hosted_registry_storage_volume_size=30Gi
+#openshift_hosted_registry_storage_volume_size=20Gi
 
 ### NFS-backed OCP services
 ## logging
