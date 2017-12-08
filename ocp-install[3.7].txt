@@ -218,6 +218,24 @@ spec:
   persistentVolumeReclaimPolicy: Retain
 EOF
 
+## create PV for etcd (NFS)
+oc create -f - <<EOF
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: etcd-volume
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+  - ReadWriteOnce
+  nfs:
+    path: "$OCP_NFS_MOUNT/enterprise/etcd"
+    server: "$OCP_NFS_SERVER"
+  persistentVolumeReclaimPolicy: Retain
+EOF
+
+
 ## OR
 ## create PV for registry (AWS)
 oc create -f - <<EOF
