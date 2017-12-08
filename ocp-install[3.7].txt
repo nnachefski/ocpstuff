@@ -209,11 +209,45 @@ metadata:
   name: registry-volume
 spec:
   capacity:
-    storage: 50Gi
+    storage: 40Gi
+  accessModes:
+  - ReadWriteMany
+  nfs:
+    path: "$OCP_NFS_MOUNT/enterprise/docker-registry"
+    server: "$OCP_NFS_SERVER"
+  persistentVolumeReclaimPolicy: Retain
+EOF
+
+## create PV for metrics (NFS)
+oc create -f - <<EOF
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: metrics-volume
+spec:
+  capacity:
+    storage: 30Gi
   accessModes:
   - ReadWriteOnce
   nfs:
-    path: "$OCP_NFS_MOUNT/enterprise/docker-registry"
+    path: "$OCP_NFS_MOUNT/enterprise/metrics"
+    server: "$OCP_NFS_SERVER"
+  persistentVolumeReclaimPolicy: Retain
+EOF
+
+## create PV for logging (NFS)
+oc create -f - <<EOF
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: logging-volume
+spec:
+  capacity:
+    storage: 20Gi
+  accessModes:
+  - ReadWriteOnce
+  nfs:
+    path: "$OCP_NFS_MOUNT/enterprise/logging"
     server: "$OCP_NFS_SERVER"
   persistentVolumeReclaimPolicy: Retain
 EOF
@@ -287,7 +321,7 @@ spec:
   - ReadWriteMany
   resources:
     requests:
-      storage: 50Gi
+      storage: 30Gi
 EOF
 
 
@@ -316,13 +350,8 @@ spec:
   persistentVolumeReclaimPolicy: Delete
 EOF
 
-ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/byo/openshift-cluster/openshift-metrics.yml -e openshift_metrics_install_metrics=True -e openshift_metrics_cassandra_storage_type=dynamic 
+ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/byo/openshift-cluster/openshift-metrics.yml -e openshift_metrics_install_metrics=true -e openshift_metrics_cassandra_storage_type=pv -e openshift_metrics_cassandra_pvc_size=30Gi
 
--e openshift_metrics_cassandra_storage_type=pv
-
-ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/byo/openshift-cluster/openshift-metrics.yml \
--e openshift_metrics_install_metrics=True \
--e openshift_metrics_cassandra_pvc_size=10Gi \
 -e openshift_metrics_cassandra_storage_type=dynamic 
 
 # <BREAK>
