@@ -378,12 +378,7 @@ spec:
 EOF
 
 ## install logging
-ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/byo/openshift-cluster/openshift-logging.yml -e openshift_logging_install_logging=True -e openshift_logging_es_pvc_dynamic=True -e openshift_logging_es_pvc_size=10Gi
--e openshift_logging_public_master_url=https://api.$ROOT_DOMAIN:8443 \ 
--e openshift_logging_kibana_hostname=kibana.$APPS_DOMAIN \ 
+ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/byo/openshift-cluster/openshift-logging.yml -e openshift_logging_install_logging=true -e openshift_logging_es_pvc_size=20Gi
 
-## un-install logging
-ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/byo/openshift-cluster/openshift-logging.yml \
--e openshift_logging_install_logging=False
 
 # done
