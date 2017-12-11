@@ -62,7 +62,7 @@ yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-o
 yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-fast-datapath-rpms
 yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-server-rhscl-7-rpms
 yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-optional-rpms 
-#yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rh-gluster-3-for-rhel-7-server-rpms
+yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rh-gluster-3-for-rhel-7-server-rpms
 #yum-config-manager --add-repo http://repo.home.nicknach.net/repo/epel
 #yum-config-manager --add-repo http://repo.home.nicknach.net/repo/cuda
 #yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-3scale-amp-2.0-rpms
@@ -218,40 +218,6 @@ spec:
   persistentVolumeReclaimPolicy: Retain
 EOF
 
-## create PV for metrics (NFS)
-oc create -f - <<EOF
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: metrics-volume
-spec:
-  capacity:
-    storage: 30Gi
-  accessModes:
-  - ReadWriteOnce
-  nfs:
-    path: "$OCP_NFS_MOUNT/enterprise/metrics"
-    server: "$OCP_NFS_SERVER"
-  persistentVolumeReclaimPolicy: Retain
-EOF
-
-## create PV for logging (NFS)
-oc create -f - <<EOF
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: logging-volume
-spec:
-  capacity:
-    storage: 20Gi
-  accessModes:
-  - ReadWriteOnce
-  nfs:
-    path: "$OCP_NFS_MOUNT/enterprise/logging"
-    server: "$OCP_NFS_SERVER"
-  persistentVolumeReclaimPolicy: Retain
-EOF
-
 ## create PV for etcd (NFS)
 oc create -f - <<EOF
 apiVersion: v1
@@ -321,9 +287,8 @@ spec:
   - ReadWriteMany
   resources:
     requests:
-      storage: 30Gi
+      storage: 40Gi
 EOF
-
 
 ## switch the registry’s storage to our NFS-backed PV we just created
 oc volume dc docker-registry  --add --overwrite -t persistentVolumeClaim  --claim-name=registry-volume-claim --name=registry-storage
@@ -331,7 +296,6 @@ oc volume dc docker-registry  --add --overwrite -t persistentVolumeClaim  --clai
 #### Deploy metrics
 ## switch to metrics project
 oc project openshift-infra
-
 
 ## create PV for metrics (NFS)
 oc create -f - <<EOF
@@ -341,13 +305,13 @@ metadata:
   name: metrics-volume
 spec:
   capacity:
-    storage: 50Gi
+    storage: 30Gi
   accessModes:
   - ReadWriteOnce
   nfs:
     path: "$OCP_NFS_MOUNT/enterprise/metrics"
     server: "$OCP_NFS_SERVER"
-  persistentVolumeReclaimPolicy: Delete
+  persistentVolumeReclaimPolicy: Retain
 EOF
 
 ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/byo/openshift-cluster/openshift-metrics.yml -e openshift_metrics_install_metrics=true -e openshift_metrics_cassandra_storage_type=pv -e openshift_metrics_cassandra_pvc_size=30Gi
@@ -357,10 +321,11 @@ ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/byo/openshift-cl
 # <BREAK>
 ## now once the deployer is finished and you see your pods as “Running” (watch -n1 ‘oc get pods’ also, ‘oc get events’)
 
+
 # Setup aggregated logging
 oc project logging
 
-# create PV for logging (NFS)
+## create PV for logging (NFS)
 oc create -f - <<EOF
 apiVersion: v1
 kind: PersistentVolume
@@ -368,16 +333,15 @@ metadata:
   name: logging-volume
 spec:
   capacity:
-    storage: 60Gi
+    storage: 20Gi
   accessModes:
   - ReadWriteOnce
   nfs:
     path: "$OCP_NFS_MOUNT/enterprise/logging"
     server: "$OCP_NFS_SERVER"
-  persistentVolumeReclaimPolicy: Delete
+  persistentVolumeReclaimPolicy: Retain
 EOF
 
-## install logging
 ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/byo/openshift-cluster/openshift-logging.yml -e openshift_logging_install_logging=true -e openshift_logging_es_pvc_size=20Gi
 
 
