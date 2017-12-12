@@ -44,6 +44,7 @@ openshift_clock_enabled=true
 ## htpasswd file auth
 #openshift_master_identity_providers=[{'name': 'htpasswd_auth', 'login': 'true', 'challenge': 'true', 'kind': 'HTPasswdPasswordIdentityProvider', 'filename': '/etc/origin/master/htpasswd'}]
 #openshift_master_htpasswd_users={'test':'$apr1$p.PVCWhK$MF.sGRq8ofCFQSOj1yHU01'}
+##welcome1
 
 ## ldap auth (AD)
 #openshift_master_identity_providers=[{"name":"NNWIN","challenge":true,"login":true,"kind":"LDAPPasswordIdentityProvider","attributes":{"id":["dn"],"email":["mail"],"name":["cn"],"preferredUsername":["sAMAccountName"]},"bindDN":"CN=SVC-nn-ose,OU=SVC,OU=FNA,DC=nnwin,DC=ad,DC=nncorp,DC=com","bindPassword":"<REDACTED>","insecure":true,"url":"ldap://uswin.nicknach.com:389/DC=uswin,DC=ad,DC=nncorp,DC=com?sAMAccountName?sub"}]
@@ -53,6 +54,10 @@ openshift_clock_enabled=true
 openshift_master_identity_providers=[{"name":"myipa","challenge":true,"login":true,"kind":"LDAPPasswordIdentityProvider","attributes":{"id":["dn"],"email":["mail"],"name":["cn"],"preferredUsername":["uid"]},"bindDN":"","bindPassword":"","ca":"my-ldap-ca-bundle.crt","insecure":false,"url":"ldap://$LDAP_SERVER/cn=users,cn=accounts,dc=home,dc=nicknach,dc=net?uid"}]
 openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 
+#openshift_use_openvswitch_system_container=False
+#openshift_use_node_system_container=False
+#openshift_use_master_system_container=False
+#openshift_use_etcd_system_container=False
 
 ## Hosted  (deprecated)
 #openshift_hosted_metrics_deploy=true
@@ -60,41 +65,49 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_hosted_metrics_storage_access_modes=['ReadWriteOnce']
 #openshift_hosted_metrics_storage_host=storage.home.nicknach.net
 #openshift_hosted_metrics_storage_nfs_directory=/home/data/openshift/enterprise
-#openshift_hosted_metrics_storage_nfs_options='*(rw,root_squash)'
+##openshift_hosted_metrics_storage_nfs_options='*(rw,root_squash,sync,no_wdelay)'
 #openshift_hosted_metrics_storage_volume_name=metrics
-#openshift_hosted_metrics_storage_volume_size=40Gi
+#openshift_hosted_metrics_storage_volume_size=15Gi
 ## logging on nfs
 #openshift_hosted_logging_deploy=true
 #openshift_hosted_logging_storage_kind=nfs
 #openshift_hosted_logging_storage_access_modes=['ReadWriteOnce']
 #openshift_hosted_logging_storage_host=storage.home.nicknach.net
 #openshift_hosted_logging_storage_nfs_directory=/home/data/openshift/enterprise
-#openshift_hosted_logging_storage_nfs_options='*(rw,root_squash)'
+##openshift_hosted_logging_storage_nfs_options='*(rw,root_squash,sync,no_wdelay)'
 #openshift_hosted_logging_storage_volume_name=logging
-#openshift_hosted_logging_storage_volume_size=30Gi
-#openshift_hosted_logging_elasticsearch_cluster_size=1
-#openshift_hosted_logging_elasticsearch_nodeselector=region=infra
-#openshift_hosted_logging_kibana_nodeselector=region=infra
-#openshift_hosted_logging_curator-nodeselector=infra
-#openshift_hosted_logging_es-instance-ram=8G
-
-
-### NFS-backed OCP services
-## registry
+#openshift_hosted_logging_storage_volume_size=10Gi
+##openshift_hosted_logging_elasticsearch_cluster_size=1
+##openshift_hosted_logging_elasticsearch_nodeselector=region=infra
+##openshift_hosted_logging_kibana_nodeselector=region=infra
+##openshift_hosted_logging_curator_nodeselector=region=infra
+##openshift_hosted_logging_es_instance_ram=8Gi
+## registry on nfs
 #openshift_hosted_registry_storage_kind=nfs
 #openshift_hosted_registry_storage_access_modes=['ReadWriteMany']
-##openshift_hosted_registry_storage_host=storage.home.nicknach.net
-#openshift_hosted_registry_storage_nfs_options='*(rw,root_squash)'
-#openshift_hosted_registry_storage_nfs_directory=/ocp
+#openshift_hosted_registry_storage_host=storage.home.nicknach.net
+##openshift_hosted_registry_storage_nfs_options='*(rw,root_squash,sync,no_wdelay)'
+#openshift_hosted_registry_storage_nfs_directory=/home/data/openshift/enterprise
 #openshift_hosted_registry_storage_volume_name=docker-registry
 #openshift_hosted_registry_storage_volume_size=20Gi
+## etcd on nfs
+#openshift_hosted_etcd_storage_kind=nfs
+#openshift_hosted_etcd_storage_nfs_directory=/home/data/openshift/enterprise
+#openshift_hosted_etcd_storage_host=storage.home.nicknach.net
+##openshift_hosted_etcd_storage_nfs_options="*(rw,root_squash,sync,no_wdelay)"
+#openshift_hosted_etcd_storage_volume_name=etcd 
+#openshift_hosted_etcd_storage_access_modes=["ReadWriteOnce"]
+#openshift_hosted_etcd_storage_volume_size=1Gi
+#openshift_hosted_etcd_storage_labels={'storage':'etcd'}
+
+### NFS-backed OCP services
 ## logging
 #openshift_logging_install_logging=true
 #openshift_logging_storage_kind=nfs
 #openshift_logging_storage_access_modes=['ReadWriteOnce']
-##openshift_logging_storage_host=storage.home.nicknach.net
-#openshift_logging_storage_nfs_options='*(rw,root_squash)'
-#openshift_logging_storage_nfs_directory=/ocp
+#openshift_logging_storage_host=storage.home.nicknach.net
+##openshift_logging_storage_nfs_options='*(rw,root_squash,sync,no_wdelay)'
+#openshift_logging_storage_nfs_directory=/home/data/openshift/enterprise
 #openshift_logging_storage_volume_name=logging
 #openshift_logging_storage_volume_size=10Gi
 #openshift_logging_storage_labels={'storage':'logging'}
@@ -102,9 +115,9 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_metrics_install_metrics=true
 #openshift_metrics_storage_kind=nfs
 #openshift_metrics_storage_access_modes=['ReadWriteOnce']
-##openshift_metrics_storage_host=storage.home.nicknach.net
-#openshift_metrics_storage_nfs_options='*(rw,root_squash)'
-#openshift_metrics_storage_nfs_directory=/ocp
+#openshift_metrics_storage_host=storage.home.nicknach.net
+##openshift_metrics_storage_nfs_options='*(rw,root_squash,sync,no_wdelay)'
+#openshift_metrics_storage_nfs_directory=/home/data/openshift/enterprise
 #openshift_metrics_storage_volume_name=metrics
 #openshift_metrics_storage_volume_size=15Gi
 #openshift_metrics_storage_labels={'storage':'metrics'}
@@ -112,9 +125,9 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_hosted_prometheus_deploy=true
 #openshift_prometheus_storage_kind=nfs
 #openshift_prometheus_storage_access_modes=['ReadWriteOnce']
-##openshift_prometheus_storage_host=storage.home.nicknach.net
-#openshift_prometheus_storage_nfs_options='*(rw,root_squash)'
-#openshift_prometheus_storage_nfs_directory=/ocp
+#openshift_prometheus_storage_host=storage.home.nicknach.net
+##openshift_prometheus_storage_nfs_options='*(rw,root_squash,sync,no_wdelay)'
+#openshift_prometheus_storage_nfs_directory=/home/data/openshift/enterprise
 #openshift_prometheus_storage_volume_name=prometheus
 #openshift_prometheus_storage_volume_size=7Gi
 #openshift_prometheus_storage_labels={'storage':'prometheus'}
@@ -122,9 +135,9 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 ## For prometheus-alertmanager
 #openshift_prometheus_alertmanager_storage_kind=nfs
 #openshift_prometheus_alertmanager_storage_access_modes=['ReadWriteOnce']
-##openshift_prometheus_alertmanager_storage_host=storage.home.nicknach.net
-#openshift_prometheus_alertmanager_storage_nfs_options='*(rw,root_squash)'
-#openshift_prometheus_alertmanager_storage_nfs_directory=/ocp
+#openshift_prometheus_alertmanager_storage_host=storage.home.nicknach.net
+##openshift_prometheus_alertmanager_storage_nfs_options='*(rw,root_squash,sync,no_wdelay)'
+#openshift_prometheus_alertmanager_storage_nfs_directory=/home/data/openshift/enterprise
 #openshift_prometheus_alertmanager_storage_volume_name=prometheus-alertmanager
 #openshift_prometheus_alertmanager_storage_volume_size=6Gi
 #openshift_prometheus_alertmanager_storage_labels={'storage':'prometheus-alertmanager'}
@@ -132,15 +145,15 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 ## For prometheus-alertbuffer
 #openshift_prometheus_alertbuffer_storage_kind=nfs
 #openshift_prometheus_alertbuffer_storage_access_modes=['ReadWriteOnce']
-##openshift_prometheus_alertbuffer_storage_host=storage.home.nicknach.net
-#openshift_prometheus_alertbuffer_storage_nfs_options='*(rw,root_squash)'
-#openshift_prometheus_alertbuffer_storage_nfs_directory=/ocp
+#openshift_prometheus_alertbuffer_storage_host=storage.home.nicknach.net
+##openshift_prometheus_alertbuffer_storage_nfs_options='*(rw,root_squash,sync,no_wdelay)'
+#openshift_prometheus_alertbuffer_storage_nfs_directory=/home/data/openshift/enterprise
 #openshift_prometheus_alertbuffer_storage_volume_name=prometheus-alertbuffer
 #openshift_prometheus_alertbuffer_storage_volume_size=5Gi
 #openshift_prometheus_alertbuffer_storage_labels={'storage':'prometheus-alertbuffer'}
 #openshift_prometheus_alertbuffer_storage_type='pvc'
 
-## non-prod settings
+## disable checks
 #openshift_disable_check=disk_availability,docker_storage,memory_availability,docker_image_availability,package_availability,package_version
 
 ## cluster stuff (uncomment for multi-master mode)
@@ -151,7 +164,7 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 
 ## deploy the registry on gluster
 #openshift_hosted_manage_registry=true
-#openshift_hosted_registry_selector='region=infra'
+#openshift_hosted_registry_selector=region=infra
 #openshift_hosted_registry_storage_kind=glusterfs
 
 ## gluster stuff
@@ -160,7 +173,7 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 
 ## set the router region
 #openshift_hosted_manage_router=true
-#openshift_hosted_router_selector='region=infra'
+#openshift_hosted_router_selector=region=infra
 
 ##  cloud provider configs
 ##  AWS

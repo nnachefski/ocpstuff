@@ -7,9 +7,6 @@ export PROJECT=openshift
 
 #### # make sure you have rhel-7-server-rhscl-rpms and rhel-7-server-optional-rpms repos enabled on all openshift build/app nodes
 
-#### # there is also a requirment that all boxes doing s2i image builds be connected to upstream RHN and not local repos (even when all necessary channels are available locally).  https://bugzilla.redhat.com/show_bug.cgi?id=1514989
-#### # work-around this by registering the nodes and attaching a pool
-
 #### # build the base rhel7 image from a git repo (clone mine or use it directly to get started)
 oc new-build https://github.com/nnachefski/ocpstuff.git --context-dir=/images/rhel7-custom --name=rhel7-custom -n $PROJECT
 
@@ -18,7 +15,7 @@ oc new-build https://github.com/nnachefski/ocpstuff.git --context-dir=/images/rh
 oc new-build https://github.com/sclorg/s2i-base-container.git -i rhel7-custom --context-dir=core --name=s2i-custom-core --strategy=docker -n $PROJECT
 
 #### # a feature is needed to allow a new-build to pass a "Dockerfile" to build (within the context-dir). 
-#### # work-around by patching the bc, https://bugzilla.redhat.com/show_bug.cgi?id=1382938 
+#### # work-around by patching the bc after you create it, https://bugzilla.redhat.com/show_bug.cgi?id=1382938 
 oc patch bc s2i-custom-core -p '{"spec":{"strategy":{"dockerStrategy":{"dockerfilePath": "Dockerfile.rhel7"}}}}' -n $PROJECT
 oc start-build s2i-custom-core -n $PROJECT
 
