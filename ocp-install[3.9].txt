@@ -72,7 +72,7 @@ echo gpgcheck=0 >> /etc/yum.repos.d/repo.home.nicknach.net_repo_rhaos-3.9.repo
 yum install -y yum-utils wget git net-tools bind-utils iptables-services bridge-utils bash-completion nfs-utils dstat mlocate
 
 ## install openshift specific pre-reqs
-yum install -y atomic atomic-openshift-utils openshift-ansible atomic-openshift-client
+yum install -y atomic atomic-openshift-utils openshift-ansible atomic-openshift-clients
 
 ## install docker (non-Atomic installs)
 yum install -y docker docker-logrotate
