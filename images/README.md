@@ -17,7 +17,6 @@ oc new-build https://github.com/sclorg/s2i-base-container.git -i rhel7-custom --
 #### # a feature is needed to allow a new-build to pass a "Dockerfile" to build (within the context-dir). 
 #### # work-around by patching the bc after you create it, https://bugzilla.redhat.com/show_bug.cgi?id=1382938 
 oc patch bc s2i-custom-core -p '{"spec":{"strategy":{"dockerStrategy":{"dockerfilePath": "Dockerfile.rhel7"}}}}' -n $PROJECT
-
 oc start-build s2i-custom-core -n $PROJECT
 
 #### # now build the 'base' s2i image
@@ -25,7 +24,6 @@ oc new-build https://github.com/sclorg/s2i-base-container.git -i s2i-custom-core
 
 #### # work-around, see above
 oc patch bc s2i-custom-base -p '{"spec":{"strategy":{"dockerStrategy":{"dockerfilePath": "Dockerfile.rhel7"}}}}' -n $PROJECT
-
 oc start-build s2i-custom-base -n $PROJECT
 
 ### # now lets build our 'builder' images for each runtime
@@ -35,7 +33,6 @@ oc new-build https://github.com/sclorg/s2i-python-container.git -i s2i-custom-ba
 
 #### # work-around, again
 oc patch bc s2i-custom-python35 -p '{"spec":{"strategy":{"dockerStrategy":{"dockerfilePath": "Dockerfile.rhel7"}}}}' -n $PROJECT
-
 oc start-build s2i-custom-python35 -n $PROJECT
 
 #### # build whatever else runtimes you need
