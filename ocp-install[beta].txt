@@ -1,14 +1,6 @@
-### created and maintained by nick@redhat.com
-### This script assumes you are running the install from the master node.  VANILLA RHEL 7
-### source:
-### https://docs.openshift.com/container-platform/3.7/install_config/install/prerequisites.html
-#
-# HTTPS whitelist these hosts if you are behind a proxy.
-## for RHSM/RHN (rpms)
-subscription.rhn.redhat.com
-## for RH’s docker registry
-registry.access.redhat.com
-access.redhat.com
+## This doc describes how to perform a disconnected installations of puddle/RC builds from internal RH repos
+
+
 
 # BEGIN
 ## do this on ALL hosts (master/infra/nodes).  copy and paste between the <BREAK>s
@@ -58,7 +50,7 @@ EOF
 #yum-config-manager --disable “*”
 #yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-rpms
 #yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-extras-rpms
-yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-ose-3.7-rpms
+yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhaos-3.9
 yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-fast-datapath-rpms
 yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-server-rhscl-7-rpms
 yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-optional-rpms 
