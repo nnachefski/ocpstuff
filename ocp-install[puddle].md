@@ -1,7 +1,13 @@
 ## This doc describes how to perform a disconnected installations of puddle/RC builds from internal RH repos
 
-## You must first
+## You must first sync the development repos from the internal build servers (these usually change nightly).
+### make sure you have ample space available on your local repo box.  At least 50GB
 
+### start by connecting your repo box to the RH VPN, then run this command to import the repo
+yum-config-manager --add-repo http://download-node-02.eng.bos.redhat.com/brewroot/repos/rhaos-3.9-rhel-7-build/latest/x86_64/
+sed -i 's/\[.*\]/\[rhaos-3.9\]/' /etc/yum.repos.d/download-node-02.eng.bos.redhat.com_brewroot_repos_rhaos-3.9-rhel-7-build_latest_x86_64_.repo
+echo gpgcheck=0 >> /etc/yum.repos.d/download-node-02.eng.bos.redhat.com_brewroot_repos_rhaos-3.9-rhel-7-build_latest_x86_64_.repo
+cd ~ && reposync -lm --repoid=rhaos-3.9
 
 
 # BEGIN
