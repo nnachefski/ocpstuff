@@ -1,5 +1,7 @@
 ## This doc describes how to perform a disconnected installations of puddle/RC builds from internal RH repos
 
+## You must first
+
 
 
 # BEGIN
@@ -10,8 +12,6 @@ export ROOT_DOMAIN=ocp.nicknach.net
 export APPS_DOMAIN=apps.$ROOT_DOMAIN 
 export OCP_USER=nicknach
 export OCP_PASSWD=welcome1
-export RHSM_ID=
-export RHSM_PW=
 export DOCKER_DEV=/dev/vdb
 export OCP_NFS_MOUNT=/home/data/openshift
 export OCP_NFS_SERVER=storage.home.nicknach.net
