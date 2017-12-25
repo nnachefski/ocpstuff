@@ -93,7 +93,6 @@ for i in list:
 		raise	
 	except:
 	 	print("failed to copy %s/%s:%s"%(src_registry, i, tag))
- 	
 	else:
 		print("saved docker://%s/%s:latest"%(dst_registry, i))
     
