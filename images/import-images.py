@@ -75,7 +75,7 @@ for i in list:
 	 	print("failed to inspect %s/%s:%s"%(src_registry, i, tag))
 	 	break
 
-	ccmd = "skopeo  --insecure-policy copy --src-tls-verify=false --dest-tls-verify=false docker://%s/%s:%s docker://%s/%s:latest"%(src_registry, i, tag, dst_registry, )
+	ccmd = "skopeo  --insecure-policy copy --src-tls-verify=false --dest-tls-verify=false docker://%s/%s:%s docker://%s/%s:latest"%(src_registry, i, tag, dst_registry, i)
 	try:
 		os.system(ccmd)
 	except:
