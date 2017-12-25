@@ -81,7 +81,7 @@ for i in list:
 		sys.exit(1)
 	except:
 	 	print("failed to inspect %s/%s:%s"%(src_registry, i, tag))
-	 	continue
+	 	break
 	else:
 		#print("inspected %s/%s:%s"%(src_registry, i, tag))
 		pass
