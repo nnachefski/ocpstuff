@@ -8,7 +8,6 @@ src_registry = 'brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888'
 dst_registry = 'docker-registry-default.apps.ocp.nicknach.net'
 
 list = [
-'openshift3/foo',
 'openshift3/ose-ansible',
 'openshift3/ose-cluster-capacity',
 'openshift3/ose-deployer',
@@ -81,7 +80,7 @@ for i in list:
 		print("\nadios...")
 		sys.exit(1)
 	except:
-	 	print("- FAILED to inspect, skipping docker://%s/%s:%s"%(src_registry, i, tag))
+	 	print("- failed to inspect docker://%s/%s:%s"%(src_registry, i, tag))
 	 	continue
 	else:
 		#print("- inspected %s/%s:%s"%(src_registry, i, tag))
@@ -95,7 +94,7 @@ for i in list:
 		print("\nadios...")
 		sys.exit(1)
 	except:
-		print("- FAILED to copy, skipping docker://%s/%s:%s"%(dst_registry, i, 'latest'))
+		print("- failed to save docker://%s/%s:%s"%(dst_registry, i, 'latest'))
 	else:
 		print("- saved docker://%s/%s:%s"%(dst_registry, i, 'latest'))
     
