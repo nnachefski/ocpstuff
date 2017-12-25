@@ -1,8 +1,9 @@
 #!/usr/bin/python3
 import sys,os
 from subprocess import DEVNULL, STDOUT, check_call
+if os.getusername() != 'root':
+	print("Sorry, but you have to have root perms because of docker")
 
-image_dir = '/tmp'
 #tag = 'latest'
 tag = 'v3.9.0.20171214.114003'
 src_registry = 'brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888'
