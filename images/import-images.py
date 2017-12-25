@@ -80,7 +80,7 @@ for i in list:
 		print("adios...")
 	except:
 	 	print("failed to inspect %s/%s:%s"%(src_registry, i, tag))
-	 	raise
+	 	print(STDOUT)
 	 	continue
 	else:
 		#print("inspected %s/%s:%s"%(src_registry, i, tag))
@@ -94,7 +94,7 @@ for i in list:
 		print("adios...")
 	except:
 		print("FAILED %s/%s:%s"%(src_registry, i, tag))
-		raise
+		print(STDOUT)
 	else:
 		print("saved docker://%s/%s:latest"%(dst_registry, i))
     
