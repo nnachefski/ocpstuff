@@ -75,13 +75,13 @@ for i in list:
 	#check_call(['skopeo', '--insecure-policy', 'inspect', '--tls-verify=false', "docker://%s/%s:%s"%(src_registry, i, tag)], )#stdout=DEVNULL, stderr=STDOUT)
 	#sys.exit()
 	try:
-		check_call(['skopeo', '--insecure-policy', 'inspect', '--tls-verify=false', "docker://%s/%s:%s"%(src_registry, i, tag)], )#stdout=DEVNULL, stderr=STDOUT)
+		check_call(['skopeo', '--insecure-policy', 'inspect', '--tls-verify=false', "docker://%s/%s:%s"%(src_registry, i, tag)], stdout=DEVNULL, stderr=STDOUT)
 	except KeyboardInterrupt:
 		print("adios...")
 		sys.exit(1)
 	except:
 	 	print("failed to inspect %s/%s:%s"%(src_registry, i, tag))
-	 	break
+	 	continue
 	else:
 		#print("inspected %s/%s:%s"%(src_registry, i, tag))
 		pass
@@ -89,7 +89,7 @@ for i in list:
 	#check_call(['skopeo', '--insecure-policy', 'copy', '--src-tls-verify=false', '--dest-tls-verify=false',  "docker://%s/%s:%s"%(src_registry, i, tag), "docker://%s/%s:latest"%(dst_registry, i)], )#stdout=DEVNULL, stderr=STDOUT)
 	#sys.exit()
 	try:
-		check_call(['skopeo', '--insecure-policy', 'copy', '--src-tls-verify=false', '--dest-tls-verify=false',  "docker://%s/%s:%s"%(src_registry, i, tag), "docker://%s/%s:latest"%(dst_registry, i)], )#stdout=DEVNULL, stderr=STDOUT)
+		check_call(['skopeo', '--insecure-policy', 'copy', '--src-tls-verify=false', '--dest-tls-verify=false',  "docker://%s/%s:%s"%(src_registry, i, tag), "docker://%s/%s:latest"%(dst_registry, i)], stdout=DEVNULL, stderr=STDOUT)
 	except KeyboardInterrupt:
 		print("adios...")
 		sys.exit(1)
