@@ -1,9 +1,6 @@
 #!/usr/bin/python3
 import sys,os
 from subprocess import DEVNULL, STDOUT, check_call
-if os.getuid() != 0:
-	print("Sorry, but you have to have root perms because of docker")
-	sys.exit(1)
 
 #tag = 'latest'
 tag = 'v3.9.0.20171214.114003'
@@ -71,19 +68,23 @@ list = [
 'rhscl/mariadb-101-rhel7',
 	]
 
+if os.getuid() != 0:
+	print("Sorry, but you need to be root to run this")
+	sys.exit(1)
+
 for i in list:
 	#check_call(['skopeo', '--insecure-policy', 'inspect', '--tls-verify=false', "docker://%s/%s:%s"%(src_registry, i, tag)], )#stdout=DEVNULL, stderr=STDOUT)
 	#sys.exit()
 	try:
 		check_call(['skopeo', '--insecure-policy', 'inspect', '--tls-verify=false', "docker://%s/%s:%s"%(src_registry, i, tag)], stdout=DEVNULL, stderr=STDOUT)
 	except KeyboardInterrupt:
-		print("adios...")
+		print("\nadios...")
 		sys.exit(1)
 	except:
 	 	print("- FAILED to inspect, skipping docker://%s/%s:%s"%(src_registry, i, tag))
 	 	continue
 	else:
-		#print("inspected %s/%s:%s"%(src_registry, i, tag))
+		#print("- inspected %s/%s:%s"%(src_registry, i, tag))
 		pass
 
 	#check_call(['skopeo', '--insecure-policy', 'copy', '--src-tls-verify=false', '--dest-tls-verify=false',  "docker://%s/%s:%s"%(src_registry, i, tag), "docker://%s/%s:latest"%(dst_registry, i)], )#stdout=DEVNULL, stderr=STDOUT)
@@ -91,12 +92,12 @@ for i in list:
 	try:
 		check_call(['skopeo', '--insecure-policy', 'copy', '--src-tls-verify=false', '--dest-tls-verify=false',  "docker://%s/%s:%s"%(src_registry, i, tag), "docker://%s/%s:latest"%(dst_registry, i)], stdout=DEVNULL, stderr=STDOUT)
 	except KeyboardInterrupt:
-		print("adios...")
+		print("\nadios...")
 		sys.exit(1)
 	except:
 		print("- FAILED to copy, skipping docker://%s/%s:%s"%(dst_registry, i, 'latest'))
 	else:
-		print("saved docker://%s/%s:%s"%(dst_registry, i, 'latest'))
+		print("- saved docker://%s/%s:%s"%(dst_registry, i, 'latest'))
     
   
 
