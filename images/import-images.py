@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 import sys,os
 from subprocess import DEVNULL, STDOUT, check_call
 
