@@ -95,7 +95,6 @@ for i in list:
 		sys.exit(1)
 	except:
 		print("FAILED %s/%s:%s"%(src_registry, i, tag))
-		print(STDOUT)
 	else:
 		print("saved docker://%s/%s:latest"%(dst_registry, i))
     
