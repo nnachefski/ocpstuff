@@ -68,7 +68,7 @@ list = [
 	]
 
 if os.getuid() != 0:
-	print("Sorry, but you need to be root to run this")
+	print("Sorry, but root is required to run this...")
 	sys.exit(1)
 
 for i in list:
