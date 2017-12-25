@@ -1,13 +1,35 @@
 ## This doc describes how to perform a disconnected installations of puddle/RC builds from internal RH repos
 
-## You must first sync the development repos from the internal build servers (these usually change nightly).
-### make sure you have ample space available on your local repo box.  At least 50GB
+## You must first sync the development repos from the internal build servers.
+### make sure you have ample space available on your local repo box.  At least 30GB for rpms(~10GB) and images(~20GB)
 
 ### start by connecting your repo box to the RH VPN, then run this command to import the repo
 yum-config-manager --add-repo http://download-node-02.eng.bos.redhat.com/brewroot/repos/rhaos-3.9-rhel-7-build/latest/x86_64/
+### change the name to something more simple
 sed -i 's/\[.*\]/\[rhaos-3.9\]/' /etc/yum.repos.d/download-node-02.eng.bos.redhat.com_brewroot_repos_rhaos-3.9-rhel-7-build_latest_x86_64_.repo
+### disable gpg checking
 echo gpgcheck=0 >> /etc/yum.repos.d/download-node-02.eng.bos.redhat.com_brewroot_repos_rhaos-3.9-rhel-7-build_latest_x86_64_.repo
+### start the reposync
 cd ~ && reposync -lm --repoid=rhaos-3.9
+### create the repodata xml
+createrepo rhaos-3.9
+### install httpd
+yum -y install httpd
+### enable httpd
+systemctl enable httpd --now
+### add a link to your repo in the web root
+ln -s /root/rhaos-3.9 /var/www/html/rhaos-3.9 && restorecon -R /var/www/html/rhaos-3.9
+
+## Now lets pull all the docker images that we are going to need
+### make sure you have a functional docker daemon on the box that is connected to the VPN (your repo box)
+### add the internal test registry to the insecure section of /etc/containers/registries
+### ex:  
+cat /etc/containers/registries.conf |grep '\[registries.insecure\]' -A1
+[registries.insecure]
+registries = ['brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888']
+
+### dont forget to restart docker
+###  now lets test to see if we can see the remote images
 
 
 # BEGIN
