@@ -11,6 +11,7 @@ src_registry = 'brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888'
 dst_registry = 'docker-registry-default.apps.ocp.nicknach.net'
 
 list = [
+'openshift3/foo',
 'openshift3/ose-ansible',
 'openshift3/ose-cluster-capacity',
 'openshift3/ose-deployer',
@@ -77,9 +78,9 @@ for i in list:
 		check_call(['skopeo', '--insecure-policy', 'inspect', '--tls-verify=false', "docker://%s/%s:%s"%(src_registry, i, tag)], stdout=DEVNULL, stderr=STDOUT)
 	except KeyboardInterrupt:
 		print("adios...")
-		raise	
 	except:
 	 	print("failed to inspect %s/%s:%s"%(src_registry, i, tag))
+	 	raise
 	 	continue
 	else:
 		#print("inspected %s/%s:%s"%(src_registry, i, tag))
@@ -91,9 +92,9 @@ for i in list:
 		check_call(['skopeo', '--insecure-policy', 'copy', '--src-tls-verify=false', '--dest-tls-verify=false',  "docker://%s/%s:%s"%(src_registry, i, tag), "docker://%s/%s:latest"%(dst_registry, i)], stdout=DEVNULL, stderr=STDOUT)
 	except KeyboardInterrupt:
 		print("adios...")
-		raise	
 	except:
-	 	print("failed to copy %s/%s:%s"%(src_registry, i, tag))
+		print("FAILED %s/%s:%s"%(src_registry, i, tag))
+		raise
 	else:
 		print("saved docker://%s/%s:latest"%(dst_registry, i))
     
