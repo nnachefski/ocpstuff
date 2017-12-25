@@ -74,12 +74,12 @@ for i in list:
 	#sys.exit()
 	try:
 		check_call(['skopeo', '--insecure-policy', 'inspect', '--tls-verify=false', "docker://%s/%s:%s"%(src_registry, i, tag)], stdout=DEVNULL, stderr=STDOUT)
+	except KeyboardInterrupt:
+		print("adios...")
+		raise	
 	except:
 	 	#print("failed to inspect %s/%s:%s"%(src_registry, i, tag))
 	 	continue
-	except KeyboardInterrupt:
-		print("adios...")
-		raise	 
 	else:
 		#print("inspected %s/%s:%s"%(src_registry, i, tag))
 		pass
@@ -88,11 +88,12 @@ for i in list:
 	#sys.exit()
 	try:
 		check_call(['skopeo', '--insecure-policy', 'copy', '--src-tls-verify=false', '--dest-tls-verify=false',  "docker://%s/%s:%s"%(src_registry, i, tag), "docker://%s/%s:latest"%(dst_registry, i)], stdout=DEVNULL, stderr=STDOUT)
-	except:
-	 	print("failed to copy %s/%s:%s"%(src_registry, i, tag))
 	except KeyboardInterrupt:
 		print("adios...")
-		raise		 	
+		raise	
+	except:
+	 	print("failed to copy %s/%s:%s"%(src_registry, i, tag))
+ 	
 	else:
 		print("saved docker://%s/%s:latest"%(dst_registry, i))
     
