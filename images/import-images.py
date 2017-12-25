@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 import sys,os
 from subprocess import DEVNULL, STDOUT, check_call
-if os.getusername() != 'root':
+if os.getuid() != 0:
 	print("Sorry, but you have to have root perms because of docker")
 
 #tag = 'latest'
