@@ -3,6 +3,7 @@ import sys,os
 from subprocess import DEVNULL, STDOUT, check_call
 if os.getuid() != 0:
 	print("Sorry, but you have to have root perms because of docker")
+	sys.exit(1)
 
 #tag = 'latest'
 tag = 'v3.9.0.20171214.114003'
@@ -78,7 +79,7 @@ for i in list:
 		print("adios...")
 		raise	
 	except:
-	 	#print("failed to inspect %s/%s:%s"%(src_registry, i, tag))
+	 	print("failed to inspect %s/%s:%s"%(src_registry, i, tag))
 	 	continue
 	else:
 		#print("inspected %s/%s:%s"%(src_registry, i, tag))
