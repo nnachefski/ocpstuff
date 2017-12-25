@@ -69,6 +69,8 @@ list = [
 	]
 
 for i in list:
+	#check_call(['skopeo', '--insecure-policy', 'inspect', '--tls-verify=false', "docker://%s/%s:%s"%(src_registry, i, tag)], )#stdout=DEVNULL, stderr=STDOUT)
+	#sys.exit()
 	try:
 		check_call(['skopeo', '--insecure-policy', 'inspect', '--tls-verify=false', "docker://%s/%s:%s"%(src_registry, i, tag)], stdout=DEVNULL, stderr=STDOUT)
 	except:
@@ -78,13 +80,12 @@ for i in list:
 		#print("inspected %s/%s:%s"%(src_registry, i, tag))
 		pass
 
-	check_call(['skopeo', '--insecure-policy', 'copy', '--src-tls-verify=false', '--dest-tls-verify=false',  "docker://%s/%s:%s"%(src_registry, i, tag), "docker://%s/%s:latest"%(dst_registry, i)], )#stdout=DEVNULL, stderr=STDOUT)
-	sys.exit()
+	#check_call(['skopeo', '--insecure-policy', 'copy', '--src-tls-verify=false', '--dest-tls-verify=false',  "docker://%s/%s:%s"%(src_registry, i, tag), "docker://%s/%s:latest"%(dst_registry, i)], )#stdout=DEVNULL, stderr=STDOUT)
+	#sys.exit()
 	try:
 		check_call(['skopeo', '--insecure-policy', 'copy', '--src-tls-verify=false', '--dest-tls-verify=false',  "docker://%s/%s:%s"%(src_registry, i, tag), "docker://%s/%s:latest"%(dst_registry, i)], stdout=DEVNULL, stderr=STDOUT)
 	except:
 	 	print("failed to copy %s/%s:%s"%(src_registry, i, tag))
-	 	continue
 	else:
 		print("saved docker://%s/%s:latest"%(dst_registry, i))
     
