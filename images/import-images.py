@@ -71,15 +71,14 @@ list = [
 for i in list:
 	icmd = "skopeo --insecure-policy inspect --tls-verify=false docker://%s/%s:%s"%(src_registry, i, tag)
 	try:
-		check_call(['skopeo', '--insecure-policy', 'inspect', '--tls-verify=false', "docker://%s/%s:%s"%(src_registry, i, tag)], stdout=DEVNULL, stderr=STDOUT)
+		check_call(['skopeo', '--insecure-policy', 'inspect', '--tls-verify=false', "docker://%s/%s:%s"%(src_registry, i, tag)], )#stdout=DEVNULL, stderr=STDOUT)
 	except:
 	 	print("failed to inspect %s/%s:%s"%(src_registry, i, tag))
 	 	break
 
 	ccmd = "skopeo  --insecure-policy copy --src-tls-verify=false --dest-tls-verify=false docker://%s/%s:%s docker://%s/%s:latest"%(src_registry, i, tag, dst_registry, i)
 	try:
-		check_call(['skopeo', '--insecure-policy', 'copy', '--src-tls-verify=false', '--dest-tls-verify=false',  "docker://%s/%s:%s"%(src_registry, i, tag), "docker://%s/%s:latest"%(dst_registry, i)], stdout=DEVNULL, stderr=STDOUT)
-		print(STDOUT)
+		check_call(['skopeo', '--insecure-policy', 'copy', '--src-tls-verify=false', '--dest-tls-verify=false',  "docker://%s/%s:%s"%(src_registry, i, tag), "docker://%s/%s:latest"%(dst_registry, i)], )#stdout=DEVNULL, stderr=STDOUT)
 	except:
 	 	print("failed to copy %s/%s:%s"%(src_registry, i, tag))
 	 	break
