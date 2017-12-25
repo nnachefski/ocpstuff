@@ -80,7 +80,7 @@ for i in list:
 		print("adios...")
 		sys.exit(1)
 	except:
-	 	print("failed to inspect %s/%s:%s"%(src_registry, i, tag))
+	 	print("- FAILED to inspect %s/%s:%s"%(src_registry, i, tag))
 	 	continue
 	else:
 		#print("inspected %s/%s:%s"%(src_registry, i, tag))
@@ -94,7 +94,7 @@ for i in list:
 		print("adios...")
 		sys.exit(1)
 	except:
-		print("FAILED %s/%s:%s"%(src_registry, i, tag))
+		print("- FAILED to copy %s:%s"%(src_registry, i, tag))
 	else:
 		print("saved docker://%s/%s:latest"%(dst_registry, i))
     
