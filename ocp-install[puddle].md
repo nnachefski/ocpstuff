@@ -20,21 +20,21 @@ systemctl enable httpd --now
 ### add a link to your repo in the web root
 ln -s /root/rhaos-3.9 /var/www/html/rhaos-3.9 && restorecon -R /var/www/html/rhaos-3.9
 
-## Now lets pull all the docker images that we are going to need
-### make sure you have a functional docker daemon on the box that is connected to the VPN (your repo box)
-### add the internal test registry to the insecure section of /etc/containers/registries
-### ex:  
+### # Now lets pull all the docker images that we are going to need
+### # make sure you have a functional docker daemon on the box that is connected to the VPN (your repo box)
+### # add the internal test registry to the insecure section of /etc/containers/registries
+### # ex:  
 cat /etc/containers/registries.conf |grep '\[registries.insecure\]' -A1
 [registries.insecure]
 registries = ['brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888']
 
-### dont forget to restart docker
-###  now lets test to see if we can see the remote images
+### # dont forget to restart docker
+### # now lets test to see if we can see the remote images
 
 
-# BEGIN
-## do this on ALL hosts (master/infra/nodes).  copy and paste between the <BREAK>s
-### SET THESE VARIABLES ###
+## # BEGIN
+### # do this on ALL hosts (master/infra/nodes).  copy and paste between the <BREAK>s
+### # SET THESE VARIABLES ###
 export POOLID=8a85f98159eeb53d0159ef8620fd4684
 export ROOT_DOMAIN=ocp.nicknach.net
 export APPS_DOMAIN=apps.$ROOT_DOMAIN 
@@ -45,7 +45,7 @@ export OCP_NFS_MOUNT=/home/data/openshift
 export OCP_NFS_SERVER=storage.home.nicknach.net
 export LDAP_SERVER=gw.home.nicknach.net
 
-# make them persistent 
+#### # make them persistent 
 cat <<EOF >> ~/.bashrc
 export ROOT_DOMAIN=$ROOT_DOMAIN
 export APPS_DOMAIN=$APPS_DOMAIN
@@ -59,22 +59,22 @@ export OCP_NFS_SERVER=$OCP_NFS_SERVER
 export LDAP_SERVER=$LDAP_SERVER
 EOF
 
-# subscribe to RHSM
+## # subscribe to RHSM
 #yum install subscription-manager yum-utils -y
 #subscription-manager register --username=$RHSM_ID --password $RHSM_PW --force
 #subscription-manager attach --pool=$POOLID
 #subscription-manager repos --disable="*"
 #subscription-manager repos \
-#   --enable=rhel-7-server-rpms \
-#   --enable=rhel-7-server-extras-rpms \
-#   --enable=rhel-7-server-ose-3.7-rpms \
-#   --enable=rhel-7-fast-datapath-rpms \
-#   --enable=rhel-7-server-rhscl-rpms \
-#   --enable=rhel-7-server-optional-rpms \
-#   --enable=rh-gluster-3-for-rhel-7-server-rpms \
-#   --enable=rhel-7-server-3scale-amp-2.0-rpms
+#--enable=rhel-7-server-rpms \
+#--enable=rhel-7-server-extras-rpms \
+#--enable=rhel-7-server-ose-3.7-rpms \
+#--enable=rhel-7-fast-datapath-rpms \
+#--enable=rhel-7-server-rhscl-rpms \
+#--enable=rhel-7-server-optional-rpms \
+#--enable=rh-gluster-3-for-rhel-7-server-rpms \
+#--enable=rhel-7-server-3scale-amp-2.0-rpms
 
-# Or, if you have internal repos
+### # Or, if you have internal repos
 #yum-config-manager --disable “*”
 #yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-rpms
 #yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-extras-rpms
@@ -87,36 +87,36 @@ yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-o
 #yum-config-manager --add-repo http://repo.home.nicknach.net/repo/cuda
 #yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-3scale-amp-2.0-rpms
 
-## install some general pre-req packages 
+### # install some general pre-req packages 
 yum install -y yum-utils wget git net-tools bind-utils iptables-services bridge-utils bash-completion nfs-utils dstat mlocate
 
-## install openshift specific pre-reqs
+### # install openshift specific pre-reqs
 yum install -y atomic atomic-openshift-utils openshift-ansible atomic-openshift-clients
 
-## install docker (non-Atomic installs)
+### # install docker (non-Atomic installs)
 yum install -y docker docker-logrotate
 
-## install gluster packages
+### # install gluster packages
 #yum -y install cns-deploy heketi-client
 
-### if using 3scale
+### # if using 3scale
 #yum install 3scale-amp-template -y
 
-## switch to a local registry mirror
+### # switch to a local registry mirror
 #sed -i 's/registry.access.redhat.com/registry.home.nicknach.net:5000/' /etc/sysconfig/docker
 #sed -i "/INSECURE_REGISTRY/s/--insecure-registry'/--insecure-registry registry.home.nicknach.net:5000'/" /etc/sysconfig/docker
 #sed -i '/# INSECURE_REGISTRY/s/^# //' /etc/sysconfig/docker
 
-## configure the docker pool device
+### # configure the docker pool device
 cat <<EOF > /etc/sysconfig/docker-storage-setup
 DEVS=$DOCKER_DEV
 VG=docker-vg
 WIPE_SIGNATURES=true
 EOF
-# and setup the storage
+### # and setup the storage
 docker-storage-setup
 
-## enable and start docker
+### # enable and start docker
 systemctl enable docker --now
 
 yum update -y && reboot

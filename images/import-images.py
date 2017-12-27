@@ -1,13 +1,50 @@
 #!/usr/bin/python3
-import sys,os
+import sys, os, argparse
 from subprocess import DEVNULL, STDOUT, check_call
 
-#tag = 'latest'
+parser = argparse.ArgumentParser(description='Import images for disconnected OCP installs')
+parser.add_argument('source', action="store", help='brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888')
+parser.add_argument('dest', action="store", help='destination, Ex: foo.tar.gz OR atomic.home.nicknach.net:5000')
+parser.add_argument('-d', action="store_true", default=False, help='debug mode')
+#parser.add_argument('--witharg', action="store", dest="witharg")
+args = parser.parse_args()
+
+uri_string = False
+
+if args.d: print("\n"+str(args)+"\n")
+
+if args.dest.endswith(("tar.gz", "tgz")):
+	uri_string = 'tarball:%s'%(args.dest)
+	if args.d: 
+		print("using tarball '%s' as the target"%args.dest)
+else:
+	try:
+		check_call(['curl', '-k', 'http://%s/v1/_ping'%(args.source)], stdout=DEVNULL, stderr=STDOUT)
+	except:
+		raise
+	else:
+		if args.d: print("success checking source '%s'"%(args.source))
+		
+	try:
+		check_call(['curl', '-k', 'http://%s/v1/_ping'%(args.dest)], stdout=DEVNULL, stderr=STDOUT)
+	except:
+		raise
+	else:
+		if args.d: print("success checking target '%s'"%(args.dest))
+	
+	uri_string = 'docker://%s'%(args.dest)
+	
+	if args.d: 
+		print("using registry '%s' as the target"%args.dest)
+
+
+
+
 tag = 'v3.9.0.20171214.114003'
 src_registry = 'brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888'
-dst_registry = 'docker-registry-default.apps.ocp.nicknach.net'
+dst_registry = 'atomic.home.nicknach.net:5000'
 
-list = [
+list = (
 'openshift3/ose-ansible',
 'openshift3/ose-cluster-capacity',
 'openshift3/ose-deployer',
@@ -65,33 +102,36 @@ list = [
 'redhat-sso-7/sso71-openshift',
 'rhscl/nodejs-6-rhel7',
 'rhscl/mariadb-101-rhel7',
-	]
+	)
 
+'''
 if os.getuid() != 0:
-	print("Sorry, but root is required to run this...")
-	sys.exit(1)
+	print("root is required")
+	sys.exit(2)
+'''
 
+pass_list=[]
 for i in list:
 	#check_call(['skopeo', '--insecure-policy', 'inspect', '--tls-verify=false', "docker://%s/%s:%s"%(src_registry, i, tag)], )#stdout=DEVNULL, stderr=STDOUT)
 	#sys.exit()
 	try:
 		check_call(['skopeo', '--insecure-policy', 'inspect', '--tls-verify=false', "docker://%s/%s:%s"%(src_registry, i, tag)], stdout=DEVNULL, stderr=STDOUT)
 	except KeyboardInterrupt:
-		print("\nadios...")
+		print("\nbye...")
 		sys.exit(1)
 	except:
 	 	print("- failed to inspect docker://%s/%s:%s"%(src_registry, i, tag))
-	 	continue
 	else:
 		#print("- inspected %s/%s:%s"%(src_registry, i, tag))
-		pass
+		pass_list.append(i)
 
+for i in pass_list:
 	#check_call(['skopeo', '--insecure-policy', 'copy', '--src-tls-verify=false', '--dest-tls-verify=false',  "docker://%s/%s:%s"%(src_registry, i, tag), "docker://%s/%s:latest"%(dst_registry, i)], )#stdout=DEVNULL, stderr=STDOUT)
 	#sys.exit()
 	try:
 		check_call(['skopeo', '--insecure-policy', 'copy', '--src-tls-verify=false', '--dest-tls-verify=false',  "docker://%s/%s:%s"%(src_registry, i, tag), "docker://%s/%s:latest"%(dst_registry, i)], stdout=DEVNULL, stderr=STDOUT)
 	except KeyboardInterrupt:
-		print("\nadios...")
+		print("\bye...")
 		sys.exit(1)
 	except:
 		print("- failed to save docker://%s/%s:%s"%(dst_registry, i, 'latest'))
