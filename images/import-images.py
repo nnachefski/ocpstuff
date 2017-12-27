@@ -45,29 +45,29 @@ except:
 pass_list=[]
 # iterate over the list and verify they are accessible
 for image in list:
-	cmdline = ['skopeo', '--insecure-policy', 'inspect', '--tls-verify=false', "docker://%s/%s:%s"%(args.source, i, args.tag)]
+	cmdline = ['skopeo', '--insecure-policy', 'inspect', '--tls-verify=false', "docker://%s/%s:%s"%(args.source, image, args.tag)]
 	if args.d: print('- '+' '.join(cmdline))
 	try:
 		check_call(cmdline, stdout=DEVNULL, stderr=STDOUT)
 	except KeyboardInterrupt:
 		print("\nbye..."); sys.exit(1)
 	except:
-	 	print("- failed to inspect docker://%s/%s:%s"%(args.source, i, args.tag))
+	 	print("- failed to inspect docker://%s/%s:%s"%(args.source, image, args.tag))
 	else:
-		if args.d: print("- inspected %s/%s:%s"%(args.source, i, args.tag))
+		if args.d: print("- inspected %s/%s:%s"%(args.source, imagea, args.tag))
 		pass_list.append(i)
 
 # iterate over the pass list and copy the images
 for image in pass_list:
-	cmdline = ['skopeo', '--insecure-policy', 'copy', '--src-tls-verify=false', '--dest-tls-verify=false',  "docker://%s/%s:%s"%(args.source, i, args.tag), "%s/%s:latest"%(uri_string, i)]
+	cmdline = ['skopeo', '--insecure-policy', 'copy', '--src-tls-verify=false', '--dest-tls-verify=false',  "docker://%s/%s:%s"%(args.source, image, args.tag), "%s/%s:latest"%(uri_string, image)]
 	if args.d: print('- '+' '.join(cmdline))
 	try:
 		check_call(cmdline, stdout=DEVNULL, stderr=STDOUT)
 	except KeyboardInterrupt:
 		print("\nbye..."); sys.exit(1)
 	except:
-		print("- failed to save docker://%s/%s:%s"%(args.dest, i, 'latest'))
+		print("- failed to save docker://%s/%s:%s"%(args.dest, image, 'latest'))
 	else:
-		print("- saved docker://%s/%s:%s"%(args.dest, i, 'latest'))
+		print("- saved docker://%s/%s:%s"%(args.dest, image, 'latest'))
     
  
