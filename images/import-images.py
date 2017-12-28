@@ -42,7 +42,7 @@ except:
 #check_call(['skopeo', '--insecure-policy', 'copy', '--src-tls-verify=false', '--dest-tls-verify=false',  "docker://%s/%s:%s"%(args.source, list[0], args.tag), "%s/%s:latest"%(uri_string, list[0])], )
 #sys.exit()
 
-pass_list=[]
+pass_list = []
 # iterate over the list and verify they are accessible
 for image in list:
 	cmdline = ['skopeo', '--insecure-policy', 'inspect', '--tls-verify=false', "docker://%s/%s:%s"%(args.source, image, args.tag)]
