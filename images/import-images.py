@@ -54,7 +54,7 @@ for image in list:
 	except:
 	 	print("- failed to inspect docker://%s/%s:%s"%(args.source, image, args.tag))
 	else:
-		if args.d: print("- inspected %s/%s:%s"%(args.source, imagea, args.tag))
+		if args.d: print("- inspected %s/%s:%s"%(args.source, image, args.tag))
 		pass_list.append(image)
 
 # iterate over the pass list and copy the images

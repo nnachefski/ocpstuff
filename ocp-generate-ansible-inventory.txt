@@ -16,16 +16,15 @@ deployment_type=openshift-enterprise
 #containerized=true
 
 #internal brew repos (for beta testing)
-#openshift_additional_repos=[{'id': 'ose-devel', 'name': 'ose-devel', 'baseurl': 'http://download.lab.bos.redhat.com/rcm-guest/puddles/RHAOS/AtomicOpenShift/3.6/latest/x86_64/os', 'enabled': 1, 'gpgcheck': 0}]
-#openshift_docker_additional_registries=brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888
-#openshift_docker_insecure_registries=brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888
+#openshift_additional_repos=[{'id': 'ose-devel', 'name': 'rhaos-3.9', 'baseurl': 'http://repo.home.nicknach.net/repo/rhaos-3.9', 'enabled': 1, 'gpgcheck': 0}]
+#openshift_docker_additional_registries=repo.home.nicknach.net:5000
+#openshift_docker_insecure_registries=repo.home.nicknach.net:5000
 
 ## alternate image format string, useful if you've got your own registry mirror
-#oreg_url=registry.home.nicknach.net:5000/ocpimages/ose-${component}:${version}
+#oreg_url=repo.home.nicknach.net:5000/openshift3/ose-\${component}:\${version}
 #openshift_examples_modify_imagestreams=true
-#openshift_docker_additional_registries=registry.home.nicknach.net:5000
 #openshift_docker_blocked_registries=registry.access.redhat.com,docker.io
-#openshift_cockpit_deployer_prefix=registry.home.nicknach.net:5000/openshift3/
+#openshift_cockpit_deployer_prefix=repo.home.nicknach.net:5000/openshift3/
 
 ## If ansible_ssh_user is not root, ansible_sudo must be set to true
 ansible_ssh_user=root
@@ -34,8 +33,8 @@ ansible_ssh_user=root
 #ansible_become=yes
 
 ## release ver
-#openshift_release=v3.5
-#openshift_image_tag=v3.5.5.8
+#openshift_release=v3.9.0
+#openshift_image_tag=v3.9.0.20171214.114003
 
 # enable ntp
 openshift_clock_enabled=true

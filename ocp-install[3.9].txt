@@ -84,9 +84,7 @@ yum install -y docker docker-logrotate
 #yum install 3scale-amp-template -y
 
 ## switch to a local registry mirror
-#sed -i 's/registry.access.redhat.com/registry.home.nicknach.net:5000/' /etc/sysconfig/docker
-#sed -i "/INSECURE_REGISTRY/s/--insecure-registry'/--insecure-registry registry.home.nicknach.net:5000'/" /etc/sysconfig/docker
-#sed -i '/# INSECURE_REGISTRY/s/^# //' /etc/sysconfig/docker
+
 
 #yum update -y 
 # reboot
