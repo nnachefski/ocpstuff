@@ -7,8 +7,9 @@
 yum-config-manager --add-repo http://download-node-02.eng.bos.redhat.com/brewroot/repos/rhaos-3.9-rhel-7-build/latest/x86_64/
 ### change the name to something more simple
 sed -i 's/\[.*\]/\[rhaos-3.9\]/' /etc/yum.repos.d/download-node-02.eng.bos.redhat.com_brewroot_repos_rhaos-3.9-rhel-7-build_latest_x86_64_.repo
+mv /etc/yum.repos.d/download-node-02.eng.bos.redhat.com_brewroot_repos_rhaos-3.9-rhel-7-build_latest_x86_64_.repo /etc/yum.repos.d/rhaos-3.9.repo
 ### disable gpg checking
-echo gpgcheck=0 >> /etc/yum.repos.d/download-node-02.eng.bos.redhat.com_brewroot_repos_rhaos-3.9-rhel-7-build_latest_x86_64_.repo
+echo gpgcheck=0 >> /etc/yum.repos.d/rhaos-3.9.repo
 ### start the reposync
 cd ~ && reposync -lm --repoid=rhaos-3.9
 ### create the repodata xml
@@ -20,26 +21,18 @@ systemctl enable httpd --now
 ### add a link to your repo in the web root
 ln -s /root/rhaos-3.9 /var/www/html/rhaos-3.9 && restorecon -R /var/www/html/rhaos-3.9
 
-### # Now lets pull all the docker images that we are going to need
+### # Now lets create the docker image mirror on our repo server
 ### # make sure you have a functional docker daemon on the box that is connected to the VPN (your repo box)
-### # add the internal test registry to the insecure section of /etc/containers/registries
-### # ex:  
-cat /etc/containers/registries.conf |grep '\[registries.insecure\]' -A1
-[registries.insecure]
-registries = ['brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888']
-
-### # dont forget to restart docker
-### # now lets test to see if we can see the remote images
-
+yum -y install atomic
+atomic install projectatomic/atomic-registry-install repo.home.nicknach.net
+systemctl enable --now atomic-registry-master.service
+/var/run/setup-atomic-registry.sh repo.home.nicknach.net
 
 ## # BEGIN
 ### # do this on ALL hosts (master/infra/nodes).  copy and paste between the <BREAK>s
 ### # SET THESE VARIABLES ###
-export POOLID=8a85f98159eeb53d0159ef8620fd4684
 export ROOT_DOMAIN=ocp.nicknach.net
 export APPS_DOMAIN=apps.$ROOT_DOMAIN 
-export OCP_USER=nicknach
-export OCP_PASSWD=welcome1
 export DOCKER_DEV=/dev/vdb
 export OCP_NFS_MOUNT=/home/data/openshift
 export OCP_NFS_SERVER=storage.home.nicknach.net
@@ -49,43 +42,23 @@ export LDAP_SERVER=gw.home.nicknach.net
 cat <<EOF >> ~/.bashrc
 export ROOT_DOMAIN=$ROOT_DOMAIN
 export APPS_DOMAIN=$APPS_DOMAIN
-export OCP_USER=$OCP_USER
-export OCP_PASSWD=$OCP_PASSWD
-export RHSM_ID=$OCP_RHSM_ID
-export RHSM_PW=$RHSM_PW
 export DOCKER_DEV=$DOCKER_DEV
 export OCP_NFS_MOUNT=$OCP_NFS_MOUNT
 export OCP_NFS_SERVER=$OCP_NFS_SERVER
 export LDAP_SERVER=$LDAP_SERVER
 EOF
 
-## # subscribe to RHSM
-#yum install subscription-manager yum-utils -y
-#subscription-manager register --username=$RHSM_ID --password $RHSM_PW --force
-#subscription-manager attach --pool=$POOLID
-#subscription-manager repos --disable="*"
-#subscription-manager repos \
-#--enable=rhel-7-server-rpms \
-#--enable=rhel-7-server-extras-rpms \
-#--enable=rhel-7-server-ose-3.7-rpms \
-#--enable=rhel-7-fast-datapath-rpms \
-#--enable=rhel-7-server-rhscl-rpms \
-#--enable=rhel-7-server-optional-rpms \
-#--enable=rh-gluster-3-for-rhel-7-server-rpms \
-#--enable=rhel-7-server-3scale-amp-2.0-rpms
-
-### # Or, if you have internal repos
-#yum-config-manager --disable “*”
-#yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-rpms
-#yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-extras-rpms
+### # add your internal repos
+yum-config-manager --disable “*”
+yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-extras-rpms
 yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhaos-3.9
-yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-fast-datapath-rpms
-yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-server-rhscl-7-rpms
-yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-optional-rpms 
+#yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-fast-datapath-rpms
+#yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-server-rhscl-7-rpms
+#yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-optional-rpms 
 #yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rh-gluster-3-for-rhel-7-server-rpms
-#yum-config-manager --add-repo http://repo.home.nicknach.net/repo/epel
-#yum-config-manager --add-repo http://repo.home.nicknach.net/repo/cuda
-#yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-3scale-amp-2.0-rpms
+
+### # disable gpg checks
+echo gpgcheck=0 >> /etc/yum.repos.d/repo.home.nicknach.net_repo_rhaos-3.9.repo
 
 ### # install some general pre-req packages 
 yum install -y yum-utils wget git net-tools bind-utils iptables-services bridge-utils bash-completion nfs-utils dstat mlocate
@@ -99,14 +72,6 @@ yum install -y docker docker-logrotate
 ### # install gluster packages
 #yum -y install cns-deploy heketi-client
 
-### # if using 3scale
-#yum install 3scale-amp-template -y
-
-### # switch to a local registry mirror
-#sed -i 's/registry.access.redhat.com/registry.home.nicknach.net:5000/' /etc/sysconfig/docker
-#sed -i "/INSECURE_REGISTRY/s/--insecure-registry'/--insecure-registry registry.home.nicknach.net:5000'/" /etc/sysconfig/docker
-#sed -i '/# INSECURE_REGISTRY/s/^# //' /etc/sysconfig/docker
-
 ### # configure the docker pool device
 cat <<EOF > /etc/sysconfig/docker-storage-setup
 DEVS=$DOCKER_DEV
@@ -116,10 +81,13 @@ EOF
 ### # and setup the storage
 docker-storage-setup
 
+
+
 ### # enable and start docker
 systemctl enable docker --now
 
-yum update -y && reboot
+### # make sure its up to date
+yum -y update
 
 # <BREAK>
 # On main master only now
@@ -132,7 +100,7 @@ for i in `cat list.txt`; do ssh-copy-id root@$i; done
 # (see other doc for creating this file)
 # <BREAK>
 ## now run the ansible playbook to install
-ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/byo/config.yml
+ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/deploy_cluster.yml
 # if you to need explicitly provide a private keyfile (like with AWS)
 --private-key ~/.ssh/nick-west2.pem
 ## verify the install was successful (oc get nodes)
