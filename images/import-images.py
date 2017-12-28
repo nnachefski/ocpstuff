@@ -59,15 +59,15 @@ for image in list:
 
 # iterate over the pass list and copy the images
 for image in pass_list:
-	cmdline = ['skopeo', '--insecure-policy', 'copy', '--src-tls-verify=false', '--dest-tls-verify=false',  "docker://%s/%s:%s"%(args.source, image, args.tag), "%s/%s:latest"%(uri_string, image)]
+	cmdline = ['skopeo', '--insecure-policy', 'copy', '--src-tls-verify=false', '--dest-tls-verify=false',  "docker://%s/%s:%s"%(args.source, image, args.tag), "%s/%s:%s"%(uri_string, image, args.tag)]
 	if args.d: print('- '+' '.join(cmdline))
 	try:
 		check_call(cmdline, stdout=DEVNULL, stderr=STDOUT)
 	except KeyboardInterrupt:
 		print("\nbye..."); sys.exit(1)
 	except:
-		print("- failed to save docker://%s/%s:%s"%(args.dest, image, 'latest'))
+		print("- failed to save docker://%s/%s:%s"%(args.dest, image, args.tag))
 	else:
-		print("- saved docker://%s/%s:%s"%(args.dest, image, 'latest'))
+		print("- saved docker://%s/%s:%s"%(args.dest, image, args.tag))
     
  
