@@ -68,6 +68,6 @@ for image in pass_list:
 	except:
 		print("- failed to save docker://%s/%s:%s"%(args.dest, image, args.tag))
 	else:
-		print("- saved docker://%s/%s:%s"%(args.dest, image, args.tag))
+		print("- saved %s/%s:%s"%(uri_string, image, args.tag))
     
  
