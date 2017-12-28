@@ -46,7 +46,7 @@ pass_list=[]
 # iterate over the list and verify they are accessible
 for image in list:
 	cmdline = ['skopeo', '--insecure-policy', 'inspect', '--tls-verify=false', "docker://%s/%s:%s"%(args.source, image, args.tag)]
-	if args.d: print('- '+' '.join(cmdline))
+	#if args.d: print('- '+' '.join(cmdline))
 	try:
 		check_call(cmdline, stdout=DEVNULL, stderr=STDOUT)
 	except KeyboardInterrupt:

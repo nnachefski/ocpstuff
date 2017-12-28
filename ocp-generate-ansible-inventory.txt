@@ -34,7 +34,7 @@ ansible_ssh_user=root
 
 ## release ver
 #openshift_release=v3.9.0
-#openshift_image_tag=v3.9.0.20171214.114003
+#openshift_image_tag=v3.9.0-0.9.0.0
 
 # enable ntp
 openshift_clock_enabled=true
@@ -58,7 +58,7 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_use_master_system_container=False
 #openshift_use_etcd_system_container=False
 
-## Hosted  (deprecated)
+## Hosted 
 #openshift_hosted_metrics_deploy=true
 #openshift_hosted_metrics_storage_kind=nfs
 #openshift_hosted_metrics_storage_access_modes=['ReadWriteOnce']

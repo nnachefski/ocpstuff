@@ -22,11 +22,11 @@ systemctl enable httpd --now
 ln -s /root/rhaos-3.9 /var/www/html/rhaos-3.9 && restorecon -R /var/www/html/rhaos-3.9
 
 ### # Now lets create the docker image mirror on our repo server
-### # make sure you have a functional docker daemon on the box that is connected to the VPN (your repo box)
-yum -y install atomic
-atomic install projectatomic/atomic-registry-install repo.home.nicknach.net
-systemctl enable --now atomic-registry-master.service
-/var/run/setup-atomic-registry.sh repo.home.nicknach.net
+yum install docker-registry.x86_64
+systemctl enable docker-distribution --now
+
+### # now from a vpn-connected system, run the import-image.py script
+### # ex: 
 
 ## # BEGIN
 ### # do this on ALL hosts (master/infra/nodes).  copy and paste between the <BREAK>s
