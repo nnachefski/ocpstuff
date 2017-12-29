@@ -34,7 +34,7 @@ ansible_ssh_user=root
 
 ## release ver
 #openshift_release=v3.9.0
-#openshift_image_tag=v3.9.0-0.9.0.0
+#openshift_image_tag=v3.9.0
 
 # enable ntp
 openshift_clock_enabled=true

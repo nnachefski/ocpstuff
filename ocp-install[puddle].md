@@ -1,7 +1,8 @@
-## This doc describes how to perform a disconnected installations of puddle/RC builds from internal RH repos
+## This doc describes how to perform a disconnected installation of puddle builds
 
-## You must first sync the development repos from the internal build servers.
-### make sure you have ample space available on your local repo box.  At least 30GB for rpms(~10GB) and images(~20GB)
+## You must first sync the development repos(rpms) from the internal build servers.
+### make sure you have ample space available on your local repo box (called repo.home.nicknach.net in my lab).  
+### At least 30GB for rpms(~10GB) and images(~20GB)
 
 ### start by connecting your repo box to the RH VPN, then run this command to import the repo
 yum-config-manager --add-repo http://download-node-02.eng.bos.redhat.com/brewroot/repos/rhaos-3.9-rhel-7-build/latest/x86_64/
@@ -19,13 +20,15 @@ yum -y install httpd
 ### enable httpd
 systemctl enable httpd --now
 ### add a link to your repo in the web root
-ln -s /root/rhaos-3.9 /var/www/html/rhaos-3.9 && restorecon -R /var/www/html/rhaos-3.9
+ln -s /root/rhaos-3.9 /var/www/html/rhaos-3.9 
+### fix selinux 
+restorecon -R /var/www/html/rhaos-3.9
 
 ### # Now lets create the docker image mirror on our repo server
-yum install docker-registry.x86_64
+yum install -y docker-registry.x86_64
 systemctl enable docker-distribution --now
 
-### # now from a vpn-connected system, run the import-image.py script
+### # now run the import-image.py script
 ### # ex: 
 
 ## # BEGIN
@@ -81,7 +84,8 @@ EOF
 ### # and setup the storage
 docker-storage-setup
 
-
+### # add the internal repo
+sed -i '16,/registries =/s/\[\]/\[\"repo.home.nicknach.net:5000\"\]/' /etc/containers/registries.conf
 
 ### # enable and start docker
 systemctl enable docker --now
