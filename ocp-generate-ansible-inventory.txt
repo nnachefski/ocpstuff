@@ -25,6 +25,7 @@ deployment_type=openshift-enterprise
 #openshift_examples_modify_imagestreams=true
 #openshift_docker_blocked_registries=registry.access.redhat.com,docker.io
 #openshift_cockpit_deployer_prefix=repo.home.nicknach.net:5000/openshift3/
+#ansible_service_broker_image_prefix=repo.home.nicknach.net:5000/openshift3/
 
 ## If ansible_ssh_user is not root, ansible_sudo must be set to true
 ansible_ssh_user=root

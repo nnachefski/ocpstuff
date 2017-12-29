@@ -2,7 +2,7 @@
 
 ## You must first sync the development repos(rpms) from the internal build servers.
 ### make sure you have ample space available on your local repo box (called repo.home.nicknach.net in my lab).  
-### At least 30GB for rpms(~10GB) and images(~20GB)
+### You need at least 30GB.  ~10GB  or rpms) and ~20GB for images
 
 ### start by connecting your repo box to the RH VPN, then run this command to import the repo
 yum-config-manager --add-repo http://download-node-02.eng.bos.redhat.com/brewroot/repos/rhaos-3.9-rhel-7-build/latest/x86_64/
@@ -25,14 +25,14 @@ ln -s /root/rhaos-3.9 /var/www/html/rhaos-3.9
 restorecon -R /var/www/html/rhaos-3.9
 
 ### # Now lets create the docker image mirror on our repo server
-yum install -y docker-registry.x86_64
+yum -y install -ocker-registry.x86_64
 systemctl enable docker-distribution --now
 
 ### # now run the import-image.py script
 ### # ex: 
-./import-images.py docker brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888 repo.home.nicknach.net:5000 -t v3.9.0 -d
+import-images.py docker brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888 repo.home.nicknach.net:5000 -t v3.9.0 -d
 
-## # BEGIN
+# # BEGIN
 ### # do this on ALL hosts (master/infra/nodes).  copy and paste between the <BREAK>s
 ### # SET THESE VARIABLES ###
 export ROOT_DOMAIN=ocp.nicknach.net
@@ -54,7 +54,6 @@ EOF
 
 ### # add your internal repos
 yum-config-manager --disable “*”
-#yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-extras-rpms
 yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhaos-3.9
 yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-fast-datapath-rpms
 yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-server-rhscl-7-rpms
@@ -94,19 +93,19 @@ systemctl enable docker --now
 ### # make sure its up to date
 yum -y update
 
-# <BREAK>
-# On main master only now
-## make passwordless key for ose installer usage
+## <BREAK>
+### #  On main master only now
+### #  make passwordless key for ose installer usage
 ssh-keygen
-# <BREAK> copy keys to all hosts(masters/nodes)
-## make a list.txt of public IPs and then do...
+## <BREAK> copy keys to all hosts(masters/nodes)
+### make a list.txt of public IPs and then do...
 for i in `cat list.txt`; do ssh-copy-id root@$i; done
-# create your ansible hosts (inventory) file 
-# (see other doc for creating this file)
-# <BREAK>
+### create your ansible hosts (inventory) file 
+### (see other doc for creating this file)
+### <BREAK>
 ## now run the ansible playbook to install
 ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/deploy_cluster.yml
-# if you to need explicitly provide a private keyfile (like with AWS)
+### if you to need explicitly provide a private keyfile (like with AWS)
 --private-key ~/.ssh/nick-west2.pem
 ## verify the install was successful (oc get nodes)
 
