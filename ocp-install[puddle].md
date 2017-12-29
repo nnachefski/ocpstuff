@@ -30,6 +30,7 @@ systemctl enable docker-distribution --now
 
 ### # now run the import-image.py script
 ### # ex: 
+./import-images.py docker brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888 repo.home.nicknach.net:5000 -t v3.9.0 -d
 
 ## # BEGIN
 ### # do this on ALL hosts (master/infra/nodes).  copy and paste between the <BREAK>s
