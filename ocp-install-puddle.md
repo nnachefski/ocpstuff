@@ -20,45 +20,56 @@ openvpn --config /etc/openvpn/ovpn-phx2-udp.conf
 yum-config-manager --add-repo http://download-node-02.eng.bos.redhat.com/brewroot/repos/rhaos-3.9-rhel-7-build/latest/x86_64/
 ```
 ##### # change the name to something more simple
+```
 sed -i 's/\[.*\]/\[rhaos-3.9\]/' /etc/yum.repos.d/download-node-02.eng.bos.redhat.com_brewroot_repos_rhaos-3.9-rhel-7-build_latest_x86_64_.repo
 mv /etc/yum.repos.d/download-node-02.eng.bos.redhat.com_brewroot_repos_rhaos-3.9-rhel-7-build_latest_x86_64_.repo /etc/yum.repos.d/rhaos-3.9.repo
-
+```
 ##### # disable gpg checking
+```
 echo gpgcheck=0 >> /etc/yum.repos.d/rhaos-3.9.repo
-
+```
 ##### # start the reposync
+```
 cd ~ && reposync -lm --repoid=rhaos-3.9
-
+```
 ##### # create the repodata xml
+```
 createrepo rhaos-3.9
-
-### install httpd
+```
+##### # install httpd
+```
 yum -y install httpd
-
-### enable httpd
+```
+##### # enable httpd
+```
 systemctl enable httpd --now
-
-### add a link to your repo dir in the web root
+```
+##### # add a link to your repo dir in the web root
+```
 ln -s /root/rhaos-3.9 /var/www/html/rhaos-3.9 
-
-### fix selinux 
+```
+##### # fix selinux
+``` 
 restorecon -R /var/www/html/rhaos-3.9
-
-### now lets create the docker image mirror on our repo server
+```
+##### # now lets create the docker image mirror on our repo server
+```
 yum -y install docker-distribution.x86_64
 systemctl enable docker-distribution --now
-
-### open the firewall up
+```
+##### # open the firewall up
+```
 firewall-cmd --set-default-zone trusted
-
-### now run the import-image.py script
+```
+##### # now run the import-image.py script
+```
 cd ~ && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/import-images.py
 chmod +x import-images.py
 ./import-images.py docker brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888 repo.home.nicknach.net:5000 -t v3.9.0 -d
-
-# # BEGIN
-### # do this on ALL hosts (master/infra/nodes).  copy and paste between the <BREAK>s
-### # SET THESE VARIABLES ###
+```
+### # BEGIN
+##### # do this on ALL hosts (master/infra/nodes).  copy and paste between the <BREAK>s
+##### # SET THESE VARIABLES ###
 export ROOT_DOMAIN=ocp.nicknach.net
 export APPS_DOMAIN=apps.$ROOT_DOMAIN 
 export DOCKER_DEV=/dev/vdb
