@@ -1,6 +1,6 @@
 ## This doc describes how to perform a disconnected installation of puddle builds
 
-### You must first sync the development rpm repos from the internal build servers
+###### You must first sync the development rpm repos from the internal build servers
 ### make sure you have ample space available on your local repo box (called repo.home.nicknach.net in my lab).  
 ### You need at least 30GB total.  (~10GB  for rpms and ~20GB for images)
 
