@@ -64,7 +64,7 @@ chmod +x import-images.py
 ./import-images.py docker brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888 repo.home.nicknach.net:5000 -t v3.9.0 -d
 ```
 ### # BEGIN
-##### # do this on ALL hosts (master/infra/nodes).  copy and paste between the <BREAK>s
+##### # do this on ALL hosts (master/infra/nodes).  copy and paste between the [STOP]s
 ##### # SET THESE VARIABLES ###
 ```
 export ROOT_DOMAIN=ocp.nicknach.net
@@ -139,20 +139,20 @@ systemctl enable docker --now
 ```
 yum -y update
 ```
-### # <BREAK>
+###### # reboot if necessary 
 #### #  On main master only now
 ##### #  make password-less key for ose installer usage
 ```
 ssh-keygen
 ```
-### # <BREAK> copy keys to all hosts(masters/nodes)
+### # [STOP] copy keys to all hosts(masters/nodes)
 ### # make a list.txt of public IPs and then do...
 ```
 for i in `cat list.txt`; do ssh-copy-id root@$i; done
 ```
 ###### # create your ansible hosts (inventory) file 
 ###### # (see other doc for creating this file)
-#### # <BREAK>
+#### # [STOP]
 ##### # now run the ansible playbook to install
 ```
 ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/deploy_cluster.yml
@@ -223,7 +223,7 @@ oc adm manage-node --selector="region=infra" --schedulable=false
 #oc new-project 3scaleamp
 #oc new-app --file /opt/amp/templates/amp.yml --param #WILDCARD_DOMAIN=apps.ocp.nicknach.net --param ADMIN_PASSWORD=welcome1
 ```
-## # <BREAK>
+## # [STOP]
 ### # add a storage class if using dynamic provisioning
 ### # for AWS
 oc create -f - <<EOF
@@ -255,7 +255,7 @@ parameters:
  zone: us-west2-b
 EOF
 
-## # <BREAK>
+## # [STOP]
 ### # create PV for registry (NFS)
 oc create -f - <<EOF
 apiVersion: v1
@@ -373,14 +373,14 @@ ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/byo/openshift-cl
 
 -e openshift_metrics_cassandra_storage_type=dynamic 
 
-# <BREAK>
-## now once the deployer is finished and you see your pods as “Running” (watch -n1 ‘oc get pods’ also, ‘oc get events’)
+### # [STOP]
+##### # now once the deployer is finished and you see your pods as “Running” (watch -n1 ‘oc get pods’ also, ‘oc get events’)
 
 
-# Setup aggregated logging
+##### # Setup aggregated logging
 oc project logging
 
-## create PV for logging (NFS)
+##### # create PV for logging (NFS)
 oc create -f - <<EOF
 apiVersion: v1
 kind: PersistentVolume
