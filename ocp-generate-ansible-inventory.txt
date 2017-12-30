@@ -273,3 +273,4 @@ node03.$ROOT_DOMAIN openshift_node_labels="{'region': 'primary', 'zone': 'c'}"
 EOF
 
 # Verify that your /etc/ansible/hosts file looks good
+
