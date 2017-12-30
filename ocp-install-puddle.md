@@ -48,10 +48,10 @@ ln -s /root/rhaos-3.9 /var/www/html/rhaos-3.9
 ``` 
 restorecon -R /var/www/html/rhaos-3.9
 ```
-##### # now lets create the docker image mirror on our repo server
+###### # now lets create the docker image mirror on our repo server
+##### # install/enable/start docker-distribution on the repo box
 ```
-yum -y install docker-distribution.x86_64
-systemctl enable docker-distribution --now
+yum -y install docker-distribution.x86_64 && systemctl enable docker-distribution --now
 ```
 ##### # open the firewall up
 ```
@@ -147,69 +147,82 @@ ssh-keygen
 ```
 ### # <BREAK> copy keys to all hosts(masters/nodes)
 ### # make a list.txt of public IPs and then do...
+```
 for i in `cat list.txt`; do ssh-copy-id root@$i; done
-### # create your ansible hosts (inventory) file 
-### # (see other doc for creating this file)
-### # <BREAK>
-### # now run the ansible playbook to install
+```
+###### # create your ansible hosts (inventory) file 
+###### # (see other doc for creating this file)
+#### # <BREAK>
+##### # now run the ansible playbook to install
+```
 ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/deploy_cluster.yml
-####  if you to need explicitly provide a private keyfile (like with AWS)
+```
+###### #  if you to need explicitly provide a private keyfile (like with AWS)
 --private-key ~/.ssh/nick-west2.pem
-### # verify the install was successful (oc get nodes)
+###### # verify the install was successful (oc get nodes)
 
-### # aliases for ops
+## # Begin post-deployment steps
+##### # aliases for ops
+```
 echo alias allpods=\'watch -n1 oc adm manage-node --selector="" --list-pods -owide\' > /etc/profile.d/ocp.sh
 echo alias allpodsp=\'watch -n1 oc adm manage-node --selector="region=primary" --list-pods -owide\' >> /etc/profile.d/ocp.sh
 chmod +x /etc/profile.d/ocp.sh
-
-### # pin all the metrics pods to the infra nodes
+```
+##### # pin all the metrics pods to the infra nodes
+```
 oc patch ns openshift-infra -p '{"metadata": {"annotations": {"openshift.io/node-selector": "region=infra"}}}'
-
-### # set gluster to be the default storageclass
+```
+##### # set gluster to be the default storageclass
 #oc annotate storageclass glusterfs-storage storageclass.beta.kubernetes.io/is-default-class="true"
 
-### # setup group sync and run it once
+##### # setup group sync and run it once
+```
 wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/ocp_group_sync.conf -O /etc/origin/master/ocp_group_sync.conf
 wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/ocp_group_sync-whitelist.conf -O /etc/origin/master/ocp_group_sync-whitelist.conf 
 oc adm groups sync --sync-config=/etc/origin/master/ocp_group_sync.conf --confirm --whitelist=/etc/origin/master/ocp_group_sync-whitelist.conf
-
-### # setup a cronjob on ansible host to sync groups nightly
+```
+##### # setup a cronjob on ansible host to sync groups nightly
+```
 echo 'oc adm groups sync --sync-config=/etc/origin/master/ocp_group_sync.conf --confirm --whitelist=/etc/origin/master/ocp_group_sync-whitelist.conf' > /etc/cron.daily/ocp-group-sync.sh && chmod +x /etc/cron.daily/ocp-group-sync.sh 
-
-### # set policies (perms) on your sync’ed groups
+```
+##### # set policies (perms) on your sync’ed groups
+```
 oc adm policy add-cluster-role-to-group cluster-admin admins
 oc adm policy add-role-to-group basic-user authenticated
-
-### #  entitle admins group to run pods as root
+```
+##### #  entitle admins group to run pods as root
 #oc adm policy add-scc-to-group anyuid system:admins
 
-### # entitle the current project’s default svcaccount to run as anyuid
+##### # entitle the current project’s default svcaccount to run as anyuid
 #oc adm policy add-scc-to-user anyuid -z default
 
-### # setup a cronjob on ansible host to prune images
+##### # setup a cronjob on ansible host to prune images
+```
 echo 'ansible all -m shell -a "docker rm \$(docker ps -q -f status=exited); docker volume rm \$(docker volume ls -qf dangling=true); docker rmi \$(docker images --filter "dangling=true" -q --no-trunc)"' >> /etc/cron.daily/ocp-image-clean.sh && chmod +x /etc/cron.daily/ocp-image-clean.sh
-
-### # setup a local htpasswd user if not using LDAP or SSO
+```
+##### # setup a local htpasswd user if not using LDAP or SSO
 #htpasswd -b /etc/origin/master/htpasswd $OCP_USER $OCP_PASSWD
-### # set user to be cluster-admin role
+##### # set user to be cluster-admin role
 #oc adm policy add-cluster-role-to-user cluster-admin $OCP_USER
 
-### # temporarily set scheduling for masters
+##### # temporarily set scheduling for masters
 #oc adm manage-node --selector="region=infra" --schedulable=true
 
-### # create the registry manually
-### # oc adm registry --create --credentials=/etc/origin/master/openshift-registry.kubeconfig --selector region=infra
+##### # create the registry manually
+##### # oc adm registry --create --credentials=/etc/origin/master/openshift-registry.kubeconfig --selector region=infra
+```
 #oc adm router --service-account=router --selector region=infra
 #oc adm policy add-scc-to-user privileged -z router
 #oc adm policy add-scc-to-user hostnetwork -z router
 #oc adm policy add-cluster-role-to-user system:router system:serviceaccount:default:router
 oc adm manage-node --selector="region=infra" --schedulable=false
-
-### deploying 3scale
+```
+##### # deploying 3scale
+```
 #yum install -y 3scale-amp-template
 #oc new-project 3scaleamp
 #oc new-app --file /opt/amp/templates/amp.yml --param #WILDCARD_DOMAIN=apps.ocp.nicknach.net --param ADMIN_PASSWORD=welcome1
-
+```
 ## # <BREAK>
 ### # add a storage class if using dynamic provisioning
 ### # for AWS
