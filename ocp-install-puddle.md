@@ -70,14 +70,16 @@ chmod +x import-images.py
 ### # BEGIN
 ##### # do this on ALL hosts (master/infra/nodes).  copy and paste between the <BREAK>s
 ##### # SET THESE VARIABLES ###
+```
 export ROOT_DOMAIN=ocp.nicknach.net
 export APPS_DOMAIN=apps.$ROOT_DOMAIN 
 export DOCKER_DEV=/dev/vdb
 export OCP_NFS_MOUNT=/home/data/openshift
 export OCP_NFS_SERVER=storage.home.nicknach.net
 export LDAP_SERVER=gw.home.nicknach.net
-
-#### # make them persistent 
+```
+##### # make them persistent 
+```
 cat <<EOF >> ~/.bashrc
 export ROOT_DOMAIN=$ROOT_DOMAIN
 export APPS_DOMAIN=$APPS_DOMAIN
@@ -86,52 +88,67 @@ export OCP_NFS_MOUNT=$OCP_NFS_MOUNT
 export OCP_NFS_SERVER=$OCP_NFS_SERVER
 export LDAP_SERVER=$LDAP_SERVER
 EOF
-
-### # add your internal repos
+```
+##### # add your internal repos
+```
 yum-config-manager --disable “*”
 yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhaos-3.9
 yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-fast-datapath-rpms
 yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-server-rhscl-7-rpms
 yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-optional-rpms 
 #yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rh-gluster-3-for-rhel-7-server-rpms
-
-### # disable gpg checks
+`1``
+##### # disable gpg checks
+```
 echo gpgcheck=0 >> /etc/yum.repos.d/repo.home.nicknach.net_repo_rhaos-3.9.repo
-
-### # install some general pre-req packages 
+```
+##### # install some general pre-req packages
+``` 
 yum install -y yum-utils wget git net-tools bind-utils iptables-services bridge-utils bash-completion nfs-utils dstat mlocate
-
-### # install openshift specific pre-reqs
+```
+##### # install openshift specific pre-reqs
+```
 yum install -y atomic atomic-openshift-utils openshift-ansible atomic-openshift-clients
-
-### # install docker (non-Atomic installs)
+```
+##### # install docker (non-Atomic installs)
+```
 yum install -y docker docker-logrotate
+```
+##### # install gluster packages
+```
+yum -y install cns-deploy heketi-client
+```
 
-### # install gluster packages
-#yum -y install cns-deploy heketi-client
-
-### # configure the docker pool device
+##### # configure the docker pool device
+```
 cat <<EOF > /etc/sysconfig/docker-storage-setup
 DEVS=$DOCKER_DEV
 VG=docker-vg
 WIPE_SIGNATURES=true
 EOF
-### # and setup the storage
+```
+##### # and setup the storage
+```
 docker-storage-setup
-
-### # add the internal repo
+```
+##### # add the internal repo
+```
 sed -i '16,/registries =/s/\[\]/\[\"repo.home.nicknach.net:5000\"\]/' /etc/containers/registries.conf
-
-### # enable and start docker
+```
+##### # enable and start docker
+```
 systemctl enable docker --now
-
-### # make sure its up to date
+```
+##### # make sure its up to date
+```
 yum -y update
-
-## <BREAK>
-### #  On main master only now
-### #  make password-less key for ose installer usage
+```
+### # <BREAK>
+#### #  On main master only now
+##### #  make password-less key for ose installer usage
+```
 ssh-keygen
+```
 ### # <BREAK> copy keys to all hosts(masters/nodes)
 ### # make a list.txt of public IPs and then do...
 for i in `cat list.txt`; do ssh-copy-id root@$i; done
