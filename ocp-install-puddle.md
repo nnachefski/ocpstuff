@@ -36,13 +36,9 @@ cd ~ && reposync -lm --repoid=rhaos-3.9
 ```
 createrepo rhaos-3.9
 ```
-##### # install httpd
+##### # install/enable/start httpd
 ```
-yum -y install httpd
-```
-##### # enable httpd
-```
-systemctl enable httpd --now
+yum -y install httpd && systemctl enable httpd --now
 ```
 ##### # add a link to your repo dir in the web root
 ```
