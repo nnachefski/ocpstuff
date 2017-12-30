@@ -93,7 +93,7 @@ yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-fast-dat
 yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-server-rhscl-7-rpms
 yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-optional-rpms 
 #yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rh-gluster-3-for-rhel-7-server-rpms
-`1``
+```
 ##### # disable gpg checks
 ```
 echo gpgcheck=0 >> /etc/yum.repos.d/repo.home.nicknach.net_repo_rhaos-3.9.repo
