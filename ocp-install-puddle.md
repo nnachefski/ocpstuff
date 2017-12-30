@@ -140,7 +140,7 @@ systemctl enable docker --now
 yum -y update
 ```
 ###### # reboot if necessary 
-## #  On main master only now
+## #  On first master(or bastion host) only now
 ##### #  make password-less key for ose installer usage
 ```
 ssh-keygen
