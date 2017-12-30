@@ -258,6 +258,7 @@ parameters:
 EOF
 ```
 ##### # create PV for registry (NFS)
+```
 oc create -f - <<EOF
 apiVersion: v1
 kind: PersistentVolume
@@ -275,6 +276,7 @@ spec:
 EOF
 ```
 ##### # create PV for etcd (NFS)
+```
 oc create -f - <<EOF
 apiVersion: v1
 kind: PersistentVolume
