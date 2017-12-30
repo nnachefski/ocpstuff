@@ -48,7 +48,7 @@ ln -s /root/rhaos-3.9 /var/www/html/rhaos-3.9
 ``` 
 restorecon -R /var/www/html/rhaos-3.9
 ```
-###### # now lets create the docker image mirror on our repo server
+#### # now lets create the docker image mirror on our repo server
 ##### # install/enable/start docker-distribution on the repo box
 ```
 yum -y install docker-distribution.x86_64 && systemctl enable docker-distribution --now
