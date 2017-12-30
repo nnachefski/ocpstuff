@@ -25,6 +25,11 @@ deployment_type=openshift-enterprise
 #openshift_examples_modify_imagestreams=true
 #openshift_docker_blocked_registries=registry.access.redhat.com,docker.io
 #openshift_cockpit_deployer_prefix=repo.home.nicknach.net:5000/openshift3/
+#openshift_metrics_image_prefix=repo.home.nicknach.net:5000/openshift3/
+#openshift_metrics_image_version=v3.9.0
+#openshift_logging_image_prefix=repo.home.nicknach.net:5000/openshift3/
+#openshift_logging_image_version=3.9.0
+#openshift_service_catalog_image_version=v3.9.0
 
 ## If ansible_ssh_user is not root, ansible_sudo must be set to true
 ansible_ssh_user=root
