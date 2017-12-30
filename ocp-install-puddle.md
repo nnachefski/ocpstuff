@@ -5,10 +5,11 @@
 ### You need at least 30GB total.  (~10GB  for rpms and ~20GB for images)
 
 ### start by connecting your repo box to the RH VPN.  You can install a command line VPN client by installing these rpms
+```
 redhat-internal-cert-install-0.1-7.el7.csb.noarch.rpm
 redhat-internal-NetworkManager-openvpn-profiles-non-gnome-0.1-30.el7.csb.noarch.rpm
 redhat-internal-openvpn-profiles-0.1-30.el7.csb.noarch.rpm
-
+```
 ### then run 
 openvpn --config /etc/openvpn/ovpn-phx2-udp.conf
 ### your repo box is now connected to the RH vpn
