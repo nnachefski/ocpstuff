@@ -4,29 +4,32 @@
 ###### # make sure you have ample space available on your local repo box (called repo.home.nicknach.net in my lab).  
 ###### # You need at least 30GB total.  (~10GB  for rpms and ~20GB for images)
 
-###### # start by connecting your repo box to the RH VPN.  You can install a command line VPN client by installing these rpms
+##### # start by connecting your repo box to the RH VPN.  You can install a command line VPN client by installing these rpms
 ```
 redhat-internal-cert-install-0.1-7.el7.csb.noarch.rpm
 redhat-internal-NetworkManager-openvpn-profiles-non-gnome-0.1-30.el7.csb.noarch.rpm
 redhat-internal-openvpn-profiles-0.1-30.el7.csb.noarch.rpm
 ```
-###### # then run 
+##### # then run
+``` 
 openvpn --config /etc/openvpn/ovpn-phx2-udp.conf
+```
 ###### # your repo box is now connected to the RH vpn
-###### # now run this command to import the puddle repo
+##### # now run this command to import the puddle repo
+```
 yum-config-manager --add-repo http://download-node-02.eng.bos.redhat.com/brewroot/repos/rhaos-3.9-rhel-7-build/latest/x86_64/
-
-### change the name to something more simple
+```
+##### # change the name to something more simple
 sed -i 's/\[.*\]/\[rhaos-3.9\]/' /etc/yum.repos.d/download-node-02.eng.bos.redhat.com_brewroot_repos_rhaos-3.9-rhel-7-build_latest_x86_64_.repo
 mv /etc/yum.repos.d/download-node-02.eng.bos.redhat.com_brewroot_repos_rhaos-3.9-rhel-7-build_latest_x86_64_.repo /etc/yum.repos.d/rhaos-3.9.repo
 
-### disable gpg checking
+##### # disable gpg checking
 echo gpgcheck=0 >> /etc/yum.repos.d/rhaos-3.9.repo
 
-### start the reposync
+##### # start the reposync
 cd ~ && reposync -lm --repoid=rhaos-3.9
 
-### create the repodata xml
+##### # create the repodata xml
 createrepo rhaos-3.9
 
 ### install httpd
