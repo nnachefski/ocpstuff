@@ -141,12 +141,12 @@ yum -y update
 ```
 ###### # reboot if necessary 
 ## #  On first master(or bastion host) only now
-##### #  make password-less key for ose installer usage
+##### #  make password-less key for openshift-ansible usage
 ```
 ssh-keygen
 ```
 ### # [STOP] copy keys to all hosts(masters/nodes)
-### # make a list.txt of public IPs and then do...
+#### # make a list.txt of public IPs and then do...
 ```
 for i in `cat list.txt`; do ssh-copy-id root@$i; done
 ```
