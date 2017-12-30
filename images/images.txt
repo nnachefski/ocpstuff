@@ -31,5 +31,3 @@ openshift3/jenkins-slave-base-rhel7
 openshift3/jenkins-slave-maven-rhel7
 openshift3/jenkins-slave-nodejs-rhel7
 openshift3/efs-provisioner
-openshift3/logging-deployer
-openshift3/metrics-deployer

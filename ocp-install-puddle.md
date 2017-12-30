@@ -1,36 +1,57 @@
 ## This doc describes how to perform a disconnected installation of puddle builds
 
-## You must first sync the development repos(rpms) from the internal build servers.
+### You must first sync the development rpm repos from the internal build servers
 ### make sure you have ample space available on your local repo box (called repo.home.nicknach.net in my lab).  
-### You need at least 30GB.  ~10GB  or rpms) and ~20GB for images
+### You need at least 30GB total.  (~10GB  for rpms and ~20GB for images)
 
-### start by connecting your repo box to the RH VPN, then run this command to import the repo
+### start by connecting your repo box to the RH VPN.  You can install a command line VPN client by installing these rpms
+redhat-internal-cert-install-0.1-7.el7.csb.noarch.rpm
+redhat-internal-NetworkManager-openvpn-profiles-non-gnome-0.1-30.el7.csb.noarch.rpm
+redhat-internal-openvpn-profiles-0.1-30.el7.csb.noarch.rpm
+
+### then run 
+openvpn --config /etc/openvpn/ovpn-phx2-udp.conf
+### your repo box is now connected to the RH vpn
+
+### now run this command to import the puddle repo
 yum-config-manager --add-repo http://download-node-02.eng.bos.redhat.com/brewroot/repos/rhaos-3.9-rhel-7-build/latest/x86_64/
+
 ### change the name to something more simple
 sed -i 's/\[.*\]/\[rhaos-3.9\]/' /etc/yum.repos.d/download-node-02.eng.bos.redhat.com_brewroot_repos_rhaos-3.9-rhel-7-build_latest_x86_64_.repo
 mv /etc/yum.repos.d/download-node-02.eng.bos.redhat.com_brewroot_repos_rhaos-3.9-rhel-7-build_latest_x86_64_.repo /etc/yum.repos.d/rhaos-3.9.repo
+
 ### disable gpg checking
 echo gpgcheck=0 >> /etc/yum.repos.d/rhaos-3.9.repo
+
 ### start the reposync
 cd ~ && reposync -lm --repoid=rhaos-3.9
+
 ### create the repodata xml
 createrepo rhaos-3.9
+
 ### install httpd
 yum -y install httpd
+
 ### enable httpd
 systemctl enable httpd --now
-### add a link to your repo in the web root
+
+### add a link to your repo dir in the web root
 ln -s /root/rhaos-3.9 /var/www/html/rhaos-3.9 
+
 ### fix selinux 
 restorecon -R /var/www/html/rhaos-3.9
 
-### # Now lets create the docker image mirror on our repo server
-yum -y install -ocker-registry.x86_64
+### now lets create the docker image mirror on our repo server
+yum -y install docker-distribution.x86_64
 systemctl enable docker-distribution --now
 
-### # now run the import-image.py script
-### # ex: 
-import-images.py docker brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888 repo.home.nicknach.net:5000 -t v3.9.0 -d
+### open the firewall up
+firewall-cmd --set-default-zone trusted
+
+### now run the import-image.py script
+cd ~ && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/import-images.py
+chmod +x import-images.py
+./import-images.py docker brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888 repo.home.nicknach.net:5000 -t v3.9.0 -d
 
 # # BEGIN
 ### # do this on ALL hosts (master/infra/nodes).  copy and paste between the <BREAK>s
