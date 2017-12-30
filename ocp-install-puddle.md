@@ -193,7 +193,7 @@ oc adm policy add-role-to-group basic-user authenticated
 ##### #  entitle admins group to run pods as root
 #oc adm policy add-scc-to-group anyuid system:admins
 
-##### # entitle the current project’s default svcaccount to run as anyuid
+##### # entitle the current project’s default svc account to run as anyuid
 #oc adm policy add-scc-to-user anyuid -z default
 
 ##### # setup a cronjob on ansible host to prune images
@@ -205,9 +205,6 @@ echo 'ansible all -m shell -a "docker rm \$(docker ps -q -f status=exited); dock
 ##### # set user to be cluster-admin role
 #oc adm policy add-cluster-role-to-user cluster-admin $OCP_USER
 
-##### # temporarily set scheduling for masters
-#oc adm manage-node --selector="region=infra" --schedulable=true
-
 ##### # create the registry manually
 ##### # oc adm registry --create --credentials=/etc/origin/master/openshift-registry.kubeconfig --selector region=infra
 ```
@@ -215,6 +212,9 @@ echo 'ansible all -m shell -a "docker rm \$(docker ps -q -f status=exited); dock
 #oc adm policy add-scc-to-user privileged -z router
 #oc adm policy add-scc-to-user hostnetwork -z router
 #oc adm policy add-cluster-role-to-user system:router system:serviceaccount:default:router
+```
+##### # set infra zone to not be schedulable for apps
+```
 oc adm manage-node --selector="region=infra" --schedulable=false
 ```
 ##### # deploying 3scale
