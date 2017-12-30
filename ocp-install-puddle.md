@@ -135,7 +135,7 @@ sed -i '16,/registries =/s/\[\]/\[\"repo.home.nicknach.net:5000\"\]/' /etc/conta
 ```
 systemctl enable docker --now
 ```
-##### # make sure its up to date
+##### # make sure your nodes are up to date
 ```
 yum -y update
 ```
