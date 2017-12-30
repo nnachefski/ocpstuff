@@ -4,7 +4,7 @@
 ###### # make sure you have ample space available on your local repo box (called repo.home.nicknach.net in my lab).  
 ###### # You need at least 30GB total.  (~10GB  for rpms and ~20GB for images)
 
-##### # start by connecting your repo box to the RH VPN.  You can install a command line VPN client by installing these rpms
+##### # start by connecting your repo box to the RH VPN.  You can setup a command line VPN client by installing these rpms
 ```
 redhat-internal-cert-install-0.1-7.el7.csb.noarch.rpm
 redhat-internal-NetworkManager-openvpn-profiles-non-gnome-0.1-30.el7.csb.noarch.rpm
@@ -223,9 +223,10 @@ oc adm manage-node --selector="region=infra" --schedulable=false
 #oc new-project 3scaleamp
 #oc new-app --file /opt/amp/templates/amp.yml --param #WILDCARD_DOMAIN=apps.ocp.nicknach.net --param ADMIN_PASSWORD=welcome1
 ```
-## # [STOP]
-### # add a storage class if using dynamic provisioning
-### # for AWS
+#### # [STOP]
+##### # add a storage class if using dynamic provisioning
+##### # for AWS
+```
 oc create -f - <<EOF
 apiVersion: v1
 kind: StorageClass
@@ -241,8 +242,9 @@ parameters:
   iopsPerGB: "1000" 
   encrypted: "false"
 EOF
-
-### # for GCE
+```
+##### # for GCE
+```
 oc create -f - <<EOF
 apiVersion: v1
 kind: StorageClass
@@ -254,9 +256,8 @@ parameters:
  type: pd-standard 
  zone: us-west2-b
 EOF
-
-## # [STOP]
-### # create PV for registry (NFS)
+```
+##### # create PV for registry (NFS)
 oc create -f - <<EOF
 apiVersion: v1
 kind: PersistentVolume
@@ -272,8 +273,8 @@ spec:
     server: "$OCP_NFS_SERVER"
   persistentVolumeReclaimPolicy: Retain
 EOF
-
-### # create PV for etcd (NFS)
+```
+##### # create PV for etcd (NFS)
 oc create -f - <<EOF
 apiVersion: v1
 kind: PersistentVolume
@@ -289,10 +290,10 @@ spec:
     server: "$OCP_NFS_SERVER"
   persistentVolumeReclaimPolicy: Retain
 EOF
-
-
-## # OR
-### # create PV for registry (AWS)
+```
+##### # OR
+##### # create PV for registry (AWS)
+```
 oc create -f - <<EOF
 apiVersion: v1
 kind: PersistentVolume
@@ -308,16 +309,17 @@ spec:
     volumeID: "vol-013223dd81d5b2cfa"
   persistentVolumeReclaimPolicy: Retain
 EOF
-
-### # OR
-### # create PV for registry (GCE)
+```
+##### # OR
+##### # create PV for registry (GCE)
+```
 oc create -f - <<EOF
 apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: registry-volume
-####  failure-domain.beta.kubernetes.io/region: "us-west1" 
-####  failure-domain.beta.kubernetes.io/zone: "us-west1-b"
+#    failure-domain.beta.kubernetes.io/region: "us-west1" 
+#    failure-domain.beta.kubernetes.io/zone: "us-west1-b"
 spec:
   capacity:
     storage: 70Gi
@@ -328,8 +330,9 @@ spec:
     pdName: "docker-registry"
   persistentVolumeReclaimPolicy: Delete
 EOF
-
-### # now create the PVC
+```
+##### # now create the PVC
+```
 oc create -f - <<EOF
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -344,15 +347,17 @@ spec:
     requests:
       storage: 40Gi
 EOF
-
-## switch the registry’s storage to our NFS-backed PV we just created
+```
+##### # switch the registry’s storage to our NFS-backed PV we just created
 oc volume dc docker-registry  --add --overwrite -t persistentVolumeClaim  --claim-name=registry-volume-claim --name=registry-storage
 
-#### Deploy metrics
-## switch to metrics project
+#### # Deploy metrics
+##### # switch to metrics project
+```
 oc project openshift-infra
-
-## create PV for metrics (NFS)
+```
+##### # create PV for metrics (NFS)
+```
 oc create -f - <<EOF
 apiVersion: v1
 kind: PersistentVolume
@@ -368,19 +373,23 @@ spec:
     server: "$OCP_NFS_SERVER"
   persistentVolumeReclaimPolicy: Retain
 EOF
-
+```
+##### # now run the playbook
+```
 ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/byo/openshift-cluster/openshift-metrics.yml -e openshift_metrics_install_metrics=true -e openshift_metrics_cassandra_storage_type=pv -e openshift_metrics_cassandra_pvc_size=30Gi
 
 -e openshift_metrics_cassandra_storage_type=dynamic 
-
-### # [STOP]
+```
+#### # [STOP]
 ##### # now once the deployer is finished and you see your pods as “Running” (watch -n1 ‘oc get pods’ also, ‘oc get events’)
 
 
 ##### # Setup aggregated logging
+```
 oc project logging
-
+```
 ##### # create PV for logging (NFS)
+```
 oc create -f - <<EOF
 apiVersion: v1
 kind: PersistentVolume
@@ -396,8 +405,9 @@ spec:
     server: "$OCP_NFS_SERVER"
   persistentVolumeReclaimPolicy: Retain
 EOF
-
+```
+##### # now run the playbook
+```
 ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/byo/openshift-cluster/openshift-logging.yml -e openshift_logging_install_logging=true -e openshift_logging_es_pvc_size=20Gi
-
-
-# done
+```
+## # done
