@@ -178,7 +178,6 @@ oc patch ns openshift-infra -p '{"metadata": {"annotations": {"openshift.io/node
 ```
 oc annotate storageclass glusterfs-storage storageclass.beta.kubernetes.io/is-default-class="true"
 ```
-
 ##### # setup group sync and run it once
 ```
 wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/ocp_group_sync.conf -O /etc/origin/master/ocp_group_sync.conf
@@ -392,8 +391,7 @@ ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/byo/openshift-cl
 #### # [STOP]
 ##### # now once the deployer is finished and you see your pods as “Running” (watch -n1 ‘oc get pods’ also, ‘oc get events’)
 
-
-##### # Setup aggregated logging
+#### # Setup aggregated logging
 ```
 oc project logging
 ```
