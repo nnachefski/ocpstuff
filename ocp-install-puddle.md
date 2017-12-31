@@ -151,8 +151,9 @@ ssh-keygen
 ```
 for i in `cat list.txt`; do ssh-copy-id root@$i; done
 ```
-###### # create your ansible hosts (inventory) file 
+##### # create your ansible hosts (inventory) file 
 ###### # (see other doc for creating this file)
+https://github.com/nnachefski/ocpstuff/blob/master/ocp-generate-ansible-inventory.txt
 #### # [STOP]
 ##### # now run the ansible playbook to install
 ```
