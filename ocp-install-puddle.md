@@ -175,7 +175,9 @@ chmod +x /etc/profile.d/ocp.sh
 oc patch ns openshift-infra -p '{"metadata": {"annotations": {"openshift.io/node-selector": "region=infra"}}}'
 ```
 ##### # set gluster to be the default storageclass
-#oc annotate storageclass glusterfs-storage storageclass.beta.kubernetes.io/is-default-class="true"
+```
+oc annotate storageclass glusterfs-storage storageclass.beta.kubernetes.io/is-default-class="true"
+```
 
 ##### # setup group sync and run it once
 ```
@@ -192,21 +194,24 @@ echo 'oc adm groups sync --sync-config=/etc/origin/master/ocp_group_sync.conf --
 oc adm policy add-cluster-role-to-group cluster-admin admins
 oc adm policy add-role-to-group basic-user authenticated
 ```
+#### # misc stuff
 ##### #  entitle admins group to run pods as root
-#oc adm policy add-scc-to-group anyuid system:admins
-
+```
+oc adm policy add-scc-to-group anyuid system:admins
+```
 ##### # entitle the current project’s default svc account to run as anyuid
-#oc adm policy add-scc-to-user anyuid -z default
-
+```
+oc adm policy add-scc-to-user anyuid -z default
+```
 ##### # setup a cronjob on ansible host to prune images
 ```
 echo 'ansible all -m shell -a "docker rm \$(docker ps -q -f status=exited); docker volume rm \$(docker volume ls -qf dangling=true); docker rmi \$(docker images --filter "dangling=true" -q --no-trunc)"' >> /etc/cron.daily/ocp-image-clean.sh && chmod +x /etc/cron.daily/ocp-image-clean.sh
 ```
 ##### # setup a local htpasswd user if not using LDAP or SSO
-#htpasswd -b /etc/origin/master/htpasswd $OCP_USER $OCP_PASSWD
-##### # set user to be cluster-admin role
-#oc adm policy add-cluster-role-to-user cluster-admin $OCP_USER
-
+```
+htpasswd -b /etc/origin/master/htpasswd $OCP_USER $OCP_PASSWD
+oc adm policy add-cluster-role-to-user cluster-admin $OCP_USER
+```
 ##### # create the registry manually
 ##### # oc adm registry --create --credentials=/etc/origin/master/openshift-registry.kubeconfig --selector region=infra
 ```
