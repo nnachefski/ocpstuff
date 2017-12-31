@@ -147,7 +147,7 @@ ssh-keygen
 ```
 #### # [STOP] 
 ##### # copy keys to all hosts(masters/nodes)
-##### # make a list.txt of public IPs and then do...
+##### # make a list.txt of IPs and then do...
 ```
 for i in `cat list.txt`; do ssh-copy-id root@$i; done
 ```
