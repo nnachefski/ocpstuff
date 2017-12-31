@@ -50,7 +50,7 @@ oc start-build s2i-custom-python35 -n $PROJECT
 ```
 oc new-project custom-s2i-test
 ```
-##### # allow pull from $PROJECT to ‘custom-s2i-test’
+##### # allow pull from $PROJECT to ‘custom-s2i-test’ (this is not required if you built your base images in the 'openshift' project)
 ``` 
 oc policy add-role-to-group system:image-puller system:serviceaccounts:custom-s2i-test -n $PROJECT
 ```
