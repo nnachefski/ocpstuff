@@ -19,11 +19,10 @@ deployment_type=openshift-enterprise
 ##openshift_additional_repos=[{'id': 'ose-devel', 'name': 'rhaos-3.9', 'baseurl': 'http://repo.home.nicknach.net/repo/rhaos-3.9', 'enabled': 1, 'gpgcheck': 0}]
 #openshift_docker_additional_registries=repo.home.nicknach.net:5000
 #openshift_docker_insecure_registries=repo.home.nicknach.net:5000
-
 ## alternate image format string, useful if you've got your own registry mirror
 #oreg_url=repo.home.nicknach.net:5000/openshift3/ose-\${component}:\${version}
 #openshift_examples_modify_imagestreams=true
-##openshift_docker_blocked_registries=registry.access.redhat.com,docker.io
+#openshift_docker_blocked_registries=registry.access.redhat.com,docker.io
 #openshift_cockpit_deployer_prefix=repo.home.nicknach.net:5000/openshift3/
 #openshift_metrics_image_prefix=repo.home.nicknach.net:5000/openshift3/
 #openshift_metrics_image_version=v3.9.0
