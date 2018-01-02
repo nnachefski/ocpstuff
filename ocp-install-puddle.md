@@ -64,7 +64,7 @@ chmod +x import-images.py
 ./import-images.py docker brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888 repo.home.nicknach.net:5000 -t v3.9.0 -d
 ```
 ### # BEGIN
-##### # do this on ALL hosts (master/infra/nodes).  copy and paste between the [STOP]s
+##### # do this on ALL hosts (master/infra/nodes)
 ##### # SET THESE VARIABLES ###
 ```
 export ROOT_DOMAIN=ocp.nicknach.net
@@ -140,7 +140,7 @@ systemctl enable docker --now
 yum -y update
 ```
 ###### # reboot if necessary 
-## #  On first master(or bastion host) only now
+## #  On first master only now (or bastion host)
 ##### #  make password-less key for openshift-ansible usage
 ```
 ssh-keygen
@@ -152,9 +152,8 @@ ssh-keygen
 for i in `cat list.txt`; do ssh-copy-id root@$i; done
 ```
 ##### # create your ansible hosts (inventory) file 
-###### # (see other doc for creating this file)
+###### # (see below doc for creating this file)
 https://github.com/nnachefski/ocpstuff/blob/master/ocp-generate-ansible-inventory.txt
-#### # [STOP]
 ##### # now run the ansible playbook to install
 ```
 ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/deploy_cluster.yml
