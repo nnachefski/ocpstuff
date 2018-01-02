@@ -21,8 +21,8 @@ yum-config-manager --add-repo http://download-node-02.eng.bos.redhat.com/brewroo
 ```
 ##### # change the name to something more simple
 ```
-sed -i 's/\[.*\]/\[rhaos-3.9\]/' /etc/yum.repos.d/download-node-02.eng.bos.redhat.com_brewroot_repos_rhaos-3.9-rhel-7-build_latest_x86_64_.repo
-mv /etc/yum.repos.d/download-node-02.eng.bos.redhat.com_brewroot_repos_rhaos-3.9-rhel-7-build_latest_x86_64_.repo /etc/yum.repos.d/rhaos-3.9.repo
+sed -i 's/\[.*\]/\[rhaos-3.9\]/' /etc/yum.repos.d/download-node-02.eng.bos.redhat.com_brewroot_repos_rhaos-3.9-rhel-7-container-build_latest_x86_64_.repo
+mv /etc/yum.repos.d/download-node-02.eng.bos.redhat.com_brewroot_repos_rhaos-3.9-rhel-7-container-build_latest_x86_64_.repo /etc/yum.repos.d/rhaos-3.9.repo
 ```
 ##### # disable gpg checking
 ```
