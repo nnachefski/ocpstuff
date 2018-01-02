@@ -193,7 +193,9 @@ echo 'oc adm groups sync --sync-config=/etc/origin/master/ocp_group_sync.conf --
 oc adm policy add-cluster-role-to-group cluster-admin admins
 oc adm policy add-role-to-group basic-user authenticated
 ```
-#### # misc stuff
+## Done!
+
+### # misc stuff
 ##### #  entitle admins group to run pods as root
 ```
 oc adm policy add-scc-to-group anyuid system:admins
