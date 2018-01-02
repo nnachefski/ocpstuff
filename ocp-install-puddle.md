@@ -145,7 +145,6 @@ yum -y update
 ```
 ssh-keygen
 ```
-#### # [STOP] 
 ##### # copy keys to all hosts(masters/nodes)
 ##### # make a list.txt of IPs and then do...
 ```
@@ -230,7 +229,6 @@ oc adm manage-node --selector="region=infra" --schedulable=false
 #oc new-project 3scaleamp
 #oc new-app --file /opt/amp/templates/amp.yml --param #WILDCARD_DOMAIN=apps.ocp.nicknach.net --param ADMIN_PASSWORD=welcome1
 ```
-#### # [STOP]
 ##### # add a storage class if using dynamic provisioning
 ##### # for AWS
 ```
@@ -389,7 +387,6 @@ ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/byo/openshift-cl
 
 -e openshift_metrics_cassandra_storage_type=dynamic 
 ```
-#### # [STOP]
 ##### # now once the deployer is finished and you see your pods as “Running” (watch -n1 ‘oc get pods’ also, ‘oc get events’)
 
 #### # Setup aggregated logging
