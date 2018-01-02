@@ -1,7 +1,4 @@
 openshift3/ose-service-catalog
-openshift3/registry-console
-openshift3/mediawiki-apb
-openshift3/postgresql-apb
 openshift3/ose-ansible-service-broker
 openshift3/ose-template-service-broker
 openshift3/ose-ansible
@@ -34,4 +31,6 @@ openshift3/jenkins-2-rhel7
 openshift3/jenkins-slave-base-rhel7
 openshift3/jenkins-slave-maven-rhel7
 openshift3/jenkins-slave-nodejs-rhel7
-openshift3/efs-provisioner
+openshift3/registry-console
+openshift3/mediawiki-apb
+openshift3/postgresql-apb
