@@ -13,7 +13,7 @@ access.redhat.com
 # BEGIN
 ## do this on ALL hosts (master/infra/nodes).  copy and paste between the <BREAK>s
 ### SET THESE VARIABLES ###
-export POOLID=8a85f9874011071c01407da00b997cb2
+export POOLID=
 export ROOT_DOMAIN=ocp.nicknach.net
 export APPS_DOMAIN=apps.$ROOT_DOMAIN 
 export OCP_USER=nicknach
