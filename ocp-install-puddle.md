@@ -388,7 +388,6 @@ ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/byo/openshift-cl
 -e openshift_metrics_cassandra_storage_type=dynamic 
 ```
 ##### # now once the deployer is finished and you see your pods as “Running” (watch -n1 ‘oc get pods’ also, ‘oc get events’)
-
 #### # Setup aggregated logging
 ```
 oc project logging
