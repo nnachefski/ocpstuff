@@ -17,7 +17,7 @@ openvpn --config /etc/openvpn/ovpn-phx2-udp.conf
 ###### # your repo box is now connected to the RH vpn
 ##### # now run this command to import the puddle repo
 ```
-yum-config-manager --add-repo http://download-node-02.eng.bos.redhat.com/brewroot/repos/rhaos-3.9-rhel-7-build/latest/x86_64/
+yum-config-manager --add-repo http://download-node-02.eng.bos.redhat.com/brewroot/repos/rhaos-3.9-rhel-7-container-build/latest/x86_64/
 ```
 ##### # change the name to something more simple
 ```
