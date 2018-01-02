@@ -114,7 +114,6 @@ yum install -y docker docker-logrotate
 ```
 #yum -y install cns-deploy heketi-client
 ```
-
 ##### # configure the docker pool device
 ```
 cat <<EOF > /etc/sysconfig/docker-storage-setup
@@ -145,13 +144,12 @@ yum -y update
 ```
 ssh-keygen
 ```
-##### # copy keys to all hosts(masters/nodes)
-##### # make a list.txt of IPs and then do...
+##### # copy keys to all hosts(masters/nodes).  make a list.txt of IPs and then do...
 ```
 for i in `cat list.txt`; do ssh-copy-id root@$i; done
 ```
 ##### # create your ansible hosts (inventory) file 
-###### # (see below doc for creating this file)
+###### # (see below link for creating this file)
 https://github.com/nnachefski/ocpstuff/blob/master/ocp-generate-ansible-inventory.txt
 ##### # now run the ansible playbook to install
 ```
