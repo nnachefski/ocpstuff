@@ -48,8 +48,9 @@ Activate the Openshift subscriptions provided by Red Hat. If using a Satellite S
 
 Additional items:
    1. RHEL7.4 (Vanilla ISO is recommended)
-   1. The “Minimum” installation is recommended
-   1. SELinux must be in “Enforcing” 
-   1. default in vanilla image
-   1. NetworkManager must be enabled 
-   1. default in vanilla image
+    - The “Minimum” installation is recommended
+   2. SELinux must be in “Enforcing” 
+    - default in vanilla image
+   3. NetworkManager must be enabled 
+    - default in vanilla image
+    
