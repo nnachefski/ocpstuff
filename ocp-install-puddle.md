@@ -263,7 +263,7 @@ parameters:
  zone: us-west2-b
 EOF
 ```
-##### # create PV for registry (NFS)
+##### # manually create PV for registry (NFS)
 ```
 oc create -f - <<EOF
 apiVersion: v1
@@ -281,7 +281,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
 EOF
 ```
-##### # create PV for etcd (NFS)
+##### # manually create PV for etcd (NFS)
 ```
 oc create -f - <<EOF
 apiVersion: v1
@@ -300,7 +300,7 @@ spec:
 EOF
 ```
 ##### # OR
-##### # create PV for registry (AWS)
+##### # manually create PV for registry (AWS)
 ```
 oc create -f - <<EOF
 apiVersion: v1
@@ -319,7 +319,7 @@ spec:
 EOF
 ```
 ##### # OR
-##### # create PV for registry (GCE)
+##### # manually create PV for registry (GCE)
 ```
 oc create -f - <<EOF
 apiVersion: v1
@@ -339,7 +339,7 @@ spec:
   persistentVolumeReclaimPolicy: Delete
 EOF
 ```
-##### # now create the PVC
+##### # manually create the PVC
 ```
 oc create -f - <<EOF
 apiVersion: v1
@@ -356,15 +356,15 @@ spec:
       storage: 40Gi
 EOF
 ```
-##### # switch the registry’s storage to our NFS-backed PV we just created
+##### # manually switch the registry’s storage to our NFS-backed PV we just created
 oc volume dc docker-registry  --add --overwrite -t persistentVolumeClaim  --claim-name=registry-volume-claim --name=registry-storage
 
-#### # Deploy metrics
+#### # manually Deploy metrics
 ##### # switch to metrics project
 ```
 oc project openshift-infra
 ```
-##### # create PV for metrics (NFS)
+##### # manually create PV for metrics (NFS)
 ```
 oc create -f - <<EOF
 apiVersion: v1
@@ -395,7 +395,7 @@ ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/byo/openshift-cl
 ```
 oc project logging
 ```
-##### # create PV for logging (NFS)
+##### # manually create PV for logging (NFS)
 ```
 oc create -f - <<EOF
 apiVersion: v1
