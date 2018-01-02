@@ -170,6 +170,7 @@ oc adm manage-node --selector="region=infra" --schedulable=false
 #oc new-project 3scaleamp
 #oc new-app --file /opt/amp/templates/amp.yml --param #WILDCARD_DOMAIN=apps.ocp.nicknach.net --param ADMIN_PASSWORD=welcome1
 
+
 # <BREAK>
 ## add a storage class if using dynamic provisioning
 ## for AWS
