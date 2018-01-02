@@ -1,3 +1,7 @@
+openshift3/ose-service-catalog
+openshift3/registry-console
+openshift3/mediawiki-apb
+openshift3/postgresql-apb
 openshift3/ose-ansible-service-broker
 openshift3/ose-template-service-broker
 openshift3/ose-ansible
