@@ -144,7 +144,7 @@ yum -y update
 ```
 ssh-keygen
 ```
-##### # copy keys to all hosts(masters/nodes).  make a list.txt of IPs and then do...
+##### # copy keys to all hosts(masters/infras/nodes).  make a list.txt of IPs and then do...
 ```
 for i in `cat list.txt`; do ssh-copy-id root@$i; done
 ```
