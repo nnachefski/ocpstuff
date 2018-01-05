@@ -190,6 +190,8 @@ oc adm policy add-cluster-role-to-group cluster-admin admins
 oc adm policy add-role-to-group basic-user authenticated
 ```
 ## Done!
+### # Now run through the rhel7-custom image build guide
+#### # https://github.com/nnachefski/ocpstuff/tree/master/images
 
 ### # misc stuff
 ##### #  entitle admins group to run pods as root
