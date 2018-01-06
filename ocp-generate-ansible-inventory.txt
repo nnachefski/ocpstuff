@@ -15,25 +15,35 @@ deployment_type=openshift-enterprise
 #deployment_type=origin
 #containerized=true
 
-##internal image repos (for puddle testing)
+##internal image repos
 ##openshift_additional_repos=[{'id': 'ose-devel', 'name': 'rhaos-3.9', 'baseurl': 'http://repo.home.nicknach.net/repo/rhaos-3.9', 'enabled': 1, 'gpgcheck': 0}]
 #openshift_docker_additional_registries=repo.home.nicknach.net:5000
 #openshift_docker_insecure_registries=repo.home.nicknach.net:5000
-## alternate image format string, useful if you've got your own registry mirror
+#openshift_docker_blocked_registries=registry.access.redhat.com,docker.io
+
 #oreg_url=repo.home.nicknach.net:5000/openshift3/ose-\${component}:\${version}
 #openshift_examples_modify_imagestreams=true
-#openshift_docker_blocked_registries=registry.access.redhat.com,docker.io
+
 #openshift_cockpit_deployer_prefix=repo.home.nicknach.net:5000/openshift3/
+
 #openshift_metrics_image_prefix=repo.home.nicknach.net:5000/openshift3/
 #openshift_metrics_image_version=v3.9.0
+
 #openshift_logging_image_prefix=repo.home.nicknach.net:5000/openshift3/
 #openshift_logging_image_version=3.9.0
-#openshift_service_catalog_image_prefix=repo.home.nicknach.net:5000/openshift3/
+
+## https://bugzilla.redhat.com/show_bug.cgi?id=1531949
+#openshift_service_catalog_image_prefix=repo.home.nicknach.net:5000/openshift3/ose-
 #openshift_service_catalog_image_version=v3.9.0
+
 #ansible_service_broker_image_prefix=repo.home.nicknach.net:5000/openshift3/
 #ansible_service_broker_image_tag=v3.9.0
 #ansible_service_broker_etcd_image_prefix=repo.home.nicknach.net:5000/openshift3/
 #ansible_service_broker_etcd_image_tag=v3.9.0
+
+#template_service_broker_prefix=repo.home.nicknach.net:5000/openshift3/
+#template_service_broker_version=v3.9.0
+#template_service_broker_image_name=ose
 
 ## If ansible_ssh_user is not root, ansible_sudo must be set to true
 ansible_ssh_user=root
