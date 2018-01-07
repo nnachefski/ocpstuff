@@ -7,7 +7,7 @@ export PROJECT=openshift
 ```
 ###### # make sure you have rhel-7-server-rhscl-rpms and rhel-7-server-optional-rpms repos enabled on all openshift build/app nodes
 
-##### # build the base rhel7 image from a git repo (clone mine or use it directly to get started)
+##### # build the base rhel7 images from a git repo (clone mine or use it directly to get started)
 ```
 oc new-build https://github.com/nnachefski/ocpstuff.git --context-dir=/images/rhel7-custom --name=rhel7-custom -n $PROJECT
 ```
