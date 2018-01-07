@@ -9,6 +9,8 @@ export DOCKER_DEV=/dev/vdb
 export OCP_NFS_MOUNT=/home/data/openshift
 export OCP_NFS_SERVER=storage.home.nicknach.net
 export LDAP_SERVER=gw.home.nicknach.net
+export RHSM_ID=
+export RHSM_PW=
 ```
 ##### # make them persistent 
 ```
