@@ -304,8 +304,9 @@ spec:
 EOF
 ```
 ##### # manually switch the registry’s storage to our NFS-backed PV we just created
+```
 oc volume dc docker-registry  --add --overwrite -t persistentVolumeClaim  --claim-name=registry-volume-claim --name=registry-storage
-
+```
 #### # manually Deploy metrics
 ##### # switch to metrics project
 ```
