@@ -21,7 +21,7 @@ oc adm policy add-scc-to-user anyuid -z default
 ```
 ##### # now build/deploy the ML framework
 ```
-oc new-app https://github.com/nnachefski/ml-on-ocp.git --name=jupyter
+oc new-app https://github.com/nnachefski/ocpstuff.git --context-dir=images/tf --name=jupyter
 ```
 ##### # expose the jupyter UI port
 ```
