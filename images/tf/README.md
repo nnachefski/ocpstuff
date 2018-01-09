@@ -34,4 +34,5 @@ oc patch dc jupyter -p '{"spec":{"template":{"spec":{"affinity":{"nodeAffinity":
 ###### # change GTX to match above
 ###### # change 'jupyter' to match above --name (in both dc and container names)
 
-#### # now run the mnist notebook and see that it scheduled on the GPU (use nvidia-smi on the bare-metal node)
+#### # now run the mnist notebook and see that it scheduled on the GPU 
+###### # use nvidia-smi on the bare-metal node
