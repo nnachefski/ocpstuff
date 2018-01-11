@@ -3,7 +3,7 @@
 #### # This example uses Tensorflow and Jupyter
 ##### # make sure to build the rhel7-cuda base image first
 ```
-oc new-build https://github.com/nnachefski/rhel7-cuda.git --strategy=docker --name=rhel7-cuda -i rhel7-custom -n openshift
+oc new-build https://github.com/nnachefski/ocpstuff.git --context-dir=images/rhel7-cuda --strategy=docker --name=rhel7-cuda -i rhel7-custom -n openshift
 ```
 ##### # join a bare-metal node (w/ an NVIDIA GPU) to your 3.6+ cluster and label that node appropriately:
 ```
