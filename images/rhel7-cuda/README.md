@@ -5,6 +5,6 @@ oc new-build https://github.com/nnachefski/rhel7-cuda.git --name=rhel7-cuda -n o
 ```
 #### # now get started with some tensorflow+jupyter demos or ether mining containers
 
-https://github.com/nnachefski/ml-on-ocp
+https://github.com/nnachefski/ocpstuff/tree/master/images/tf
 
-https://github.com/nnachefski/ether-on-ocp
+https://github.com/nnachefski/ocpstuff/tree/master/images/ether
