@@ -9,8 +9,8 @@ export DOCKER_DEV=/dev/vdb
 export OCP_NFS_MOUNT=/home/data/openshift
 export OCP_NFS_SERVER=storage.home.nicknach.net
 export LDAP_SERVER=gw.home.nicknach.net
-export RHSM_ID=
-export RHSM_PW=
+export RHSM_ID=your@rhn.com
+export RHSM_PW=yourpassword
 ```
 ##### # make them persistent 
 ```
@@ -58,7 +58,7 @@ yum install -y yum-utils wget git net-tools bind-utils iptables-services bridge-
 ```
 yum install -y atomic atomic-openshift-utils openshift-ansible atomic-openshift-clients
 ```
-##### # install docker (non-Atomic installs)
+##### # install docker
 ```
 yum install -y docker docker-logrotate
 ```
