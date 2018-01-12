@@ -1,7 +1,7 @@
-## # This repo's content is for building and deploying CUDA/GPU-enabled ML images on Openshift.
-### # You must first build the base image (which adds the cuda layer)
-#### # This example uses Tensorflow and Jupyter
-##### # make sure to build the rhel7-cuda base image first
+#### # This repo's content is for building and deploying CUDA/GPU-enabled ML images on Openshift.
+##### # This example uses Tensorflow and Jupyter
+
+##### # You must first build the base image (which adds the cuda layer)
 ```
 oc new-build https://github.com/nnachefski/ocpstuff.git --context-dir=images/rhel7-cuda --strategy=docker --name=rhel7-cuda -i rhel7-custom -n openshift
 ```
@@ -34,5 +34,5 @@ oc patch dc jupyter -p '{"spec":{"template":{"spec":{"affinity":{"nodeAffinity":
 ###### # change GTX to match above
 ###### # change 'jupyter' to match above --name (in both dc and container names)
 
-#### # now run the mnist notebook and see that it scheduled on the GPU 
+##### # now run the mnist notebook and see that it scheduled on the GPU 
 ###### # use nvidia-smi on the bare-metal node
