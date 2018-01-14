@@ -66,7 +66,7 @@ yum install -y docker docker-logrotate
 ```
 ##### # install gluster packages
 ```
-yum -y install cns-deploy heketi-client
+#yum -y install cns-deploy heketi-client
 ```
 ##### # configure the docker pool device
 ```
