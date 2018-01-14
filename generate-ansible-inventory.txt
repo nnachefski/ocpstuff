@@ -32,7 +32,6 @@ deployment_type=openshift-enterprise
 #openshift_logging_image_prefix=repo.home.nicknach.net:5000/openshift3/
 #openshift_logging_image_version=3.9.0
 
-## https://bugzilla.redhat.com/show_bug.cgi?id=1531949
 #openshift_service_catalog_image_prefix=repo.home.nicknach.net:5000/openshift3/ose-
 #openshift_service_catalog_image_version=v3.9.0
 
