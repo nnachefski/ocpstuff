@@ -10,7 +10,7 @@ export OCP_NFS_MOUNT=/home/data/openshift
 export OCP_NFS_SERVER=storage.home.nicknach.net
 export LDAP_SERVER=gw.home.nicknach.net
 export RHSM_ID=nnachefs@redhat.com
-export RHSM_PW=whyn0w0rk13
+export RHSM_PW=nopasswd
 export POOLID=8a85f98260c27fc50160c323263339ff
 ```
 ##### # make them persistent 
