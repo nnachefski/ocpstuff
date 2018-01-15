@@ -103,7 +103,7 @@ for i in `cat list.txt`; do ssh-copy-id root@$i; done
 https://github.com/nnachefski/ocpstuff/blob/master/ocp-generate-ansible-inventory.txt
 ##### # now run the ansible playbook to install
 ```
-ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/deploy_cluster.yml
+ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/byo/config.yml
 ```
 ###### #  if you to need explicitly provide a private keyfile (like with AWS)
 --private-key ~/.ssh/nick-west2.pem
