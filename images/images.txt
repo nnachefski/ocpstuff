@@ -1,3 +1,4 @@
+openshift3/oauth-proxy
 openshift3/ose-web-console
 openshift3/ose-service-catalog
 openshift3/ose-ansible-service-broker
