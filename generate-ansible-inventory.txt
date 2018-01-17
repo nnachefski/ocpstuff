@@ -30,7 +30,7 @@ deployment_type=openshift-enterprise
 
 #openshift_service_catalog_image_prefix=repo.home.nicknach.net:5000/openshift3/ose-
 #openshift_service_catalog_image_version=v3.9.0
-#openshift_web_console_prefix=repo.home.nicknach.net:5000/openshift/
+#openshift_web_console_prefix=repo.home.nicknach.net:5000/openshift3/
 #openshift_web_console_version=v3.9.0
 #ansible_service_broker_image_prefix=repo.home.nicknach.net:5000/openshift3/
 #ansible_service_broker_image_tag=v3.9.0
