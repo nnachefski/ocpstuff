@@ -173,7 +173,7 @@ oc patch ns openshift-infra -p '{"metadata": {"annotations": {"openshift.io/node
 ```
 ##### # set gluster to be the default storageclass
 ```
-oc annotate storageclass glusterfs-storage storageclass.beta.kubernetes.io/is-default-class="true"
+#oc annotate storageclass glusterfs-storage storageclass.beta.kubernetes.io/is-default-class="true"
 ```
 ##### # setup group sync and run it once
 ```
