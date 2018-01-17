@@ -1,3 +1,4 @@
+rhel7/etcd
 openshift3/oauth-proxy
 openshift3/ose-web-console
 openshift3/ose-service-catalog
