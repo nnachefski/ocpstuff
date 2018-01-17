@@ -1,3 +1,4 @@
+openshift3/ose-web-console
 openshift3/ose-service-catalog
 openshift3/ose-ansible-service-broker
 openshift3/ose-template-service-broker
