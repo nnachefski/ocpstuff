@@ -1,0 +1,273 @@
+# Create an OSEv3 group that contains the masters and nodes groups
+[OSEv3:children]
+masters
+nodes
+new_nodes
+etcd
+lb
+#nfs
+#glusterfs
+
+## Set variables common for all OSEv3 hosts
+[OSEv3:vars]
+deployment_type=openshift-enterprise
+#deployment_type=origin
+#containerized=true
+
+##internal image repos
+##openshift_additional_repos=[{'id': 'ose-devel', 'name': 'rhaos-3.9', 'baseurl': 'http://repo.home.nicknach.net/repo/rhaos-3.9', 'enabled': 1, 'gpgcheck': 0}]
+openshift_docker_additional_registries=repo.home.nicknach.net:5000
+openshift_docker_insecure_registries=repo.home.nicknach.net:5000
+openshift_docker_blocked_registries=registry.access.redhat.com,docker.io
+oreg_url=repo.home.nicknach.net:5000/openshift3/ose-${component}:${version}
+openshift_examples_modify_imagestreams=true
+openshift_cockpit_deployer_prefix=repo.home.nicknach.net:5000/openshift3/
+openshift_metrics_image_prefix=repo.home.nicknach.net:5000/openshift3/
+openshift_metrics_image_version=v3.9.0
+openshift_logging_image_prefix=repo.home.nicknach.net:5000/openshift3/
+openshift_logging_image_version=v3.9.0
+openshift_service_catalog_image_prefix=repo.home.nicknach.net:5000/openshift3/ose-
+openshift_service_catalog_image_version=v3.9.0
+openshift_web_console_prefix=repo.home.nicknach.net:5000/openshift3/
+openshift_web_console_version=v3.9.0
+ansible_service_broker_image_prefix=repo.home.nicknach.net:5000/openshift3/ose-
+ansible_service_broker_image_tag=v3.9.0
+ansible_service_broker_etcd_image_prefix=repo.home.nicknach.net:5000/rhel7/
+ansible_service_broker_etcd_image_tag=latest
+template_service_broker_prefix=repo.home.nicknach.net:5000/openshift3/
+template_service_broker_version=v3.9.0
+
+## If ansible_ssh_user is not root, ansible_sudo must be set to true
+ansible_ssh_user=root
+#ansible_ssh_user=cloud-user
+#ansible_sudo=true
+#ansible_become=yes
+
+## release ver
+openshift_release=v3.9.0
+openshift_image_tag=v3.9.0
+
+## enable ntp
+openshift_clock_enabled=true
+
+## authentication stuff
+## htpasswd file auth
+#openshift_master_identity_providers=[{'name': 'htpasswd_auth', 'login': 'true', 'challenge': 'true', 'kind': 'HTPasswdPasswordIdentityProvider', 'filename': '/etc/origin/master/htpasswd'}]
+#openshift_master_htpasswd_users={'test':'.PVCWhK.sGRq8ofCFQSOj1yHU01'}
+##welcome1
+
+## ldap auth (AD)
+#openshift_master_identity_providers=[{"name":"NNWIN","challenge":true,"login":true,"kind":"LDAPPasswordIdentityProvider","attributes":{"id":["dn"],"email":["mail"],"name":["cn"],"preferredUsername":["sAMAccountName"]},"bindDN":"CN=SVC-nn-ose,OU=SVC,OU=FNA,DC=nnwin,DC=ad,DC=nncorp,DC=com","bindPassword":"<REDACTED>","insecure":true,"url":"ldap://uswin.nicknach.com:389/DC=uswin,DC=ad,DC=nncorp,DC=com?sAMAccountName?sub"}]
+#openshift_master_ldap_ca_file=/etc/ssl/certs/NNWINDC_Cert_Chain.pem
+
+## ldap auth (IPA)
+openshift_master_identity_providers=[{"name":"myipa","challenge":true,"login":true,"kind":"LDAPPasswordIdentityProvider","attributes":{"id":["dn"],"email":["mail"],"name":["cn"],"preferredUsername":["uid"]},"bindDN":"","bindPassword":"","ca":"my-ldap-ca-bundle.crt","insecure":false,"url":"ldap://gw.home.nicknach.net/cn=users,cn=accounts,dc=home,dc=nicknach,dc=net?uid"}]
+openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
+
+#openshift_use_openvswitch_system_container=False
+#openshift_use_node_system_container=False
+#openshift_use_master_system_container=False
+#openshift_use_etcd_system_container=False
+
+## Hosted 
+#openshift_hosted_metrics_deploy=true
+#openshift_hosted_metrics_storage_kind=nfs
+#openshift_hosted_metrics_storage_access_modes=['ReadWriteOnce']
+#openshift_hosted_metrics_storage_host=storage.home.nicknach.net
+#openshift_hosted_metrics_storage_nfs_directory=/data/openshift/enterprise
+##openshift_hosted_metrics_storage_nfs_options='*(rw,root_squash,sync,no_wdelay)'
+#openshift_hosted_metrics_storage_volume_name=metrics
+#openshift_hosted_metrics_storage_volume_size=15Gi
+## logging on nfs
+#openshift_hosted_logging_deploy=true
+#openshift_hosted_logging_storage_kind=nfs
+#openshift_hosted_logging_storage_access_modes=['ReadWriteOnce']
+#openshift_hosted_logging_storage_host=storage.home.nicknach.net
+#openshift_hosted_logging_storage_nfs_directory=/data/openshift/enterprise
+##openshift_hosted_logging_storage_nfs_options='*(rw,root_squash,sync,no_wdelay)'
+#openshift_hosted_logging_storage_volume_name=logging
+#openshift_hosted_logging_storage_volume_size=10Gi
+##openshift_hosted_logging_elasticsearch_cluster_size=1
+##openshift_hosted_logging_elasticsearch_nodeselector=region=infra
+##openshift_hosted_logging_kibana_nodeselector=region=infra
+##openshift_hosted_logging_curator_nodeselector=region=infra
+##openshift_hosted_logging_es_instance_ram=8Gi
+## registry on nfs
+openshift_hosted_registry_storage_kind=nfs
+openshift_hosted_registry_storage_access_modes=['ReadWriteMany']
+openshift_hosted_registry_storage_host=storage.home.nicknach.net
+openshift_hosted_registry_storage_nfs_directory=/data/openshift/enterprise
+#openshift_hosted_registry_storage_nfs_options='*(rw,root_squash,sync,no_wdelay)'
+openshift_hosted_registry_storage_volume_name=docker-registry
+openshift_hosted_registry_storage_volume_size=20Gi
+# etcd on nfs
+openshift_hosted_etcd_storage_kind=nfs
+openshift_hosted_etcd_storage_access_modes=["ReadWriteOnce"]
+openshift_hosted_etcd_storage_host=storage.home.nicknach.net
+openshift_hosted_etcd_storage_nfs_directory=/data/openshift/enterprise
+#openshift_hosted_etcd_storage_nfs_options="*(rw,root_squash,sync,no_wdelay)"
+openshift_hosted_etcd_storage_volume_name=etcd 
+openshift_hosted_etcd_storage_volume_size=1Gi
+openshift_hosted_etcd_storage_labels={'storage':'etcd'}
+
+### NFS-backed OCP services
+## logging
+openshift_logging_install_logging=true
+openshift_logging_storage_kind=nfs
+openshift_logging_storage_access_modes=['ReadWriteOnce']
+openshift_logging_storage_host=storage.home.nicknach.net
+openshift_logging_storage_nfs_directory=/data/openshift/enterprise
+#openshift_logging_storage_nfs_options='*(rw,root_squash,sync,no_wdelay)'
+openshift_logging_storage_volume_name=logging
+openshift_logging_storage_volume_size=10Gi
+openshift_logging_storage_labels={'storage':'logging'}
+# metrics
+#openshift_metrics_install_metrics=true
+#openshift_metrics_storage_kind=nfs
+#openshift_metrics_storage_access_modes=['ReadWriteOnce']
+#openshift_metrics_storage_host=storage.home.nicknach.net
+#openshift_metrics_storage_nfs_directory=/data/openshift/enterprise
+#openshift_metrics_storage_nfs_options='*(rw,root_squash,sync,no_wdelay)'
+#openshift_metrics_storage_volume_name=metrics
+#openshift_metrics_storage_volume_size=15Gi
+#openshift_metrics_storage_labels={'storage':'metrics'}
+# For prometheus
+#openshift_hosted_prometheus_deploy=true
+#openshift_prometheus_storage_kind=nfs
+#openshift_prometheus_storage_access_modes=['ReadWriteOnce']
+#openshift_prometheus_storage_host=storage.home.nicknach.net
+#openshift_prometheus_storage_nfs_directory=/data/openshift/enterprise
+#openshift_prometheus_storage_nfs_options='*(rw,root_squash,sync,no_wdelay)'
+#openshift_prometheus_storage_volume_name=prometheus
+#openshift_prometheus_storage_volume_size=7Gi
+#openshift_prometheus_storage_labels={'storage':'prometheus'}
+#openshift_prometheus_storage_type='pvc'
+# For prometheus-alertmanager
+#openshift_prometheus_alertmanager_storage_kind=nfs
+#openshift_prometheus_alertmanager_storage_access_modes=['ReadWriteOnce']
+#openshift_prometheus_alertmanager_storage_host=storage.home.nicknach.net
+#openshift_prometheus_alertmanager_storage_nfs_directory=/data/openshift/enterprise
+#openshift_prometheus_alertmanager_storage_nfs_options='*(rw,root_squash,sync,no_wdelay)'
+#openshift_prometheus_alertmanager_storage_volume_name=prometheus-alertmanager
+#openshift_prometheus_alertmanager_storage_volume_size=6Gi
+#openshift_prometheus_alertmanager_storage_labels={'storage':'prometheus-alertmanager'}
+#openshift_prometheus_alertmanager_storage_type='pvc'
+# For prometheus-alertbuffer
+#openshift_prometheus_alertbuffer_storage_kind=nfs
+#openshift_prometheus_alertbuffer_storage_access_modes=['ReadWriteOnce']
+#openshift_prometheus_alertbuffer_storage_host=storage.home.nicknach.net
+#openshift_prometheus_alertbuffer_storage_nfs_directory=/data/openshift/enterprise
+#openshift_prometheus_alertbuffer_storage_nfs_options='*(rw,root_squash,sync,no_wdelay)'
+#openshift_prometheus_alertbuffer_storage_volume_name=prometheus-alertbuffer
+#openshift_prometheus_alertbuffer_storage_volume_size=5Gi
+#openshift_prometheus_alertbuffer_storage_labels={'storage':'prometheus-alertbuffer'}
+#openshift_prometheus_alertbuffer_storage_type='pvc'
+
+## disable checks
+openshift_disable_check=disk_availability,docker_storage,memory_availability,docker_image_availability,package_availability,package_version
+
+## cluster stuff (uncomment for multi-master mode)
+openshift_master_cluster_method=native
+openshift_master_cluster_hostname=api.ocp.nicknach.net
+openshift_master_cluster_public_hostname=console.ocp.nicknach.net
+
+
+## deploy the registry on gluster
+#openshift_hosted_manage_registry=true
+#openshift_hosted_registry_selector=region=infra
+#openshift_hosted_registry_storage_kind=glusterfs
+
+## gluster stuff
+#openshift_storage_glusterfs_namespace=glusterfs
+#openshift_storage_glusterfs_name=storage
+
+## set the router region
+#openshift_hosted_manage_router=true
+#openshift_hosted_router_selector=region=infra
+
+##  cloud provider configs
+##  AWS
+#openshift_cloudprovider_kind=aws
+#openshift_cloudprovider_aws_access_key=
+#openshift_cloudprovider_aws_secret_key=
+##  Openstack
+#openshift_cloudprovider_kind=openstack
+#openshift_cloudprovider_openstack_auth_url=https://controller.home.nicknach.com:35357/v2.0
+#openshift_cloudprovider_openstack_username=svc-openshift-np
+#openshift_cloudprovider_openstack_password=kX7mE10dkX7mE10d
+#openshift_cloudprovider_openstack_tenant_id=f741ba7204ec47c9886c050891dd592e
+#openshift_cloudprovider_openstack_tenant_name=nn-dev
+#openshift_cloudprovider_openstack_region=RegionOne
+#openshift_cloudprovider_openstack_lb_subnet_id=d7c61f2a-d591-461d-af28-308ade046c0d
+##  GCE
+#openshift_cloudprovider_kind=gce
+
+## domain stuff
+openshift_master_default_subdomain=apps.ocp.nicknach.net
+
+## network stuff
+#os_sdn_network_plugin_name='redhat/openshift-ovs-multitenant'
+# set these if you are behind a proxy
+#openshift_http_proxy=http://192.168.0.254:3128
+#openshift_https_proxy=http://192.168.0.254:3128
+#openshift_no_proxy=.ocp.nicknach.net,.apps.ocp.nicknach.net
+
+## use these if there is a network IP conflict
+#osm_cluster_network_cidr=10.129.0.0/14
+#openshift_portal_net=172.31.0.0/16
+
+## use these if you want to switch the console/api port to something other that 8443
+#openshift_master_public_api_url=https://api.ocp.nicknach.net:443
+#openshift_master_public_console_url=https://console.ocp.nicknach.net:443/console
+#openshift_master_api_port=443
+#openshift_master_console_port=443
+
+## adjust max pods for scale testing
+#openshift_node_kubelet_args={'max-pods': ['225'], 'image-gc-high-threshold': ['90'], 'image-gc-low-threshold': ['80']}
+## adjust scheduler
+#osm_controller_args={'node-monitor-period': ['2s'], 'node-monitor-grace-period': ['16s'], 'pod-eviction-timeout': ['30s']}
+
+### start group definitions ###
+## nfs host, if needed.
+#[nfs]
+#nfs.ocp.nicknach.net
+
+## load balancer
+[lb]
+lb.ocp.nicknach.net
+
+## host group for etcd (uncomment for multi-master)
+[etcd]
+master01.ocp.nicknach.net
+master02.ocp.nicknach.net
+master03.ocp.nicknach.net
+
+## host group for masters
+[masters]
+master01.ocp.nicknach.net
+master02.ocp.nicknach.net
+master03.ocp.nicknach.net
+
+[nodes]
+master01.ocp.nicknach.net openshift_node_labels="{'region': 'masters', 'zone': 'a'}" openshift_schedulable=false
+master02.ocp.nicknach.net openshift_node_labels="{'region': 'masters', 'zone': 'b'}" openshift_schedulable=false
+master03.ocp.nicknach.net openshift_node_labels="{'region': 'masters', 'zone': 'c'}" openshift_schedulable=false
+infra01.ocp.nicknach.net openshift_node_labels="{'region': 'infra', 'zone': 'a'}" openshift_schedulable=true
+infra02.ocp.nicknach.net openshift_node_labels="{'region': 'infra', 'zone': 'b'}" openshift_schedulable=true
+infra03.ocp.nicknach.net openshift_node_labels="{'region': 'infra', 'zone': 'c'}" openshift_schedulable=true
+node01.ocp.nicknach.net openshift_node_labels="{'region': 'primary', 'zone': 'a'}"
+node02.ocp.nicknach.net openshift_node_labels="{'region': 'primary', 'zone': 'b'}"
+node03.ocp.nicknach.net openshift_node_labels="{'region': 'primary', 'zone': 'c'}"
+
+## if using gluster (Container Native Storage)
+#[glusterfs]
+#infra01.ocp.nicknach.net  glusterfs_devices='[ "/dev/vdc"]'
+#infra02.ocp.nicknach.net  glusterfs_devices='[ "/dev/vdc"]'
+#infra03.ocp.nicknach.net  glusterfs_devices='[ "/dev/vdc"]'
+#node01.ocp.nicknach.net  glusterfs_devices='[ "/dev/vdc"]'
+#node02.ocp.nicknach.net  glusterfs_devices='[ "/dev/vdc"]'
+#node03.ocp.nicknach.net  glusterfs_devices='[ "/dev/vdc"]'
+
+[new_nodes]
+## hold for use when adding new nodes
+
