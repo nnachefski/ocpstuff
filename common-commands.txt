@@ -1,4 +1,7 @@
-﻿# disable router sticky
+﻿## clean up journal
+journalctl --vacuum-size=100M
+
+# disable router sticky
 oc annotate route pydemo --overwrite haproxy.router.openshift.io/balance=roundrobin
 ## In default project (that contains router):
 oc env dc/router ROUTER_TCP_BALANCE_SCHEME=leastconn
