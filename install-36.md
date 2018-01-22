@@ -370,7 +370,7 @@ ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/byo/openshift-cl
 ##### # upgrade 3.6 -> 3.7
 ##### # switch repos on all nodes
 ```
-yum-config-manager --disable repo.home.nicknach.net_repo_rhel-7-server-ose-3.6-rpms && yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-ose-3.7-rpms
+yum-config-manager --disable repo.home.nicknach.net_repo_rhel-7-server-ose-3.6-rpms && yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-ose-3.7-rpms && yum clean all
 ```
 ##### # on first master (or bastion) host only now
 ```
