@@ -1,6 +1,12 @@
 ﻿## clean up journal
 journalctl --vacuum-size=100M
 
+## iftop
+iftop -i enp0s20u3 -f 'not port 30303 and not broadcast and not arp and not port 53' -P
+
+
+
+
 # disable router sticky
 oc annotate route pydemo --overwrite haproxy.router.openshift.io/balance=roundrobin
 ## In default project (that contains router):
