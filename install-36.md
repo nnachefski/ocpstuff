@@ -110,7 +110,7 @@ ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/byo/config.yml
 --private-key ~/.ssh/nick-west2.pem
 ###### # verify the install was successful (oc get nodes)
 
-### # Begin post-deployment steps
+#### # Begin post-deployment steps
 ##### # aliases for ops
 ```
 echo alias allpods=\'watch -n1 oc adm manage-node --selector="" --list-pods -owide\' > /etc/profile.d/ocp.sh
