@@ -140,7 +140,7 @@ echo 'oc adm groups sync --sync-config=/etc/origin/master/ocp_group_sync.conf --
 oc adm policy add-cluster-role-to-group cluster-admin admins
 oc adm policy add-role-to-group basic-user authenticated
 ```
-## Done!
+## # Done!
 ### # Now run through the rhel7-custom image build guide
 #### # https://github.com/nnachefski/ocpstuff/tree/master/images
 
