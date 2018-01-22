@@ -366,3 +366,17 @@ EOF
 ```
 ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/byo/openshift-cluster/openshift-logging.yml -e openshift_logging_install_logging=true -e openshift_logging_es_pvc_size=20Gi
 ```
+
+##### # upgrade 3.6 -> 3.7
+##### # switch repos on all nodes
+```
+yum-config-manager --disable repo.home.nicknach.net_repo_rhel-7-server-ose-3.6-rpms && yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-ose-3.7-rpms
+```
+##### # on first master (or bastion) host only now
+```
+yum upgrade -y openshift-ansible
+```
+##### # now run the upgrade playbook
+```
+ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/byo/openshift-cluster/upgrades/v3_7/upgrade.yml
+```
