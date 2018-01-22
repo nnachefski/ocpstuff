@@ -1,4 +1,4 @@
-FROM centos:7
+FROM rhel7-custom:latest
 
 ENV DAQ_VERSION 2.0.6
 ENV SNORT_VERSION 2.9.9.0
