@@ -3,7 +3,6 @@ FROM rhel7-custom:latest
 ENV DAQ_VERSION 2.0.6
 ENV SNORT_VERSION 2.9.9.0
 
-RUN yum -y install epel-release
 RUN yum -y install \
  https://www.snort.org/downloads/archive/snort/daq-${DAQ_VERSION}-1.centos7.x86_64.rpm \
  https://www.snort.org/downloads/archive/snort/snort-openappid-${SNORT_VERSION}-1.centos7.x86_64.rpm
