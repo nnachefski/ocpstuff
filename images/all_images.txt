@@ -1,3 +1,9 @@
+rhel7/etcd
+openshift3/oauth-proxy
+openshift3/ose-web-console
+openshift3/ose-service-catalog
+openshift3/ose-ansible-service-broker
+openshift3/ose-template-service-broker
 openshift3/ose-ansible
 openshift3/ose-cluster-capacity
 openshift3/ose-deployer
@@ -24,11 +30,13 @@ openshift3/metrics-cassandra
 openshift3/metrics-hawkular-metrics
 openshift3/metrics-hawkular-openshift-agent
 openshift3/metrics-heapster
-openshift3/jenkins-1-rhel7
 openshift3/jenkins-2-rhel7
 openshift3/jenkins-slave-base-rhel7
 openshift3/jenkins-slave-maven-rhel7
 openshift3/jenkins-slave-nodejs-rhel7
+openshift3/registry-console
+openshift3/mediawiki-apb
+openshift3/postgresql-apb
 openshift3/efs-provisioner
 openshift3/logging-deployer
 openshift3/metrics-deployer
