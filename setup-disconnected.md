@@ -45,7 +45,7 @@ firewall-cmd --set-default-zone trusted
 ##### # now run the import-image.py script
 ```
 cd ~ && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/import-images.py && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/images.txt && chmod +x import-images.py
-./import-images.py docker brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888 repo.home.nicknach.net:5000 -t v3.7 -d
+./import-images.py docker registry.access.redhat.com repo.home.nicknach.net:5000 -t v3.7 -d
 ```
 #### # done with repo box now
 
