@@ -73,5 +73,7 @@ oc new-app https://github.com/nnachefski/pydemo.git -i s2i-custom-python35 --nam
 ###### # click to the terminal tab and look for the files that you added to the rhel7-custom base image
 ##### # now make a change to your rhel7-custom base image and watch all the dependant apps/images get rebuilt auto-magically (via ImageChange triggers)
 
-##### # run through the rhel7-cuda image build howto and get started with some ML or Ether projects. 
-##### # https://github.com/nnachefski/ocpstuff/tree/master/images/rhel7-cuda
+##### # run through the ML(tensorflow) and/or ether mining howto using the cuda image (if you have a bare-metal OCP node with a GPU handy)  ;-)
+https://github.com/nnachefski/ocpstuff/tree/master/images/tf
+https://github.com/nnachefski/ocpstuff/tree/master/images/ether
+
