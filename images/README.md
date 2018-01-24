@@ -9,6 +9,8 @@
 ```
 ###### # this template was generated from the bc and is of five builds below.
 ###### # oc export bc,is rhel7-custom rhel7-cuda s2i-custom-core s2i-custom-base s2i-custom-python35 -n openshift > custom-images-template.yml
+
+#### # Begin
 ##### # set the project we want to build these image in.  Using the 'openshift' project will allow others to use these images
 ```
 export PROJECT=openshift
