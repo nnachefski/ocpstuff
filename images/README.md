@@ -9,8 +9,9 @@
 ```
 ###### # this template was generated from the bc and includes all of five builds below.
 ###### # oc export bc,is rhel7-custom rhel7-cuda s2i-custom-core s2i-custom-base s2i-custom-python35 -n openshift > custom-images-template.yml
-
 #### # Begin
+###### # the idea is to clone and then customize the rhel7-custom folder.  Insert your org's certs, gpgkeys, repo files, etc...  Then, you can build (and provide custimzed runtime images to your developers and operations communities.
+
 ##### # set the project we want to build these image in.  Using the 'openshift' project will allow others to use these images
 ```
 export PROJECT=openshift
