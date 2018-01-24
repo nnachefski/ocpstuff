@@ -1,0 +1,351 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: BuildConfig
+  metadata:
+    annotations:
+      openshift.io/generated-by: OpenShiftNewBuild
+    creationTimestamp: null
+    labels:
+      build: rhel7-custom
+    name: rhel7-custom
+  spec:
+    failedBuildsHistoryLimit: 5
+    nodeSelector: null
+    output:
+      to:
+        kind: ImageStreamTag
+        name: rhel7-custom:latest
+    postCommit: {}
+    resources: {}
+    runPolicy: Serial
+    source:
+      contextDir: images/rhel7-custom
+      git:
+        uri: https://github.com/nnachefski/ocpstuff.git
+      type: Git
+    strategy:
+      dockerStrategy:
+        from:
+          kind: ImageStreamTag
+          name: rhel7.4:latest
+      type: Docker
+    successfulBuildsHistoryLimit: 5
+    triggers:
+    - github:
+        secret: OlE9rmpMOFr-QFCnXA3t
+      type: GitHub
+    - generic:
+        secret: nXOPielsczZxqO6XUvn2
+      type: Generic
+    - type: ConfigChange
+    - imageChange: {}
+      type: ImageChange
+  status:
+    lastVersion: 0
+- apiVersion: v1
+  kind: BuildConfig
+  metadata:
+    annotations:
+      openshift.io/generated-by: OpenShiftNewBuild
+    creationTimestamp: null
+    labels:
+      build: rhel7-cuda
+    name: rhel7-cuda
+  spec:
+    failedBuildsHistoryLimit: 5
+    nodeSelector: null
+    output:
+      to:
+        kind: ImageStreamTag
+        name: rhel7-cuda:latest
+    postCommit: {}
+    resources: {}
+    runPolicy: Serial
+    source:
+      contextDir: images/rhel7-cuda
+      git:
+        uri: https://github.com/nnachefski/ocpstuff.git
+      type: Git
+    strategy:
+      dockerStrategy:
+        from:
+          kind: ImageStreamTag
+          name: rhel7-custom:latest
+          namespace: openshift
+      type: Docker
+    successfulBuildsHistoryLimit: 5
+    triggers:
+    - github:
+        secret: YAV1xPP_rNreu7iYgJR3
+      type: GitHub
+    - generic:
+        secret: eg94fn_y3i0Zau6r20m7
+      type: Generic
+    - type: ConfigChange
+    - imageChange: {}
+      type: ImageChange
+  status:
+    lastVersion: 0
+- apiVersion: v1
+  kind: BuildConfig
+  metadata:
+    annotations:
+      openshift.io/generated-by: OpenShiftNewBuild
+    creationTimestamp: null
+    labels:
+      build: s2i-custom-core
+    name: s2i-custom-core
+  spec:
+    failedBuildsHistoryLimit: 5
+    nodeSelector: null
+    output:
+      to:
+        kind: ImageStreamTag
+        name: s2i-custom-core:latest
+    postCommit: {}
+    resources: {}
+    runPolicy: Serial
+    source:
+      contextDir: core
+      git:
+        uri: https://github.com/sclorg/s2i-base-container.git
+      type: Git
+    strategy:
+      dockerStrategy:
+        dockerfilePath: Dockerfile.rhel7
+        from:
+          kind: ImageStreamTag
+          name: rhel7-custom:latest
+          namespace: openshift
+      type: Docker
+    successfulBuildsHistoryLimit: 5
+    triggers:
+    - github:
+        secret: QRMj2l00IGVA2LvgODO3
+      type: GitHub
+    - generic:
+        secret: 9wENfUFd0dmOe-ruxtF7
+      type: Generic
+    - type: ConfigChange
+    - imageChange: {}
+      type: ImageChange
+  status:
+    lastVersion: 0
+- apiVersion: v1
+  kind: BuildConfig
+  metadata:
+    annotations:
+      openshift.io/generated-by: OpenShiftNewBuild
+    creationTimestamp: null
+    labels:
+      build: s2i-custom-base
+    name: s2i-custom-base
+  spec:
+    failedBuildsHistoryLimit: 5
+    nodeSelector: null
+    output:
+      to:
+        kind: ImageStreamTag
+        name: s2i-custom-base:latest
+    postCommit: {}
+    resources: {}
+    runPolicy: Serial
+    source:
+      contextDir: base
+      git:
+        uri: https://github.com/sclorg/s2i-base-container.git
+      type: Git
+    strategy:
+      dockerStrategy:
+        dockerfilePath: Dockerfile.rhel7
+        from:
+          kind: ImageStreamTag
+          name: s2i-custom-core:latest
+          namespace: openshift
+      type: Docker
+    successfulBuildsHistoryLimit: 5
+    triggers:
+    - github:
+        secret: MkYNbNuCGcKfJKA2-nfS
+      type: GitHub
+    - generic:
+        secret: RP9JzgZ86xiH04F9U0dv
+      type: Generic
+    - type: ConfigChange
+    - imageChange: {}
+      type: ImageChange
+  status:
+    lastVersion: 0
+- apiVersion: v1
+  kind: BuildConfig
+  metadata:
+    annotations:
+      openshift.io/generated-by: OpenShiftNewBuild
+    creationTimestamp: null
+    labels:
+      build: s2i-custom-python35
+    name: s2i-custom-python35
+  spec:
+    failedBuildsHistoryLimit: 5
+    nodeSelector: null
+    output:
+      to:
+        kind: ImageStreamTag
+        name: s2i-custom-python35:latest
+    postCommit: {}
+    resources: {}
+    runPolicy: Serial
+    source:
+      contextDir: "3.5"
+      git:
+        uri: https://github.com/sclorg/s2i-python-container.git
+      type: Git
+    strategy:
+      dockerStrategy:
+        dockerfilePath: Dockerfile.rhel7
+        from:
+          kind: ImageStreamTag
+          name: s2i-custom-base:latest
+          namespace: openshift
+      type: Docker
+    successfulBuildsHistoryLimit: 5
+    triggers:
+    - github:
+        secret: rkt1tLalcK-IehIJ2YRl
+      type: GitHub
+    - generic:
+        secret: tzLiD7J9ewcZNVj4aZN2
+      type: Generic
+    - type: ConfigChange
+    - imageChange: {}
+      type: ImageChange
+  status:
+    lastVersion: 0
+- apiVersion: v1
+  kind: ImageStream
+  metadata:
+    annotations:
+      openshift.io/generated-by: OpenShiftNewBuild
+    creationTimestamp: null
+    generation: 1
+    labels:
+      build: rhel7-custom
+    name: rhel7-custom
+  spec:
+    lookupPolicy:
+      local: false
+    tags:
+    - annotations: null
+      from:
+        kind: DockerImage
+        name: docker-registry.default.svc:5000/openshift/rhel7-custom:latest
+      generation: null
+      importPolicy: {}
+      name: latest
+      referencePolicy:
+        type: ""
+  status:
+    dockerImageRepository: ""
+- apiVersion: v1
+  kind: ImageStream
+  metadata:
+    annotations:
+      openshift.io/generated-by: OpenShiftNewBuild
+    creationTimestamp: null
+    generation: 1
+    labels:
+      build: rhel7-cuda
+    name: rhel7-cuda
+  spec:
+    lookupPolicy:
+      local: false
+    tags:
+    - annotations: null
+      from:
+        kind: DockerImage
+        name: docker-registry.default.svc:5000/openshift/rhel7-cuda:latest
+      generation: null
+      importPolicy: {}
+      name: latest
+      referencePolicy:
+        type: ""
+  status:
+    dockerImageRepository: ""
+- apiVersion: v1
+  kind: ImageStream
+  metadata:
+    annotations:
+      openshift.io/generated-by: OpenShiftNewBuild
+    creationTimestamp: null
+    generation: 1
+    labels:
+      build: s2i-custom-core
+    name: s2i-custom-core
+  spec:
+    lookupPolicy:
+      local: false
+    tags:
+    - annotations: null
+      from:
+        kind: DockerImage
+        name: docker-registry.default.svc:5000/openshift/s2i-custom-core:latest
+      generation: null
+      importPolicy: {}
+      name: latest
+      referencePolicy:
+        type: ""
+  status:
+    dockerImageRepository: ""
+- apiVersion: v1
+  kind: ImageStream
+  metadata:
+    annotations:
+      openshift.io/generated-by: OpenShiftNewBuild
+    creationTimestamp: null
+    generation: 1
+    labels:
+      build: s2i-custom-base
+    name: s2i-custom-base
+  spec:
+    lookupPolicy:
+      local: false
+    tags:
+    - annotations: null
+      from:
+        kind: DockerImage
+        name: docker-registry.default.svc:5000/openshift/s2i-custom-base:latest
+      generation: null
+      importPolicy: {}
+      name: latest
+      referencePolicy:
+        type: ""
+  status:
+    dockerImageRepository: ""
+- apiVersion: v1
+  kind: ImageStream
+  metadata:
+    annotations:
+      openshift.io/generated-by: OpenShiftNewBuild
+    creationTimestamp: null
+    generation: 1
+    labels:
+      build: s2i-custom-python35
+    name: s2i-custom-python35
+  spec:
+    lookupPolicy:
+      local: false
+    tags:
+    - annotations: null
+      from:
+        kind: DockerImage
+        name: docker-registry.default.svc:5000/openshift/s2i-custom-python35:latest
+      generation: null
+      importPolicy: {}
+      name: latest
+      referencePolicy:
+        type: ""
+  status:
+    dockerImageRepository: ""
+kind: List
+metadata: {}
