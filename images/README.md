@@ -1,5 +1,5 @@
 ### # How to generate an s2i image chain from a customized RHEL7 base image using native buildconfigs and imagestreams in Openshift
-###### # note that because we are linking images streams, any subsequent modifications to the rhel7-custom image will send imagechange triggers to the entire s2i chain.  This functionality is higly desired by ops folks when maintaining custom images (and their derived s2i builders).  
+###### # note that because we are linking images streams, any subsequent modifications to the rhel7-custom image will send imagechange triggers to the entire s2i chain.  This functionality is highly desired by OPS folks when maintaining custom images (and their derived s2i builders).  
 
 ### # Note
 #### # You can either run through these steps one-at-a-time, or take the easy way and import the template below.
@@ -7,7 +7,7 @@
 ```
  oc create -f https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/custom-images-template.yml
 ```
-###### # this template was generated from the bc and is of five builds below.
+###### # this template was generated from the bc and includes all of five builds below.
 ###### # oc export bc,is rhel7-custom rhel7-cuda s2i-custom-core s2i-custom-base s2i-custom-python35 -n openshift > custom-images-template.yml
 
 #### # Begin
