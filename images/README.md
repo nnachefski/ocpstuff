@@ -75,5 +75,6 @@ oc new-app https://github.com/nnachefski/pydemo.git -i s2i-custom-python35 --nam
 
 ##### # run through the ML(tensorflow) and/or ether mining howto using the cuda image (if you have a bare-metal OCP node with a GPU handy)  ;-)
 https://github.com/nnachefski/ocpstuff/tree/master/images/tf
+
 https://github.com/nnachefski/ocpstuff/tree/master/images/ether
 
