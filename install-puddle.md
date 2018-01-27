@@ -151,7 +151,7 @@ for i in `cat list.txt`; do ssh-copy-id root@$i; done
 ```
 ##### # create your ansible hosts (inventory) file 
 ###### # (see below link for creating this file)
-https://github.com/nnachefski/ocpstuff/blob/master/ocp-generate-ansible-inventory.txt
+https://raw.githubusercontent.com/nnachefski/ocpstuff/master/generate-ansible-inventory.txt
 ##### # now run the ansible playbook to install
 ```
 ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/deploy_cluster.yml
