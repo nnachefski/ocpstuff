@@ -1,4 +1,4 @@
-### # This repo's content is for building and deploying CUDA/GPU-enabled Ethereum components on Openshift.
+### # This image is for building and deploying CUDA/GPU-enabled Ethereum miner on Openshift.
 ##### # build the rhel7-cuda base image first
 ```
 oc new-build https://github.com/nnachefski/ocpstuff.git --context-dir=images/rhel7-cuda --name=rhel7-cuda -n openshift
