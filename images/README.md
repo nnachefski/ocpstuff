@@ -7,7 +7,7 @@
 ```
  oc create -f https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/custom-images-template.yml
 ```
-###### # this template was generated from the buildconfigs of all five builds below.
+###### # this template was generated from the buildconfigs of all five image folders in this context-dir.  The command i used to generate this template is: 
 ###### # oc export bc,is rhel7-custom rhel7-cuda s2i-custom-core s2i-custom-base s2i-custom-python35 -n openshift > custom-images-template.yml
 #### # Begin
 ###### # the idea is to clone and then customize the rhel7-custom folder/image.  Insert your org's certs, gpgkeys, repo files, etc...  Then, you can build (and provide) customized runtime images to your developers and operations communities.
