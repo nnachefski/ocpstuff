@@ -12,7 +12,7 @@
 #### # Begin
 ###### # the idea is to clone and then customize the rhel7-custom folder/image.  Insert your org's certs, gpgkeys, repo files, etc...  Then, you can build (and provide) customized runtime images to your developers and operations communities.
 
-##### # set the project we want to build these image in.  Using the 'openshift' project will allow others to use these images by default
+##### # set the project that we want to build these image in.  Using the 'openshift' project will allow others to use these images by default
 ```
 export PROJECT=openshift
 ```
