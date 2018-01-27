@@ -24,4 +24,4 @@ oc expose svc ether --port 1234
 oc patch dc ethminer -p '{"spec":{"template":{"spec":{"affinity":{"nodeAffinity":{"requiredDuringSchedulingIgnoredDuringExecution":{"nodeSelectorTerms":[{"matchExpressions":[{"key":"alpha.kubernetes.io/nvidia-gpu-name","operator":"In","values":["GTX"]}]}]}}},"containers":[{"name":"ethminer","resources":{"limits":{"alpha.kubernetes.io/nvidia-gpu":"1"}}}]}}}}'
 ```
 ###### # change GTX to match node label for your NVIDIA box   
-###### # change 'ethminer' to match above --name (in both dc and container names)
+###### # change 'ethminer' to match above --name (in both dc and container name)
