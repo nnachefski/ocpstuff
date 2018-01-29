@@ -44,10 +44,10 @@ EOF
 ```
 ##### # OR, add your internal repos
 ```
-yum-config-manager --disable \* && rm -rf /etc/yum.repos.d/*.repo && yum clean all
-yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-rpms
+#yum-config-manager --disable \* && rm -rf /etc/yum.repos.d/*.repo && yum clean all
+#yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-rpms
+#yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-extras-rpms
 yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-fast-datapath-rpms
-yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-extras-rpms
 yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-ose-3.6-rpms
 yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-server-rhscl-7-rpms
 yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-optional-rpms 
