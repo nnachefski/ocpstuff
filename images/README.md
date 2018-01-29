@@ -6,7 +6,7 @@
 
 ```
 oc project openshift
-oc import-image rhel7.4
+oc import-image rhel7.4 --confirm
 oc create -f https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/custom-images-template.yml
 ```
 ###### # this template was generated from the buildconfigs of all five image folders in this context-dir.  The command i used to generate this template is: 
