@@ -134,7 +134,7 @@ oc adm groups sync --sync-config=/etc/origin/master/ocp_group_sync.conf --confir
 ```
 ##### # setup a cronjob on ansible host to sync groups nightly
 ```
-echo 'oc adm groups sync --sync-config=/etc/origin/master/ocp_group_sync.conf --confirm --whitelist=/etc/origin/master/ocp_group_sync-whitelist.conf' > /etc/cron.daily/ocp-group-sync.sh && chmod +x /etc/cron.daily/ocp-group-sync.sh 
+#echo 'oc adm groups sync --sync-config=/etc/origin/master/ocp_group_sync.conf --confirm --whitelist=/etc/origin/master/ocp_group_sync-whitelist.conf' > /etc/cron.daily/ocp-group-sync.sh && chmod +x /etc/cron.daily/ocp-group-sync.sh 
 ```
 ##### # set policies (perms) on your sync’ed groups
 ```
@@ -143,6 +143,7 @@ oc adm policy add-role-to-group basic-user authenticated
 ```
 ##### # set your infra region to unschedulable
 ```
+oc adm manage-node --selector=region=masters --schedulable=false
 oc adm manage-node --selector=region=infra --schedulable=false
 ```
 ## # Done!
