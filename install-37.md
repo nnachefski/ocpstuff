@@ -11,6 +11,8 @@ export OCP_NFS_SERVER=storage.home.nicknach.net
 export LDAP_SERVER=gw.home.nicknach.net
 export RHSM_ID=your@rhn.com
 export RHSM_PW=yourpassword
+export POOLID=8a85f98260c27fc50160c323263339ff
+
 ```
 ##### # make them persistent 
 ```
@@ -21,6 +23,7 @@ export DOCKER_DEV=$DOCKER_DEV
 export OCP_NFS_MOUNT=$OCP_NFS_MOUNT
 export OCP_NFS_SERVER=$OCP_NFS_SERVER
 export LDAP_SERVER=$LDAP_SERVER
+export POOLID=$POOLID
 EOF
 ```
 
