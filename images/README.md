@@ -5,7 +5,8 @@
 #### # You can either run through these steps one-at-a-time, or take the easy way and import the template below.
 
 ```
- oc create -f https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/custom-images-template.yml
+oc project openshift
+oc create -f https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/custom-images-template.yml
 ```
 ###### # this template was generated from the buildconfigs of all five image folders in this context-dir.  The command i used to generate this template is: 
 ###### # oc export bc,is rhel7-custom rhel7-cuda s2i-custom-core s2i-custom-base s2i-custom-python35 -n openshift > custom-images-template.yml
