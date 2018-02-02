@@ -1,4 +1,10 @@
-﻿## clean up journal
+﻿# fix ssh to allow remote root
+sed -i 's/^#PermitRootLogin/PermitRootLogin/' /etc/ssh/sshd_config
+sed -i 's/^#PermitRootLogin no/PermitRootLogin yes/' /etc/ssh/sshd_config; sed -i 's/^#PasswordAuthentication/PasswordAuthentication/' /etc/ssh/sshd_config
+# set root passwd (use something strong, this is exposed to the inet)
+passwd
+
+## clean up journal
 journalctl --vacuum-size=100M
 
 ## iftop

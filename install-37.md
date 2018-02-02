@@ -29,29 +29,29 @@ EOF
 
 ##### # subscribe to RHSM
 ```
-yum install subscription-manager yum-utils -y
-subscription-manager register --username=$RHSM_ID --password $RHSM_PW --force
-subscription-manager attach --pool=$POOLID
-subscription-manager repos --disable="*"
-subscription-manager repos \
-   --enable=rhel-7-server-rpms \
-   --enable=rhel-7-server-extras-rpms \
-   --enable=rhel-7-server-ose-3.7-rpms \
-   --enable=rhel-7-fast-datapath-rpms \
-   --enable=rhel-7-server-rhscl-rpms \
-   --enable=rhel-7-server-optional-rpms 
-#   --enable=rh-gluster-3-for-rhel-7-server-rpms \ 
-#   --enable=rhel-7-server-3scale-amp-2.0-rpms
+#yum install subscription-manager yum-utils -y
+#subscription-manager register --username=$RHSM_ID --password $RHSM_PW --force
+#subscription-manager attach --pool=$POOLID
+#subscription-manager repos --disable="*"
+#subscription-manager repos \
+#   --enable=rhel-7-server-rpms \
+#   --enable=rhel-7-server-extras-rpms \
+#   --enable=rhel-7-server-ose-3.7-rpms \
+#   --enable=rhel-7-fast-datapath-rpms \
+#   --enable=rhel-7-server-rhscl-rpms \
+#   --enable=rhel-7-server-optional-rpms 
+##   --enable=rh-gluster-3-for-rhel-7-server-rpms \ 
+##   --enable=rhel-7-server-3scale-amp-2.0-rpms
 ```
 ##### # OR, add your internal repos
 ```
 ##yum-config-manager --disable \* && rm -rf /etc/yum.repos.d/*.repo && yum clean all
 ##yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-rpms
 ##yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-extras-rpms
-#yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-fast-datapath-rpms
-#yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-ose-3.7-rpms
-#yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-server-rhscl-7-rpms
-#yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-optional-rpms 
+yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-fast-datapath-rpms
+yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-ose-3.7-rpms
+yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-server-rhscl-7-rpms
+yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-optional-rpms 
 ##yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rh-gluster-3-for-rhel-7-server-rpms
 ```
 ##### # install some general pre-req packages
