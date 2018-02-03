@@ -42,7 +42,7 @@ yum -y install httpd && systemctl enable httpd --now
 ```
 ##### # add a link to your repo dir in the web root
 ```
-ln -s /root/rhaos-3.9 /var/www/html/rhaos-3.9 
+mv ~/rhaos-3.9 /var/www/html 
 ```
 ##### # fix selinux
 ``` 
