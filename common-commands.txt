@@ -1,4 +1,7 @@
-﻿# fix ssh to allow remote root
+﻿## add tag alias
+export TAG=v3.9.0-0.36.0; for i in `cat images.txt`; do docker pull repo.home.nicknach.net:5000/$i:v3.9.0; docker tag repo.home.nicknach.net:5000/$i:v3.9.0 repo.home.nicknach.net:5000/$i:$TAG; docker push repo.home.nicknach.net:5000/$i:$TAG; done
+
+# fix ssh to allow remote root
 sed -i 's/^#PermitRootLogin/PermitRootLogin/' /etc/ssh/sshd_config
 sed -i 's/^#PermitRootLogin no/PermitRootLogin yes/' /etc/ssh/sshd_config; sed -i 's/^#PasswordAuthentication/PasswordAuthentication/' /etc/ssh/sshd_config
 # set root passwd (use something strong, this is exposed to the inet)
