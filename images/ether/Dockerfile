@@ -2,7 +2,7 @@ FROM rhel7-cuda:latest
 ## maintained by nnachefski@gmail.com
 
 ENV APP_DIR=/opt/ether-on-ocp
-ENV APP_VER=0.12.0
+ENV APP_VER=0.13.0
 ENV STRATUM_P=us2.ethermine.org:4444
 ENV STRATUM_S=us2.ethermine.org:14444
 ENV WALLET_ID=0x4B17d141c77327978Ff9998205145F68216294Fd
