@@ -40,7 +40,7 @@ createrepo rhaos-3.9
 ```
 yum -y install httpd && systemctl enable httpd --now
 ```
-##### # add a link to your repo dir in the web root
+##### # move your repo dir into the web root
 ```
 mv ~/rhaos-3.9 /var/www/html 
 ```
