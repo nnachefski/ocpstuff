@@ -6,7 +6,7 @@ ENV APP_VER=0.12.0
 ENV STRATUM_P=us2.ethermine.org:4444
 ENV STRATUM_S=us2.ethermine.org:14444
 ENV WALLET_ID=0x4B17d141c77327978Ff9998205145F68216294Fd
-ENV NODEID=myminer
+ENV NODEID=ocp
 ENV DEBUG=1
 
 RUN yum -y install openssl-devel gmp-devel libffi libtool wget git libcurl-devel python-jsonrpclib.noarch libmicrohttpd && yum clean all
