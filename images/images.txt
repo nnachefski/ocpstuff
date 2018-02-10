@@ -1,5 +1,5 @@
+openshift3/prometheus
 openshift3/prometheus-alert-buffer
-rhel7/etcd
 openshift3/oauth-proxy
 openshift3/ose-web-console
 openshift3/ose-service-catalog
@@ -38,3 +38,4 @@ openshift3/jenkins-slave-nodejs-rhel7
 openshift3/registry-console
 openshift3/mediawiki-apb
 openshift3/postgresql-apb
+rhel7/etcd
