@@ -1,3 +1,4 @@
+openshift3/prometheus-alert-buffer
 rhel7/etcd
 openshift3/oauth-proxy
 openshift3/ose-web-console
