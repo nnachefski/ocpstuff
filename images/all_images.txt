@@ -1,4 +1,5 @@
-rhel7/etcd
+openshift3/prometheus
+openshift3/prometheus-alert-buffer
 openshift3/oauth-proxy
 openshift3/ose-web-console
 openshift3/ose-service-catalog
@@ -63,3 +64,5 @@ redhat-openjdk-18/openjdk18-openshift
 redhat-sso-7/sso71-openshift
 rhscl/nodejs-6-rhel7
 rhscl/mariadb-101-rhel7
+rhel7/etcd
+
