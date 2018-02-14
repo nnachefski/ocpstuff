@@ -1,4 +1,4 @@
-## This doc describes how to perform an RPM-based installation of OCP 3.7
+## This doc describes how to perform an RPM-based installation of OCP 3.6
 #### # BEGIN
 ##### # do this on ALL hosts (master/infra/nodes)
 ##### # SET THESE VARIABLES ###
@@ -28,17 +28,17 @@ EOF
 
 ##### # subscribe to RHSM
 ```
-#yum install subscription-manager yum-utils -y
-#subscription-manager register --username=$RHSM_ID --password $RHSM_PW --force
-#subscription-manager attach --pool=$POOLID
-#subscription-manager repos --disable="*"
-#subscription-manager repos \
-#   --enable=rhel-7-server-rpms \
-#   --enable=rhel-7-server-extras-rpms \
-#   --enable=rhel-7-server-ose-3.6-rpms \
-#   --enable=rhel-7-fast-datapath-rpms \
-#   --enable=rhel-7-server-rhscl-rpms \
-#   --enable=rhel-7-server-optional-rpms
+yum install subscription-manager yum-utils -y
+subscription-manager register --username=$RHSM_ID --password $RHSM_PW --force
+subscription-manager attach --pool=$POOLID
+subscription-manager repos --disable="*"
+subscription-manager repos \
+   --enable=rhel-7-server-rpms \
+   --enable=rhel-7-server-extras-rpms \
+   --enable=rhel-7-server-ose-3.6-rpms \
+   --enable=rhel-7-fast-datapath-rpms \
+   --enable=rhel-7-server-rhscl-rpms \
+   --enable=rhel-7-server-optional-rpms
 #   --enable=rh-gluster-3-for-rhel-7-server-rpms 
 #   --enable=rhel-7-server-3scale-amp-2.0-rpms
 ```
@@ -47,10 +47,10 @@ EOF
 #yum-config-manager --disable \* && rm -rf /etc/yum.repos.d/*.repo && yum clean all
 #yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-rpms
 #yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-extras-rpms
-yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-fast-datapath-rpms
-yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-ose-3.6-rpms
-yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-server-rhscl-7-rpms
-yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-optional-rpms 
+#yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-fast-datapath-rpms
+#yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-ose-3.6-rpms
+#yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-server-rhscl-7-rpms
+#yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-optional-rpms 
 #yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rh-gluster-3-for-rhel-7-server-rpms
 ```
 ##### # install some general pre-req packages
@@ -113,8 +113,8 @@ ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/byo/config.yml
 #### # Begin post-deployment steps
 ##### # aliases for ops
 ```
-echo alias allpods=\'watch -n1 oc adm manage-node --selector="" --list-pods -owide\' > /etc/profile.d/ocp.sh
-echo alias allpodsp=\'watch -n1 oc adm manage-node --selector="region=primary" --list-pods -owide\' >> /etc/profile.d/ocp.sh
+echo alias allpods=\'watch -n1 oc adm manage-node --selector="" --list-pods\' > /etc/profile.d/ocp.sh
+echo alias allpodsp=\'watch -n1 oc adm manage-node --selector="region=primary" --list-pods\' >> /etc/profile.d/ocp.sh
 chmod +x /etc/profile.d/ocp.sh
 ```
 ##### # pin all the metrics pods to the infra nodes
