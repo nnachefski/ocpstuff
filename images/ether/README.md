@@ -15,10 +15,6 @@ oc adm policy add-scc-to-user anyuid -z default
 ```
 oc new-app https://github.com/nnachefski/ocpstuff.git --context-dir=images/ether --name=ethminer
 ```
-##### # expose the service
-```
-oc expose svc ether --port 1234
-```
 ##### # then patch the dc to set resource limits and nodeaffinity
 ```
 oc patch dc ethminer -p '{"spec":{"template":{"spec":{"affinity":{"nodeAffinity":{"requiredDuringSchedulingIgnoredDuringExecution":{"nodeSelectorTerms":[{"matchExpressions":[{"key":"alpha.kubernetes.io/nvidia-gpu-name","operator":"In","values":["GTX"]}]}]}}},"containers":[{"name":"ethminer","resources":{"limits":{"alpha.kubernetes.io/nvidia-gpu":"1"}}}]}}}}'
