@@ -8,3 +8,15 @@ ansible etcd -m shell -a "rm -rf /etc/etcd"
 ansible etcd -m shell -a "rm -rf /var/lib/origin"
 ansible etcd -m shell -a "systemctl stop docker && rm -rf /var/lib/docker && systemctl start docker"
 ansible all -m yum -a "name=atomic-openshift-utils state=latest"
+
+## Or
+
+yum remove -y openshift* atomic*
+rm -rf /etc/origin/*
+rm -rf /etc/sysconfig/atomic*
+rm -rf /root/.kube
+yum remove -y etcd
+rm -rf /etc/etcd
+rm -rf /var/lib/origin
+systemctl stop docker && rm -rf /var/lib/docker && systemctl start docker
+yum install -y atomic-openshift-utils openshift-ansible
