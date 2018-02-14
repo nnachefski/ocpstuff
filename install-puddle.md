@@ -163,8 +163,8 @@ ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/deploy_cluster.y
 ## # Begin post-deployment steps
 ##### # aliases for ops
 ```
-echo alias allpods=\'watch -n1 oc adm manage-node --selector="" --list-pods -owide\' > /etc/profile.d/ocp.sh
-echo alias allpodsp=\'watch -n1 oc adm manage-node --selector="region=primary" --list-pods -owide\' >> /etc/profile.d/ocp.sh
+echo alias allpods=\'watch -n1 oc adm manage-node --selector="" --list-pods\' > /etc/profile.d/ocp.sh
+echo alias allpodsp=\'watch -n1 oc adm manage-node --selector="region=primary" --list-pods\' >> /etc/profile.d/ocp.sh
 chmod +x /etc/profile.d/ocp.sh
 ```
 ##### # pin all the metrics pods to the infra nodes
