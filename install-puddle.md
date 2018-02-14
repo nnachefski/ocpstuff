@@ -80,6 +80,7 @@ export DOCKER_DEV=/dev/vdb
 export OCP_NFS_MOUNT=/home/data/openshift
 export OCP_NFS_SERVER=storage.home.nicknach.net
 export LDAP_SERVER=gw.home.nicknach.net
+export REGISTRY=repo.home.nicknach.net:5000
 ```
 ##### # make them persistent 
 ```
@@ -90,6 +91,7 @@ export DOCKER_DEV=$DOCKER_DEV
 export OCP_NFS_MOUNT=$OCP_NFS_MOUNT
 export OCP_NFS_SERVER=$OCP_NFS_SERVER
 export LDAP_SERVER=$LDAP_SERVER
+export REGISTRY=$REGISTRY
 EOF
 ```
 ##### # add your internal repos
