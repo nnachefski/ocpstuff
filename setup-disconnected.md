@@ -50,20 +50,27 @@ cd ~ && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images
 #### # done with repo box now
 
 #### # on your client boxes now
+##### # set your docker registry endpoint
+```
+export REPO=repo.home.nicknach.net
+```
 ##### # add your rpm repos
 ```
 yum-config-manager --disable \* && rm -rf /etc/yum.repos.d/*.repo && yum clean all
-yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-rpms
-yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-fast-datapath-rpms
-yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-extras-rpms
-yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-ose-3.7-rpms
-yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-server-rhscl-7-rpms
-yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-optional-rpms 
-#yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rh-gluster-3-for-rhel-7-server-rpms
+yum-config-manager --add-repo http://$REPO/repo/rhel-7-server-rpms
+yum-config-manager --add-repo http://$REPO/repo/rhel-7-fast-datapath-rpms
+yum-config-manager --add-repo http://$REPO/repo/rhel-7-server-extras-rpms
+yum-config-manager --add-repo http://$REPO/repo/rhel-7-server-ose-3.7-rpms
+yum-config-manager --add-repo http://$REPO/repo/rhel-server-rhscl-7-rpms
+yum-config-manager --add-repo http://$REPO/repo/rhel-7-server-optional-rpms 
+#yum-config-manager --add-repo http://$REPO/repo/rh-gluster-3-for-rhel-7-server-rpms
 ```
 ##### # add your docker registry
 ```
-sed -i '16,/registries =/s/\[\]/\[\"repo.home.nicknach.net:5000\"\]/' /etc/containers/registries.conf
+sed -i '16,/registries =/s/\[\]/\[\"$REPO:5000\"\]/' /etc/containers/registries.conf
 systemctl restart docker
 ```
+
+##### # add tag alias
+export TAG=v3.9.0-0.42.0; for i in `cat images.txt`; do docker pull $REPO:5000/$i:v3.9.0; docker tag $REPO:5000/$i:v3.9.0 $REPO:5000/$i:$TAG; docker push $REPO:5000/$i:$TAG; done
 

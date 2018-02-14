@@ -53,6 +53,10 @@ restorecon -R /var/www/html/rhaos-3.9
 ```
 yum -y install docker-distribution.x86_64 && systemctl enable docker-distribution --now
 ```
+##### # set your docker registry endpoint
+```
+export REGISTRY=repo.home.nicknach.net:5000
+```
 ##### # open the firewall up
 ```
 firewall-cmd --set-default-zone trusted
@@ -61,8 +65,11 @@ firewall-cmd --set-default-zone trusted
 ```
 cd ~ && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/import-images.py && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/images.txt
 chmod +x import-images.py
-./import-images.py docker brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888 repo.home.nicknach.net:5000 -t v3.9.0 -d
+./import-images.py docker brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888 $REGISTRY -t v3.9.0 -d
 ```
+##### # in case you have to re-tag everything
+export TAG=v3.9.0-0.36.0; for i in `cat images.txt`; do docker pull $REGISTRY/$i:v3.9.0; docker tag $REGISTRY/$i:v3.9.0 $REGISTRY/$i:$TAG; docker push $REGISTRY/$i:$TAG; done
+
 ### # BEGIN
 ##### # do this on ALL hosts (master/infra/nodes)
 ##### # SET THESE VARIABLES ###
@@ -129,7 +136,7 @@ docker-storage-setup
 ```
 ##### # add the internal repo
 ```
-sed -i '16,/registries =/s/\[\]/\[\"repo.home.nicknach.net:5000\"\]/' /etc/containers/registries.conf
+sed -i '16,/registries =/s/\[\]/\[\"$REGISTRY\"\]/' /etc/containers/registries.conf
 ```
 ##### # enable and start docker
 ```
