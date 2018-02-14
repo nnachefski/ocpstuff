@@ -68,6 +68,10 @@ oc new-project custom-s2i-test
 ``` 
 oc policy add-role-to-group system:image-puller system:serviceaccounts:custom-s2i-test -n $PROJECT
 ```
+##### # add your custom builder to the catalog as a 'builder' image
+```
+oc patch is s2i-custom-python35 -p '{"spec":{"tags":[{"annotations":{"tags":"builder,python"},"name":"latest"}]}}'
+```
 ##### # and finally, create the app
 ```
 oc new-app https://github.com/nnachefski/pydemo.git -i s2i-custom-python35 --name=pydemo
