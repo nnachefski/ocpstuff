@@ -1,7 +1,5 @@
 ﻿https://docs.openshift.com/container-platform/latest/install_config/install/planning.html
 
-
-
 Summary: 4 VMs recommended for single master install.  Additional VM if NFS services are needed.
 * Infrastructure (physical or virtual machines, assuming virtual):
 * Master (1 VM Required)
