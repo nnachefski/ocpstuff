@@ -5,6 +5,6 @@ oc new-build https://github.com/nnachefski/ocpstuff.git --context-dir=images/rhe
 ```
 #### # now get started with some tensorflow+jupyter demos or ether mining containers
 
-https://github.com/nnachefski/ocpstuff/tree/master/images/tf
+https://github.com/nnachefski/ocpstuff/tree/master/images/tensorflow
 
 https://github.com/nnachefski/ocpstuff/tree/master/images/ether
