@@ -37,11 +37,6 @@ try:
 except: 
 	print("\n ERROR: skopeo is not installed"); sys.exit(3)
 
-#list = ('openshift3/ose-pod',)
-#check_call(['skopeo', '--insecure-policy', 'inspect', '--tls-verify=false', "docker://%s/%s:%s"%(args.source, i, args.tag)], )#stdout=DEVNULL, stderr=STDOUT)
-#check_call(['skopeo', '--insecure-policy', 'copy', '--src-tls-verify=false', '--dest-tls-verify=false',  "docker://%s/%s:%s"%(args.source, list[0], args.tag), "%s/%s:latest"%(uri_string, list[0])], )
-#sys.exit()
-
 pass_list = []
 # iterate over the list and verify they are accessible
 for image in list:
