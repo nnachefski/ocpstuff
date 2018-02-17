@@ -68,9 +68,9 @@ export REGISTRY=$REPO:5000
 ```
 ##### # import keys from repo
 ```
-rpm --import $REPO_SERVER/keys/7fa2af80.pub
-rpm --import $REPO_SERVER/keys/RPM-GPG-KEY-EPEL-7
-rpm --import $REPO_SERVER/keys/RPM-GPG-KEY-redhat-release
+rpm --import http://$REPO/keys/7fa2af80.pub
+rpm --import http://$REPO/keys/RPM-GPG-KEY-EPEL-7
+rpm --import http://$REPO/keys/RPM-GPG-KEY-redhat-release
 ```
 ##### # add your rpm repos
 ```
