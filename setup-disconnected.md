@@ -47,6 +47,10 @@ firewall-cmd --set-default-zone trusted
 cd ~ && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/import-images.py && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/images.txt && chmod +x import-images.py
 ./import-images.py docker registry.access.redhat.com repo.home.nicknach.net:5000 -t v3.7 -d
 ```
+##### # manually get the etcd image
+```
+skopeo --insecure-policy copy --src-tls-verify=false --dest-tls-verify=false docker://brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888/rhel7/etcd:latest docker://$REGISTRY/rhel7/etcd:latest
+```
 #### # done with repo box now
 
 #### # on your client boxes now
