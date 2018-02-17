@@ -1,3 +1,6 @@
+## use this template to create rhel7-custom, rhel7-cuda, s2i-custom-core, s2i-custom-base, s2i-custom-python35 images streams
+## oc create -f https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/custom-images-template.yml
+
 apiVersion: v1
 items:
 - apiVersion: v1
