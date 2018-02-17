@@ -42,10 +42,14 @@ yum -y install docker-distribution.x86_64 && systemctl enable docker-distributio
 ```
 firewall-cmd --set-default-zone trusted
 ```
+##### # set your docker registry variable
+```
+export REGISTRY=repo.home.nicknach.net:5000
+```
 ##### # now run the import-image.py script
 ```
 cd ~ && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/import-images.py && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/images.txt && chmod +x import-images.py
-./import-images.py docker registry.access.redhat.com repo.home.nicknach.net:5000 -t v3.7 -d
+./import-images.py docker registry.access.redhat.com $REGISTRY -t v3.7 -d
 ```
 ##### # manually get the etcd image
 ```
@@ -57,6 +61,16 @@ skopeo --insecure-policy copy --src-tls-verify=false --dest-tls-verify=false doc
 ##### # set your docker registry endpoint
 ```
 export REPO=repo.home.nicknach.net
+```
+##### # set your docker registry variable
+```
+export REGISTRY=$REPO:5000
+```
+##### # import keys from repo
+```
+rpm --import $REPO_SERVER/keys/7fa2af80.pub
+rpm --import $REPO_SERVER/keys/RPM-GPG-KEY-EPEL-7
+rpm --import $REPO_SERVER/keys/RPM-GPG-KEY-redhat-release
 ```
 ##### # add your rpm repos
 ```
@@ -71,10 +85,9 @@ yum-config-manager --add-repo http://$REPO/repo/rhel-7-server-optional-rpms
 ```
 ##### # add your docker registry
 ```
-sed -i '16,/registries =/s/\[\]/\[\"$REPO:5000\"\]/' /etc/containers/registries.conf
+sed -i '16,/registries =/s/\[\]/\[\"$REGISTRY\"\]/' /etc/containers/registries.conf
 systemctl restart docker
 ```
-
 ##### # add tag alias
-export TAG=v3.9.0-0.42.0; for i in `cat images.txt`; do docker pull $REPO:5000/$i:v3.9.0; docker tag $REPO:5000/$i:v3.9.0 $REPO:5000/$i:$TAG; docker push $REPO:5000/$i:$TAG; done
+export TAG=v3.9.0-0.45.0; for i in `cat images.txt`; do docker pull $REGISTRY/$i:v3.9.0; docker tag $REGISTRY/$i:v3.9.0 $REGISTRY/$i:$TAG; docker push $REGISTRY/$i:$TAG; done
 
