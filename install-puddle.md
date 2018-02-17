@@ -67,6 +67,10 @@ cd ~ && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images
 chmod +x import-images.py
 ./import-images.py docker brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888 $REGISTRY -t v3.9.0 -d
 ```
+##### # manually get the etcd image
+```
+skopeo --insecure-policy copy --src-tls-verify=false --dest-tls-verify=false docker://brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888/rhel7/etcd:latest docker://$REGISTRY/rhel7/etcd:latest
+```
 ##### # in case you have to re-tag everything
 export TAG=v3.9.0-0.36.0; for i in `cat images.txt`; do docker pull $REGISTRY/$i:v3.9.0; docker tag $REGISTRY/$i:v3.9.0 $REGISTRY/$i:$TAG; docker push $REGISTRY/$i:$TAG; done
 
