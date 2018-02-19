@@ -9,8 +9,9 @@ oc new-build https://github.com/nnachefski/ocpstuff.git --context-dir=images/rhe
 ```
 oc label node desktop.home.nicknach.net alpha.kubernetes.io/nvidia-gpu-name='GTX' --overwrite
 ```
-###### # dont forget to enable the Features Gate for Accelerators in the node-config.yml for this node  
-###### # change GTX to whatever you want
+###### # dont forget to enable the Features Gate for Accelerators in the node-config.yml on this node  
+###### # change 'desktop.home.nicknach.net' to your node name
+###### # change 'GTX' to whatever you want (this is a node label)
 ##### # create the project
 ```
 oc new-project ml-on-ocp
@@ -21,7 +22,7 @@ oc adm policy add-scc-to-user anyuid -z default
 ```
 ##### # now build/deploy the ML framework
 ```
-oc new-app https://github.com/nnachefski/ocpstuff.git --context-dir=images/tf --name=jupyter
+oc new-app https://github.com/nnachefski/ocpstuff.git --context-dir=images/tensorflow --name=jupyter
 ```
 ##### # expose the jupyter UI port
 ```
@@ -31,8 +32,8 @@ oc expose svc jupyter --port 8888
 ```
 oc patch dc jupyter -p '{"spec":{"template":{"spec":{"affinity":{"nodeAffinity":{"requiredDuringSchedulingIgnoredDuringExecution":{"nodeSelectorTerms":[{"matchExpressions":[{"key":"alpha.kubernetes.io/nvidia-gpu-name","operator":"In","values":["GTX"]}]}]}}},"containers":[{"name":"jupyter","resources":{"limits":{"alpha.kubernetes.io/nvidia-gpu":"1"}}}]}}}}'
 ```
-###### # change GTX to match above
-###### # change 'jupyter' to match above --name (in both dc and container names)
+###### # change 'GTX' to match above node label
+###### # change 'jupyter' to match above --name (in both dc and container name)
 
 ##### # now run the mnist notebook and see that it scheduled on the GPU 
 ###### # use nvidia-smi on the bare-metal node
