@@ -19,4 +19,4 @@ yum remove -y etcd
 rm -rf /etc/etcd
 rm -rf /var/lib/origin
 systemctl stop docker && rm -rf /var/lib/docker && systemctl start docker
-yum install -y atomic-openshift-utils openshift-ansible
+# yum install -y atomic-openshift-utils openshift-ansible
