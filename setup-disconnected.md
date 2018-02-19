@@ -84,3 +84,9 @@ yum-config-manager --add-repo http://$REPO/repo/rhel-7-server-optional-rpms
 sed -i '16,/registries =/s/\[\]/\[\"repo.home.nicknach.net:5000\"\]/' /etc/containers/registries.conf
 systemctl restart docker
 ```
+##### # during the install, do these commands in other terminals
+```
+watch -n2 oc adm manage-node --selector= --list-pods -owide
+journalctl -xlf
+```
+###### # look for errors about images not found
