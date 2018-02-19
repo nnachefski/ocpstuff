@@ -55,10 +55,10 @@ cd ~ && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images
 ```
 skopeo --insecure-policy copy --src-tls-verify=false --dest-tls-verify=false docker://brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888/rhel7/etcd:latest docker://$REGISTRY/rhel7/etcd:latest
 ```
-#### # done with repo box now
+#### # done with repo box
 
-#### # on your client boxes now
-##### # set your docker registry endpoint
+### # now on your client boxes
+##### # set your docker repo hostname
 ```
 export REPO=repo.home.nicknach.net
 ```
