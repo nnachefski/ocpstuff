@@ -1,0 +1,55 @@
+﻿https://docs.openshift.com/container-platform/latest/install_config/install/planning.html
+
+Summary: 4 VMs recommended for single master install.  Additional VM if NFS services are needed.
+* Infrastructure (physical or virtual machines, assuming virtual):
+* Master Nodes (3 VMs required)
+  * 16GB RAM
+  * 4 vCPUs
+  * 20GB Disk (for OS)
+  * 30GB Disk (for Docker, raw/unformatted)
+  * RHEL7.4 upgraded to latest patchset
+* Infrastructure Nodes (3 VMs recommended)
+  * 16GB RAM
+  * 4 vCPUs
+  * 20GB Disk (for OS)
+  * 30GB Disk (for Docker, raw/unformatted)
+  * RHEL7.4 upgraded to latest patchset
+* Application Nodes (3 VMs recommended) 
+  * 16GB RAM
+  * 4 vCPUs
+  * 20GB Disk (for OS)
+  * 30GB Disk (for Docker, raw/unformatted)
+  * RHEL7.4 upgraded to latest patchset
+  * 50GB Disk (for CNS, raw/unformatted)
+* Additional VM if NFS is needed
+  * 8GB RAM
+  * 2 vCPUs
+  * 100GB Disk (Minimum)
+  * RHEL7.4 upgraded to latest patchset
+* Internet connectivity is recommended (via proxy is fine)
+  * HTTPS Whitelist these trusted hosts in proxy (if needed)
+	For content (RPM packages):
+	- subscription.rhn.redhat.com
+	- cdn.redhat.com
+	For docker registry:
+	- registry.access.redhat.com
+
+* DNS Requirements 
+  * Choose a domain name for Openshift – Example: ocp.example.com
+* Create a wildcard entry in parent DNS zone that points to master VM
+* Ex:  A record '*.ocp' IN zone example.com
+**This DNS record is absolutely required and is often the most time consuming task to get done (internal approvals are likely required)**
+
+Activate the Openshift subscriptions provided by Red Hat. If using a Satellite Server, synchronize the relevant channels to the Satellite Server.
+   * rhel-7-server-rpms
+   * rhel-7-server-extras-rpms
+   * rhel-7-server-ose-3.7-rpms
+   * rhel-7-fast-datapath-rpms
+   * rh-gluster-3-for-rhel-7-server-rpms
+
+Additional items:
+   1. RHEL7.4 (Vanilla ISO is recommended)
+    - The “Minimum” installation is recommended
+   2. SELinux must be in “Enforcing” (this is the default in vanilla image)
+   3. NetworkManager must be enabled (this is the default in vanilla image)
+    
