@@ -4,6 +4,10 @@ docker volume rm $(docker volume ls -qf dangling=true)
 docker rmi $(docker images --filter "dangling=true" -q --no-trunc)
 
 # or, with ansible
-
 ansible all -m shell -a "docker rm \$(docker ps -q -f status=exited); docker volume rm \$(docker volume ls -qf dangling=true); docker rmi \$(docker images --filter "dangling=true" -q --no-trunc)"
 
+## remove all images
+for i in `docker images |grep -v REPO |awk '{print $3}'`; do docker rmi $i --force; done
+
+## re-tag images
+export REGISTRY=repo.home.nicknach.net:5000; export TAG=v3.9.0-0.45.0; for i in `cat images.txt`; do docker pull $REGISTRY/$i:v3.9.0; docker tag $REGISTRY/$i:v3.9.0 $REGISTRY/$i:$TAG; docker push $REGISTRY/$i:$TAG; done
