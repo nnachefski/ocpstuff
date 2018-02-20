@@ -1,5 +1,7 @@
-﻿curl  http://gw.home.nicknach.net/ipa/config/ca.crt >> /etc/origin/master/my-ldap-ca-bundle.crt
+﻿## grab the cert from your IPA server
+curl  http://gw.home.nicknach.net/ipa/config/ca.crt >> /etc/origin/master/my-ldap-ca-bundle.crt
 
+## test your filter 
 ldapsearch -H ldaps://dc1.home.nicknach.net:636 -v -x -s base -D uid=bind_account,ou=people,dc=ocp,dc=nicknach,dc=net -W
 
 ## edit master-config.yml.  The following config will use two auth providers, htpasswd and ldap.
