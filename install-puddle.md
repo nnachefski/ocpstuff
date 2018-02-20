@@ -53,10 +53,6 @@ restorecon -R /var/www/html/rhaos-3.9
 ```
 yum -y install docker-distribution.x86_64 && systemctl enable docker-distribution --now
 ```
-##### # set your docker registry endpoint
-```
-export REGISTRY=repo.home.nicknach.net:5000
-```
 ##### # open the firewall up
 ```
 firewall-cmd --set-default-zone trusted
@@ -65,14 +61,14 @@ firewall-cmd --set-default-zone trusted
 ```
 cd ~ && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/import-images.py && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/images.txt
 chmod +x import-images.py
-./import-images.py docker brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888 $REGISTRY -t v3.9.0 -d
+./import-images.py docker brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888 repo.home.nicknach.net:5000 -t v3.9.0 -d
 ```
 ##### # manually get the etcd image
 ```
-skopeo --insecure-policy copy --src-tls-verify=false --dest-tls-verify=false docker://brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888/rhel7/etcd:latest docker://$REGISTRY/rhel7/etcd:latest
+skopeo --insecure-policy copy --src-tls-verify=false --dest-tls-verify=false docker://brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888/rhel7/etcd:latest docker://repo.home.nicknach.net:5000/rhel7/etcd:latest
 ```
 ##### # in case you have to re-tag everything
-export TAG=v3.9.0-0.36.0; for i in `cat images.txt`; do docker pull $REGISTRY/$i:v3.9.0; docker tag $REGISTRY/$i:v3.9.0 $REGISTRY/$i:$TAG; docker push $REGISTRY/$i:$TAG; done
+export TAG=v3.9.0-0.36.0; for i in `cat images.txt`; do docker pull repo.home.nicknach.net:5000/$i:v3.9.0; docker tag repo.home.nicknach.net:5000/$i:v3.9.0 repo.home.nicknach.net:5000/$i:$TAG; docker push repo.home.nicknach.net:5000/$i:$TAG; done
 
 ### # BEGIN
 ##### # do this on ALL hosts (master/infra/nodes)
@@ -84,7 +80,6 @@ export DOCKER_DEV=/dev/vdb
 export OCP_NFS_MOUNT=/home/data/openshift
 export OCP_NFS_SERVER=storage.home.nicknach.net
 export LDAP_SERVER=gw.home.nicknach.net
-export REGISTRY=repo.home.nicknach.net:5000
 ```
 ##### # make them persistent 
 ```
@@ -95,7 +90,6 @@ export DOCKER_DEV=$DOCKER_DEV
 export OCP_NFS_MOUNT=$OCP_NFS_MOUNT
 export OCP_NFS_SERVER=$OCP_NFS_SERVER
 export LDAP_SERVER=$LDAP_SERVER
-export REGISTRY=$REGISTRY
 EOF
 ```
 ##### # add your internal repos
@@ -142,7 +136,7 @@ docker-storage-setup
 ```
 ##### # add the internal repo
 ```
-sed -i '16,/registries =/s/\[\]/\[\"$REGISTRY\"\]/' /etc/containers/registries.conf
+sed -i '16,/registries =/s/\[\]/\[\"repo.home.nicknach.net:5000\"\]/' /etc/containers/registries.conf
 ```
 ##### # enable and start docker
 ```
