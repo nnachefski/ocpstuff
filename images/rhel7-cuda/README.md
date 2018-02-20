@@ -7,7 +7,7 @@ oc new-build https://github.com/nnachefski/ocpstuff.git --context-dir=images/rhe
 ```
 ##### # add it to the builder catalog
 ```
-oc patch is s2i-custom-python35 -p '{"spec":{"tags":[{"annotations":{"tags":"builder,python"},"name":"latest"}]}}' -n $PROJECT
+oc patch is rhel7-cuda -p '{"spec":{"tags":[{"annotations":{"tags":"builder,rhel7,cuda"},"name":"latest"}]}}' -n $PROJECT
 ```
 #### # now get started with some tensorflow+jupyter demos or ether mining containers
 
