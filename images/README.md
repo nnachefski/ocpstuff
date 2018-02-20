@@ -70,7 +70,7 @@ oc policy add-role-to-group system:image-puller system:serviceaccounts:custom-s2
 ```
 ##### # add your custom builder to the catalog as a 'builder' image
 ```
-oc patch is s2i-custom-python35 -p '{"spec":{"tags":[{"annotations":{"tags":"builder,python"},"name":"latest"}]}}'
+oc patch is s2i-custom-python35 -p '{"spec":{"tags":[{"annotations":{"tags":"builder,python"},"name":"latest"}]}}' -n $PROJECT
 ```
 ##### # and finally, create the app
 ```
