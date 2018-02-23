@@ -37,6 +37,8 @@ deployment_type=openshift-enterprise
 #template_service_broker_version=v3.9.0
 #openshift_web_console_prefix=repo.home.nicknach.net:5000/openshift3/
 #openshift_web_console_version=v3.9.0
+#openshift_prometheus_image_prefix=repo.home.nicknach.net:5000/openshift3/
+#openshift_prometheus_image_version=3.9.0
 
 ## If ansible_ssh_user is not root, ansible_sudo must be set to true
 ansible_ssh_user=root
