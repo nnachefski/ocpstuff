@@ -1,5 +1,7 @@
-openshift3/prometheus
+openshift3/prometheus-node-exporter
+openshift3/prometheus-alertmanager
 openshift3/prometheus-alert-buffer
+openshift3/prometheus
 openshift3/oauth-proxy
 openshift3/ose-web-console
 openshift3/ose-service-catalog
