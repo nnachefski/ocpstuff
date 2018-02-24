@@ -1,4 +1,4 @@
-openshift3/prometheus-alert-manager
+openshift3/prometheus-alertmanager
 openshift3/prometheus-alert-buffer
 openshift3/prometheus
 openshift3/oauth-proxy
