@@ -7,7 +7,7 @@ ansible etcd -m shell -a "rm -rf /var/lib/etcd"
 ansible etcd -m shell -a "rm -rf /etc/etcd"
 ansible etcd -m shell -a "rm -rf /var/lib/origin"
 ansible etcd -m shell -a "systemctl stop docker && rm -rf /var/lib/docker && systemctl start docker"
-ansible all -m yum -a "name=atomic-openshift-utils state=latest"
+#ansible all -m yum -a "name=atomic-openshift-utils state=latest"
 
 ## Or
 
