@@ -4,7 +4,7 @@
 ```
 oc new-project ether-on-ocp
 ```
-##### # now build/deploy ethminer
+##### # build/deploy ethminer
 ```
 oc new-app https://github.com/nnachefski/ocpstuff.git --context-dir=images/ether --name=ethminer
 ```
