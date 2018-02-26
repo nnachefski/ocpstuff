@@ -32,7 +32,7 @@ elif [ "$TYPE" == "ocp" ]; then
         ssh root@hv5.home.nicknach.net /cloud/scripts/new.sh infra03 $TEMPLATE 8192 2 52:54:00:18:73:04 &
 
 else
-	echo "Unrecognized deployment type, idiot.  Use 'ose|oso|beta'"
+	echo "Unrecognized deployment type, idiot.  Use 'ose|oso'"
 	exit 1 
 fi
 
