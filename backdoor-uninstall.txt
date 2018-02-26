@@ -19,6 +19,6 @@ yum remove -y etcd
 rm -rf /etc/etcd
 rm -rf /var/lib/origin
 rm -rf /var/lib/docker
-# yum install -y atomic-openshift-utils openshift-ansible
+#yum install -y atomic-openshift-utils openshift-ansible
 rm -rf /var/lib/docker
 vgremove docker-vg -y
