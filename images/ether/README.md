@@ -4,11 +4,7 @@
 ```
 oc new-project ether-on-ocp
 ```
-##### # set anyuid for the default serviceaccount
-```
-oc adm policy add-scc-to-user anyuid -z default
-```
-##### # now build/deploy ethminer
+##### # build/deploy ethminer
 ```
 oc new-app https://github.com/nnachefski/ocpstuff.git --context-dir=images/ether --name=ethminer
 ```
