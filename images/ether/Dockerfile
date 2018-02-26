@@ -1,7 +1,7 @@
 FROM rhel7-cuda:latest
 ## maintained by nnachefski@gmail.com
 
-ENV APP_DIR=/opt/ether-on-ocp
+ENV APP_DIR=/opt/ethminer
 ENV APP_VER=0.13.0
 ENV STRATUM_P=us2.ethermine.org:4444
 ENV STRATUM_S=us2.ethermine.org:14444
