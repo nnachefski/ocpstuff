@@ -10,7 +10,7 @@ oc label node desktop.home.nicknach.net alpha.kubernetes.io/nvidia-gpu-name='GTX
 ###### # change 'GTX' to whatever you want (this is a node label)
 ##### # create the project
 ```
-oc new-project ml-on-ocp
+oc new-project tensorflow
 ```
 ##### # set anyuid for the default serviceaccount
 ```
