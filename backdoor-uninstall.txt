@@ -2,6 +2,7 @@
 ansible all -m shell -a 'rm -rf /etc/origin/*'
 ansible all -m shell -a 'rm -rf /etc/sysconfig/atomic*'
 ansible all -m shell -a "rm -rf /root/.kube"
+ansible all -m shell -a "rm -rf /etc/openvswitch"
 ansible etcd -m shell -a "yum remove -y etcd"
 ansible etcd -m shell -a "rm -rf /var/lib/etcd"
 ansible etcd -m shell -a "rm -rf /etc/etcd"
@@ -15,6 +16,7 @@ yum remove -y openshift* atomic* openvswitch*
 rm -rf /etc/origin/*
 rm -rf /etc/sysconfig/atomic*
 rm -rf /root/.kube
+rm -rf /etc/openvswitch
 yum remove -y etcd
 rm -rf /etc/etcd
 rm -rf /var/lib/origin
