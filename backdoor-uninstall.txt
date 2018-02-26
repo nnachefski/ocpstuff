@@ -1,4 +1,4 @@
-﻿ansible all -m shell -a "yum remove -y openshift* atomic*"
+﻿ansible all -m shell -a "yum remove -y openshift* atomic* openvswitch*"
 ansible all -m shell -a 'rm -rf /etc/origin/*'
 ansible all -m shell -a 'rm -rf /etc/sysconfig/atomic*'
 ansible all -m shell -a "rm -rf /root/.kube"
@@ -11,7 +11,7 @@ ansible etcd -m shell -a "systemctl stop docker && rm -rf /var/lib/docker && sys
 
 ## Or
 
-yum remove -y openshift* atomic*
+yum remove -y openshift* atomic* openvswitch*
 rm -rf /etc/origin/*
 rm -rf /etc/sysconfig/atomic*
 rm -rf /root/.kube
