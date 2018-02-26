@@ -2,7 +2,7 @@
 ###### # this image requires the rhel7-cuda image to be available
 ##### # create the project
 ```
-oc new-project ether-on-ocp
+oc new-project ether
 ```
 ##### # build/deploy ethminer
 ```
