@@ -1,6 +1,5 @@
 ## This doc describes how setup content mirrors for disconnected installs
 
-#### # You must first sync the development rpm repos from the internal build servers
 ###### # make sure you have ample space available on your local repo box (called repo.home.nicknach.net in my lab).  
 ###### # You need at least 30GB total.  (~10GB  for rpms and ~20GB for images)
 
