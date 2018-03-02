@@ -4,7 +4,7 @@
 ###### # make sure you deploy your 3.9 cluster with promtheus/alertmanager/alertbuffer and that you have PVs allocated
 ##### # deploy the node exporter
 ```
-oc create -f node-exporter.yaml -n kube-system
-oc adm policy add-scc-to-user -z prometheus-node-exporter -n kube-system hostaccess
-oc annotate ns kube-system openshift.io/node-selector= --overwrite
+oc create -f node-exporter.yaml -n openshift-metrics
+oc adm policy add-scc-to-user -z prometheus-node-exporter -n openshift-metrics hostaccess
+oc annotate ns openshift-metrics openshift.io/node-selector= --overwrite
 ```
