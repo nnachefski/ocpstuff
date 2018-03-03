@@ -44,7 +44,7 @@ firewall-cmd --set-default-zone trusted
 ##### # now run the import-image.py script
 ```
 cd ~ && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/import-images.py && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/images.txt && chmod +x import-images.py
-./import-images.py docker registry.access.redhat.com repo.home.nicknach.net:5000 -t v3.7 -d
+./import-images.py docker registry.access.redhat.com repo.home.nicknach.net:5000 -t v3.7.23 -d
 ```
 ##### # manually get the etcd image
 ```
