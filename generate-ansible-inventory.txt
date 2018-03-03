@@ -16,7 +16,7 @@ deployment_type=openshift-enterprise
 #containerized=true
 
 ##internal image repos
-#openshift_additional_repos=[{'id': 'ose-devel', 'name': 'rhaos-3.9', 'baseurl': 'http://repo.home.nicknach.net/repo/rhaos-3.9', 'enabled': 1, 'gpgcheck': 0}]
+##openshift_additional_repos=[{'id': 'ose-devel', 'name': 'rhaos-3.9', 'baseurl': 'http://repo.home.nicknach.net/repo/rhaos-3.9', 'enabled': 1, 'gpgcheck': 0}]
 #openshift_docker_additional_registries=repo.home.nicknach.net:5000
 #openshift_docker_insecure_registries=repo.home.nicknach.net:5000
 #openshift_docker_blocked_registries=registry.access.redhat.com,docker.io
