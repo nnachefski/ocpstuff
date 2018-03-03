@@ -168,8 +168,14 @@ ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/deploy_cluster.y
 ```
 ###### #  if you to need explicitly provide a private keyfile (like with AWS)
 --private-key ~/.ssh/nick-west2.pem
-###### # verify the install was successful (oc get nodes)
-
+##### # use these commands in other terminal windows to keep an eye on the deployment (and look for potential problems)
+```
+watch -n2 oc adm manage-node --selector= --list-pods -owide
+watch -n2 oc get pv
+journalctl -xlf
+```
+###### # verify the install was successful
+###### 'oc get nodes'
 ### # Now run through the post-deployment steps
 #### # https://github.com/nnachefski/ocpstuff/install-post-deployment.md
 
