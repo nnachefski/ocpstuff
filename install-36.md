@@ -12,6 +12,7 @@ export LDAP_SERVER=gw.home.nicknach.net
 export RHSM_ID=nnachefs@redhat.com
 export RHSM_PW=nopasswd
 export POOLID=8a85f98260c27fc50160c323263339ff
+export ANSIBLE_HOST_KEY_CHECKING=False
 ```
 ##### # make them persistent 
 ```
@@ -23,6 +24,7 @@ export OCP_NFS_MOUNT=$OCP_NFS_MOUNT
 export OCP_NFS_SERVER=$OCP_NFS_SERVER
 export LDAP_SERVER=$LDAP_SERVER
 export POOLID=$POOLID
+export ANSIBLE_HOST_KEY_CHECKING=False
 EOF
 ```
 
@@ -109,7 +111,7 @@ for i in `cat list.txt`; do ssh-copy-id root@$i; done
 https://raw.githubusercontent.com/nnachefski/ocpstuff/master/generate-ansible-inventory.txt
 ##### # now run the ansible playbook to install
 ```
-ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/byo/config.yml
+ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/byo/config.yml
 ```
 ###### #  if you to need explicitly provide a private keyfile (like with AWS)
 --private-key ~/.ssh/nick-west2.pem
