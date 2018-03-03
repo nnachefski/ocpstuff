@@ -134,9 +134,10 @@ EOF
 ```
 docker-storage-setup
 ```
-##### # add the internal repo
+##### # add the internal docker registry
 ```
 sed -i '16,/registries =/s/\[\]/\[\"repo.home.nicknach.net:5000\"\]/' /etc/containers/registries.conf
+systemctl restart docker
 ```
 ##### # enable and start docker
 ```
