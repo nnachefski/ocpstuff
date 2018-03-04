@@ -50,6 +50,10 @@ deployment_type=openshift-enterprise
 #template_service_broker_selector=region=masters
 #template_service_broker_image_name=template-service-broker
 
+## disable TSB and ASB
+#openshift_enable_service_catalog=false
+#template_service_broker_install=false
+
 ## If ansible_ssh_user is not root, ansible_sudo must be set to true
 ansible_ssh_user=root
 #ansible_ssh_user=cloud-user
@@ -99,6 +103,7 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 ##openshift_hosted_logging_storage_nfs_options='*(rw,root_squash,sync,no_wdelay)'
 #openshift_hosted_logging_storage_volume_name=logging
 #openshift_hosted_logging_storage_volume_size=10Gi
+#openshift_logging_es_pvc_storage_class_name=nfs
 ##openshift_hosted_logging_elasticsearch_cluster_size=1
 ##openshift_hosted_logging_elasticsearch_nodeselector=region=infra
 ##openshift_hosted_logging_kibana_nodeselector=region=infra
