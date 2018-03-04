@@ -148,6 +148,9 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_metrics_storage_volume_name=metrics
 #openshift_metrics_storage_volume_size=15Gi
 #openshift_metrics_storage_labels={'storage':'metrics'}
+#openshift_metrics_hawkular_nodeselector={'region':'infra'}
+#openshift_metrics_heapster_nodeselector={'region':'infra'}
+#openshift_metrics_cassandra_nodeselector={'region':'infra'}
 ## For prometheus
 #openshift_hosted_prometheus_deploy=true
 #openshift_prometheus_storage_kind=nfs
@@ -158,6 +161,7 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_prometheus_storage_volume_name=prometheus
 #openshift_prometheus_storage_volume_size=7Gi
 #openshift_prometheus_storage_labels={'storage':'prometheus'}
+#openshift_prometheus_node_selector={'region':'infra'}
 #openshift_prometheus_storage_type='pvc'
 ## For prometheus-alertmanager
 #openshift_prometheus_alertmanager_storage_kind=nfs
