@@ -47,9 +47,10 @@ cd ~ && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images
 chmod +x import-images.py
 ./import-images.py docker registry.access.redhat.com repo.home.nicknach.net:5000 -t v3.7.23 -d
 ```
-##### # manually get the etcd image
+##### # manually get the etcd and rhel7 images
 ```
-skopeo --insecure-policy copy --src-tls-verify=false --dest-tls-verify=false docker://brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888/rhel7/etcd:latest docker://repo.home.nicknach.net:5000/rhel7/etcd:latest
+skopeo --insecure-policy copy --src-tls-verify=false --dest-tls-verify=false docker://registry.access.redhat.com/rhel7/etcd docker://repo.home.nicknach.net:5000/rhel7/etcd
+skopeo --insecure-policy copy --src-tls-verify=false --dest-tls-verify=false docker://registry.access.redhat.com/rhel7.4 docker://repo.home.nicknach.net:5000/rhel7.4
 ```
 #### # done with repo box
 

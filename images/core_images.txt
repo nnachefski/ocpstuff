@@ -1,5 +1,3 @@
-rhel7/etcd
-rhel7.4
 openshift3/prometheus-node-exporter
 openshift3/prometheus-alertmanager
 openshift3/prometheus-alert-buffer
