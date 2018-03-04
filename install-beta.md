@@ -69,7 +69,7 @@ skopeo --insecure-policy copy --src-tls-verify=false --dest-tls-verify=false doc
 skopeo --insecure-policy copy --src-tls-verify=false --dest-tls-verify=false docker://registry.access.redhat.com/rhel7.4 docker://repo.home.nicknach.net:5000/rhel7.4
 ```
 ##### # in case you have to re-tag everything
-export TAG=v3.9.0-0.36.0; for i in `cat images.txt`; do docker pull repo.home.nicknach.net:5000/$i:v3.9.0; docker tag repo.home.nicknach.net:5000/$i:v3.9.0 repo.home.nicknach.net:5000/$i:$TAG; docker push repo.home.nicknach.net:5000/$i:$TAG; done
+export TAG=v3.9.0-0.53.0; for i in `cat images.txt`; do docker pull repo.home.nicknach.net:5000/$i:v3.9.0; docker tag repo.home.nicknach.net:5000/$i:v3.9.0 repo.home.nicknach.net:5000/$i:$TAG; docker push repo.home.nicknach.net:5000/$i:$TAG; done
 
 ### # BEGIN
 ##### # do this on ALL hosts (master/infra/nodes)
