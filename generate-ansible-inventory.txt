@@ -41,11 +41,11 @@ deployment_type=openshift-enterprise
 #openshift_prometheus_alertmanager_image_version=v3.9.0
 #openshift_prometheus_alertbuffer_image_prefix=repo.home.nicknach.net:5000/openshift3/
 #openshift_prometheus_alertbuffer_image_version=v3.9.0
-#template_service_broker_prefix=repo.home.nicknach.net:5000/openshift3/ose-
+#template_service_broker_prefix=repo.home.nicknach.net:5000/openshift3/
 #template_service_broker_version=v3.9.0
 
 ### 3.7 (this is all jacked up)
-#template_service_broker_image_name=template-service-broker
+#template_service_broker_image_name=ose-template-service-broker
 
 ## If ansible_ssh_user is not root, ansible_sudo must be set to true
 ansible_ssh_user=root
