@@ -1,7 +1,7 @@
 ## This doc describes how setup content mirrors for disconnected installs
 
 ###### # make sure you have ample space available on your local repo box (called repo.home.nicknach.net in my lab).  
-###### # You need at least 30GB total.  (~10GB  for rpms and ~20GB for images)
+###### # Recommended 100GB storage for this repo server.
 
 ##### # subscribe your repo box to the proper channels for OCP
 ```
