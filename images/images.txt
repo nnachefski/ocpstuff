@@ -41,3 +41,4 @@ openshift3/registry-console
 openshift3/mediawiki-apb
 openshift3/postgresql-apb
 rhel7/etcd
+rhel7.4
