@@ -41,9 +41,10 @@ Activate the Openshift subscriptions provided by Red Hat. If using a Satellite S
    * rhel-7-fast-datapath-rpms
    * rh-gluster-3-for-rhel-7-server-rpms
 
-Additional items:
+Additional Considerations:
    1. RHEL7.4 (Vanilla ISO is recommended)
     - The “Minimum” installation is recommended
    2. SELinux must be in “Enforcing” (this is the default in vanilla image)
    3. NetworkManager must be enabled (this is the default in vanilla image)
-    
+   4. iptables must be enabled (this is the default in vanilla image)
+
