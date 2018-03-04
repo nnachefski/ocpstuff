@@ -8,7 +8,7 @@ parser.add_argument('source', action="store", help='Ex: brew-pulp-docker01.web.p
 parser.add_argument('dest', action="store", help='destination, Ex: 192.168.0.4:1234')
 parser.add_argument('-d', action="store_true", default=False, help='debug mode')
 parser.add_argument('-t', action="store", dest="tag", help="tag to use, default is latest", default='latest')
-parser.add_argument('-l', action="store", dest="list", help="image list, default is images.txt", default='core_images.txt')
+parser.add_argument('-l', action="store", dest="list", help="image list, default is core_images.txt", default='core_images.txt')
 args = parser.parse_args()
 
 uri_string = False
