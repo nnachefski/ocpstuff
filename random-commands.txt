@@ -30,7 +30,7 @@ oadm manage-node master03.ocp.nicknach.net infra03.ocp.nicknach.net node03.ocp.n
 
 
 #re-populate image streams
-for i in `oc get is -n openshift |awk '{print $1}' |grep -v NAME`; do oc import-image repo.home.nicknach.net:5000/rhscl/$i --confirm --insecure; done
+for i in `oc get is -n openshift |awk '{print $1}' |grep -v NAME`; do oc delete is -n openshift $i && oc import-image repo.home.nicknach.net:5000/rhscl/$i -n openshift  --insecure --confirm; done
 
 
 #check registry health
