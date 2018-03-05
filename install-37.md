@@ -124,7 +124,7 @@ journalctl -xlf
 ###### 'oc get nodes'
 
 ### # Now run through the post-deployment steps
-#### # https://github.com/nnachefski/ocpstuff/install-post-deployment.md
+#### # https://github.com/nnachefski/ocpstuff/blob/master/install-post-deployment.md
 
 ### # Now run through the rhel7-custom image build guide
 #### # https://github.com/nnachefski/ocpstuff/tree/master/images
