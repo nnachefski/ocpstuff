@@ -52,6 +52,17 @@ chmod +x import-images.py
 skopeo --insecure-policy copy --src-tls-verify=false --dest-tls-verify=false docker://registry.access.redhat.com/rhel7/etcd docker://repo.home.nicknach.net:5000/rhel7/etcd
 skopeo --insecure-policy copy --src-tls-verify=false --dest-tls-verify=false docker://registry.access.redhat.com/rhel7.4 docker://repo.home.nicknach.net:5000/rhel7.4
 ```
+##### # create certs for this registry (so you can enable https)
+```
+mkdir /etc/docker/certs.d/repo.home.nicknach.net
+openssl req   -newkey rsa:4096 -nodes -sha256 -keyout repo.home.nicknach.net.key   -x509 -days 365 -out repo.home.nicknach.net.crt
+```
+##### # add this to the http section in /etc/docker-distribution/registry/config.yml
+```
+  tls:
+    certificate: /etc/docker/certs.d/repo.home.nicknach.net/repo.home.nicknach.net.crt
+    key: /etc/docker/certs.d/repo.home.nicknach.net/repo.home.nicknach.net.key
+```
 #### # done with repo box
 
 ### # now on your client boxes
