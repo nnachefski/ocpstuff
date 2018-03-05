@@ -55,7 +55,7 @@ deployment_type=openshift-enterprise
 #template_service_broker_install=false
 
 ## disable template imports (do them manually from an insecure registry)
-#openshift_install_examples=true
+#openshift_install_examples=false
 
 ## If ansible_ssh_user is not root, ansible_sudo must be set to true
 ansible_ssh_user=root
