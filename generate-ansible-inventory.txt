@@ -20,6 +20,9 @@ deployment_type=openshift-enterprise
 #openshift_docker_additional_registries=repo.home.nicknach.net:5000
 #openshift_docker_insecure_registries=repo.home.nicknach.net:5000
 #openshift_docker_blocked_registries=registry.access.redhat.com,docker.io
+insecure_registries = [
+{{ l_insecure_crio_registries|default("") }}
+]
 #oreg_url=repo.home.nicknach.net:5000/openshift3/ose-\${component}:\${version}
 #openshift_examples_modify_imagestreams=true
 #openshift_metrics_image_prefix=repo.home.nicknach.net:5000/openshift3/
@@ -141,6 +144,7 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_logging_storage_volume_name=logging
 #openshift_logging_storage_volume_size=10Gi
 #openshift_logging_storage_labels={'storage':'logging'}
+#openshift_logging_es_pv_selector=region=infra
 ## metrics
 #openshift_metrics_install_metrics=true
 #openshift_metrics_storage_kind=nfs
