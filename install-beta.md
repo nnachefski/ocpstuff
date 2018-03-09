@@ -144,7 +144,7 @@ systemctl enable docker --now
 ```
 ##### # make sure your nodes are up to date
 ```
-yum -y update
+yum -y update --disablerepo=repo.home.nicknach.net_repo_rh-gluster-3-for-rhel-7-server-rpms
 ```
 ###### # reboot if necessary 
 ## #  On first master only now (or bastion host)
