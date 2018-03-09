@@ -1,3 +1,5 @@
+rhgs3/rhgs-volmanager-rhel7
+rhgs3/rhgs-server-rhel7
 openshift3/prometheus-node-exporter
 openshift3/prometheus-alertmanager
 openshift3/prometheus-alert-buffer
