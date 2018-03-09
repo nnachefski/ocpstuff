@@ -94,12 +94,12 @@ EOF
 ##### # add your internal repos
 ```
 yum-config-manager --disable \* && rm -rf /etc/yum.repos.d/*.repo && yum clean all
-#yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhaos-3.9
+yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhaos-3.9
 yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-fast-datapath-rpms
 yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-extras-rpms
 yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-server-rhscl-7-rpms
 yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-optional-rpms 
-#yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rh-gluster-3-for-rhel-7-server-rpms
+yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rh-gluster-3-for-rhel-7-server-rpms
 ```
 ##### # disable gpg checks
 ```
@@ -119,7 +119,7 @@ yum install -y docker docker-logrotate
 ```
 ##### # install gluster packages
 ```
-#yum -y install cns-deploy heketi-client
+yum -y install cns-deploy heketi-client
 ```
 ##### # configure the docker pool device
 ```
