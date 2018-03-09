@@ -33,7 +33,7 @@ deployment_type=openshift-enterprise
 #openshift_service_catalog_image_prefix=repo.home.nicknach.net:5000/openshift3/ose-
 #openshift_service_catalog_image_version=v3.9.0
 #openshift_cockpit_deployer_prefix=repo.home.nicknach.net:5000/openshift3/
-#openshift_web_console_prefix=repo.home.nicknach.net:5000/openshift3/
+#openshift_web_console_prefix=repo.home.nicknach.net:5000/openshift3/ose-
 #openshift_web_console_version=v3.9.0
 #openshift_prometheus_image_prefix=repo.home.nicknach.net:5000/openshift3/
 #openshift_prometheus_image_version=v3.9.0
@@ -43,6 +43,10 @@ deployment_type=openshift-enterprise
 #openshift_prometheus_alertbuffer_image_version=v3.9.0
 #template_service_broker_prefix=repo.home.nicknach.net:5000/openshift3/ose-
 #template_service_broker_version=v3.9.0
+#openshift_storage_glusterfs_image=repo.home.nicknach.net:5000/rhgs3/rhgs-server-rhel7
+#openshift_storage_glusterfs_version=
+#openshift_storage_glusterfs_heketi_image=repo.home.nicknach.net:5000/rhgs3/rhgs-volmanager-rhel7
+#openshift_storage_glusterfs_heketi_version=
 
 ### 3.7 (this is all jacked up)
 #template_service_broker_prefix=repo.home.nicknach.net:5000/openshift3/
