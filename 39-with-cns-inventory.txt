@@ -58,14 +58,14 @@ openshift_hosted_registry_storage_kind=glusterfs
 
 ## metrics
 # Will be uncommented for Metrics deployment
-#openshift_metrics_storage_kind=dynamic
+openshift_metrics_storage_kind=dynamic
 
 ## logging
 # the size of each PersistentVolume of the ElasticSearch pods (modify as desired)
 # Logging requires a PVC size for installation
 openshift_logging_es_pvc_size=10Gi
 # Will be uncommented for Logging deployment
-#openshift_logging_storage_kind=dynamic
+openshift_logging_storage_kind=dynamic
 
 ## First CNS storage cluster for applications
 # Namespace for CNS pods (will be created)
