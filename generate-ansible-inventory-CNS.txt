@@ -19,32 +19,32 @@ openshift_docker_blocked_registries=registry.access.redhat.com,docker.io
 oreg_url=repo.home.nicknach.net:5000/openshift3/ose-\${component}:\${version}
 openshift_examples_modify_imagestreams=true
 openshift_metrics_image_prefix=repo.home.nicknach.net:5000/openshift3/
-openshift_metrics_image_version=v3.9.4
+openshift_metrics_image_version=v3.9
 openshift_logging_image_prefix=repo.home.nicknach.net:5000/openshift3/
-openshift_logging_image_version=v3.9.4
+openshift_logging_image_version=v3.9
 ansible_service_broker_image_prefix=repo.home.nicknach.net:5000/openshift3/ose-
-ansible_service_broker_image_tag=v3.9.4
+ansible_service_broker_image_tag=v3.9
 ansible_service_broker_etcd_image_prefix=repo.home.nicknach.net:5000/rhel7/
 ansible_service_broker_etcd_image_tag=latest
 openshift_service_catalog_image_prefix=repo.home.nicknach.net:5000/openshift3/ose-
-openshift_service_catalog_image_version=v3.9.4
+openshift_service_catalog_image_version=v3.9
 openshift_cockpit_deployer_prefix=repo.home.nicknach.net:5000/openshift3/
 openshift_web_console_prefix=repo.home.nicknach.net:5000/openshift3/
-openshift_web_console_version=v3.9.4
+openshift_web_console_version=v3.9
 openshift_prometheus_image_prefix=repo.home.nicknach.net:5000/openshift3/
-openshift_prometheus_image_version=v3.9.4
+openshift_prometheus_image_version=v3.9
 openshift_prometheus_alertmanager_image_prefix=repo.home.nicknach.net:5000/openshift3/
-openshift_prometheus_alertmanager_image_version=v3.9.4
+openshift_prometheus_alertmanager_image_version=v3.9
 openshift_prometheus_alertbuffer_image_prefix=repo.home.nicknach.net:5000/openshift3/
-openshift_prometheus_alertbuffer_image_version=v3.9.4
+openshift_prometheus_alertbuffer_image_version=v3.9
 template_service_broker_prefix=repo.home.nicknach.net:5000/openshift3/ose-
-template_service_broker_version=v3.9.4
+template_service_broker_version=v3.9
 
 ansible_ssh_user=root
 
 ## release ver
-#openshift_release=v3.9.4
-#openshift_image_tag=v3.9.4
+#openshift_release=v3.9
+#openshift_image_tag=v3.9
 
 ## ldap auth (IPA)
 openshift_master_identity_providers=[{"name":"myipa","challenge":true,"login":true,"kind":"LDAPPasswordIdentityProvider","attributes":{"id":["dn"],"email":["mail"],"name":["cn"],"preferredUsername":["uid"]},"bindDN":"","bindPassword":"","ca":"my-ldap-ca-bundle.crt","insecure":false,"url":"ldap://$LDAP_SERVER/cn=users,cn=accounts,dc=home,dc=nicknach,dc=net?uid"}]
