@@ -2,7 +2,7 @@
 oc patch is mysql -p '{"spec":{"tags":[{"importPolicy":{"insecure":true},"name":"latest"}]}}'
 
 ## add tag alias
-export TAG=v3.9.0-0.36.0; for i in `cat images.txt`; do docker pull repo.home.nicknach.net:5000/$i:v3.9.0; docker tag repo.home.nicknach.net:5000/$i:v3.9.0 repo.home.nicknach.net:5000/$i:$TAG; docker push repo.home.nicknach.net:5000/$i:$TAG; done
+export TAG=v3.9; for i in `cat images.txt`; do docker pull repo.home.nicknach.net:5000/$i:v3.9; docker tag repo.home.nicknach.net:5000/$i:v3.9 repo.home.nicknach.net:5000/$i:$TAG; docker push repo.home.nicknach.net:5000/$i:$TAG; done
 
 # fix ssh to allow remote root
 sed -i 's/^#PermitRootLogin/PermitRootLogin/' /etc/ssh/sshd_config
