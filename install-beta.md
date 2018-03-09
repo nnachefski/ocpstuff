@@ -78,8 +78,6 @@ export TAG=v3.9.0-0.53.0; for i in `cat images.txt`; do docker pull repo.home.ni
 export ROOT_DOMAIN=ocp.nicknach.net
 export APPS_DOMAIN=apps.$ROOT_DOMAIN 
 export DOCKER_DEV=/dev/vdb
-export OCP_NFS_MOUNT=/home/data/openshift
-export OCP_NFS_SERVER=storage.home.nicknach.net
 export LDAP_SERVER=gw.home.nicknach.net
 export ANSIBLE_HOST_KEY_CHECKING=False
 ```
@@ -89,8 +87,6 @@ cat <<EOF >> ~/.bashrc
 export ROOT_DOMAIN=$ROOT_DOMAIN
 export APPS_DOMAIN=$APPS_DOMAIN
 export DOCKER_DEV=$DOCKER_DEV
-export OCP_NFS_MOUNT=$OCP_NFS_MOUNT
-export OCP_NFS_SERVER=$OCP_NFS_SERVER
 export LDAP_SERVER=$LDAP_SERVER
 export ANSIBLE_HOST_KEY_CHECKING=False
 EOF
