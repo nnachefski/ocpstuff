@@ -10,6 +10,7 @@ glusterfs_registry
 ## Set variables common for all OSEv3 hosts
 [OSEv3:vars]
 deployment_type=openshift-enterprise
+dynamic_volumes_check=False
 
 ##internal image repos
 openshift_docker_additional_registries=repo.home.nicknach.net:5000
@@ -46,8 +47,8 @@ openshift_storage_glusterfs_heketi_version=latest
 ansible_ssh_user=root
 
 ## release ver
-#openshift_release=v3.9.4
-#openshift_image_tag=v3.9.4
+openshift_release=v3.9.4
+openshift_image_tag=v3.9.4
 
 ## ldap auth (IPA)
 openshift_master_identity_providers=[{"name":"myipa","challenge":true,"login":true,"kind":"LDAPPasswordIdentityProvider","attributes":{"id":["dn"],"email":["mail"],"name":["cn"],"preferredUsername":["uid"]},"bindDN":"","bindPassword":"","ca":"my-ldap-ca-bundle.crt","insecure":false,"url":"ldap://gw.home.nicknach.net/cn=users,cn=accounts,dc=home,dc=nicknach,dc=net?uid"}]
@@ -138,3 +139,4 @@ node03.ocp.nicknach.net glusterfs_devices='[ "/dev/vdc" ]'
 infra01.ocp.nicknach.net glusterfs_devices='[ "/dev/vdc" ]'
 infra02.ocp.nicknach.net glusterfs_devices='[ "/dev/vdc" ]'
 infra03.ocp.nicknach.net glusterfs_devices='[ "/dev/vdc" ]'
+
