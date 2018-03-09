@@ -1,9 +1,6 @@
 ﻿## patch an IS to be pulled from http (vs https) registry
 oc patch is mysql -p '{"spec":{"tags":[{"importPolicy":{"insecure":true},"name":"latest"}]}}'
 
-## add tag alias
-export TAG=v3.9; for i in `cat images.txt`; do docker pull repo.home.nicknach.net:5000/$i:v3.9; docker tag repo.home.nicknach.net:5000/$i:v3.9 repo.home.nicknach.net:5000/$i:$TAG; docker push repo.home.nicknach.net:5000/$i:$TAG; done
-
 # fix ssh to allow remote root
 sed -i 's/^#PermitRootLogin/PermitRootLogin/' /etc/ssh/sshd_config
 sed -i 's/^#PermitRootLogin no/PermitRootLogin yes/' /etc/ssh/sshd_config; sed -i 's/^#PasswordAuthentication/PasswordAuthentication/' /etc/ssh/sshd_config

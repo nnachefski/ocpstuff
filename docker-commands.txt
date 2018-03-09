@@ -10,6 +10,5 @@ ansible all -m shell -a "docker rm \$(docker ps -q -f status=exited); docker vol
 for i in `docker images |grep -v REPO |awk '{print $3}'`; do docker rmi $i --force; done
 
 ## re-tag images from a remote docker client
-export REGISTRY=repo.home.nicknach.net:5000
-export TAG=v3.9.0-0.45.0
-for i in `cat images.txt`; do docker pull $REGISTRY/$i:v3.9.0; docker tag $REGISTRY/$i:v3.9.0 $REGISTRY/$i:$TAG; docker push $REGISTRY/$i:$TAG; done
+## add tag alias
+export TAG=v3.9; for i in `cat images.txt`; do docker pull repo.home.nicknach.net:5000/$i:v3.9; docker tag repo.home.nicknach.net:5000/$i:v3.9 repo.home.nicknach.net:5000/$i:$TAG; docker push repo.home.nicknach.net:5000/$i:$TAG; done
