@@ -39,9 +39,9 @@ openshift_prometheus_alertbuffer_image_version=v3.9.4
 template_service_broker_prefix=repo.home.nicknach.net:5000/openshift3/ose-
 template_service_broker_version=v3.9.4
 openshift_storage_glusterfs_image=repo.home.nicknach.net:5000/rhgs3/rhgs-server-rhel7
-#openshift_storage_glusterfs_version=
+openshift_storage_glusterfs_version=latest
 openshift_storage_glusterfs_heketi_image=repo.home.nicknach.net:5000/rhgs3/rhgs-volmanager-rhel7
-#openshift_storage_glusterfs_heketi_version=
+openshift_storage_glusterfs_heketi_version=latest
 
 ansible_ssh_user=root
 
