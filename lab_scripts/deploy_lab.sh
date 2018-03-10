@@ -2,7 +2,7 @@ TYPE=$1
 TEMPLATE=rhel7
 
 echo "Cleaning up data dirs..."
-ssh root@storage /cloud/scripts/osev3/nfs_cleanup.sh
+ssh root@storage /cloud/scripts/osev3/cleanup.sh
 
 if [ "$TYPE" == "oso" ]; then
 	TEMPLATE=centos7
@@ -20,20 +20,21 @@ if [ "$TYPE" == "oso" ]; then
 
 elif [ "$TYPE" == "ocp" ]; then
 	echo "- using $TEMPLATE base image"
-	ssh root@hv4.home.nicknach.net /cloud/scripts/new.sh master01 $TEMPLATE 8192 2 52:54:00:fb:09:ec &
-	ssh root@hv3.home.nicknach.net /cloud/scripts/new.sh master02 $TEMPLATE 8192 2 52:54:00:18:58:01 &
-	ssh root@hv5.home.nicknach.net /cloud/scripts/new.sh master03 $TEMPLATE 8192 2 52:54:00:18:58:02 &
-	ssh root@hv4.home.nicknach.net /cloud/scripts/new.sh node01 $TEMPLATE 14336 2 52:54:00:db:14:7d &
-	ssh root@hv3.home.nicknach.net /cloud/scripts/new.sh node02 $TEMPLATE 14336 2 52:54:00:68:4a:e3 &
-	ssh root@hv5.home.nicknach.net /cloud/scripts/new.sh node03 $TEMPLATE 14336 2 52:54:00:68:54:49 &
-	ssh root@hv5.home.nicknach.net /cloud/scripts/new.sh lb $TEMPLATE 4196 2 52:54:00:18:58:16 &
-        ssh root@hv4.home.nicknach.net /cloud/scripts/new.sh infra01 $TEMPLATE 8192 2 52:54:00:18:58:03 &
-        ssh root@hv3.home.nicknach.net /cloud/scripts/new.sh infra02 $TEMPLATE 8192 2 52:54:00:18:59:04 &
-        ssh root@hv5.home.nicknach.net /cloud/scripts/new.sh infra03 $TEMPLATE 8192 2 52:54:00:18:73:04 &
-
+	ssh root@hv4.home.nicknach.net /cloud/scripts/new.sh master01 $TEMPLATE 16384 2 52:54:00:fb:09:ec &
+	ssh root@hv3.home.nicknach.net /cloud/scripts/new.sh master02 $TEMPLATE 16384 2 52:54:00:18:58:01 &
+	ssh root@hv5.home.nicknach.net /cloud/scripts/new.sh master03 $TEMPLATE 16384 2 52:54:00:18:58:02 &
+	ssh root@hv4.home.nicknach.net /cloud/scripts/new.sh node01 $TEMPLATE 16384 2 52:54:00:db:14:7d &
+	ssh root@hv3.home.nicknach.net /cloud/scripts/new.sh node02 $TEMPLATE 16384 2 52:54:00:68:4a:e3 &
+	ssh root@hv5.home.nicknach.net /cloud/scripts/new.sh node03 $TEMPLATE 16384 2 52:54:00:68:54:49 &
+	ssh root@storage.home.nicknach.net /cloud/scripts/new.sh lb $TEMPLATE 4196 2 52:54:00:18:58:16 &
+	ssh root@hv4.home.nicknach.net /cloud/scripts/new.sh infra01 $TEMPLATE 16384 2 52:54:00:18:58:03 &
+	ssh root@hv3.home.nicknach.net /cloud/scripts/new.sh infra02 $TEMPLATE 16384 2 52:54:00:18:59:04 &
+	ssh root@hv5.home.nicknach.net /cloud/scripts/new.sh infra03 $TEMPLATE 16384 2 52:54:00:18:73:04 &
 else
 	echo "Unrecognized deployment type, idiot.  Use 'ose|oso'"
 	exit 1 
 fi
 
 echo "Done!"
+
+
