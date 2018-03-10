@@ -2,7 +2,7 @@ TYPE=$1
 TEMPLATE=rhel7
 
 echo "Cleaning up data dirs..."
-ssh root@storage /cloud/scripts/osev3/cleanup.sh
+ssh root@storage /cloud/scripts/osev3/nfs_cleanup.sh
 
 if [ "$TYPE" == "oso" ]; then
 	TEMPLATE=centos7

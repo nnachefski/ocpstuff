@@ -31,6 +31,6 @@ ssh root@hv5.home.nicknach.net rm -rf /var/lib/libvirt/images/infra03*.qcow2
 ssh root@hv5.home.nicknach.net rm -rf /var/lib/libvirt/images/lb*.qcow2
 
 echo "Cleaning up data dirs..."
-ssh root@storage.home.nicknach.net /cloud/scripts/osev3/cleanup.sh
+ssh root@storage.home.nicknach.net /cloud/scripts/osev3/nfs_cleanup.sh
 
 echo "Done!"
