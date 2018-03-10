@@ -162,6 +162,7 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_master_cluster_hostname=api.$ROOT_DOMAIN
 #openshift_master_cluster_public_hostname=console.$ROOT_DOMAIN
 
+
 ## cns
 #openshift_hosted_registry_storage_kind=glusterfs
 #openshift_metrics_install_metrics=true
@@ -185,6 +186,8 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_cloudprovider_kind=aws
 #openshift_cloudprovider_aws_access_key=
 #openshift_cloudprovider_aws_secret_key=
+##  GCE
+#openshift_cloudprovider_kind=gce
 ##  Openstack
 #openshift_cloudprovider_kind=openstack
 #openshift_cloudprovider_openstack_auth_url=https://controller.home.nicknach.com:35357/v2.0
@@ -194,8 +197,6 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_cloudprovider_openstack_tenant_name=nn-dev
 #openshift_cloudprovider_openstack_region=RegionOne
 #openshift_cloudprovider_openstack_lb_subnet_id=d7c61f2a-d591-461d-af28-308ade046c0d
-##  GCE
-#openshift_cloudprovider_kind=gce
 
 ## set the router region
 #openshift_hosted_manage_router=true
@@ -211,7 +212,7 @@ openshift_master_default_subdomain=$APPS_DOMAIN
 #openshift_https_proxy=http://192.168.0.254:3128
 #openshift_no_proxy=
 
-## use these if there is a network IP conflict
+## use these if there is a conflict with the docker bridge and/or SDN networks
 #osm_cluster_network_cidr=10.129.0.0/14
 #openshift_portal_net=172.31.0.0/16
 
