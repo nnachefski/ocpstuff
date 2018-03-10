@@ -222,9 +222,10 @@ openshift_master_default_subdomain=$APPS_DOMAIN
 #openshift_master_console_port=443
 
 ## adjust max pods for scale testing
-#openshift_node_kubelet_args={'max-pods': ['500'], 'image-gc-high-threshold': ['90'], 'image-gc-low-threshold': ['80']}
+#openshift_node_kubelet_args={'pods-per-core': ['15'], 'max-pods': ['500'], 'image-gc-high-threshold': ['85'], 'image-gc-low-threshold': ['80']}
 ## adjust scheduler
 #osm_controller_args={'node-monitor-period': ['2s'], 'node-monitor-grace-period': ['16s'], 'pod-eviction-timeout': ['30s']}
+#osm_controller_args={'resource-quota-sync-period': ['10s']}
 
 ## load balancer
 #[lb]
