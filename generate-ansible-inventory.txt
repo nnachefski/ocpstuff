@@ -6,7 +6,6 @@ nodes
 new_nodes
 #etcd
 #lb
-#nfs
 #glusterfs
 
 ## Set variables common for all OSEv3 hosts
@@ -44,19 +43,9 @@ deployment_type=openshift-enterprise
 #template_service_broker_prefix=repo.home.nicknach.net:5000/openshift3/ose-
 #template_service_broker_version=v3.9.0
 #openshift_storage_glusterfs_image=repo.home.nicknach.net:5000/rhgs3/rhgs-server-rhel7
-#openshift_storage_glusterfs_version=
+#openshift_storage_glusterfs_version=latest
 #openshift_storage_glusterfs_heketi_image=repo.home.nicknach.net:5000/rhgs3/rhgs-volmanager-rhel7
-#openshift_storage_glusterfs_heketi_version=
-
-### 3.7 (this is all jacked up)
-#template_service_broker_prefix=repo.home.nicknach.net:5000/openshift3/
-#template_service_broker_version=v3.7.23
-#template_service_broker_selector=region=masters
-#template_service_broker_image_name=template-service-broker
-
-## disable TSB and ASB
-#openshift_enable_service_catalog=false
-#template_service_broker_install=false
+#openshift_storage_glusterfs_heketi_version=latest
 
 ## disable template imports (do them manually from an insecure registry)
 #openshift_install_examples=false
@@ -87,35 +76,6 @@ openshift_master_htpasswd_users={'ocpuser':'welcome1'}
 openshift_master_identity_providers=[{"name":"myipa","challenge":true,"login":true,"kind":"LDAPPasswordIdentityProvider","attributes":{"id":["dn"],"email":["mail"],"name":["cn"],"preferredUsername":["uid"]},"bindDN":"","bindPassword":"","ca":"my-ldap-ca-bundle.crt","insecure":false,"url":"ldap://$LDAP_SERVER/cn=users,cn=accounts,dc=home,dc=nicknach,dc=net?uid"}]
 openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 
-#openshift_use_openvswitch_system_container=False
-#openshift_use_node_system_container=False
-#openshift_use_master_system_container=False
-#openshift_use_etcd_system_container=False
-
-## Hosted 
-#openshift_hosted_metrics_deploy=true
-#openshift_hosted_metrics_storage_kind=nfs
-#openshift_hosted_metrics_storage_access_modes=['ReadWriteOnce']
-#openshift_hosted_metrics_storage_host=storage.home.nicknach.net
-#openshift_hosted_metrics_storage_nfs_directory=/data/openshift/enterprise
-##openshift_hosted_metrics_storage_nfs_options='*(rw,root_squash,sync,no_wdelay)'
-#openshift_hosted_metrics_storage_volume_name=metrics
-#openshift_hosted_metrics_storage_volume_size=15Gi
-## logging on nfs
-#openshift_hosted_logging_deploy=true
-#openshift_hosted_logging_storage_kind=nfs
-#openshift_hosted_logging_storage_access_modes=['ReadWriteOnce']
-#openshift_hosted_logging_storage_host=storage.home.nicknach.net
-#openshift_hosted_logging_storage_nfs_directory=/data/openshift/enterprise
-##openshift_hosted_logging_storage_nfs_options='*(rw,root_squash,sync,no_wdelay)'
-#openshift_hosted_logging_storage_volume_name=logging
-#openshift_hosted_logging_storage_volume_size=10Gi
-#openshift_logging_es_pvc_storage_class_name=nfs
-##openshift_hosted_logging_elasticsearch_cluster_size=1
-##openshift_hosted_logging_elasticsearch_nodeselector=region=infra
-##openshift_hosted_logging_kibana_nodeselector=region=infra
-##openshift_hosted_logging_curator_nodeselector=region=infra
-##openshift_hosted_logging_es_instance_ram=8Gi
 ## registry on nfs
 #openshift_hosted_registry_storage_kind=nfs
 #openshift_hosted_registry_storage_access_modes=['ReadWriteMany']
@@ -124,6 +84,7 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 ##openshift_hosted_registry_storage_nfs_options='*(rw,root_squash,sync,no_wdelay)'
 #openshift_hosted_registry_storage_volume_name=docker-registry
 #openshift_hosted_registry_storage_volume_size=20Gi
+
 ## etcd on nfs
 #openshift_hosted_etcd_storage_kind=nfs
 #openshift_hosted_etcd_storage_access_modes=["ReadWriteOnce"]
@@ -134,8 +95,7 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_hosted_etcd_storage_volume_size=1Gi
 #openshift_hosted_etcd_storage_labels={'storage':'etcd'}
 
-### NFS-backed OCP services
-## logging
+## logging on nfs
 #openshift_logging_install_logging=true
 #openshift_logging_storage_kind=nfs
 #openshift_logging_storage_access_modes=['ReadWriteOnce']
@@ -146,7 +106,8 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_logging_storage_volume_size=10Gi
 #openshift_logging_storage_labels={'storage':'logging'}
 #openshift_logging_es_pv_selector=region=infra
-## metrics
+
+## metrics on nfs
 #openshift_metrics_install_metrics=true
 #openshift_metrics_storage_kind=nfs
 #openshift_metrics_storage_access_modes=['ReadWriteOnce']
@@ -159,7 +120,8 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_metrics_hawkular_nodeselector={'region':'infra'}
 #openshift_metrics_heapster_nodeselector={'region':'infra'}
 #openshift_metrics_cassandra_nodeselector={'region':'infra'}
-## For prometheus
+
+## prometheus on nfs
 #openshift_hosted_prometheus_deploy=true
 #openshift_prometheus_storage_kind=nfs
 #openshift_prometheus_storage_access_modes=['ReadWriteOnce']
@@ -200,19 +162,23 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_master_cluster_hostname=api.$ROOT_DOMAIN
 #openshift_master_cluster_public_hostname=console.$ROOT_DOMAIN
 
-
-## deploy the registry on gluster
-#openshift_hosted_manage_registry=true
-#openshift_hosted_registry_selector=region=infra
+## cns
 #openshift_hosted_registry_storage_kind=glusterfs
-
-## gluster stuff
-#openshift_storage_glusterfs_namespace=glusterfs
-#openshift_storage_glusterfs_name=storage
-
-## set the router region
-#openshift_hosted_manage_router=true
-#openshift_hosted_router_selector=region=infra
+#openshift_metrics_install_metrics=true
+#openshift_metrics_storage_kind=dynamic
+#openshift_logging_es_pvc_size=10Gi
+#openshift_logging_install_logging=true
+#openshift_logging_storage_kind=dynamic
+#openshift_storage_glusterfs_namespace=app-storage
+#openshift_storage_glusterfs_storageclass=true
+#openshift_storage_glusterfs_block_deploy=true
+#openshift_storage_glusterfs_registry_namespace=infra-storage
+#openshift_storage_glusterfs_registry_storageclass=false
+#openshift_storage_glusterfs_registry_block_deploy=true
+#openshift_storage_glusterfs_registry_block_host_vol_size=50
+#openshift_storage_glusterfs_registry_block_storageclass=true
+#openshift_storage_glusterfs_registry_block_storageclass_default=true
+#openshift_storageclass_default=false
 
 ##  cloud provider configs
 ##  AWS
@@ -231,6 +197,10 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 ##  GCE
 #openshift_cloudprovider_kind=gce
 
+## set the router region
+#openshift_hosted_manage_router=true
+#openshift_hosted_router_selector=region=infra
+
 ## domain stuff
 openshift_master_default_subdomain=$APPS_DOMAIN
 
@@ -239,7 +209,7 @@ openshift_master_default_subdomain=$APPS_DOMAIN
 # set these if you are behind a proxy
 #openshift_http_proxy=http://192.168.0.254:3128
 #openshift_https_proxy=http://192.168.0.254:3128
-#openshift_no_proxy=.$ROOT_DOMAIN,.$APPS_DOMAIN
+#openshift_no_proxy=
 
 ## use these if there is a network IP conflict
 #osm_cluster_network_cidr=10.129.0.0/14
@@ -252,14 +222,9 @@ openshift_master_default_subdomain=$APPS_DOMAIN
 #openshift_master_console_port=443
 
 ## adjust max pods for scale testing
-#openshift_node_kubelet_args={'max-pods': ['225'], 'image-gc-high-threshold': ['90'], 'image-gc-low-threshold': ['80']}
+#openshift_node_kubelet_args={'max-pods': ['500'], 'image-gc-high-threshold': ['90'], 'image-gc-low-threshold': ['80']}
 ## adjust scheduler
 #osm_controller_args={'node-monitor-period': ['2s'], 'node-monitor-grace-period': ['16s'], 'pod-eviction-timeout': ['30s']}
-
-### start group definitions ###
-## nfs host, if needed.
-#[nfs]
-#nfs.$ROOT_DOMAIN
 
 ## load balancer
 #[lb]
@@ -290,12 +255,14 @@ node03.$ROOT_DOMAIN openshift_node_labels="{'region': 'primary', 'zone': 'a', 'r
 
 ## if using gluster (Container Native Storage)
 #[glusterfs]
-#infra01.$ROOT_DOMAIN  glusterfs_devices='[ "/dev/vdc"]'
-#infra02.$ROOT_DOMAIN  glusterfs_devices='[ "/dev/vdc"]'
-#infra03.$ROOT_DOMAIN  glusterfs_devices='[ "/dev/vdc"]'
-#node01.$ROOT_DOMAIN  glusterfs_devices='[ "/dev/vdc"]'
-#node02.$ROOT_DOMAIN  glusterfs_devices='[ "/dev/vdc"]'
-#node03.$ROOT_DOMAIN  glusterfs_devices='[ "/dev/vdc"]'
+#node01.ocp.nicknach.net glusterfs_devices='[ "/dev/vdc" ]'
+#node02.ocp.nicknach.net glusterfs_devices='[ "/dev/vdc" ]'
+#node03.ocp.nicknach.net glusterfs_devices='[ "/dev/vdc" ]'
+
+#[glusterfs_registry]
+#infra01.ocp.nicknach.net glusterfs_devices='[ "/dev/vdc" ]'
+#infra02.ocp.nicknach.net glusterfs_devices='[ "/dev/vdc" ]'
+#infra03.ocp.nicknach.net glusterfs_devices='[ "/dev/vdc" ]'
 
 [new_nodes]
 ## hold for use when adding new nodes

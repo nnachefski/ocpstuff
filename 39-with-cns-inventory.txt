@@ -54,42 +54,21 @@ openshift_image_tag=v3.9.4
 openshift_master_identity_providers=[{"name":"myipa","challenge":true,"login":true,"kind":"LDAPPasswordIdentityProvider","attributes":{"id":["dn"],"email":["mail"],"name":["cn"],"preferredUsername":["uid"]},"bindDN":"","bindPassword":"","ca":"my-ldap-ca-bundle.crt","insecure":false,"url":"ldap://gw.home.nicknach.net/cn=users,cn=accounts,dc=home,dc=nicknach,dc=net?uid"}]
 openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 
-## registry
 openshift_hosted_registry_storage_kind=glusterfs
-
-## metrics
 openshift_metrics_install_metrics=true
 openshift_metrics_storage_kind=dynamic
-
-## logging
-# Logging requires a PVC size for installation
 openshift_logging_es_pvc_size=10Gi
 openshift_logging_install_logging=true
 openshift_logging_storage_kind=dynamic
-
-## First CNS storage cluster for applications
-# Namespace for CNS pods (will be created)
 openshift_storage_glusterfs_namespace=app-storage
-# Automatically create a StorageClass referencing this CNS cluster
 openshift_storage_glusterfs_storageclass=true
-# glusterblock functionality is not supported outside of Logging/Metrics
 openshift_storage_glusterfs_block_deploy=true
-
-## Second CNS storage cluster for OpenShift infrastructure
-# Namespace for CNS pods (will be created)
 openshift_storage_glusterfs_registry_namespace=infra-storage
-# No StorageClass; this cluster should not need to provide dynamic provisioning
 openshift_storage_glusterfs_registry_storageclass=false
 openshift_storage_glusterfs_registry_block_deploy=true
-# Size of automatically created block-hosting volumes,
-# must be at least the size of your largest desired block volume
 openshift_storage_glusterfs_registry_block_host_vol_size=50
-# Create StorageClass, used by Logging and Metrics
 openshift_storage_glusterfs_registry_block_storageclass=true
-# StorageClass needs to be cluster default for Logging/Metrics provisioning
 openshift_storage_glusterfs_registry_block_storageclass_default=true
-
-# Disable any other default StorageClass
 openshift_storageclass_default=false
 
 
