@@ -4,6 +4,11 @@
 ###### # make sure you have ample space available on your local repo box (called repo.home.nicknach.net in my lab).  
 ###### # You need at least 30GB total.  (~10GB  for rpms and ~20GB for images)
 
+##### # set your repo host var
+```
+export MY_REPO=repo.home.nicknach.net
+export SRC_REPO=download-node-02.eng.bos.redhat.com
+```
 ##### # start by connecting your repo box to the RH VPN.  You can setup a command line VPN client by installing these rpms
 ```
 redhat-internal-cert-install-0.1-7.el7.csb.noarch.rpm
@@ -17,14 +22,14 @@ openvpn --config /etc/openvpn/ovpn-phx2-udp.conf
 ###### # your repo box is now connected to the RH vpn
 ##### # now run this command to import the puddle repo
 ```
-yum-config-manager --add-repo http://download-node-02.eng.bos.redhat.com/brewroot/repos/rhaos-3.9-rhel-7-build/latest/x86_64/
+yum-config-manager --add-repo http://$SRC_REPO/brewroot/repos/rhaos-3.9-rhel-7-build/latest/x86_64/
 ```
 ##### # change the name to something more simple (rhaos-3.9)
 ```
 sed -i 's/\[.*\]/\[rhaos-3.9\]/' /etc/yum.repos.d/download-node-02.eng.bos.redhat.com_brewroot_repos_rhaos-3.9-rhel-7-build_latest_x86_64_.repo
 mv /etc/yum.repos.d/download-node-02.eng.bos.redhat.com_brewroot_repos_rhaos-3.9-rhel-7-build_latest_x86_64_.repo /etc/yum.repos.d/rhaos-3.9.repo
 ```
-##### # disable gpg checking
+##### # disable gpg checking (for beta/puddle builds only)
 ```
 echo gpgcheck=0 >> /etc/yum.repos.d/rhaos-3.9.repo
 ```
@@ -53,23 +58,23 @@ restorecon -R /var/www/html/rhaos-3.9
 ```
 yum -y install docker-distribution.x86_64 && systemctl enable docker-distribution --now
 ```
-##### # open the firewall up
+##### # open the firewall up (feel free to tighted this up)
 ```
 firewall-cmd --set-default-zone trusted
 ```
 ##### # now run the import-image.py script
 ```
-cd ~ && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/import-images.py && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/core_images.txt
+cd ~ && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/scripts/import-images.py && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/core_images.txt
 chmod +x import-images.py
-./import-images.py docker brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888 repo.home.nicknach.net:5000 -t v3.9.0 -d
+./import-images.py docker $SRC_REPO:8888 $MY_REPO -d
 ```
 ##### # manually get the etcd and rhel7 images
 ```
-skopeo --insecure-policy copy --src-tls-verify=false --dest-tls-verify=false docker://registry.access.redhat.com/rhel7/etcd docker://repo.home.nicknach.net:5000/rhel7/etcd
-skopeo --insecure-policy copy --src-tls-verify=false --dest-tls-verify=false docker://registry.access.redhat.com/rhel7.4 docker://repo.home.nicknach.net:5000/rhel7.4
+skopeo --insecure-policy copy --src-tls-verify=false --dest-tls-verify=false docker://registry.access.redhat.com/rhel7/etcd docker://$MY_REPO/rhel7/etcd
+skopeo --insecure-policy copy --src-tls-verify=false --dest-tls-verify=false docker://registry.access.redhat.com/rhel7.4 docker://$MY_REPO/rhel7.4
 ```
 ##### # in case you have to re-tag everything
-export TAG=v3.9.0-0.53.0; for i in `cat images.txt`; do docker pull repo.home.nicknach.net:5000/$i:v3.9.0; docker tag repo.home.nicknach.net:5000/$i:v3.9.0 repo.home.nicknach.net:5000/$i:$TAG; docker push repo.home.nicknach.net:5000/$i:$TAG; done
+export TAG=v3.9.4; for i in `cat core_images.txt`; do docker pull $MY_REPO/$i:latest; docker tag $MY_REPO/$i:latest $MY_REPO/$i:$TAG; docker push $MY_REPO/$i:$TAG; done
 
 ### # BEGIN
 ##### # do this on ALL hosts (master/infra/nodes)
@@ -94,16 +99,16 @@ EOF
 ##### # add your internal repos
 ```
 yum-config-manager --disable \* && rm -rf /etc/yum.repos.d/*.repo && yum clean all
-yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhaos-3.9
-yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-fast-datapath-rpms
-yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-extras-rpms
-yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-server-rhscl-7-rpms
-yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-optional-rpms 
-yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rh-gluster-3-for-rhel-7-server-rpms
+yum-config-manager --add-repo http://$MY_REPO/repo/rhaos-3.9
+yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-fast-datapath-rpms
+yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-extras-rpms
+yum-config-manager --add-repo http://$MY_REPO/repo/rhel-server-rhscl-7-rpms
+yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-optional-rpms 
+yum-config-manager --add-repo http://$MY_REPO/repo/rh-gluster-3-for-rhel-7-server-rpms
 ```
 ##### # disable gpg checks
 ```
-echo gpgcheck=0 >> /etc/yum.repos.d/repo.home.nicknach.net_repo_rhaos-3.9.repo
+echo gpgcheck=0 >> /etc/yum.repos.d/$MY_REPO_repo_rhaos-3.9.repo
 ```
 ##### # install some general pre-req packages
 ``` 
@@ -135,7 +140,7 @@ docker-storage-setup
 ```
 ##### # add the internal docker registry
 ```
-sed -i '16,/registries =/s/\[\]/\[\"repo.home.nicknach.net:5000\"\]/' /etc/containers/registries.conf
+sed -i '16,/registries =/s/\[\]/\[\"repo.home.nicknach.net\"\]/' /etc/containers/registries.conf
 systemctl restart docker
 ```
 ##### # enable and start docker
@@ -144,7 +149,7 @@ systemctl enable docker --now
 ```
 ##### # make sure your nodes are up to date
 ```
-yum -y update --disablerepo=repo.home.nicknach.net_repo_rh-gluster-3-for-rhel-7-server-rpms
+yum -y update --disablerepo=$MY_REPO_repo_rh-gluster-3-for-rhel-7-server-rpms
 ```
 ###### # reboot if necessary 
 ## #  On first master only now (or bastion host)

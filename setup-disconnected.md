@@ -50,26 +50,25 @@ yum -y install docker-distribution.x86_64 && systemctl enable docker-distributio
 ```
 cd ~ && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/scripts/import-images.py && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/core_images.txt
 chmod +x import-images.py
-./import-images.py docker registry.access.redhat.com $REPO:5000 -d
+./import-images.py docker $SRC_REPO $MY_REPO -d
 ```
 ##### # manually get the etcd and rhel7 images
 ```
-skopeo --insecure-policy copy --src-tls-verify=false --dest-tls-verify=false docker://registry.access.redhat.com/rhel7/etcd docker://repo.home.nicknach.net:5000/rhel7/etcd
-skopeo --insecure-policy copy --src-tls-verify=false --dest-tls-verify=false docker://registry.access.redhat.com/rhel7.4 docker://repo.home.nicknach.net:5000/rhel7.4
-
+skopeo --insecure-policy copy --src-tls-verify=false --dest-tls-verify=false docker://$SRC_REPO/rhel7/etcd docker://$MY_REPO/rhel7/etcd
+skopeo --insecure-policy copy --src-tls-verify=false --dest-tls-verify=false docker://$SRC_REPO/rhel7.4 docker://$MY_REPO/rhel7.4
 ```
 ##### # create certs for this registry (so you can enable https)
 ```
-mkdir -p /etc/docker/certs.d/repo.home.nicknach.net
-openssl req  -newkey rsa:4096 -nodes -sha256 -keyout /etc/docker/certs.d/repo.home.nicknach.net/repo.home.nicknach.net.key  -x509 -days 365 -out /etc/docker/certs.d/repo.home.nicknach.net/repo.home.nicknach.net.crt
+mkdir -p /etc/docker/certs.d/$MY_REPO
+openssl req  -newkey rsa:4096 -nodes -sha256 -keyout /etc/docker/certs.d/$MY_REPO/$MY_REPO.key -x509 -days 365 -out /etc/docker/certs.d/$MY_REPO/$MY_REPO.crt
 ```
 ##### # add this to the http section in /etc/docker-distribution/registry/config.yml
 ```
     headers:
         X-Content-Type-Options: [nosniff]
     tls:
-        certificate: /etc/docker/certs.d/repo.home.nicknach.net/repo.home.nicknach.net.crt
-        key: /etc/docker/certs.d/repo.home.nicknach.net/repo.home.nicknach.net.key
+        certificate: /etc/docker/certs.d/$MY_REPO/$MY_REPO.crt
+        key: /etc/docker/certs.d/$MY_REPO/$MY_REPO.key
 ```
 #### # done with repo box
 
@@ -97,7 +96,7 @@ yum-config-manager --add-repo http://$REPO/repo/rhel-7-server-optional-rpms
 ```
 ##### # add your docker registry
 ```
-sed -i '16,/registries =/s/\[\]/\[\"repo.home.nicknach.net:5000\"\]/' /etc/containers/registries.conf
+sed -i '16,/registries =/s/\[\]/\[\"repo.home.nicknach.net\"\]/' /etc/containers/registries.conf
 systemctl restart docker
 ```
 ##### # during the install, do these commands in other terminals
