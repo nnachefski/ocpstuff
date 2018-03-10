@@ -85,6 +85,7 @@ export APPS_DOMAIN=apps.$ROOT_DOMAIN
 export DOCKER_DEV=/dev/vdb
 export LDAP_SERVER=gw.home.nicknach.net
 export ANSIBLE_HOST_KEY_CHECKING=False
+export MY_REPO=repo.home.nicknach.net
 ```
 ##### # make them persistent 
 ```
@@ -94,6 +95,7 @@ export APPS_DOMAIN=$APPS_DOMAIN
 export DOCKER_DEV=$DOCKER_DEV
 export LDAP_SERVER=$LDAP_SERVER
 export ANSIBLE_HOST_KEY_CHECKING=False
+export MY_REPO=$MY_REPO
 EOF
 ```
 ##### # add your internal repos
