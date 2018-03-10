@@ -1,13 +1,11 @@
 #!/bin/bash
-## this scipt automates the creation of KVM VMs
-## ./new.sh domain rhel7 8192 4 <optional MAC> 
+# ./new.sh domain rhel7 8192 4 <optional MAC> 
 
 HOST=`printf '%s' $1`
 HOME="/var/lib/libvirt/images"
 IM="$HOME/$HOST.qcow2"
 UM="$HOME/$HOST-1.qcow2"
 TIM="/images/templates/$2-template.qcow2"
-SIM="/images/templates/$2-template-1.qcow2"
 MEM=`printf '%s' $3`
 CPU=`printf '%s' $4`
 NIC=`printf '%s' $5`
@@ -32,6 +30,14 @@ fi
 dd if=/dev/zero of=$UM bs=1M count=$DOCKER_DISK_SIZE
 
 RUNLINE="$RUNLINE --disk path=$UM,bus=virtio "
+if [[ $HOST == infra* ]] || [[ $HOST == node* ]];
+then
+CNS_DISK="$HOME/$HOST-2.qcow2"
+    echo "adding CNS disk '$CNS_DISK'"
+    dd if=/dev/zero of=$CNS_DISK bs=1M count=50000
+    RUNLINE="$RUNLINE --disk path=$CNS_DISK,bus=virtio"
+fi
 
 echo "Executing: $RUNLINE"
 eval $RUNLINE
+
