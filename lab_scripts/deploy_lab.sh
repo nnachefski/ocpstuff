@@ -13,10 +13,10 @@ if [ "$TYPE" == "oso" ]; then
 	ssh root@hv2.home.nicknach.net /cloud/scripts/new.sh onode01 $TEMPLATE 16384 2 52:54:00:18:56:49 &
 	ssh root@hv3.home.nicknach.net /cloud/scripts/new.sh onode02 $TEMPLATE 16385 2 52:54:00:18:57:49 &
 	ssh root@hv5.home.nicknach.net /cloud/scripts/new.sh onode03 $TEMPLATE 16384 2 52:54:00:12:58:49 &
-        ssh root@hv2.home.nicknach.net /cloud/scripts/new.sh olb $TEMPLATE 4196 1 52:54:00:18:58:17 &
-        ssh root@hv2.home.nicknach.net /cloud/scripts/new.sh oinfra01 $TEMPLATE 8192 2 52:54:00:01:58:49 &
-        ssh root@hv3.home.nicknach.net /cloud/scripts/new.sh oinfra02 $TEMPLATE 8192 2 52:54:00:02:58:49 &
-        ssh root@hv5.home.nicknach.net /cloud/scripts/new.sh oinfra03 $TEMPLATE 8192 2 52:54:00:03:58:49 &
+    ssh root@hv2.home.nicknach.net /cloud/scripts/new.sh olb $TEMPLATE 4196 1 52:54:00:18:58:17 &
+    ssh root@hv2.home.nicknach.net /cloud/scripts/new.sh oinfra01 $TEMPLATE 8192 2 52:54:00:01:58:49 &
+    ssh root@hv3.home.nicknach.net /cloud/scripts/new.sh oinfra02 $TEMPLATE 8192 2 52:54:00:02:58:49 &
+    ssh root@hv5.home.nicknach.net /cloud/scripts/new.sh oinfra03 $TEMPLATE 8192 2 52:54:00:03:58:49 &
 
 elif [ "$TYPE" == "ocp" ]; then
 	echo "- using $TEMPLATE base image"
