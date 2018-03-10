@@ -58,14 +58,13 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 openshift_hosted_registry_storage_kind=glusterfs
 
 ## metrics
-# Will be uncommented for Metrics deployment
+openshift_metrics_install_metrics=true
 openshift_metrics_storage_kind=dynamic
 
 ## logging
-# the size of each PersistentVolume of the ElasticSearch pods (modify as desired)
 # Logging requires a PVC size for installation
 openshift_logging_es_pvc_size=10Gi
-# Will be uncommented for Logging deployment
+openshift_logging_install_logging=true
 openshift_logging_storage_kind=dynamic
 
 ## First CNS storage cluster for applications
@@ -74,7 +73,7 @@ openshift_storage_glusterfs_namespace=app-storage
 # Automatically create a StorageClass referencing this CNS cluster
 openshift_storage_glusterfs_storageclass=true
 # glusterblock functionality is not supported outside of Logging/Metrics
-openshift_storage_glusterfs_block_deploy=false
+openshift_storage_glusterfs_block_deploy=true
 
 ## Second CNS storage cluster for OpenShift infrastructure
 # Namespace for CNS pods (will be created)
@@ -125,9 +124,9 @@ master03.ocp.nicknach.net openshift_node_labels="{'region': 'masters', 'zone': '
 infra01.ocp.nicknach.net openshift_node_labels="{'region': 'infra', 'zone': 'a', 'role': 'infra'}" openshift_schedulable=true
 infra02.ocp.nicknach.net openshift_node_labels="{'region': 'infra', 'zone': 'a', 'role': 'infra'}" openshift_schedulable=true
 infra03.ocp.nicknach.net openshift_node_labels="{'region': 'infra', 'zone': 'a', 'role': 'infra'}" openshift_schedulable=true
-node01.ocp.nicknach.net openshift_node_labels="{'region': 'primary', 'zone': 'a', 'role': 'app'}" openshift_schedulable=true
-node02.ocp.nicknach.net openshift_node_labels="{'region': 'primary', 'zone': 'a', 'role': 'app'}" openshift_schedulable=true
-node03.ocp.nicknach.net openshift_node_labels="{'region': 'primary', 'zone': 'a', 'role': 'app'}" openshift_schedulable=true
+node01.ocp.nicknach.net openshift_node_labels="{'region': 'primary', 'zone': 'a', 'role': 'compute'}" openshift_schedulable=true
+node02.ocp.nicknach.net openshift_node_labels="{'region': 'primary', 'zone': 'a', 'role': 'compute'}" openshift_schedulable=true
+node03.ocp.nicknach.net openshift_node_labels="{'region': 'primary', 'zone': 'a', 'role': 'compute'}" openshift_schedulable=true
 
 ## if using gluster (Container Native Storage)
 [glusterfs]
