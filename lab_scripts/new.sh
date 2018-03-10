@@ -27,14 +27,15 @@ else
     RUNLINE="$RUNLINE -m $NIC"
 fi
 
-dd if=/dev/zero of=$UM bs=1M count=$DOCKER_DISK_SIZE
-
+## create the docker-pool disk
+qemu-img create -f qcow2 $UM 16G
 RUNLINE="$RUNLINE --disk path=$UM,bus=virtio "
+
 if [[ $HOST == infra* ]] || [[ $HOST == node* ]];
 then
 CNS_DISK="$HOME/$HOST-2.qcow2"
     echo "adding CNS disk '$CNS_DISK'"
-    dd if=/dev/zero of=$CNS_DISK bs=1M count=50000
+    qemu-img create -f qcow2 $CNS_DISK 50G
     RUNLINE="$RUNLINE --disk path=$CNS_DISK,bus=virtio"
 fi
 
