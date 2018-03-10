@@ -10,8 +10,8 @@ new_nodes
 
 ## Set variables common for all OSEv3 hosts
 [OSEv3:vars]
-deployment_type=openshift-enterprise
-#deployment_type=origin
+openshift_deployment_type=openshift-enterprise
+#openshift_deployment_type=origin
 #containerized=true
 
 ##internal image repos
