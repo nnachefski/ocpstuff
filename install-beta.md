@@ -58,7 +58,7 @@ restorecon -R /var/www/html/rhaos-3.9
 ```
 yum -y install docker-distribution.x86_64 && systemctl enable docker-distribution --now
 ```
-##### # open the firewall up (feel free to tighted this up)
+##### # open the firewall up (feel free to tighten this up)
 ```
 firewall-cmd --set-default-zone trusted
 ```
