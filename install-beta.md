@@ -73,9 +73,6 @@ chmod +x import-images.py
 skopeo --insecure-policy copy --src-tls-verify=false --dest-tls-verify=false docker://registry.access.redhat.com/rhel7/etcd docker://$MY_REPO/rhel7/etcd
 skopeo --insecure-policy copy --src-tls-verify=false --dest-tls-verify=false docker://registry.access.redhat.com/rhel7.4 docker://$MY_REPO/rhel7.4
 ```
-##### # in case you have to re-tag everything
-export TAG=v3.9.4; for i in `cat core_images.txt`; do docker pull $MY_REPO/$i:latest; docker tag $MY_REPO/$i:latest $MY_REPO/$i:$TAG; docker push $MY_REPO/$i:$TAG; done
-
 ### # BEGIN
 ##### # do this on ALL hosts (master/infra/nodes)
 ##### # SET THESE VARIABLES ###
