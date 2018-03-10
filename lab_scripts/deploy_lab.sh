@@ -20,7 +20,7 @@ if [ "$TYPE" == "oso" ]; then
 
 elif [ "$TYPE" == "ocp" ]; then
 	echo "- using $TEMPLATE base image"
-        ssh root@storage.home.nicknach.net /cloud/scripts/new.sh lb $TEMPLATE 4196 2 52:54:00:18:58:16
+    ssh root@storage.home.nicknach.net /cloud/scripts/new.sh lb $TEMPLATE 4196 2 52:54:00:18:58:16
 	ssh root@hv4.home.nicknach.net /cloud/scripts/new.sh master01 $TEMPLATE 16384 2 52:54:00:fb:09:ec &
 	ssh root@hv3.home.nicknach.net /cloud/scripts/new.sh master02 $TEMPLATE 16384 2 52:54:00:18:58:01 &
 	ssh root@hv5.home.nicknach.net /cloud/scripts/new.sh master03 $TEMPLATE 16384 2 52:54:00:18:58:02 &
