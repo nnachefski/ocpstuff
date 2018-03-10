@@ -13,6 +13,7 @@ export RHSM_ID=your@rhn.com
 export RHSM_PW=yourpassword
 export POOLID=8a85f98260c27fc50160c323263339ff
 export ANSIBLE_HOST_KEY_CHECKING=False
+export MY_REPO=repo.home.nicknach.net
 ```
 ##### # make them persistent 
 ```
@@ -25,6 +26,7 @@ export OCP_NFS_SERVER=$OCP_NFS_SERVER
 export LDAP_SERVER=$LDAP_SERVER
 export POOLID=$POOLID
 export ANSIBLE_HOST_KEY_CHECKING=False
+export MY_REPO=$MY_REPO
 EOF
 ```
 ##### # subscribe to RHSM
@@ -46,13 +48,13 @@ EOF
 ##### # OR, add your internal repos
 ```
 ##yum-config-manager --disable \* && rm -rf /etc/yum.repos.d/*.repo && yum clean all
-##yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-rpms
-##yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-extras-rpms
-yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-fast-datapath-rpms
-yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-ose-3.7-rpms
-yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-server-rhscl-7-rpms
-yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rhel-7-server-optional-rpms 
-##yum-config-manager --add-repo http://repo.home.nicknach.net/repo/rh-gluster-3-for-rhel-7-server-rpms
+##yum-config-manager --add-repo http://$MY_REPO/rhel-7-server-rpms
+##yum-config-manager --add-repo http://$MY_REPO/rhel-7-server-extras-rpms
+yum-config-manager --add-repo http://$MY_REPO/rhel-7-fast-datapath-rpms
+yum-config-manager --add-repo http://$MY_REPO/rhel-7-server-ose-3.7-rpms
+yum-config-manager --add-repo http://$MY_REPO/rhel-server-rhscl-7-rpms
+yum-config-manager --add-repo http://$MY_REPO/rhel-7-server-optional-rpms 
+##yum-config-manager --add-repo http://$MY_REPO/rh-gluster-3-for-rhel-7-server-rpms
 ```
 ##### # install some general pre-req packages
 ``` 
