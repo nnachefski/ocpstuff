@@ -54,14 +54,16 @@ skopeo --insecure-policy copy --src-tls-verify=false --dest-tls-verify=false doc
 ```
 ##### # create certs for this registry (so you can enable https)
 ```
-mkdir /etc/docker/certs.d/repo.home.nicknach.net
-openssl req   -newkey rsa:4096 -nodes -sha256 -keyout repo.home.nicknach.net.key   -x509 -days 365 -out repo.home.nicknach.net.crt
+mkdir -p /etc/docker/certs.d/repo.home.nicknach.net
+openssl req  -newkey rsa:4096 -nodes -sha256 -keyout /etc/docker/certs.d/repo.home.nicknach.net/repo.home.nicknach.net.key  -x509 -days 365 -out /etc/docker/certs.d/repo.home.nicknach.net/repo.home.nicknach.net.crt
 ```
 ##### # add this to the http section in /etc/docker-distribution/registry/config.yml
 ```
-  tls:
-    certificate: /etc/docker/certs.d/repo.home.nicknach.net/repo.home.nicknach.net.crt
-    key: /etc/docker/certs.d/repo.home.nicknach.net/repo.home.nicknach.net.key
+    headers:
+        X-Content-Type-Options: [nosniff]
+    tls:
+        certificate: /etc/docker/certs.d/repo.home.nicknach.net/repo.home.nicknach.net.crt
+        key: /etc/docker/certs.d/repo.home.nicknach.net/repo.home.nicknach.net.key
 ```
 #### # done with repo box
 
