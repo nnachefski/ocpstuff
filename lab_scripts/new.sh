@@ -10,25 +10,25 @@ MEM=`printf '%s' $3`
 CPU=`printf '%s' $4`
 NIC=`printf '%s' $5`
 BASE='home.nicknach.net'
-DOCKER_DISK_SIZE=16384
 
 rm -rf $IM
 echo "cloning $TIM to $IM"
 cp $TIM $IM
 
 echo "making vm..."
-RUNLINE="virt-install --connect qemu:///system -n $HOST -r $MEM --vcpus=$CPU --disk path=$IM,bus=virtio --vnc --noautoconsole --os-type linux --accelerate --hvm --boot hd -w bridge=virbr0,model=virtio"
+RUNLINE="virt-install --vnc --accelerate --hvm --noautoconsole --os-type linux --os-variant=rhel7 --boot hd --connect qemu:///system -n $HOST -r $MEM --vcpus=$CPU --disk path=$IM,bus=virtio --network bridge=virbr0,model=virtio"
 
 if [ -z "$NIC" ];
 then
-    echo "not MAC specified..."
+    echo "no MAC specified..."
+    RUNLINE="$RUNLINE "
 else
     echo "adding MAC $NIC"
-    RUNLINE="$RUNLINE -m $NIC"
+    RUNLINE="$RUNLINE,mac=$NIC"
 fi
 
 ## create the docker-pool disk
-qemu-img create -f qcow2 $UM 16G
+qemu-img create -f qcow2 $UM 15G
 RUNLINE="$RUNLINE --disk path=$UM,bus=virtio "
 
 if [[ $HOST == infra* ]] || [[ $HOST == node* ]];
@@ -41,4 +41,5 @@ fi
 
 echo "Executing: $RUNLINE"
 eval $RUNLINE
+
 
