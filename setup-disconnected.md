@@ -3,6 +3,11 @@
 ###### # make sure you have ample space available on your local repo box (called repo.home.nicknach.net in my lab).  
 ###### # Recommended 100GB storage for this repo server.
 
+##### # set your repo host var
+```
+export MY_REPO=repo.home.nicknach.net
+export SRC_REPO=registry.access.redhat.com
+```
 ##### # subscribe your repo box to the proper channels for OCP
 ```
 subscription-manager register --username=nnachefs@redhat.com --password <REDACTED> --force
@@ -15,42 +20,43 @@ subscription-manager repos \
    --enable=rhel-7-fast-datapath-rpms \
    --enable=rhel-7-server-rhscl-rpms \
    --enable=rhel-7-server-optional-rpms 
-#   --enable=rh-gluster-3-for-rhel-7-server-rpms \ 
-#   --enable=rhel-7-server-3scale-amp-2.0-rpms
+   --enable=rh-gluster-3-for-rhel-7-server-rpms \ 
 ```
 ##### # install/enable/start httpd
 ```
 yum -y install httpd && systemctl enable httpd --now
-mkdir /var/www/html/repos
+mkdir /var/www/html/repo
 ```
 ##### # start the reposync
 ```
-cd ~ && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/sync_repos.sh && chmod +x sync_repos.sh
+cd ~ && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/scripts/sync_repos.sh && chmod +x sync_repos.sh
 ./sync_repos.sh
 ```
 ##### # fix selinux
 ``` 
-restorecon -R /var/www/html/repos
+restorecon -R /var/www/html/repo
+```
+##### # open the firewall up
+##### # you can get more strict with this if you want
+```
+firewall-cmd --set-default-zone trusted
 ```
 #### # now lets create the docker image mirror on our repo server
 ##### # install/enable/start docker-distribution on the repo box
 ```
 yum -y install docker-distribution.x86_64 && systemctl enable docker-distribution --now
 ```
-##### # open the firewall up
-```
-firewall-cmd --set-default-zone trusted
-```
 ##### # now run the import-image.py script
 ```
-cd ~ && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/import-images.py && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/core_images.txt
+cd ~ && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/scripts/import-images.py && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/core_images.txt
 chmod +x import-images.py
-./import-images.py docker registry.access.redhat.com repo.home.nicknach.net:5000 -t v3.7.23 -d
+./import-images.py docker registry.access.redhat.com $REPO:5000 -d
 ```
 ##### # manually get the etcd and rhel7 images
 ```
 skopeo --insecure-policy copy --src-tls-verify=false --dest-tls-verify=false docker://registry.access.redhat.com/rhel7/etcd docker://repo.home.nicknach.net:5000/rhel7/etcd
 skopeo --insecure-policy copy --src-tls-verify=false --dest-tls-verify=false docker://registry.access.redhat.com/rhel7.4 docker://repo.home.nicknach.net:5000/rhel7.4
+
 ```
 ##### # create certs for this registry (so you can enable https)
 ```
@@ -68,19 +74,15 @@ openssl req  -newkey rsa:4096 -nodes -sha256 -keyout /etc/docker/certs.d/repo.ho
 #### # done with repo box
 
 ### # now on your client boxes
-##### # set your docker repo hostname
+##### # set your docker repo host var
 ```
 export REPO=repo.home.nicknach.net
 ```
-##### # set your docker registry variable
-```
-export REGISTRY=$REPO:5000
-```
 ##### # import keys from repo
 ```
-rpm --import http://$REPO/keys/7fa2af80.pub
-rpm --import http://$REPO/keys/RPM-GPG-KEY-EPEL-7
-rpm --import http://$REPO/keys/RPM-GPG-KEY-redhat-release
+rpm --import http://$REPO/7fa2af80.pub
+rpm --import http://$REPO/RPM-GPG-KEY-EPEL-7
+rpm --import http://$REPO/RPM-GPG-KEY-redhat-release
 ```
 ##### # add your rpm repos
 ```
