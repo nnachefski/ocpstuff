@@ -15,6 +15,7 @@ oc adm groups sync --sync-config=/etc/origin/master/ocp_group_sync.conf --confir
 ```
 oc adm policy add-cluster-role-to-group cluster-admin admins
 oc adm policy add-role-to-group basic-user authenticated
+oc adm policy add-role-to-group basic-user authenticated
 ```
 ##### # set your infra/masters regions to unschedulable
 ```
