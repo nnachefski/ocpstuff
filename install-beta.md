@@ -80,9 +80,11 @@ skopeo --insecure-policy copy --src-tls-verify=false --dest-tls-verify=false doc
 export ROOT_DOMAIN=ocp.nicknach.net
 export APPS_DOMAIN=apps.$ROOT_DOMAIN 
 export DOCKER_DEV=/dev/vdb
-export LDAP_SERVER=gw.home.nicknach.net
+export OCP_NFS_MOUNT=/data/openshift/enterprise
+export OCP_NFS_SERVER=storage.home.nicknach.net
 export ANSIBLE_HOST_KEY_CHECKING=False
 export MY_REPO=repo.home.nicknach.net
+export OCP_VER=v3.9.4
 ```
 ##### # make them persistent 
 ```
@@ -90,9 +92,11 @@ cat <<EOF >> ~/.bashrc
 export ROOT_DOMAIN=$ROOT_DOMAIN
 export APPS_DOMAIN=$APPS_DOMAIN
 export DOCKER_DEV=$DOCKER_DEV
-export LDAP_SERVER=$LDAP_SERVER
+export OCP_NFS_MOUNT=$OCP_NFS_MOUNT
+export OCP_NFS_SERVER=$OCP_NFS_SERVER
 export ANSIBLE_HOST_KEY_CHECKING=False
 export MY_REPO=$MY_REPO
+export OCP_VER=$OCP_VER
 EOF
 ```
 ##### # add your internal repos

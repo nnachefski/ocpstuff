@@ -6,14 +6,15 @@
 export ROOT_DOMAIN=ocp.nicknach.net
 export APPS_DOMAIN=apps.$ROOT_DOMAIN 
 export DOCKER_DEV=/dev/vdb
-export OCP_NFS_MOUNT=/home/data/openshift
+export OCP_NFS_MOUNT=/data/openshift
 export OCP_NFS_SERVER=storage.home.nicknach.net
 export LDAP_SERVER=gw.home.nicknach.net
+export ANSIBLE_HOST_KEY_CHECKING=False
+export MY_REPO=repo.home.nicknach.net
+export OCP_VER=v3.9.4
 export RHSM_ID=your@rhn.com
 export RHSM_PW=yourpassword
 export POOLID=8a85f98260c27fc50160c323263339ff
-export ANSIBLE_HOST_KEY_CHECKING=False
-export MY_REPO=repo.home.nicknach.net
 ```
 ##### # make them persistent 
 ```
@@ -27,6 +28,7 @@ export LDAP_SERVER=$LDAP_SERVER
 export POOLID=$POOLID
 export ANSIBLE_HOST_KEY_CHECKING=False
 export MY_REPO=$MY_REPO
+export OCP_VER=v3.9.4
 EOF
 ```
 ##### # subscribe to RHSM
