@@ -51,6 +51,13 @@ openshift_deployment_type=openshift-enterprise
 #openshift_storage_glusterfs_heketi_image=$MY_REPO/rhgs3/rhgs-volmanager-rhel7
 #openshift_storage_glusterfs_heketi_version=latest
 
+## release ver
+#openshift_release=$OCP_VER
+#openshift_image_tag=$OCP_VER
+
+## enable ntp
+openshift_clock_enabled=true
+
 ## disable template imports (do them manually from an insecure registry)
 #openshift_install_examples=false
 
@@ -60,17 +67,10 @@ ansible_ssh_user=root
 #ansible_sudo=true
 #ansible_become=yes
 
-## release ver
-#openshift_release=$OCP_VER
-#openshift_image_tag=$OCP_VER
-
-## enable ntp
-openshift_clock_enabled=true
-
 ## authentication stuff
 ## htpasswd file auth
-openshift_master_identity_providers=[{'name': 'htpasswd_auth', 'login': 'true', 'challenge': 'true', 'kind': 'HTPasswdPasswordIdentityProvider', 'filename': '/etc/origin/master/htpasswd'}]
-openshift_master_htpasswd_users={'ocpuser':'welcome1'}
+#openshift_master_identity_providers=[{'name': 'htpasswd_auth', 'login': 'true', 'challenge': 'true', 'kind': 'HTPasswdPasswordIdentityProvider', 'filename': '/etc/origin/master/htpasswd'}]
+#openshift_master_htpasswd_users={'ocpuser':'welcome1'}
 
 ## ldap auth (AD)
 #openshift_master_identity_providers=[{"name":"NNWIN","challenge":true,"login":true,"kind":"LDAPPasswordIdentityProvider","attributes":{"id":["dn"],"email":["mail"],"name":["cn"],"preferredUsername":["sAMAccountName"]},"bindDN":"CN=SVC-nn-ose,OU=SVC,OU=FNA,DC=nnwin,DC=ad,DC=nncorp,DC=com","bindPassword":"<REDACTED>","insecure":true,"url":"ldap://uswin.nicknach.com:389/DC=uswin,DC=ad,DC=nncorp,DC=com?sAMAccountName?sub"}]
