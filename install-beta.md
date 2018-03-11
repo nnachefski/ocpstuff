@@ -107,7 +107,7 @@ yum-config-manager --add-repo http://$MY_REPO/repo/rh-gluster-3-for-rhel-7-serve
 ```
 ##### # disable gpg checks
 ```
-echo gpgcheck=0 >> /etc/yum.repos.d/$MY_REPO_repo_rhaos-3.9.repo
+echo gpgcheck=0 >> /etc/yum.repos.d/repo.home.nicknach.net_repo_rhaos-3.9.repo
 ```
 ##### # install some general pre-req packages
 ``` 
@@ -148,7 +148,7 @@ systemctl enable docker --now
 ```
 ##### # make sure your nodes are up to date
 ```
-yum -y update --disablerepo=$MY_REPO_repo_rh-gluster-3-for-rhel-7-server-rpms
+yum -y update --disablerepo=repo.home.nicknach.net_repo_rh-gluster-3-for-rhel-7-server-rpms
 ```
 ###### # reboot if necessary 
 ## #  On first master only now (or bastion host)
