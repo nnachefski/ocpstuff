@@ -97,7 +97,7 @@ EOF
 ```
 ##### # add your internal repos
 ```
-yum-config-manager --disable \* && rm -rf /etc/yum.repos.d/*.repo && yum clean all
+rm -rf /etc/yum.repos.d/* && yum clean all
 yum-config-manager --add-repo http://$MY_REPO/repo/rhaos-3.9
 yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-fast-datapath-rpms
 yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-extras-rpms
