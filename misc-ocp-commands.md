@@ -13,8 +13,8 @@ echo 'ansible all -m shell -a "docker rm \$(docker ps -q -f status=exited); dock
 ```
 ##### # setup a local htpasswd user if not using LDAP or SSO
 ```
-htpasswd -b /etc/origin/master/htpasswd $OCP_USER $OCP_PASSWD
-oc adm policy add-cluster-role-to-user cluster-admin $OCP_USER
+htpasswd -b /etc/origin/master/htpasswd ocpadmin welcome1
+oc adm policy add-cluster-role-to-user cluster-admin ocpadmin
 ```
 ##### # create the registry manually
 ##### # oc adm registry --create --credentials=/etc/origin/master/openshift-registry.kubeconfig --selector region=infra
