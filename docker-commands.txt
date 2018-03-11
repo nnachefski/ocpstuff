@@ -11,4 +11,4 @@ for i in `docker images |grep -v REPO |awk '{print $3}'`; do docker rmi $i --for
 
 ## re-tag images from a remote docker client
 ## add tag alias
-TAG=v3.9.4 REPO=repo.home.nicknach.net; for i in `cat core_images.txt`; do docker pull $REPO/$i:latest; docker tag $REPO/$i:latest $REPO/$i:$TAG; docker push $REPO/$i:$TAG; done
+TAG=v3.9.4 REPO=repo.home.nicknach.net; for i in `cat core_images.txt`; do docker pull $REPO/$i:v3.9; docker tag $REPO/$i:v3.9 $REPO/$i:$TAG; docker push $REPO/$i:$TAG; done
