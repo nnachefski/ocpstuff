@@ -22,4 +22,9 @@ oc adm policy add-cluster-role-to-user cluster-reader readonly
 oc adm manage-node --selector=region=masters --schedulable=false
 oc adm manage-node --selector=region=infra --schedulable=false
 ```
+##### # pin your metrics and asb projects to infra nodes
+```
+oc patch ns openshift-infra -p '{"metadata": {"annotations": {"openshift.io/node-selector": "region=infra"}}}'
+oc patch ns openshift-ansible-service-broker -p '{"metadata": {"annotations": {"openshift.io/node-selector": "region=infra"}}}'
+```
 ## # Done!
