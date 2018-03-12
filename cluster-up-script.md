@@ -1,13 +1,13 @@
-﻿#### # created and maintained by nick@redhat.com
+#### # created and maintained by nick@redhat.com
 ###### # you can copy/paste this entire page (at once) into a centos7 terminal (virt or physical)
-##### Goto the following link and get the link to the desired version Openshift client (oc)
+##### Goto the following link and get the link to the desired version of Openshift that yo wish to deploy
 ###### # https://github.com/openshift/origin/releases
 ##### # set the oc binary version corresponding to the version that you want to deploy.
 ```
 PACKAGE_LINK=https://github.com/openshift/origin/releases/download/v3.9.0-alpha.3/openshift-origin-client-tools-v3.9.0-alpha.3-78ddc10-linux-64bit.tar.gz
 ```
-##### # You need a wildcard (domain) for Openshift to manage.  If you have easy access to a DNS server (like IPA), then you can easly create one.  If not, and you can send recursive DNS lookups to the public internet, then you can use xip.io. 
-##### # notice below how the console and apps endpoints are overloaded into the wildcard.  
+##### # You need a wildcard (domain) for Openshift to manage.  If you have easy access to a DNS server (like IPA), then you can create one.  If not, and you can send recursive DNS lookups to the public internet, then you can use xip.io. 
+##### # notice below how the console is with the app domain (wildcard).  
 ###### # setup this way, you just need a single wildcard DNS record pointing to this box and that’s it.
 ```
 Ex:  *.origin.ocp.nicknach.net. → 192.168.2.69
@@ -26,19 +26,19 @@ DOCKER_DEV=/dev/vdb
 OCP_USER=ocpadmin
 ```
 #### # Begin
-###### # you need to subscribe this system to the rhel7 base channel as well as the rhel7-extras channel
+###### # you need to subscribe this system to the centos7/rhel7 base channel as well as the extras channel
 ##### # temporarily open the firewall up
 firewall-cmd --set-default-zone trusted
-##### # setup docker
+##### # setup docker storage and enable
+sudo yum install docker -y && systemctl enable docker
 ```
 sudo sed -i '/# INSECURE_REGISTRY/s/# INSECURE_REGISTRY/INSECURE_REGISTRY/' /etc/sysconfig/docker; 
 sed -i "s/--selinux-enabled/--selinux-enabled --insecure-registry\ 172\.30\.0\.0\\/16/" /etc/sysconfig/docker
 sudo cat <<EOF > /etc/sysconfig/docker-storage-setup
 DEVS=$DOCKER_DEV
 VG=docker-vg
+WIPE_SIGNATURES=true
 EOF
-##### # setup docker storage and enable/start the service
-sudo yum install docker -y && systemctl enable docker
 sudo docker-storage-setup 
 ##### # download the oc client and install it in /usb/bin
 ```
