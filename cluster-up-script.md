@@ -59,10 +59,12 @@ oc cluster up --metrics=true --logging=true --public-hostname console.$WILDCARD 
 oc login -u system:admin
 oc create user $OCP_USER 
 oc adm policy add-cluster-role-to-user cluster-admin $OCP_USER
+```
+##### # add some aliases that are useful
+```
 echo alias allpods=\'watch -n1 oc adm manage-node --selector= --list-pods\' > /etc/profile.d/ocp.sh
 echo alias allpodsp=\'watch -n1 oc adm manage-node --selector= --list-pods\' >> /etc/profile.d/ocp.sh
-echo export WILDCARD=$WILDCARD >> /etc/profile.d/ocp.sh
-chmod +x /etc/profile.d/ocp.sh && source /etc/profile.d/ocp.sh
+echo export WILDCARD=$WILDCARD >> /etc/profile.d/ocp.sh && chmod +x /etc/profile.d/ocp.sh && source /etc/profile.d/ocp.sh
 ```
 #### # done
 ###### # type ‘allpods’ and watch the magic happen….
