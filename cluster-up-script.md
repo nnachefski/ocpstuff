@@ -4,26 +4,25 @@
 ###### # https://github.com/openshift/origin/releases
 ##### # set the oc binary version corresponding to the version that you want to deploy.
 ```
-PACKAGE_LINK=https://github.com/openshift/origin/releases/download/v3.9.0-alpha.3/openshift-origin-client-tools-v3.9.0-alpha.3-78ddc10-linux-64bit.tar.gz
+export PACKAGE_LINK=https://github.com/openshift/origin/releases/download/v3.9.0-alpha.3/openshift-origin-client-tools-v3.9.0-alpha.3-78ddc10-linux-64bit.tar.gz
 ```
 ##### # You need a wildcard (domain) for Openshift to manage.  If you have easy access to a DNS server (like IPA), then you can create one.  If not, and you can send recursive DNS lookups to the public internet, then you can use xip.io. 
 ##### # notice below how the console is with the app domain (wildcard).  
 ###### # setup this way, you just need a single wildcard DNS record pointing to this box and that’s it.
-```
 Ex:  *.origin.ocp.nicknach.net. → 192.168.2.69
 or
 Ex: WILDCARD=192.168.2.69.xip.io (xip will resolve this to 192.168.2.69 for you)
 ```
-WILDCARD=origin.ocp.nicknach.net
-
+export WILDCARD=origin.ocp.nicknach.net
+```
 ##### # configure the docker pool device, example here is using a secondary raw disk (“Option A”)
 ###### # https://docs.openshift.com/container-platform/latest/install_config/install/prerequisites.html
 ```
-DOCKER_DEV=/dev/vdb
+export DOCKER_DEV=/dev/vdb
 ```
 ##### # setup an admin user 
 ```
-OCP_USER=ocpadmin
+export OCP_USER=ocpadmin
 ```
 #### # Begin
 ###### # you need to subscribe this system to the centos7/rhel7 base channel as well as the extras channel
