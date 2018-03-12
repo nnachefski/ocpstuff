@@ -50,7 +50,9 @@ mkdir octool && tar -xzvf openshift-origin-client-tools*.tar.gz -C octool
 cp -f octool/openshift-origin-client-tools*/oc /usr/bin && rm -rf octool
 ```
 ##### # launch the cluster
+```
 oc cluster up --metrics=true --logging=true --public-hostname console.$WILDCARD --routing-suffix $WILDCARD --host-data-dir=ocpdata --host-config-dir=ocpconfig --use-existing-config
+```
 ##### # login and validate deployment
 ```
 oc login -u system:admin
