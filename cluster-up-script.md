@@ -68,5 +68,5 @@ echo export WILDCARD=$WILDCARD >> /etc/profile.d/ocp.sh && chmod +x /etc/profile
 ```
 #### # done
 ###### # type ‘allpods’ and watch the magic happen….
-###### # browse to https://console.<$WILDCARD>:8443
+##### # when the installer is complete, browse to https://console.<$WILDCARD>:8443
 ###### # in my case, https://console.ocp.nicknach.net:8443
