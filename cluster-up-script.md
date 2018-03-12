@@ -25,7 +25,7 @@ export DOCKER_DEV=/dev/vdb
 export OCP_USER=ocpadmin
 ```
 #### # Begin
-###### # you need to subscribe this system to the centos7/rhel7 base channel as well as the extras channel
+###### # you need to subscribe this system to the centos7/rhel7 base and extras channels
 ##### # temporarily open the firewall up
 ```
 firewall-cmd --set-default-zone trusted
