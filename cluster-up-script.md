@@ -11,7 +11,7 @@ export PACKAGE_LINK=https://github.com/openshift/origin/releases/download/v3.9.0
 ###### # setup this way, you just need a single wildcard DNS record pointing to this box and that’s it.
 ##### # Ex:  *.origin.ocp.nicknach.net. → 192.168.2.69
 ###### # or
-##### #Ex: WILDCARD=192.168.2.69.xip.io (xip will resolve this to 192.168.2.69 for you)
+##### # Ex: WILDCARD=192.168.2.69.xip.io (xip will resolve this to 192.168.2.69 for you)
 ```
 export WILDCARD=origin.ocp.nicknach.net
 ```
@@ -27,7 +27,9 @@ export OCP_USER=ocpadmin
 #### # Begin
 ###### # you need to subscribe this system to the centos7/rhel7 base channel as well as the extras channel
 ##### # temporarily open the firewall up
+```
 firewall-cmd --set-default-zone trusted
+```
 ##### # setup docker storage and enable
 ```
 sudo yum install docker -y && systemctl enable docker
@@ -45,7 +47,7 @@ sudo docker-storage-setup
 rm -rf openshift-origin-client-tools*
 yum install wget -y && cd ~ && wget $PACKAGE_LINK
 mkdir octool && tar -xzvf openshift-origin-client-tools*.tar.gz -C octool
-cp octool/openshift-origin-client-tools*/oc /usr/bin && rm -rf octool
+cp -f octool/openshift-origin-client-tools*/oc /usr/bin && rm -rf octool
 ```
 ##### # launch the cluster
 oc cluster up --metrics=true --logging=true --public-hostname console.$WILDCARD --routing-suffix $WILDCARD --host-data-dir=ocpdata --host-config-dir=ocpconfig --use-existing-config
