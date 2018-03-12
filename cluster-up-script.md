@@ -30,8 +30,8 @@ OCP_USER=ocpadmin
 ##### # temporarily open the firewall up
 firewall-cmd --set-default-zone trusted
 ##### # setup docker storage and enable
-sudo yum install docker -y && systemctl enable docker
 ```
+sudo yum install docker -y && systemctl enable docker
 sudo sed -i '/# INSECURE_REGISTRY/s/# INSECURE_REGISTRY/INSECURE_REGISTRY/' /etc/sysconfig/docker; 
 sed -i "s/--selinux-enabled/--selinux-enabled --insecure-registry\ 172\.30\.0\.0\\/16/" /etc/sysconfig/docker
 sudo cat <<EOF > /etc/sysconfig/docker-storage-setup
