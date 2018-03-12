@@ -41,6 +41,7 @@ VG=docker-vg
 WIPE_SIGNATURES=true
 EOF
 sudo docker-storage-setup
+sudo systemctl start docker
 ``` 
 ##### # download the oc client and install it in /usb/bin
 ```
