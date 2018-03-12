@@ -9,9 +9,9 @@ export PACKAGE_LINK=https://github.com/openshift/origin/releases/download/v3.9.0
 ##### # You need a wildcard (domain) for Openshift to manage.  If you have easy access to a DNS server (like IPA), then you can create one.  If not, and you can send recursive DNS lookups to the public internet, then you can use xip.io. 
 ##### # notice below how the console is with the app domain (wildcard).  
 ###### # setup this way, you just need a single wildcard DNS record pointing to this box and that’s it.
-Ex:  *.origin.ocp.nicknach.net. → 192.168.2.69
-or
-Ex: WILDCARD=192.168.2.69.xip.io (xip will resolve this to 192.168.2.69 for you)
+##### # Ex:  *.origin.ocp.nicknach.net. → 192.168.2.69
+###### # or
+##### #Ex: WILDCARD=192.168.2.69.xip.io (xip will resolve this to 192.168.2.69 for you)
 ```
 export WILDCARD=origin.ocp.nicknach.net
 ```
