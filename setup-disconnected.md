@@ -31,7 +31,7 @@ yum -y install httpd && systemctl enable httpd --now
 cd ~ && mkdir repo && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/scripts/sync_repos.sh && chmod +x sync_repos.sh
 ./sync_repos.sh
 ```
-##### # move and fix repo dir fix selinux
+##### # move and fix repo dir selinux
 ```
 mv repo /var/www/html && restorecon -R /var/www/html/repo
 ```
