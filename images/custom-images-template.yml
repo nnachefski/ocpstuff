@@ -1,6 +1,3 @@
-## use this template to create rhel7-custom, rhel7-cuda, s2i-custom-core, s2i-custom-base, s2i-custom-python35 images streams
-## oc create -f https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/custom-images-template.yml
-
 apiVersion: v1
 items:
 - apiVersion: v1
@@ -230,8 +227,9 @@ items:
   metadata:
     annotations:
       openshift.io/generated-by: OpenShiftNewBuild
+      openshift.io/image.dockerRepositoryCheck: 2018-03-15T21:18:34Z
     creationTimestamp: null
-    generation: 1
+    generation: 2
     labels:
       build: rhel7-custom
     name: rhel7-custom
@@ -243,11 +241,11 @@ items:
       from:
         kind: DockerImage
         name: docker-registry.default.svc:5000/openshift/rhel7-custom:latest
-      generation: null
+      generation: 2
       importPolicy: {}
       name: latest
       referencePolicy:
-        type: ""
+        type: Source
   status:
     dockerImageRepository: ""
 - apiVersion: v1
@@ -255,24 +253,15 @@ items:
   metadata:
     annotations:
       openshift.io/generated-by: OpenShiftNewBuild
+      openshift.io/image.dockerRepositoryCheck: 2018-03-15T21:18:34Z
     creationTimestamp: null
-    generation: 1
+    generation: 2
     labels:
       build: rhel7-cuda
     name: rhel7-cuda
   spec:
     lookupPolicy:
       local: false
-    tags:
-    - annotations: null
-      from:
-        kind: DockerImage
-        name: docker-registry.default.svc:5000/openshift/rhel7-cuda:latest
-      generation: null
-      importPolicy: {}
-      name: latest
-      referencePolicy:
-        type: ""
   status:
     dockerImageRepository: ""
 - apiVersion: v1
@@ -280,8 +269,9 @@ items:
   metadata:
     annotations:
       openshift.io/generated-by: OpenShiftNewBuild
+      openshift.io/image.dockerRepositoryCheck: 2018-03-15T21:18:34Z
     creationTimestamp: null
-    generation: 1
+    generation: 2
     labels:
       build: s2i-custom-core
     name: s2i-custom-core
@@ -293,11 +283,11 @@ items:
       from:
         kind: DockerImage
         name: docker-registry.default.svc:5000/openshift/s2i-custom-core:latest
-      generation: null
+      generation: 2
       importPolicy: {}
       name: latest
       referencePolicy:
-        type: ""
+        type: Source
   status:
     dockerImageRepository: ""
 - apiVersion: v1
@@ -305,8 +295,9 @@ items:
   metadata:
     annotations:
       openshift.io/generated-by: OpenShiftNewBuild
+      openshift.io/image.dockerRepositoryCheck: 2018-03-15T21:18:34Z
     creationTimestamp: null
-    generation: 1
+    generation: 2
     labels:
       build: s2i-custom-base
     name: s2i-custom-base
@@ -318,11 +309,11 @@ items:
       from:
         kind: DockerImage
         name: docker-registry.default.svc:5000/openshift/s2i-custom-base:latest
-      generation: null
+      generation: 2
       importPolicy: {}
       name: latest
       referencePolicy:
-        type: ""
+        type: Source
   status:
     dockerImageRepository: ""
 - apiVersion: v1
@@ -330,8 +321,9 @@ items:
   metadata:
     annotations:
       openshift.io/generated-by: OpenShiftNewBuild
+      openshift.io/image.dockerRepositoryCheck: 2018-03-15T21:18:34Z
     creationTimestamp: null
-    generation: 1
+    generation: 3
     labels:
       build: s2i-custom-python35
     name: s2i-custom-python35
@@ -339,15 +331,16 @@ items:
     lookupPolicy:
       local: false
     tags:
-    - annotations: null
+    - annotations:
+        tags: builder,python
       from:
         kind: DockerImage
         name: docker-registry.default.svc:5000/openshift/s2i-custom-python35:latest
-      generation: null
+      generation: 2
       importPolicy: {}
       name: latest
       referencePolicy:
-        type: ""
+        type: Source
   status:
     dockerImageRepository: ""
 kind: List
