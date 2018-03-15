@@ -127,7 +127,7 @@ yum install -y atomic atomic-openshift-utils atomic-openshift-clients
 ```
 yum install -y docker docker-logrotate
 ```
-##### # install gluster packages
+##### # install gluster packages 
 ```
 yum -y install cns-deploy heketi-client
 ```
