@@ -25,7 +25,6 @@ subscription-manager repos \
 ##### # install/enable/start httpd
 ```
 yum -y install httpd && systemctl enable httpd --now
-mkdir /var/www/html/repo
 ```
 ##### # start the reposync
 ```
