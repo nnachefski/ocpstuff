@@ -171,14 +171,14 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 
 
 ## cns
+#openshift_storage_glusterfs_namespace=app-storage
+#openshift_storage_glusterfs_storageclass=true
 #openshift_hosted_registry_storage_kind=glusterfs
 #openshift_metrics_install_metrics=true
 #openshift_metrics_storage_kind=dynamic
 #openshift_logging_es_pvc_size=10Gi
 #openshift_logging_install_logging=true
 #openshift_logging_storage_kind=dynamic
-#openshift_storage_glusterfs_namespace=app-storage
-#openshift_storage_glusterfs_storageclass=true
 #openshift_storage_glusterfs_block_deploy=true
 #openshift_storage_glusterfs_registry_namespace=infra-storage
 #openshift_storage_glusterfs_registry_storageclass=false
