@@ -11,7 +11,7 @@ export OCP_NFS_SERVER=storage.home.nicknach.net
 export LDAP_SERVER=gw.home.nicknach.net
 export ANSIBLE_HOST_KEY_CHECKING=False
 export MY_REPO=repo.home.nicknach.net
-export OCP_VER=v3.9.4
+export OCP_VER=v3.7
 export RHSM_ID=your@rhn.com
 export RHSM_PW=yourpassword
 export POOLID=8a85f98260c27fc50160c323263339ff
@@ -28,7 +28,7 @@ export LDAP_SERVER=$LDAP_SERVER
 export POOLID=$POOLID
 export ANSIBLE_HOST_KEY_CHECKING=False
 export MY_REPO=$MY_REPO
-export OCP_VER=v3.9.4
+export OCP_VER=$OCP_VER
 EOF
 ```
 ##### # subscribe to RHSM
@@ -44,8 +44,7 @@ EOF
 #   --enable=rhel-7-fast-datapath-rpms \
 #   --enable=rhel-7-server-rhscl-rpms \
 #   --enable=rhel-7-server-optional-rpms 
-##   --enable=rh-gluster-3-for-rhel-7-server-rpms \ 
-##   --enable=rhel-7-server-3scale-amp-2.0-rpms
+#   --enable=rh-gluster-3-for-rhel-7-server-rpms  
 ```
 ##### # OR, add your internal repos
 ```
@@ -72,7 +71,7 @@ yum install -y docker docker-logrotate
 ```
 ##### # install gluster packages
 ```
-#yum -y install cns-deploy heketi-client
+yum -y install cns-deploy heketi-client
 ```
 ##### # configure the docker pool device
 ```
