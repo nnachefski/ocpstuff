@@ -81,6 +81,10 @@ wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/app_ima
 skopeo --insecure-policy copy --src-tls-verify=false --dest-tls-verify=false docker://$SRC_REPO/rhel7/etcd docker://$MY_REPO/rhel7/etcd
 skopeo --insecure-policy copy --src-tls-verify=false --dest-tls-verify=false docker://$SRC_REPO/rhel7.4 docker://$MY_REPO/rhel7.4
 ```
+###### # sometimes you have to normalize the tags on your images (like with beta/puddle builds)
+```
+TAG=v3.9.9 REPO=repo.home.nicknach.net; for i in `cat core_images.txt`; do docker pull $REPO/$i:v3.9; docker tag $REPO/$i:v3.9 $REPO/$i:$TAG; docker push $REPO/$i:$TAG; done
+```
 #### # done with repo box
 
 ### # now on your client boxes
