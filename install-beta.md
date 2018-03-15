@@ -111,7 +111,7 @@ yum-config-manager --add-repo http://$MY_REPO/repo/rhel-server-rhscl-7-rpms
 yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-optional-rpms 
 yum-config-manager --add-repo http://$MY_REPO/repo/rh-gluster-3-for-rhel-7-server-rpms
 ```
-##### # disable gpg checks
+##### # disable gpg checks (because these are beta bits)
 ```
 echo gpgcheck=0 >> /etc/yum.repos.d/repo.home.nicknach.net_repo_rhaos-3.9.repo
 ```
@@ -121,7 +121,7 @@ yum install -y yum-utils wget git net-tools bind-utils iptables-services bridge-
 ```
 ##### # install openshift specific pre-reqs
 ```
-yum install -y atomic atomic-openshift-utils atomic-openshift-clients
+yum install -y atomic atomic-openshift-clients
 ```
 ##### # install docker (non-Atomic installs)
 ```
@@ -159,7 +159,7 @@ yum -y update --disablerepo=repo.home.nicknach.net_repo_rh-gluster-3-for-rhel-7-
 ###### # reboot if necessary 
 ## #  On first master only now (or bastion host)
 ```
-yum install -y openshift-ansible
+yum install -y openshift-ansible atomic-openshift-utils
 ```
 ##### #  make password-less key for openshift-ansible usage
 ```
