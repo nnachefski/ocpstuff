@@ -86,7 +86,7 @@ rpm --import http://$REPO/RPM-GPG-KEY-redhat-release
 ```
 ##### # add the docker repo cert to the pki store
 ```
-wget https://$MY_REPO/repo/$MY_REPO.crt && restorecon /var/www/html/repo/$MY_REPO.crt && update-ca-trust
+wget http://$MY_REPO/repo/$MY_REPO.crt && mv -f $MY_REPO.crt /etc/pki/ca-trust/source/anchors && restorecon -R /etc/pki/ca-trust/source/anchors/$MY_REPO.crt && update-ca-trust
 ```
 ##### # add your rpm repos
 ```
