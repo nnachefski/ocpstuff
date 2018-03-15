@@ -3,7 +3,7 @@
 ###### # make sure you have ample space available on your local repo box (called repo.home.nicknach.net in my lab).  
 ###### # Recommended 100GB storage for this repo server.
 
-##### # set your repo host var
+##### # set your repo host vars
 ```
 export MY_REPO=repo.home.nicknach.net
 export SRC_REPO=registry.access.redhat.com
