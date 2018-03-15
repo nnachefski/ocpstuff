@@ -29,12 +29,12 @@ mkdir /var/www/html/repo
 ```
 ##### # start the reposync
 ```
-cd ~ && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/scripts/sync_repos.sh && chmod +x sync_repos.sh
+cd ~ && mkdir repo && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/scripts/sync_repos.sh && chmod +x sync_repos.sh
 ./sync_repos.sh
 ```
-##### # fix selinux
-``` 
-restorecon -R /var/www/html/repo
+##### # move and fix repo dir fix selinux
+```
+mv repo /var/www/html && restorecon -R /var/www/html/repo
 ```
 ##### # open the firewall up
 ##### # you can get more strict with this if you want
@@ -45,17 +45,6 @@ firewall-cmd --set-default-zone trusted
 ##### # install/enable/start docker-distribution on the repo box
 ```
 yum -y install docker-distribution.x86_64 && systemctl enable docker-distribution --now
-```
-##### # now run the import-image.py script
-```
-cd ~ && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/scripts/import-images.py && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/core_images.txt
-chmod +x import-images.py
-./import-images.py docker $SRC_REPO $MY_REPO -d
-```
-##### # manually get the etcd and rhel7 images
-```
-skopeo --insecure-policy copy --src-tls-verify=false --dest-tls-verify=false docker://$SRC_REPO/rhel7/etcd docker://$MY_REPO/rhel7/etcd
-skopeo --insecure-policy copy --src-tls-verify=false --dest-tls-verify=false docker://$SRC_REPO/rhel7.4 docker://$MY_REPO/rhel7.4
 ```
 ##### # create certs for this registry (so you can enable https)
 ```
@@ -69,6 +58,21 @@ openssl req  -newkey rsa:4096 -nodes -sha256 -keyout /etc/docker/certs.d/$MY_REP
     tls:
         certificate: /etc/docker/certs.d/$MY_REPO/$MY_REPO.crt
         key: /etc/docker/certs.d/$MY_REPO/$MY_REPO.key
+```
+##### # restart registry for SSL changes
+```
+systemctl restart docker-distribution
+```
+##### # now run the import-image.py script
+```
+cd ~ && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/scripts/import-images.py && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/core_images.txt
+chmod +x import-images.py
+./import-images.py docker $SRC_REPO $MY_REPO -d
+```
+##### # manually get the etcd and rhel7 images
+```
+skopeo --insecure-policy copy --src-tls-verify=false --dest-tls-verify=false docker://$SRC_REPO/rhel7/etcd docker://$MY_REPO/rhel7/etcd
+skopeo --insecure-policy copy --src-tls-verify=false --dest-tls-verify=false docker://$SRC_REPO/rhel7.4 docker://$MY_REPO/rhel7.4
 ```
 #### # done with repo box
 

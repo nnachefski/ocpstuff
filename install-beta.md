@@ -41,28 +41,8 @@ cd ~ && reposync -lm --repoid=rhaos-3.9
 ```
 createrepo rhaos-3.9
 ```
-##### # install/enable/start httpd
-```
-yum -y install httpd && systemctl enable httpd --now
-```
-##### # move your repo dir into the web root
-```
-mv ~/rhaos-3.9 /var/www/html 
-```
-##### # fix selinux
-``` 
-restorecon -R /var/www/html/rhaos-3.9
-```
-#### # now lets create the docker image mirror on our repo server
-##### # install/enable/start docker-distribution on the repo box
-```
-yum -y install docker-distribution.x86_64 && systemctl enable docker-distribution --now
-```
-##### # open the firewall up (feel free to tighten this up)
-```
-firewall-cmd --set-default-zone trusted
-```
-##### # now run the import-image.py script
+
+##### # run the import-image.py script
 ```
 cd ~ && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/scripts/import-images.py && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/core_images.txt
 chmod +x import-images.py
