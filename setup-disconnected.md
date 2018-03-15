@@ -107,7 +107,7 @@ yum-config-manager --add-repo http://$REPO/repo/rhel-7-server-extras-rpms
 yum-config-manager --add-repo http://$REPO/repo/rhel-7-server-ose-3.7-rpms
 yum-config-manager --add-repo http://$REPO/repo/rhel-server-rhscl-7-rpms
 yum-config-manager --add-repo http://$REPO/repo/rhel-7-server-optional-rpms 
-#yum-config-manager --add-repo http://$REPO/repo/rh-gluster-3-for-rhel-7-server-rpms
+yum-config-manager --add-repo http://$REPO/repo/rh-gluster-3-for-rhel-7-server-rpms
 ```
 ##### # add your docker registry
 ```
