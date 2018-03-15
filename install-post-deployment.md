@@ -29,6 +29,6 @@ oc patch ns openshift-ansible-service-broker -p '{"metadata": {"annotations": {"
 ```
 ##### # make CNS the default SC
 ```
-oc patch storageclass fs-storage -p '{"metadata": {"annotations": {"storageclass.kubernetes.io/is-default-class": "true"}}}'
+oc patch storageclass glusterfs-storage -p '{"metadata": {"annotations": {"storageclass.kubernetes.io/is-default-class": "true"}}}'
 ```
 ## # Done!
