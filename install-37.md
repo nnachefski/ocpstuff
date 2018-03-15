@@ -1,4 +1,4 @@
-## This doc describes how to perform an RPM-based installation of OCP 3.7
+## This doc describes how to perform an installation of OCP 3.7
 #### # BEGIN
 ##### # do this on ALL hosts (master/infra/nodes)
 ##### # SET THESE VARIABLES ###
@@ -56,7 +56,7 @@ yum-config-manager --add-repo http://$MY_REPO/rhel-7-fast-datapath-rpms
 yum-config-manager --add-repo http://$MY_REPO/rhel-7-server-ose-3.7-rpms
 yum-config-manager --add-repo http://$MY_REPO/rhel-server-rhscl-7-rpms
 yum-config-manager --add-repo http://$MY_REPO/rhel-7-server-optional-rpms 
-##yum-config-manager --add-repo http://$MY_REPO/rh-gluster-3-for-rhel-7-server-rpms
+yum-config-manager --add-repo http://$MY_REPO/rh-gluster-3-for-rhel-7-server-rpms
 ```
 ##### # install some general pre-req packages
 ``` 
