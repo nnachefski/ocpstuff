@@ -120,3 +120,6 @@ watch -n2 oc adm manage-node --selector= --list-pods -owide
 journalctl -xlf
 ```
 ###### # look for errors about images not found
+
+#### Now run through the install howto
+###### # https://github.com/nnachefski/ocpstuff/blob/master/install-37.md
