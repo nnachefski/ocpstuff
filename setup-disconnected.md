@@ -69,6 +69,10 @@ cd ~ && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/script
 chmod +x import-images.py
 ./import-images.py docker $SRC_REPO $MY_REPO -d
 ```
+##### # now get the other app images
+```
+./import-images.py docker $SRC_REPO $MY_REPO -d -l app_images.txt
+```
 ##### # manually get the etcd and rhel7 images
 ```
 skopeo --insecure-policy copy --src-tls-verify=false --dest-tls-verify=false docker://$SRC_REPO/rhel7/etcd docker://$MY_REPO/rhel7/etcd
