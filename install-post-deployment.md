@@ -27,4 +27,8 @@ oc adm manage-node --selector=region=infra --schedulable=false
 oc patch ns openshift-infra -p '{"metadata": {"annotations": {"openshift.io/node-selector": "region=infra"}}}'
 oc patch ns openshift-ansible-service-broker -p '{"metadata": {"annotations": {"openshift.io/node-selector": "region=infra"}}}'
 ```
+##### # make CNS the default SC
+```
+oc patch storageclass fs-storage -p '{"metadata": {"annotations": {"storageclass.kubernetes.io/is-default-class": "true"}}}'
+```
 ## # Done!
