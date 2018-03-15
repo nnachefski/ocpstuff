@@ -93,7 +93,6 @@ export REPO=repo.home.nicknach.net
 rpm --import http://$REPO/7fa2af80.pub
 rpm --import http://$REPO/RPM-GPG-KEY-EPEL-7
 rpm --import http://$REPO/RPM-GPG-KEY-redhat-release
-
 ```
 ##### # add the docker repo cert to the pki store
 ```
