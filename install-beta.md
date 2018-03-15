@@ -121,7 +121,7 @@ yum install -y yum-utils wget git net-tools bind-utils iptables-services bridge-
 ```
 ##### # install openshift specific pre-reqs
 ```
-yum install -y atomic atomic-openshift-utils openshift-ansible atomic-openshift-clients
+yum install -y atomic atomic-openshift-utils atomic-openshift-clients
 ```
 ##### # install docker (non-Atomic installs)
 ```
@@ -158,6 +158,9 @@ yum -y update --disablerepo=repo.home.nicknach.net_repo_rh-gluster-3-for-rhel-7-
 ```
 ###### # reboot if necessary 
 ## #  On first master only now (or bastion host)
+```
+yum install -y openshift-ansible
+```
 ##### #  make password-less key for openshift-ansible usage
 ```
 ssh-keygen
