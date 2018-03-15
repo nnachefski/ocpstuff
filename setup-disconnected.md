@@ -62,11 +62,15 @@ openssl req  -newkey rsa:4096 -nodes -sha256 -keyout /etc/docker/certs.d/$MY_REP
 ```
 systemctl restart docker-distribution
 ```
-##### # now run the import-image.py script
+##### # get the import-image.py script and image lists
 ```
-cd ~ && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/scripts/import-images.py && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/core_images.txt
-chmod +x import-images.py
-./import-images.py docker $SRC_REPO $MY_REPO -d
+cd ~ && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/scripts/import-images.py && chmod +x import-images.py
+wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/core_images.txt
+wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/app_images.txt 
+```
+##### # now get the core images
+``` 
+./import-images.py docker $SRC_REPO $MY_REPO -d -t v3.7
 ```
 ##### # now get the other app images
 ```
