@@ -49,9 +49,9 @@ EOF
 ```
 ##### # OR, add your internal repos
 ```
-##yum-config-manager --disable \* && rm -rf /etc/yum.repos.d/*.repo && yum clean all
-##yum-config-manager --add-repo http://$MY_REPO/rhel-7-server-rpms
-##yum-config-manager --add-repo http://$MY_REPO/rhel-7-server-extras-rpms
+yum-config-manager --disable \* && rm -rf /etc/yum.repos.d/*.repo && yum clean all
+yum-config-manager --add-repo http://$MY_REPO/rhel-7-server-rpms
+yum-config-manager --add-repo http://$MY_REPO/rhel-7-server-extras-rpms
 yum-config-manager --add-repo http://$MY_REPO/rhel-7-fast-datapath-rpms
 yum-config-manager --add-repo http://$MY_REPO/rhel-7-server-ose-3.7-rpms
 yum-config-manager --add-repo http://$MY_REPO/rhel-server-rhscl-7-rpms
@@ -64,7 +64,7 @@ yum install -y yum-utils wget git net-tools bind-utils iptables-services bridge-
 ```
 ##### # install ocp specific pre-reqs
 ```
-yum install -y atomic atomic-openshift-utils openshift-ansible atomic-openshift-clients
+yum install -y atomic atomic-openshift-clients
 ```
 ##### # install docker
 ```
@@ -92,7 +92,7 @@ systemctl enable docker --now
 ```
 ##### # add an internal docker registry (if any)
 ```
-#sed -i '16,/registries =/s/\[\]/\[\"repo.home.nicknach.net:5000\"\]/' /etc/containers/registries.conf && systemctl restart docker
+sed -i '16,/registries =/s/\[\]/\[\"repo.home.nicknach.net:5000\"\]/' /etc/containers/registries.conf && systemctl restart docker
 ```
 ##### # make sure your nodes are up to date
 ```
@@ -100,6 +100,10 @@ yum -y update
 ```
 ###### # reboot if necessary 
 ## #  On first master only now (or bastion host)
+##### # install openshift tools
+```
+yum install -y atomic-openshift-utils openshift-ansible 
+```
 ##### #  make password-less key for openshift-ansible usage
 ```
 ssh-keygen
