@@ -44,9 +44,10 @@ createrepo rhaos-3.9
 
 ##### # run the import-image.py script
 ```
-cd ~ && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/scripts/import-images.py && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/core_images.txt
-chmod +x import-images.py
-./import-images.py docker $SRC_REPO:8888 $MY_REPO -d
+cd ~ && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/scripts/import-images.py && chmod +x import-images.py
+wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/core_images.txt
+wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/app_images.txt
+./import-images.py docker $SRC_REPO:8888 $MY_REPO -d -t 3.9
 ```
 ##### # manually get the etcd and rhel7 images
 ```

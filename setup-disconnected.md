@@ -40,7 +40,7 @@ mv repo /var/www/html && restorecon -R /var/www/html/repo
 ```
 firewall-cmd --set-default-zone trusted
 ```
-#### # now lets create the docker image mirror on our repo server
+### # now lets create the docker image mirror on our repo server
 ##### # install/enable/start docker-distribution on the repo box
 ```
 yum -y install docker-distribution.x86_64 && systemctl enable docker-distribution --now
