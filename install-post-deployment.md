@@ -32,3 +32,6 @@ oc patch ns openshift-ansible-service-broker -p '{"metadata": {"annotations": {"
 oc patch storageclass glusterfs-storage -p '{"metadata": {"annotations": {"storageclass.kubernetes.io/is-default-class": "true"}}}'
 ```
 ## # Done!
+
+### # Now run through the rhel7-custom image build guide
+#### # https://github.com/nnachefski/ocpstuff/tree/master/images
