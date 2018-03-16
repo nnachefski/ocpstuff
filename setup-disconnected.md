@@ -83,7 +83,7 @@ skopeo --insecure-policy copy --src-tls-verify=false --dest-tls-verify=false doc
 ```
 ###### # sometimes you have to normalize the tags on your images (like with beta/puddle builds)
 ```
-TAG=v3.9.9 REPO=repo.home.nicknach.net; for i in `cat core_images.txt`; do docker pull $REPO/$i:v3.9; docker tag $REPO/$i:v3.9 $REPO/$i:$TAG; docker push $REPO/$i:$TAG; done
+TAG=v3.7.23 REPO=repo.home.nicknach.net; for i in `cat core_images.txt`; do docker pull $REPO/$i:v3.7; docker tag $REPO/$i:v3.7 $REPO/$i:$TAG; docker push $REPO/$i:$TAG; done
 ```
 #### # done with repo box
 
