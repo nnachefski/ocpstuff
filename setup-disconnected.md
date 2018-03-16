@@ -129,7 +129,7 @@ journalctl -xlf
 ```
 ###### # look for errors about images not found
 
-#### Now run through the install howto
+#### # Now run through the install howto
 ###### # https://github.com/nnachefski/ocpstuff/blob/master/install-37.md
 ###### # or, try a puddle build (internal only)
 ###### # https://github.com/nnachefski/ocpstuff/blob/master/install-beta.md
