@@ -62,6 +62,10 @@ openssl req  -newkey rsa:4096 -nodes -sha256 -keyout /etc/docker/certs.d/$MY_REP
 ```
 systemctl restart docker-distribution
 ```
+##### # copy the cert to the webroot for your clients to pull from
+```
+cp -f /etc/docker/certs.d/$MY_REPO/$MY_REPO.crt /var/www/html/repo && restorecon /var/www/html/repo/$MY_REPO.crt
+```
 ##### # get the import-image.py script and image lists
 ```
 cd ~ && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/scripts/import-images.py && chmod +x import-images.py
