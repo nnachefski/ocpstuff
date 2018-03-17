@@ -126,6 +126,7 @@ systemctl restart docker
 ##### # during the install, do these commands in separate terminals to trouble shoot any missing images
 ```
 watch -n2 oc adm manage-node --selector= --list-pods -owide
+and
 journalctl -xlf
 ```
 ###### # look for errors about images not found
