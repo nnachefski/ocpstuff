@@ -130,7 +130,7 @@ and
 journalctl -xlf
 ```
 ###### # look for errors about images not found
-##### # after install, you may find that you didnt copy of evert non-core image.  If that is the case, image streams will be broken and their template will not deploy.  If you want a list of missing images (defunct imageStreams) then do this
+##### # after install, you may find that you didnt copy EVERY single non-core image.  If that is the case, image streams will be broken and their corresponding templates may not deploy.  If you want a list of missing images (defunct imageStreams) then do this
 ```
 for i in `oc get is -n openshift |grep -v NAME |awk '{print $1}'`; do oc get is $i -n openshift -o json; done |grep 'not found' |awk '{print $3}' |awk -F \/ '{print $2,$3}' | awk -F \: '{print $1}' |sed 's/ /\//g' |sort -u
 ```
