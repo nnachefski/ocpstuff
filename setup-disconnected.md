@@ -33,7 +33,7 @@ cd ~ && mkdir repo && wget https://raw.githubusercontent.com/nnachefski/ocpstuff
 ```
 ##### # move and fix repo dir selinux
 ```
-mv repo /var/www/html && restorecon -R /var/www/html/repo
+mv repo /var/www/html && restorecon -R /var/www/html
 ```
 ##### # open the firewall up
 ###### # you can get more strict with this if you want
