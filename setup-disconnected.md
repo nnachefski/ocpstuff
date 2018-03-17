@@ -119,7 +119,7 @@ yum-config-manager --add-repo http://$REPO/repo/rh-gluster-3-for-rhel-7-server-r
 ```
 ##### # add your docker registry
 ```
-sed -i '16,/registries =/s/\[\]/\[\"repo.home.nicknach.net\"\]/' /etc/containers/registries.conf
+sed -i "16,/registries =/s/\[\]/\[\'$REPO\'\]/" /etc/containers/registries.conf
 systemctl restart docker
 ```
 #### # Troubleshooting disconnected installs
