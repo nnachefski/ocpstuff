@@ -140,8 +140,9 @@ yum -y update --disablerepo=$MY_REPO_repo_rh-gluster-3-for-rhel-7-server-rpms
 ###### # reboot if necessary 
 ## #  On first master only now (or bastion host)
 ```
-yum install -y openshift-ansible atomic-openshift-utils
+yum install -y atomic-openshift-utils
 ```
+###### # this will install openshift-ansible as a dependency
 ##### #  make password-less key for openshift-ansible usage
 ```
 ssh-keygen
@@ -159,16 +160,11 @@ ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/deploy_cluster.y
 ```
 ###### #  if you to need explicitly provide a private keyfile (like with AWS)
 --private-key ~/.ssh/nick-west2.pem
-##### # use these commands in other terminal windows to keep an eye on the deployment (and look for potential problems)
-```
-watch -n2 oc adm manage-node --selector= --list-pods -owide
-watch -n2 oc get pv
-journalctl -xlf
-```
+
 ###### # verify the install was successful
 ###### 'oc get nodes'
 ### # Now run through the post-deployment steps
 #### # https://github.com/nnachefski/ocpstuff/blob/master/install-post-deployment.txt
 
-### # Now run through the rhel7-custom image build guide
+### # Then run through the rhel7-custom image build guide
 #### # https://github.com/nnachefski/ocpstuff/tree/master/images
