@@ -104,7 +104,7 @@ yum install -y yum-utils wget git net-tools bind-utils iptables-services bridge-
 ```
 yum install -y atomic atomic-openshift-clients
 ```
-##### # install docker (non-Atomic installs)
+##### # install docker
 ```
 yum install -y docker docker-logrotate
 ```
@@ -128,10 +128,6 @@ docker-storage-setup
 ```
 sed -i "16,/registries =/s/\[\]/\[\'$MY_REPO\'\]/" /etc/containers/registries.conf
 systemctl restart docker
-```
-##### # enable and start docker
-```
-systemctl enable docker --now
 ```
 ##### # make sure your nodes are up to date
 ```
