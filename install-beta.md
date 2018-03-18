@@ -142,7 +142,7 @@ yum -y update --disablerepo=$MY_REPO_repo_rh-gluster-3-for-rhel-7-server-rpms
 ```
 yum install -y atomic-openshift-utils
 ```
-###### # this will install openshift-ansible as a dependency
+###### # this will install openshift-ansible and dependencies 
 ##### #  make password-less key for openshift-ansible usage
 ```
 ssh-keygen
