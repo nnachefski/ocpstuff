@@ -40,6 +40,8 @@ except:
 pass_list = []
 # iterate over the list and verify they are accessible
 for image in list:
+	if image.startswith('#'):
+		continue
 	cmdline = ['skopeo', '--insecure-policy', 'inspect', '--tls-verify=false', "docker://%s/%s:%s"%(args.source, image, args.tag)]
 	#if args.d: print('- '+' '.join(cmdline))
 	try:
