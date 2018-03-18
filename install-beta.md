@@ -126,7 +126,7 @@ docker-storage-setup
 ```
 ##### # add the internal docker registry
 ```
-sed -i '16,/registries =/s/\[\]/\[\"repo.home.nicknach.net\"\]/' /etc/containers/registries.conf
+sed -i "16,/registries =/s/\[\]/\[\'$MY_REPO\'\]/" /etc/containers/registries.conf
 systemctl restart docker
 ```
 ##### # enable and start docker
@@ -135,7 +135,7 @@ systemctl enable docker --now
 ```
 ##### # make sure your nodes are up to date
 ```
-yum -y update --disablerepo=repo.home.nicknach.net_repo_rh-gluster-3-for-rhel-7-server-rpms
+yum -y update --disablerepo=$MY_REPO_repo_rh-gluster-3-for-rhel-7-server-rpms
 ```
 ###### # reboot if necessary 
 ## #  On first master only now (or bastion host)
