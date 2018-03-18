@@ -122,7 +122,7 @@ EOF
 ```
 ##### # and setup the storage
 ```
-docker-storage-setup
+container-storage-setup
 ```
 ##### # add the internal docker registry
 ```
