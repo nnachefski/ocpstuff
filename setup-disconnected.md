@@ -129,6 +129,10 @@ watch -n2 oc adm manage-node --selector= --list-pods -owide
 
 and
 
+watch -n2 oc get pv
+
+and
+
 journalctl -xlf
 ```
 ###### # look for errors about images not found
