@@ -162,5 +162,3 @@ ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/deploy_cluster.y
 ### # Now run through the post-deployment steps
 #### # https://github.com/nnachefski/ocpstuff/blob/master/install-post-deployment.txt
 
-### # Then run through the rhel7-custom image build guide
-#### # https://github.com/nnachefski/ocpstuff/tree/master/images
