@@ -28,7 +28,7 @@ else
 fi
 
 ## create the docker-pool disk
-qemu-img create -f qcow2 $UM 15G
+qemu-img create -f raw $UM 15G
 RUNLINE="$RUNLINE --disk path=$UM,bus=virtio "
 
 if [[ $HOST == infra* ]] || [[ $HOST == node* ]];
