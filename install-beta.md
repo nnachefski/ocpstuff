@@ -131,7 +131,7 @@ systemctl restart docker
 ```
 ##### # make sure your nodes are up to date
 ```
-yum -y update --disablerepo=$MY_REPO_repo_rh-gluster-3-for-rhel-7-server-rpms
+yum -y update --disablerepo="$MY_REPO""_repo_rh-gluster-3-for-rhel-7-server-rpms"
 ```
 ###### # reboot if necessary 
 ## #  On first master only now (or bastion host)
