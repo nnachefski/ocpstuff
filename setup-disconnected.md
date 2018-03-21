@@ -141,3 +141,4 @@ journalctl -xlf
 for i in `oc get is -n openshift |grep -v NAME |awk '{print $1}'`; do oc get is $i -n openshift -o json; done |grep 'not found' |awk '{print $3}' |awk -F \/ '{print $2,$3}' | awk -F \: '{print $1}' |sed 's/ /\//g' |sort -u
 ```
 ###### # this will yeild a list of missing images that you can import using the import-images.py script
+###### # redirect the output to a file (> missing.txt) and then re-run the import-images.py script with '-l missing.txt'
