@@ -91,7 +91,7 @@ systemctl enable docker --now
 ```
 ##### # add an internal docker registry (if any)
 ```
-sed -i '16,/registries =/s/\[\]/\[\"repo.home.nicknach.net:5000\"\]/' /etc/containers/registries.conf && systemctl restart docker
+sed -i '16,/registries =/s/\[\]/\[\"repo.home.nicknach.net\"\]/' /etc/containers/registries.conf && systemctl restart docker
 ```
 ##### # make sure your nodes are up to date
 ```
