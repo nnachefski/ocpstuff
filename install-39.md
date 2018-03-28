@@ -1,4 +1,4 @@
-## This doc describes how to perform an installation of OCP 3.7
+## This doc describes how to perform an installation of OCP 3.9
 ### # BEGIN
 ##### # do this on ALL hosts (master/infra/nodes)
 ##### # SET THESE VARIABLES ###
