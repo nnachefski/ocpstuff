@@ -112,5 +112,5 @@ ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/deploy_cluster.y
 ###### # verify the install was successful
 ###### 'oc get nodes'
 ### # Now run through the post-deployment steps
-#### # https://github.com/nnachefski/ocpstuff/blob/master/install-post-deployment.txt
+#### # https://github.com/nnachefski/ocpstuff/blob/master/install-post-deployment.md
 
