@@ -91,7 +91,7 @@ yum -y update
 yum install -y atomic-openshift-utils
 ```
 ###### # this will install openshift-ansible and dependencies 
-##### #  make password-less key for openshift-ansible usage
+##### #  make password-less key for ansible usage
 ```
 ssh-keygen
 ```
