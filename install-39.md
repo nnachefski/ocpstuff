@@ -81,9 +81,9 @@ container-storage-setup
 sed -i "16,/registries =/s/\[\]/\[\'$MY_REPO\'\]/" /etc/containers/registries.conf
 systemctl restart docker
 ```
-##### # make sure your nodes are up to date
+##### # make sure your nodes are up-to-date
 ```
-yum -y update --disablerepo="$MY_REPO""_repo_rh-gluster-3-for-rhel-7-server-rpms"
+yum -y update
 ```
 ###### # reboot if necessary 
 ## #  On first master only now (or bastion host)
