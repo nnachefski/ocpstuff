@@ -48,8 +48,6 @@ rhscl/thermostat-1-agent-rhel7
 rhscl/thermostat-16-agent-rhel7
 rhscl/thermostat-16-storage-rhel7
 rhscl/varnish-4-rhel7
-openshift3/mediawiki-123
-openshift3/mediawiki-apb
 rhcertification/redhat-certification
 rhmap41/mongodb
 rhmap42/httpd
@@ -91,16 +89,6 @@ jboss-webserver-3/webserver30-tomcat7-openshift
 jboss-webserver-3/webserver30-tomcat8-openshift
 jboss-webserver-3/webserver31-tomcat7-openshift
 jboss-webserver-3/webserver31-tomcat8-openshift
-openshift3/jenkins-1-rhel7
-openshift3/mongodb-24-rhel7
-openshift3/mysql-55-rhel7
-openshift3/nodejs-010-rhel7
-openshift3/perl-516-rhel7
-openshift3/php-55-rhel7
-openshift3/postgresql-92-rhel7
-openshift3/python-33-rhel7
-openshift3/ruby-20-rhel7
-openshift/rhel7-cuda
 redhat-openjdk-18/openjdk18-openshift
 redhat-sso-7/sso70-openshift
 redhat-sso-7/sso71-openshift
