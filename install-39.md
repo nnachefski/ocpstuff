@@ -59,6 +59,11 @@ yum install -y docker docker-logrotate
 ```
 yum -y install cns-deploy heketi-client
 ```
+##### # disable gluster channel now 
+###### # because of python lib conflicts with the base channel
+```
+yum-config-manager --disable repo.home.nicknach.net_repo_rh-gluster-3-for-rhel-7-server-rpms
+```
 ##### # configure the docker pool device
 ```
 cat <<EOF > /etc/sysconfig/docker-storage-setup
