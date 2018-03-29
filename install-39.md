@@ -47,7 +47,7 @@ wget http://$MY_REPO/repo/$MY_REPO.crt && mv -f $MY_REPO.crt /etc/pki/ca-trust/s
 ``` 
 yum install -y yum-utils wget git net-tools bind-utils iptables-services bridge-utils bash-completion nfs-utils dstat mlocate
 ```
-##### # install openshift specific pre-reqs
+##### # install openshift client package (oc)
 ```
 yum install -y atomic atomic-openshift-clients
 ```
