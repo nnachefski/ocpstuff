@@ -57,7 +57,7 @@ yum install -y docker docker-logrotate
 ```
 ##### # install gluster packages 
 ```
-yum -y install cns-deploy heketi-client
+yum install -y cns-deploy heketi-client
 ```
 ##### # disable gluster channel now 
 ###### # because of python lib conflicts with the base channel
