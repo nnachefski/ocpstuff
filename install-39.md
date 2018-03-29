@@ -106,7 +106,7 @@ https://raw.githubusercontent.com/nnachefski/ocpstuff/master/generate-ansible-in
 ```
 ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/deploy_cluster.yml
 ```
-###### #  if you to need explicitly provide a private keyfile (like with AWS)
+###### #  if you to need explicitly provide a private key file (like with AWS)
 --private-key ~/.ssh/nick-west2.pem
 
 ###### # verify the install was successful
