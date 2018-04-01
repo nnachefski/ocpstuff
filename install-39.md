@@ -64,6 +64,7 @@ yum install -y cns-deploy heketi-client
 ```
 yum-config-manager --disable repo.home.nicknach.net_repo_rh-gluster-3-for-rhel-7-server-rpms
 ```
+
 ##### # configure the docker pool device
 ```
 cat <<EOF > /etc/sysconfig/docker-storage-setup
