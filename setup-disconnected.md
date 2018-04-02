@@ -7,6 +7,7 @@
 ```
 export MY_REPO=repo.home.nicknach.net
 export SRC_REPO=registry.access.redhat.com
+export OCP_VER=v3.9.14
 ```
 ##### # subscribe your repo box to the proper channels for OCP
 ```
@@ -45,7 +46,7 @@ firewall-cmd --set-default-zone trusted
 ```
 yum -y install docker-distribution.x86_64 && systemctl enable docker-distribution --now
 ```
-##### # create certs for this registry (so you can enable https)
+##### # create certs for this registry (so you can enable https, required for v2 images)
 ```
 mkdir -p /etc/docker/certs.d/$MY_REPO
 openssl req  -newkey rsa:4096 -nodes -sha256 -keyout /etc/docker/certs.d/$MY_REPO/$MY_REPO.key -x509 -days 365 -out /etc/docker/certs.d/$MY_REPO/$MY_REPO.crt
@@ -72,22 +73,13 @@ cd ~ && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/script
 wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/core_images.txt
 wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/app_images.txt 
 ```
-##### # now get the core images
+##### # now get the core images, setting debug mode and a specific version (this will default to core_images.txt list)
 ``` 
-./import-images.py docker $SRC_REPO $MY_REPO -d -t v3.7
+./import-images.py docker $SRC_REPO $MY_REPO -d -t $OCP_VER
 ```
-##### # now get the other app images
+##### # now get the other app images, specifying the app_images.txt list (this will default to 'latest' tag)
 ```
 ./import-images.py docker $SRC_REPO $MY_REPO -d -l app_images.txt
-```
-##### # manually get the etcd and rhel7 images
-```
-skopeo --insecure-policy copy --src-tls-verify=false --dest-tls-verify=false docker://$SRC_REPO/rhel7/etcd docker://$MY_REPO/rhel7/etcd
-skopeo --insecure-policy copy --src-tls-verify=false --dest-tls-verify=false docker://$SRC_REPO/rhel7.4 docker://$MY_REPO/rhel7.4
-```
-###### # sometimes you have to normalize the tags on your core images (like with beta/puddle builds)
-```
-TAG=v3.7.23 REPO=repo.home.nicknach.net; for i in `cat core_images.txt`; do docker pull $REPO/$i:v3.7; docker tag $REPO/$i:v3.7 $REPO/$i:$TAG; docker push $REPO/$i:$TAG; done
 ```
 #### # done with repo box
 
@@ -112,10 +104,11 @@ yum-config-manager --disable \* && rm -rf /etc/yum.repos.d/*.repo && yum clean a
 yum-config-manager --add-repo http://$REPO/repo/rhel-7-server-rpms
 yum-config-manager --add-repo http://$REPO/repo/rhel-7-fast-datapath-rpms
 yum-config-manager --add-repo http://$REPO/repo/rhel-7-server-extras-rpms
-yum-config-manager --add-repo http://$REPO/repo/rhel-7-server-ose-3.7-rpms
+yum-config-manager --add-repo http://$REPO/repo/rhel-7-server-ose-3.9-rpms
 yum-config-manager --add-repo http://$REPO/repo/rhel-server-rhscl-7-rpms
 yum-config-manager --add-repo http://$REPO/repo/rhel-7-server-optional-rpms 
 yum-config-manager --add-repo http://$REPO/repo/rh-gluster-3-for-rhel-7-server-rpms
+yum-config-manager --add-repo http://$REPO/repo/rhel-7-server-ansible-2.4-rpms
 ```
 ##### # add your docker registry
 ```
@@ -140,5 +133,5 @@ journalctl -xlf
 ```
 for i in `oc get is -n openshift |grep -v NAME |awk '{print $1}'`; do oc get is $i -n openshift -o json; done |grep 'not found' |awk '{print $3}' |awk -F \/ '{print $2,$3}' | awk -F \: '{print $1}' |sed 's/ /\//g' |sort -u
 ```
-###### # this will yeild a list of missing images that you can import using the import-images.py script
+###### # this will yield a list of missing images that you can import using the import-images.py script
 ###### # redirect the output to a file (> missing.txt) and then re-run the import-images.py script with '-l missing.txt'
