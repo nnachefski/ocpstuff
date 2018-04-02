@@ -20,7 +20,7 @@ subscription-manager repos \
    --enable=rhel-7-fast-datapath-rpms \
    --enable=rhel-7-server-rhscl-rpms \
    --enable=rhel-7-server-optional-rpms 
-   --enable=rh-gluster-3-for-rhel-7-server-rpms \ 
+   --enable=rh-gluster-3-for-rhel-7-server-rpms
 ```
 ##### # install/enable/start httpd
 ```

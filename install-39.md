@@ -27,7 +27,22 @@ export MY_REPO=$MY_REPO
 export OCP_VER=$OCP_VER
 EOF
 ```
-##### # add your internal repos
+##### # subscribe to RHN
+```
+#subscription-manager register --username=nnachefs@redhat.com --password <REDACTED> --force
+#subscription-manager attach --pool=8a85f98260c27fc50160c323263339ff
+#subscription-manager repos --disable="*"
+#subscription-manager repos \
+#   --enable=rhel-7-server-rpms \
+#   --enable=rhel-7-server-extras-rpms \
+#   --enable=rhel-7-server-ose-3.9-rpms \
+#   --enable=rhel-7-fast-datapath-rpms \
+#   --enable=rhel-server-rhscl-7-rpms \
+#   --enable=rhel-7-server-optional-rpms \
+#   --enable=rhel-7-server-ansible-2.4-rpms \
+#   --enable=rh-gluster-3-for-rhel-7-server-rpms
+```   
+##### # OR add your internal repos (disconnected only)
 ```
 rm -rf /etc/yum.repos.d/* && yum clean all
 yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-ose-3.9-rpms
@@ -39,7 +54,7 @@ yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-optional-rpms
 yum-config-manager --add-repo http://$MY_REPO/repo/rh-gluster-3-for-rhel-7-server-rpms
 yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-ansible-2.4-rpms
 ```
-##### # add the docker repo cert to the pki store
+##### # add the docker repo cert to the pki store (disconnected only)
 ```
 wget http://$MY_REPO/repo/$MY_REPO.crt && mv -f $MY_REPO.crt /etc/pki/ca-trust/source/anchors && restorecon /etc/pki/ca-trust/source/anchors/$MY_REPO.crt && update-ca-trust
 ```
@@ -77,7 +92,7 @@ EOF
 ```
 container-storage-setup
 ```
-##### # add the internal docker registry (if using one)
+##### # add the internal docker registry (disconnected only)
 ```
 sed -i "16,/registries =/s/\[\]/\[\'$MY_REPO\'\]/" /etc/containers/registries.conf
 systemctl restart docker
