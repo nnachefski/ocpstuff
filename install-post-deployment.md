@@ -31,7 +31,7 @@ oc patch ns openshift-ansible-service-broker -p '{"metadata": {"annotations": {"
 ```
 oc patch storageclass glusterfs-storage -p '{"metadata": {"annotations": {"storageclass.kubernetes.io/is-default-class": "true"}}}'
 ```
-##### # set disk resource limits on journald (keeps docker from filling up your disks)
+##### # set disk resource limits on journald (keeps docker logging from filling up your disks)
 ```
 echo SystemMaxFileSize=100M >> /etc/systemd/journald.conf && echo RuntimeMaxFileSize=100M >> /etc/systemd/journald.conf && systemctl restart systemd-journald.service
 ```
