@@ -22,7 +22,7 @@ oc adm policy add-cluster-role-to-user cluster-reader readonly
 oc adm manage-node --selector=region=masters --schedulable=false
 oc adm manage-node --selector=region=infra --schedulable=false
 ```
-##### # pin your metrics and asb projects to infra nodes
+##### # pin your metrics and asb projects to infra nodes (if using HA)
 ```
 oc patch ns openshift-infra -p '{"metadata": {"annotations": {"openshift.io/node-selector": "region=infra"}}}'
 oc patch ns openshift-ansible-service-broker -p '{"metadata": {"annotations": {"openshift.io/node-selector": "region=infra"}}}'
@@ -30,6 +30,10 @@ oc patch ns openshift-ansible-service-broker -p '{"metadata": {"annotations": {"
 ##### # make CNS the default SC
 ```
 oc patch storageclass glusterfs-storage -p '{"metadata": {"annotations": {"storageclass.kubernetes.io/is-default-class": "true"}}}'
+```
+##### # set disk resource limits on journald (keeps docker from filling up your disks)
+```
+echo SystemMaxFileSize=100M >> /etc/systemd/journald.conf && echo RuntimeMaxFileSize=100M >> /etc/systemd/journald.conf && systemctl restart systemd-journald.service
 ```
 ## # Done!
 

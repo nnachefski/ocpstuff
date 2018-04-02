@@ -77,7 +77,7 @@ EOF
 ```
 container-storage-setup
 ```
-##### # add the internal docker registry
+##### # add the internal docker registry (if using one)
 ```
 sed -i "16,/registries =/s/\[\]/\[\'$MY_REPO\'\]/" /etc/containers/registries.conf
 systemctl restart docker
