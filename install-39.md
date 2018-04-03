@@ -111,7 +111,7 @@ yum install -y atomic-openshift-utils
 ```
 ssh-keygen
 ```
-##### # copy keys to all hosts(masters/infras/nodes).  make a list.txt of hostnames/IPs and then do...
+##### # copy key to all hosts(masters/infras/nodes).  make a list.txt of hostnames/IPs and then do...
 ```
 for i in `cat list.txt`; do ssh-copy-id root@$i; done
 ```
