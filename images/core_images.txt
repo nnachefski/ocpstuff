@@ -1,3 +1,4 @@
+openshift3/registry-console
 openshift3/prometheus-node-exporter
 openshift3/prometheus-alertmanager
 openshift3/prometheus-alert-buffer
@@ -37,6 +38,5 @@ openshift3/jenkins-2-rhel7
 openshift3/jenkins-slave-base-rhel7
 openshift3/jenkins-slave-maven-rhel7
 openshift3/jenkins-slave-nodejs-rhel7
-openshift3/registry-console
 openshift3/mediawiki-apb
 openshift3/postgresql-apb
