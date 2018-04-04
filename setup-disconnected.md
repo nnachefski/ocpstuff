@@ -136,3 +136,4 @@ for i in `oc get is -n openshift |grep -v NAME |awk '{print $1}'`; do oc get is 
 ```
 ###### # this will yield a list of missing images that you can import using the import-images.py script
 ###### # redirect the output to a file (> missing.txt) and then re-run the import-images.py script with '-l missing.txt'
+###### # be prepared to pay a storage cost for all those old images.
