@@ -37,7 +37,7 @@ Summary: 4 VMs recommended for single master install.  Additional VM if NFS serv
 Activate the Openshift subscriptions provided by Red Hat. If using a Satellite Server, synchronize the relevant channels to the Satellite Server.
    * rhel-7-server-rpms
    * rhel-7-server-extras-rpms
-   * rhel-7-server-ose-3.7-rpms
+   * rhel-7-server-ose-3.9-rpms
    * rhel-7-fast-datapath-rpms
    * rh-gluster-3-for-rhel-7-server-rpms
 
