@@ -1,0 +1,31 @@
+---
+
+- import_playbook: /usr/share/ansible/openshift-ansible/playbooks/adhoc/uninstall.yml
+
+- name: Tasks for all hosts
+  hosts: all
+  ignore_errors: yes
+  tasks:
+    - name: Stop Docker
+      shell: /usr/bin/docker stop `docker ps -a -q`
+    - name: Remove Docker containers
+      shell: /usr/bin/docker rm `docker ps -a -q`
+    - name: Remove Docker volumes
+      shell: /usr/bin/docker volume rm $(/usr/bin/docker volume ls -q --filter dangling=true)
+    - name: Remove Docker Images
+      shell: /usr/bin/docker rmi --force $(/usr/bin/docker images -q)
+    - name: Remove master folder
+      file: path=/etc/origin/master state=absent
+    - name: Remove node folder
+      file: path=/etc/origin/node state=absent
+
+- name: Tasks for gluster nodes
+  hosts: glusterfs
+  tasks:
+    - name: clear glusterfs drives
+      command: dd if=/dev/zero of=/dev/sdc count=1000 bs=1M
+      ignore_errors: yes
+    - name: clear heketi folder
+      command: rm -rf /var/lib/heketi/*
+    - name: clear glusterd vols
+      command: rm -rf /var/lib/glusterd/vols/*
