@@ -18,3 +18,4 @@ Skip TLS Verification (Insecure) = true
 ```
 ##### # now click on the 'dashboards' tab and you should see "Prometheus Stats" listed
 ##### # click on the 'import' button on the right
+
