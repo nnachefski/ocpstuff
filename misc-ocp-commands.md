@@ -1,4 +1,9 @@
 ### # misc stuff
+##### # login to master box (if you somehow lose your .kube folder)
+```
+export KUBECONFIG=/etc/origin/master/admin.kubeconfig
+oc login -u system:admin
+```
 ##### #  entitle admins group to run pods as root
 ```
 oc adm policy add-scc-to-group anyuid system:admins

@@ -8,6 +8,7 @@
 ```
 export MY_REPO=repo.home.nicknach.net
 export SRC_REPO=download-node-02.eng.bos.redhat.com
+export OCP_VER=3.10
 ```
 ##### # start by connecting your repo box to the RH VPN.  You can setup a command line VPN client by installing these rpms
 ```
@@ -22,24 +23,24 @@ openvpn --config /etc/openvpn/ovpn-phx2-udp.conf
 ###### # your repo box is now connected to the RH vpn
 ##### # now run this command to import the puddle repo
 ```
-yum-config-manager --add-repo http://$SRC_REPO/brewroot/repos/rhaos-3.9-rhel-7-build/latest/x86_64/
+yum-config-manager --add-repo http://$SRC_REPO/brewroot/repos/rhaos-$OCP_VER-rhel-7-build/latest/x86_64/
 ```
-##### # change the name to something more simple (rhaos-3.9)
+##### # change the name to something more simple (rhaos-beta)
 ```
-sed -i 's/\[.*\]/\[rhaos-3.9\]/' /etc/yum.repos.d/download-node-02.eng.bos.redhat.com_brewroot_repos_rhaos-3.9-rhel-7-build_latest_x86_64_.repo
-mv /etc/yum.repos.d/download-node-02.eng.bos.redhat.com_brewroot_repos_rhaos-3.9-rhel-7-build_latest_x86_64_.repo /etc/yum.repos.d/rhaos-3.9.repo
+sed -i "s/\[.*\]/\[rhaos-$OCP_VERT\]/" /etc/yum.repos.d/download-node-02.eng.bos.redhat.com_brewroot_repos_rhaos-$OCP_VER-rhel-7-build_latest_x86_64_.repo
+mv /etc/yum.repos.d/download-node-02.eng.bos.redhat.com_brewroot_repos_rhaos-$OCP_VER-rhel-7-build_latest_x86_64_.repo /etc/yum.repos.d/rhaos-beta.repo
 ```
 ##### # disable gpg checking (for beta/puddle builds only)
 ```
-echo gpgcheck=0 >> /etc/yum.repos.d/rhaos-3.9.repo
+echo gpgcheck=0 >> /etc/yum.repos.d/rhaos-beta.repo
 ```
 ##### # start the reposync
 ```
-cd ~ && reposync -lm --repoid=rhaos-3.9
+cd ~ && reposync -lm --repoid=rhaos-beta
 ```
 ##### # create the repodata xml
 ```
-createrepo rhaos-3.9
+createrepo rhaos-beta
 ```
 
 ##### # run the import-image.py script
@@ -47,15 +48,18 @@ createrepo rhaos-3.9
 cd ~ && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/scripts/import-images.py && chmod +x import-images.py
 wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/core_images.txt
 wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/app_images.txt
-./import-images.py docker $SRC_REPO:8888 $MY_REPO -d -t 3.9
+./import-images.py docker $SRC_REPO:8888 $MY_REPO -d -t $OCP_VER
 ```
 ##### # manually get the etcd and rhel7 images
 ```
 skopeo --insecure-policy copy --src-tls-verify=false --dest-tls-verify=false docker://registry.access.redhat.com/rhel7/etcd docker://$MY_REPO/rhel7/etcd
 skopeo --insecure-policy copy --src-tls-verify=false --dest-tls-verify=false docker://registry.access.redhat.com/rhel7.4 docker://$MY_REPO/rhel7.4
 ```
-### # BEGIN
+#### done with repo box
+
+##### # now on the client systems
 ##### # do this on ALL hosts (master/infra/nodes)
+#### # BEGIN
 ##### # SET THESE VARIABLES ###
 ```
 export ROOT_DOMAIN=ocp.nicknach.net
@@ -66,7 +70,7 @@ export OCP_NFS_SERVER=storage.home.nicknach.net
 export LDAP_SERVER=gw.home.nicknach.net
 export ANSIBLE_HOST_KEY_CHECKING=False
 export MY_REPO=repo.home.nicknach.net
-export OCP_VER=v3.9.14
+export OCP_VER=v3.10
 ```
 ##### # make them persistent 
 ```
@@ -85,7 +89,7 @@ EOF
 ##### # add your internal repos
 ```
 rm -rf /etc/yum.repos.d/* && yum clean all
-yum-config-manager --add-repo http://$MY_REPO/repo/rhaos-3.9
+yum-config-manager --add-repo http://$MY_REPO/repo/rhaos-beta
 yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-fast-datapath-rpms
 yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-extras-rpms
 yum-config-manager --add-repo http://$MY_REPO/repo/rhel-server-rhscl-7-rpms
@@ -94,7 +98,7 @@ yum-config-manager --add-repo http://$MY_REPO/repo/rh-gluster-3-for-rhel-7-serve
 ```
 ##### # disable gpg checks (because these are beta bits)
 ```
-echo gpgcheck=0 >> /etc/yum.repos.d/repo.home.nicknach.net_repo_rhaos-3.9.repo
+echo gpgcheck=0 >> /etc/yum.repos.d/repo.home.nicknach.net_repo_rhaos-beta.repo
 ```
 ##### # install some general pre-req packages
 ``` 
