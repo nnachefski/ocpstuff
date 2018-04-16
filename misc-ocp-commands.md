@@ -1,4 +1,9 @@
 ### # misc stuff
+
+##### # change roles
+```
+oc label node --selector=region=infra node-role.kubernetes.io/infra=true
+```
 ##### # login to master box (if you somehow lose your .kube folder)
 ```
 export KUBECONFIG=/etc/origin/master/admin.kubeconfig
