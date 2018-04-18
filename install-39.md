@@ -64,7 +64,7 @@ yum install -y yum-utils wget git net-tools bind-utils iptables-services bridge-
 ```
 ##### # install openshift client package (oc)
 ```
-yum install -y atomic atomic-openshift-clients
+yum install -y atomic-openshift-clients
 ```
 ##### # install docker
 ```

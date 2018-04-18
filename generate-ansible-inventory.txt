@@ -188,6 +188,24 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_storage_glusterfs_registry_block_storageclass_default=true
 #openshift_storageclass_default=false
 
+
+
+# Grafana Configuration
+#grafana_namespace=openshift-grafana
+#openshift_grafana_namespace=openshift-grafana
+#grafana_datasource_name="prometheus"
+#openshift_grafana_datasource_name="prometheus"
+#grafana_prometheus_namespace="openshift-metrics"
+#openshift_grafana_prometheus_namespace="openshift-metrics"
+#grafana_prometheus_serviceaccount=prometheus
+#openshift_grafana_prometheus_serviceaccount=prometheus
+#grafana_graph_granularity="2m"
+#openshift_grafana_graph_granularity="2m"
+#grafana_node_selector={"region":"primary"}
+#openshift_grafana_node_selector={"region":"primary
+
+
+
 ##  cloud provider configs
 ##  AWS
 #openshift_cloudprovider_kind=aws
