@@ -204,8 +204,6 @@ openshift_storage_glusterfs_wipe=true
 #grafana_node_selector={"region":"primary"}
 #openshift_grafana_node_selector={"region":"primary
 
-
-
 ##  cloud provider configs
 ##  AWS
 #openshift_cloudprovider_kind=aws
