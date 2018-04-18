@@ -21,7 +21,7 @@ subscription-manager repos \
    --enable=rhel-7-fast-datapath-rpms \
    --enable=rhel-7-server-rhscl-rpms \
    --enable=rhel-7-server-ansible-2.4-rpms \
-   --enable=rh-gluster-3-for-rhel-7-server-rpms \
+   --enable=rh-gluster-3-client-for-rhel-7-server-rpms \
    --enable=rhel-7-server-optional-rpms 
 ```
 ##### # install/enable/start httpd
@@ -108,7 +108,7 @@ yum-config-manager --add-repo http://$REPO/repo/rhel-7-server-extras-rpms
 yum-config-manager --add-repo http://$REPO/repo/rhel-7-server-ose-3.9-rpms
 yum-config-manager --add-repo http://$REPO/repo/rhel-server-rhscl-7-rpms
 yum-config-manager --add-repo http://$REPO/repo/rhel-7-server-optional-rpms 
-yum-config-manager --add-repo http://$REPO/repo/rh-gluster-3-for-rhel-7-server-rpms
+yum-config-manager --add-repo http://$REPO/repo/rh-gluster-3-client-for-rhel-7-server-rpms
 yum-config-manager --add-repo http://$REPO/repo/rhel-7-server-ansible-2.4-rpms
 ```
 ##### # add your docker registry
