@@ -29,11 +29,11 @@ oc patch ns openshift-ansible-service-broker -p '{"metadata": {"annotations": {"
 ```
 ##### # make CNS the default SC
 ```
-oc patch storageclass glusterfs-storage -p '{"metadata": {"annotations": {"storageclass.kubernetes.io/is-default-class": "true"}}}'
+#oc patch storageclass glusterfs-storage -p '{"metadata": {"annotations": {"storageclass.kubernetes.io/is-default-class": "true"}}}'
 ```
-##### # set disk resource limits on journald (keeps docker logging from filling up your disks)
+##### # add infra role for infra nodes
 ```
-echo SystemMaxFileSize=100M >> /etc/systemd/journald.conf && echo RuntimeMaxFileSize=100M >> /etc/systemd/journald.conf && systemctl restart systemd-journald.service
+oc label node --selector=region=infra node-role.kubernetes.io/infra=true
 ```
 ## # Done!
 
