@@ -119,7 +119,7 @@ systemctl restart docker
 #### # Troubleshooting disconnected installs
 ##### # during the install, do these commands in separate terminals to trouble shoot any missing images
 ```
-watch -n2 oc adm manage-node --selector= --list-pods -owide
+watch -n2 oc get pods -owide --all-namespaces
 
 and
 
