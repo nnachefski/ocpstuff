@@ -51,7 +51,7 @@ yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-rpms
 yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-extras-rpms
 yum-config-manager --add-repo http://$MY_REPO/repo/rhel-server-rhscl-7-rpms
 yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-optional-rpms 
-yum-config-manager --add-repo http://$MY_REPO/repo/rh-gluster-3-for-rhel-7-server-rpms
+yum-config-manager --add-repo http://$MY_REPO/repo/rh-gluster-3-client-for-rhel-7-server-rpms
 yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-ansible-2.4-rpms
 ```
 ##### # add the docker repo cert to the pki store (disconnected only)
@@ -74,12 +74,6 @@ yum install -y docker docker-logrotate
 ```
 yum install -y cns-deploy heketi-client
 ```
-##### # disable gluster channel now 
-###### # because of python lib conflicts with the base channel
-```
-yum-config-manager --disable repo.home.nicknach.net_repo_rh-gluster-3-for-rhel-7-server-rpms
-```
-
 ##### # configure the docker pool device
 ```
 cat <<EOF > /etc/sysconfig/docker-storage-setup
