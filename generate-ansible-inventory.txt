@@ -187,8 +187,8 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_storage_glusterfs_registry_block_storageclass=true
 #openshift_storage_glusterfs_registry_block_storageclass_default=true
 #openshift_storageclass_default=false
-
-
+openshift_storage_glusterfs_heketi_wipe=true
+openshift_storage_glusterfs_wipe=true
 
 # Grafana Configuration
 #grafana_namespace=openshift-grafana
