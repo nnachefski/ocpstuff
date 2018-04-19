@@ -1,7 +1,7 @@
 #### # Begin post-deployment steps
 ##### # aliases for ops
 ```
-echo alias allpods=\'watch -n1 oc adm manage-node --selector="" --list-pods\' > /etc/profile.d/ocp.sh
+echo alias allpods=\'watch -n2 oc get pods -owide --all-namespaces\' > /etc/profile.d/ocp.sh
 echo alias allpodsp=\'watch -n1 oc adm manage-node --selector="region=primary" --list-pods\' >> /etc/profile.d/ocp.sh
 chmod +x /etc/profile.d/ocp.sh
 ```
