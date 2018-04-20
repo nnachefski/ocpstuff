@@ -1,0 +1,8 @@
+---
+
+- name: Cleanup NFS storage
+  hosts: storage.home.nicknach.net
+  tasks:
+    - name: Cleanup NFS exports
+      shell: for i in `ls /data/openshift/enterprise`; do rm -rf /data/openshift/enterprise/$i/*; done
+      
