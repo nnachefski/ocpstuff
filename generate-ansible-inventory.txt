@@ -136,7 +136,7 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_prometheus_storage_nfs_directory=$OCP_NFS_MOUNT
 ##openshift_prometheus_storage_nfs_options='*(rw,root_squash,sync,no_wdelay)'
 #openshift_prometheus_storage_volume_name=prometheus
-#openshift_prometheus_storage_volume_size=10Gi
+#openshift_prometheus_storage_volume_size=11Gi
 #openshift_prometheus_storage_labels={'storage':'prometheus'}
 #openshift_prometheus_node_selector={'region':'infra'}
 #openshift_prometheus_storage_type='pvc'
@@ -147,7 +147,7 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_prometheus_alertmanager_storage_nfs_directory=$OCP_NFS_MOUNT
 ##openshift_prometheus_alertmanager_storage_nfs_options='*(rw,root_squash,sync,no_wdelay)'
 #openshift_prometheus_alertmanager_storage_volume_name=prometheus-alertmanager
-#openshift_prometheus_alertmanager_storage_volume_size=10Gi
+#openshift_prometheus_alertmanager_storage_volume_size=12Gi
 #openshift_prometheus_alertmanager_storage_labels={'storage':'prometheus-alertmanager'}
 #openshift_prometheus_alertmanager_storage_type='pvc'
 ## For prometheus-alertbuffer
@@ -157,7 +157,7 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_prometheus_alertbuffer_storage_nfs_directory=$OCP_NFS_MOUNT
 ##openshift_prometheus_alertbuffer_storage_nfs_options='*(rw,root_squash,sync,no_wdelay)'
 #openshift_prometheus_alertbuffer_storage_volume_name=prometheus-alertbuffer
-#openshift_prometheus_alertbuffer_storage_volume_size=10Gi
+#openshift_prometheus_alertbuffer_storage_volume_size=13Gi
 #openshift_prometheus_alertbuffer_storage_labels={'storage':'prometheus-alertbuffer'}
 #openshift_prometheus_alertbuffer_storage_type='pvc'
 
