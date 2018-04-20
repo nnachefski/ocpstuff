@@ -26,8 +26,8 @@ Summary: 9 VMs recommended for multi master install.  Additional VM if NFS servi
   * 4 vCPUs
   * 100GB Disk (more is better)
   * RHEL7.4 upgraded to latest patchset
-* Internet connectivity is recommended (via proxy is fine)
-  * HTTPS Whitelist these trusted hosts in proxy (if needed)
+* Internet connectivity is recommended
+  * HTTPS Whitelist these trusted hosts in proxies and/or firewalls (if needed)
 	For content (RPM packages):
 	- subscription.rhn.redhat.com
 	- cdn.redhat.com
