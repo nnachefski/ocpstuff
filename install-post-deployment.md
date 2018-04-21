@@ -27,11 +27,11 @@ oc adm manage-node --selector=region=infra --schedulable=false
 oc patch ns openshift-infra -p '{"metadata": {"annotations": {"openshift.io/node-selector": "region=infra"}}}'
 oc patch ns openshift-ansible-service-broker -p '{"metadata": {"annotations": {"openshift.io/node-selector": "region=infra"}}}'
 ```
-##### # make CNS the default SC
+##### # make CNS the default SC (optional)
 ```
 oc patch storageclass glusterfs-storage -p '{"metadata": {"annotations": {"storageclass.kubernetes.io/is-default-class": "true"}}}'
 ```
-##### # add infra role for infra nodes
+##### # add infra role for infra nodes (work-around)
 ```
 oc label node --selector=region=infra node-role.kubernetes.io/infra=true
 ```

@@ -40,7 +40,7 @@ EOF
 #   --enable=rhel-server-rhscl-7-rpms \
 #   --enable=rhel-7-server-optional-rpms \
 #   --enable=rhel-7-server-ansible-2.4-rpms \
-#   --enable=rh-gluster-3-for-rhel-7-server-rpms
+#   --enable=rh-gluster-3-client-for-rhel-7-server-rpms
 ```   
 ##### # OR add your internal repos (disconnected only)
 ```
@@ -131,8 +131,7 @@ and
 
 journalctl -xlf
 ```
-###### # verify the install was successful
-###### 'oc get nodes'
+###### # verify the install was successful (oc get nodes)
 ### # Now run through the post-deployment steps
 #### # https://github.com/nnachefski/ocpstuff/blob/master/install-post-deployment.md
 
