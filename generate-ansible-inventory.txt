@@ -7,6 +7,7 @@ new_nodes
 #etcd
 #lb
 #glusterfs
+#glusterfs_registry
 
 ## Set variables common for all OSEv3 hosts
 [OSEv3:vars]
@@ -169,26 +170,26 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_master_cluster_hostname=api.$ROOT_DOMAIN
 #openshift_master_cluster_public_hostname=console.$ROOT_DOMAIN
 
-
 ## cns
 #openshift_storage_glusterfs_namespace=app-storage
 #openshift_storage_glusterfs_storageclass=true
 #openshift_hosted_registry_storage_kind=glusterfs
+#openshift_hosted_etcd_storage_kind=glusterfs
+#openshift_hosted_etcd_storage_volume_size=1G
 #openshift_metrics_install_metrics=true
 #openshift_metrics_storage_kind=dynamic
-#openshift_logging_es_pvc_size=10Gi
+##openshift_logging_es_pvc_size=10Gi
 #openshift_logging_install_logging=true
 #openshift_logging_storage_kind=dynamic
 #openshift_storage_glusterfs_block_deploy=true
 #openshift_storage_glusterfs_registry_namespace=infra-storage
-#openshift_storage_glusterfs_registry_storageclass=false
 #openshift_storage_glusterfs_registry_block_deploy=true
 #openshift_storage_glusterfs_registry_block_host_vol_size=50
 #openshift_storage_glusterfs_registry_block_storageclass=true
 #openshift_storage_glusterfs_registry_block_storageclass_default=true
 #openshift_storageclass_default=false
-openshift_storage_glusterfs_heketi_wipe=true
-openshift_storage_glusterfs_wipe=true
+#openshift_storage_glusterfs_heketi_wipe=true
+#openshift_storage_glusterfs_wipe=true
 
 # Grafana Configuration
 #grafana_namespace=openshift-grafana
