@@ -5,6 +5,14 @@ echo alias allpods=\'watch -n2 oc get pods -owide --all-namespaces\' > /etc/prof
 echo alias allpodsp=\'watch -n1 oc adm manage-node --selector="region=primary" --list-pods\' >> /etc/profile.d/ocp.sh
 chmod +x /etc/profile.d/ocp.sh
 ```
+##### # if not using LDAP, you'll need to add some htpasswd users (on all masters)
+```
+#htpasswd -b /etc/origin/master/htpasswd ocpadmin welcome1
+```
+##### # and set cluster-admin perms on admin accounts
+```
+#oc adm policy add-cluster-role-to-user cluster-admin ocpadmin
+```
 ##### # setup group sync and run it once
 ```
 wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/ocp_group_sync.conf -O /etc/origin/master/ocp_group_sync.conf
