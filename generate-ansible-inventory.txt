@@ -7,7 +7,6 @@ new_nodes
 #etcd
 #lb
 #glusterfs
-#glusterfs_registry
 
 ## Set variables common for all OSEv3 hosts
 [OSEv3:vars]
@@ -178,7 +177,8 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_hosted_etcd_storage_volume_size=1G
 #openshift_metrics_install_metrics=true
 #openshift_metrics_storage_kind=dynamic
-##openshift_logging_es_pvc_size=10Gi
+#openshift_metrics_cassandra_pvc_size=10Gi  
+#openshift_logging_es_pvc_size=10Gi
 #openshift_logging_install_logging=true
 #openshift_logging_storage_kind=dynamic
 #openshift_storage_glusterfs_block_deploy=true
@@ -203,10 +203,11 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #grafana_graph_granularity="2m"
 #openshift_grafana_graph_granularity="2m"
 #grafana_node_selector={"region":"primary"}
-#openshift_grafana_node_selector={"region":"primary
+#openshift_grafana_node_selector={"region":"primary"}
 
 ##  cloud provider configs
 ##  AWS
+#openshift_clusterid=clusterid
 #openshift_cloudprovider_kind=aws
 #openshift_cloudprovider_aws_access_key=
 #openshift_cloudprovider_aws_secret_key=
@@ -265,7 +266,7 @@ openshift_master_default_subdomain=$APPS_DOMAIN
 ## host group for masters
 [masters]
 master01.$ROOT_DOMAIN
-#master02.$ROOT_DOMAIN
+#master02.$ROOT_DOMAIN openshift_public_hostname=console.openshiftdemo.com
 #master03.$ROOT_DOMAIN
 
 [nodes]
@@ -284,11 +285,6 @@ node03.$ROOT_DOMAIN openshift_node_labels="{'region': 'primary', 'zone': 'a', 'r
 #node01.ocp.nicknach.net glusterfs_devices='[ "/dev/vdc" ]'
 #node02.ocp.nicknach.net glusterfs_devices='[ "/dev/vdc" ]'
 #node03.ocp.nicknach.net glusterfs_devices='[ "/dev/vdc" ]'
-
-#[glusterfs_registry]
-#infra01.ocp.nicknach.net glusterfs_devices='[ "/dev/vdc" ]'
-#infra02.ocp.nicknach.net glusterfs_devices='[ "/dev/vdc" ]'
-#infra03.ocp.nicknach.net glusterfs_devices='[ "/dev/vdc" ]'
 
 [new_nodes]
 ## hold for use when adding new nodes
