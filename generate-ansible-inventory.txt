@@ -138,7 +138,6 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_prometheus_storage_volume_name=prometheus
 #openshift_prometheus_storage_volume_size=11Gi
 #openshift_prometheus_storage_labels={'storage':'prometheus'}
-#openshift_prometheus_node_selector={'region':'infra'}
 #openshift_prometheus_storage_type='pvc'
 ## For prometheus-alertmanager
 #openshift_prometheus_alertmanager_storage_kind=nfs
