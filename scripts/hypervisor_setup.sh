@@ -14,4 +14,4 @@ cp /lib/systemd/system/dhcrelay.service /etc/systemd/system/
 sed 's/pid/pid $DHCP_SERVER/' -i /etc/systemd/system/dhcrelay.service
 systemctl --system daemon-reload
 systemctl enable dhcrelay --now
-yum -y install cuda-8-0
+yum -y install cuda-9-0
