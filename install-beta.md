@@ -140,7 +140,7 @@ yum -y update
 ###### # reboot if necessary 
 ## #  On first master only now (or bastion host)
 ```
-yum install -y atomic-openshift-utils
+yum install -y atomic-openshift-playbooks
 ```
 ###### # this will install openshift-ansible and dependencies 
 ##### #  make password-less key for openshift-ansible usage
