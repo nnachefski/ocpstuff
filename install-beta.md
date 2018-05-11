@@ -95,6 +95,7 @@ yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-extras-rpms
 yum-config-manager --add-repo http://$MY_REPO/repo/rhel-server-rhscl-7-rpms
 yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-optional-rpms 
 yum-config-manager --add-repo http://$MY_REPO/repo/rh-gluster-3-client-for-rhel-7-server-rpms
+yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-ansible-2.4-rpms
 ```
 ##### # disable gpg checks (because these are beta bits)
 ```
