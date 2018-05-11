@@ -13,6 +13,7 @@ new_nodes
 openshift_deployment_type=openshift-enterprise
 #openshift_deployment_type=origin
 #containerized=true
+openshift_enable_unsupported_configurations=True
 
 ##internal image repos
 ##openshift_additional_repos=[{'id': 'ose-devel', 'name': 'rhaos-3.9', 'baseurl': 'http://$MY_REPO/repo/rhaos-3.9', 'enabled': 1, 'gpgcheck': 0}]
