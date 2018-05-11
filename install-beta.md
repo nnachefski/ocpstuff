@@ -27,7 +27,7 @@ yum-config-manager --add-repo http://$SRC_REPO/brewroot/repos/rhaos-$OCP_VER-rhe
 ```
 ##### # change the name to something more simple (rhaos-beta)
 ```
-sed -i "s/\[.*\]/\[rhaos-$OCP_VERT\]/" /etc/yum.repos.d/download-node-02.eng.bos.redhat.com_brewroot_repos_rhaos-$OCP_VER-rhel-7-build_latest_x86_64_.repo
+sed -i "s/\[.*\]/\[rhaos-beta\]/" /etc/yum.repos.d/download-node-02.eng.bos.redhat.com_brewroot_repos_rhaos-$OCP_VER-rhel-7-build_latest_x86_64_.repo
 mv /etc/yum.repos.d/download-node-02.eng.bos.redhat.com_brewroot_repos_rhaos-$OCP_VER-rhel-7-build_latest_x86_64_.repo /etc/yum.repos.d/rhaos-beta.repo
 ```
 ##### # disable gpg checking (for beta/puddle builds only)
@@ -135,7 +135,7 @@ systemctl restart docker
 ```
 ##### # make sure your nodes are up to date
 ```
-yum -y update --disablerepo="$MY_REPO""_repo_rh-gluster-3-for-rhel-7-server-rpms"
+yum -y update
 ```
 ###### # reboot if necessary 
 ## #  On first master only now (or bastion host)
