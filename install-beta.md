@@ -8,7 +8,7 @@
 ```
 export MY_REPO=repo.home.nicknach.net
 export SRC_REPO=download-node-02.eng.bos.redhat.com
-export OCP_VER=3.10
+export OCP_VER=3.10.0
 ```
 ##### # start by connecting your repo box to the RH VPN.  You can setup a command line VPN client by installing these rpms
 ```
@@ -70,7 +70,7 @@ export OCP_NFS_SERVER=storage.home.nicknach.net
 export LDAP_SERVER=gw.home.nicknach.net
 export ANSIBLE_HOST_KEY_CHECKING=False
 export MY_REPO=repo.home.nicknach.net
-export OCP_VER=v3.10
+export OCP_VER=v3.10.0
 ```
 ##### # make them persistent 
 ```
