@@ -299,9 +299,9 @@ node03.$ROOT_DOMAIN openshift_node_labels="{'region': 'primary', 'zone': 'a', 'r
 
 ## if using gluster (Container Native Storage)
 #[glusterfs]
-#node01.ocp.nicknach.net glusterfs_devices='[ "/dev/vdc" ]'
-#node02.ocp.nicknach.net glusterfs_devices='[ "/dev/vdc" ]'
-#node03.ocp.nicknach.net glusterfs_devices='[ "/dev/vdc" ]'
+#infra01.ocp.nicknach.net glusterfs_devices='[ "/dev/vdc" ]'
+#infra02.ocp.nicknach.net glusterfs_devices='[ "/dev/vdc" ]'
+#infra03.ocp.nicknach.net glusterfs_devices='[ "/dev/vdc" ]'
 
 [new_nodes]
 ## hold for use when adding new nodes
