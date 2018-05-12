@@ -134,6 +134,10 @@ container-storage-setup
 sed -i "16,/registries =/s/\[\]/\[\'$MY_REPO\'\]/" /etc/containers/registries.conf
 systemctl restart docker
 ```
+##### # add the registry mirror cert
+```
+wget http://$REPO/repo/$REPO.crt && mv -f $REPO.crt /etc/pki/ca-trust/source/anchors && restorecon /etc/pki/ca-trust/source/anchors/$REPO.crt && update-ca-trust
+```
 ##### # make sure your nodes are up to date
 ```
 yum -y update
