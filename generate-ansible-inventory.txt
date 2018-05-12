@@ -72,6 +72,7 @@ ansible_ssh_user=root
 ## htpasswd file auth
 openshift_master_identity_providers=[{'name': 'htpasswd_auth', 'login': 'true', 'challenge': 'true', 'kind': 'HTPasswdPasswordIdentityProvider'}]
 #openshift_master_htpasswd_users={'ocpuser':'welcome1'}
+#openshift_master_htpasswd_users={'testuser':'$apr1$azF6n0fo$khEfbcGI6TiDYtv3gaOLm0'}
 
 ## ldap auth (AD)
 #openshift_master_identity_providers=[{"name":"NNWIN","challenge":true,"login":true,"kind":"LDAPPasswordIdentityProvider","attributes":{"id":["dn"],"email":["mail"],"name":["cn"],"preferredUsername":["sAMAccountName"]},"bindDN":"CN=SVC-nn-ose,OU=SVC,OU=FNA,DC=nnwin,DC=ad,DC=nncorp,DC=com","bindPassword":"<REDACTED>","insecure":true,"url":"ldap://uswin.nicknach.com:389/DC=uswin,DC=ad,DC=nncorp,DC=com?sAMAccountName?sub"}]
