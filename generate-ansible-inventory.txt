@@ -70,7 +70,7 @@ ansible_ssh_user=root
 
 ## authentication stuff
 ## htpasswd file auth
-openshift_master_identity_providers=[{'name': 'htpasswd_auth', 'login': 'true', 'challenge': 'true', 'kind': 'HTPasswdPasswordIdentityProvider'}]
+openshift_master_identity_providers=[{'name': 'htpasswd_auth', 'login': 'true', 'challenge': 'true', 'kind': 'HTPasswdPasswordIdentityProvider', 'filename': '/etc/origin/master/htpasswd'}]
 #openshift_master_htpasswd_users={'ocpuser':'welcome1'}
 #openshift_master_htpasswd_users={'testuser':'$apr1$azF6n0fo$khEfbcGI6TiDYtv3gaOLm0'}
 
