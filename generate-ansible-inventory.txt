@@ -162,6 +162,9 @@ openshift_master_identity_providers=[{'name': 'htpasswd_auth', 'login': 'true', 
 #openshift_prometheus_alertbuffer_storage_labels={'storage':'prometheus-alertbuffer'}
 #openshift_prometheus_alertbuffer_storage_type='pvc'
 
+# temp fix
+openshift_prometheus_node_exporter_image_version=$OCP_VER
+
 ## disable checks
 #openshift_disable_check=disk_availability,docker_storage,memory_availability,docker_image_availability,package_availability,package_version
 
