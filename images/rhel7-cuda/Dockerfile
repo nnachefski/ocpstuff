@@ -2,6 +2,8 @@ FROM registry.access.redhat.com/rhel7.4
 
 ENV DNN=http://repo.home.nicknach.net/repo/nvidia/cudnn-8.0-linux-x64-v6.0.tgz \
 	CUDA=cuda-8-0
+
+ENV NVIDIA_DRIVER_CAPABILITES=compute,utility
 	
 RUN yum -y install wget cmake gcc gcc-c++ git make patch pciutils unzip vim-enhanced && yum clean all
 RUN yum -y install $CUDA && yum clean all
