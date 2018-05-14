@@ -11,7 +11,7 @@ export OCP_NFS_SERVER=storage.home.nicknach.net
 export LDAP_SERVER=gw.home.nicknach.net
 export ANSIBLE_HOST_KEY_CHECKING=False
 export MY_REPO=repo.home.nicknach.net
-export OCP_VER=v3.9.14
+export OCP_VER=v3.9.25
 ```
 ##### # make them persistent 
 ```
@@ -60,7 +60,7 @@ wget http://$MY_REPO/repo/$MY_REPO.crt && mv -f $MY_REPO.crt /etc/pki/ca-trust/s
 ```
 ##### # install some general pre-req packages
 ``` 
-yum install -y yum-utils wget git net-tools bind-utils iptables-services bridge-utils bash-completion nfs-utils dstat mlocate
+yum install -y yum-utils wget git net-tools bind-utils iptables-services bridge-utils bash-completion nfs-utils dstat mlocate && updatedb
 ```
 ##### # install openshift client package (oc)
 ```
