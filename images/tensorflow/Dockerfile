@@ -3,7 +3,7 @@ FROM rhel7-cuda:latest
 ENV APP_DIR=/opt/ml-on-ocp
 ENV NVIDIA_VISIBLE_DEVICES=all
 ENV NVIDIA_DRIVER_CAPABILITIES=compute,utility
-ENV NVIDIA_REQUIRE_CUDA'"cuda>=8.0"
+ENV NVIDIA_REQUIRE_CUDA'="cuda>=8.0"
 
 RUN yum -y install python-pip python-devel && yum clean all
 RUN pip install --no-cache-dir --upgrade pip
