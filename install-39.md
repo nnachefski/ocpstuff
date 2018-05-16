@@ -88,8 +88,8 @@ container-storage-setup
 ```
 ##### # add the internal docker registry (disconnected only)
 ```
-sed -i "16,/registries =/s/\[\]/\[\'$MY_REPO\'\]/" /etc/containers/registries.conf
-systemctl restart docker
+#sed -i "16,/registries =/s/\[\]/\[\'$MY_REPO\'\]/" /etc/containers/registries.conf
+#systemctl restart docker
 ```
 ##### # make sure your nodes are up-to-date
 ```
@@ -112,15 +112,12 @@ for i in `cat list.txt`; do ssh-copy-id root@$i; done
 ##### # create your ansible hosts (inventory) file 
 ###### # (see below link for creating this file)
 https://raw.githubusercontent.com/nnachefski/ocpstuff/master/generate-ansible-inventory.txt
-##### # now run the ansible playbook to install
-
-First run
+# Verify the pre-reqs are done properly
 
 ```
 ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/prerequisites.yml
 ```
-Then run
-
+##### # now run the ansible playbook to deploy
 ```
 ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/deploy_cluster.yml
 ```
