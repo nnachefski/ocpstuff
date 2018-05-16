@@ -41,7 +41,7 @@ oc patch storageclass glusterfs-storage -p '{"metadata": {"annotations": {"stora
 ```
 ##### # add infra role for infra nodes (work-around)
 ```
-oc label node --selector=region=infra node-role.kubernetes.io/infra=true
+#oc label node --selector=region=infra node-role.kubernetes.io/infra=true
 ```
 ## # Done!
 
