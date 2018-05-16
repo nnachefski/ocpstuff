@@ -113,6 +113,14 @@ for i in `cat list.txt`; do ssh-copy-id root@$i; done
 ###### # (see below link for creating this file)
 https://raw.githubusercontent.com/nnachefski/ocpstuff/master/generate-ansible-inventory.txt
 ##### # now run the ansible playbook to install
+
+First run
+
+```
+ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/prerequisites.yml
+```
+Then run
+
 ```
 ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/deploy_cluster.yml
 ```
