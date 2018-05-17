@@ -5,7 +5,11 @@ FROM registry.access.redhat.com/rhel7.4
 
 ENV NVIDIA_VISIBLE_DEVICES=all
 ENV NVIDIA_DRIVER_CAPABILITIES=compute,utility
+<<<<<<< HEAD
 ENV NVIDIA_REQUIRE_CUDA="cuda>=8.0" 
+=======
+ENV NVIDIA_REQUIRE_CUDA="cuda>=8.0"
+>>>>>>> branch 'master' of https://github.com/nnachefski/ocpstuff.git
 	
 #RUN yum -y install wget cmake gcc gcc-c++ git make patch pciutils unzip vim-enhanced && yum clean all
 #RUN yum -y install $CUDA && yum clean all
