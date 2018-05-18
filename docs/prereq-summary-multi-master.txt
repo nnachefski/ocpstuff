@@ -7,25 +7,25 @@ Summary: 9 VMs recommended for multi master install.  Additional VM if NFS servi
   * 4 vCPUs (more is better)
   * 20GB Disk (for OS)
   * 30GB Disk (for Docker, raw/unformatted)
-  * RHEL7.4 upgraded to latest patchset
+  * RHEL7.5 upgraded to latest patchset
 * Infrastructure Nodes (3 VMs required)
   * 32GB RAM (more is better)
   * 4 vCPUs (more is better)
   * 20GB Disk (for OS)
   * 30GB Disk (for Docker, raw/unformatted)
-  * RHEL7.4 upgraded to latest patchset
+  * RHEL7.5 upgraded to latest patchset
 * Application Nodes (3 VMs recommended) 
   * 32GB RAM (more is better)
   * 4 vCPUs (more is better)
   * 20GB Disk (for OS)
   * 30GB Disk (for Docker, raw/unformatted)
-  * RHEL7.4 upgraded to latest patchset
+  * RHEL7.5 upgraded to latest patchset
   * 50GB Disk (for CNS, raw/unformatted)
 * Additional VM if NFS is needed
   * 8GB RAM
   * 4 vCPUs
   * 100GB Disk (more is better)
-  * RHEL7.4 upgraded to latest patchset
+  * RHEL7.5 upgraded to latest patchset
 * Internet connectivity is recommended
   * HTTPS Whitelist these trusted hosts in proxies and/or firewalls (if needed)
 	For content (RPM packages):
@@ -52,6 +52,10 @@ Additional Considerations:
    1. RHEL7.4 (Vanilla ISO is recommended)
     - The “Minimum” installation is recommended
    2. SELinux must be in “Enforcing” (this is the default in vanilla image)
+   	- test with 'getenforce'
    3. NetworkManager must be enabled (this is the default in vanilla image)
+    - test with 'nmcli dev status'
    4. iptables must be enabled (this is the default in vanilla image)
+    - test with 'systemctl status iptables'
+
     
