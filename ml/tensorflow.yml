@@ -1,0 +1,83 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: nvidia-deviceplugin
+  namespace: nvidia
+  selfLink: /api/v1/namespaces/nvidia/serviceaccounts/nvidia-deviceplugin
+
+allowHostDirVolumePlugin: true
+allowHostIPC: true
+allowHostNetwork: true
+allowHostPID: true
+allowHostPorts: true
+allowPrivilegedContainer: true
+allowedCapabilities:
+- '*'
+allowedFlexVolumes: null
+apiVersion: v1
+defaultAddCapabilities:
+- '*'
+fsGroup:
+ type: RunAsAny
+groups:
+- system:cluster-admins
+- system:nodes
+- system:masters
+kind: SecurityContextConstraints
+metadata:
+ annotations:
+   kubernetes.io/description: anyuid provides all features of the restricted SCC
+     but allows users to run with any UID and any GID.
+ creationTimestamp: null
+ name: nvidia-deviceplugin
+priority: 10
+readOnlyRootFilesystem: false
+requiredDropCapabilities:
+runAsUser:
+ type: RunAsAny
+seLinuxContext:
+ type: RunAsAny
+seccompProfiles:
+- '*'
+supplementalGroups:
+ type: RunAsAny
+users:
+- system:serviceaccount:nvidia:nvidia-deviceplugin
+volumes:
+- '*'
+
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  name: nvidia-device-plugin-daemonset
+  namespace: nvidia 
+spec:
+ template:
+   metadata:
+     labels:
+       name: nvidia-device-plugin-ds
+   spec:
+     priorityClassName: system-node-critical
+     affinity:
+       nodeAffinity:
+         requiredDuringSchedulingIgnoredDuringExecution:
+           nodeSelectorTerms:
+           - matchExpressions:
+             - key: openshift.com/gpu-accelerator 
+               operator: Exists
+     serviceAccount: nvidia-deviceplugin
+     serivceAccountName: nvidia-deviceplugin
+     hostNetwork: true
+     hostPID: true
+     containers:
+     - image: nvidia/k8s-device-plugin:1.9
+       name: nvidia-device-plugin-ctr
+       securityContext:
+         privileged: true
+       volumeMounts:
+         - name: device-plugin
+           mountPath: /var/lib/kubelet/device-plugins
+     volumes:
+       - name: device-plugin
+         hostPath:
+           path: /var/lib/kubelet/device-plugins
