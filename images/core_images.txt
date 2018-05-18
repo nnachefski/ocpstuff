@@ -1,6 +1,7 @@
 openshift3/metrics-schema-installer
 openshift3/ose-node
 openshift3/ose-control-plane
+rhgs3/rhgs-gluster-block-prov-rhel7
 openshift3/registry-console
 openshift3/prometheus-node-exporter
 openshift3/prometheus-alertmanager
