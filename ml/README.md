@@ -7,7 +7,8 @@ oc import-image repo.home.nicknach.net/tensorflow/tensorflow:latest-gpu -n opens
 ```
 ##### # now run the template to create serviceaccount
 ```
-oc create -f 
+oc create -f https://raw.githubusercontent.com/nnachefski/ocpstuff/master/ml/tensorflow.yml
+```
 ##### # now use new-app to launch the image
 ```
 oc new-app -i tensorflow:latest-gpu -e NVIDIA_VISIBLE_DEVICES=all -e NVIDIA_DRIVER_CAPABILITIES="compute,utility" -e NVIDIA_REQUIRE_CUDA="cuda>=8.0"
