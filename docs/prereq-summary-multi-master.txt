@@ -52,7 +52,7 @@ Additional Considerations:
    1. RHEL7.4 (Vanilla ISO is recommended)
     - The “Minimum” installation is recommended
    2. SELinux must be in “Enforcing” (this is the default in vanilla image)
-   	- test with 'getenforce'
+    - test with 'getenforce'
    3. NetworkManager must be enabled (this is the default in vanilla image)
     - test with 'nmcli dev status'
    4. iptables must be enabled (this is the default in vanilla image)
