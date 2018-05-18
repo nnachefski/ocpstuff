@@ -1,4 +1,4 @@
-﻿https://docs.openshift.com/container-platform/latest/install_config/install/planning.html
+﻿https://docs.openshift.com/container-platform/3.9/install_config/install/planning.html
 
 Summary: 9 VMs recommended for multi master install.  Additional VM if NFS services are needed.
 * Infrastructure (physical or virtual machines, assuming virtual):
@@ -33,7 +33,6 @@ Summary: 9 VMs recommended for multi master install.  Additional VM if NFS servi
 	- cdn.redhat.com
 	For docker registry:
 	- registry.access.redhat.com
-
 * DNS Requirements 
   * Choose a domain name for Openshift – Example: ocp.example.com
 * Create a wildcard entry in parent DNS zone that points to infra structure VMs (round robin)
