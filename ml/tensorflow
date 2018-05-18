@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: 2018-05-18T18:03:52Z
+  name: nvidia-deviceplugin
+  namespace: nvidia
+  selfLink: /api/v1/namespaces/nvidia/serviceaccounts/nvidia-deviceplugin
