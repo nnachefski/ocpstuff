@@ -56,5 +56,4 @@ Additional Considerations:
     - Test with 'nmcli dev status'
    4. iptables must be enabled (this is the default in vanilla image)
     - Test with 'systemctl status iptables'
-
     
