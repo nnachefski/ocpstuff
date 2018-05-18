@@ -1,3 +1,18 @@
+apiVersion: project.openshift.io/v1
+kind: Project
+metadata:
+  annotations:
+    openshift.io/description: ""
+    openshift.io/display-name: ""
+  name: nvidia
+  selfLink: /apis/project.openshift.io/v1/projects/nvidia
+spec:
+  finalizers:
+  - openshift.io/origin
+  - kubernetes
+status:
+  phase: Active
+
 apiVersion: v1
 kind: ServiceAccount
 metadata:
