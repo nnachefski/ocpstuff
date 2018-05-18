@@ -42,7 +42,7 @@ EOF
 #   --enable=rhel-7-server-ansible-2.4-rpms \
 #   --enable=rh-gluster-3-client-for-rhel-7-server-rpms
 ```   
-##### # OR add your internal repos (disconnected only)
+##### # OR add your internal repos (for disconnected installs)
 ```
 rm -rf /etc/yum.repos.d/* && yum clean all
 yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-ose-3.9-rpms
@@ -54,7 +54,7 @@ yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-optional-rpms
 yum-config-manager --add-repo http://$MY_REPO/repo/rh-gluster-3-client-for-rhel-7-server-rpms
 yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-ansible-2.4-rpms
 ```
-##### # add the docker repo cert to the pki store (disconnected only)
+##### # add the docker repo cert to the pki store (for disconnected installs)
 ```
 wget http://$MY_REPO/repo/$MY_REPO.crt && mv -f $MY_REPO.crt /etc/pki/ca-trust/source/anchors && restorecon /etc/pki/ca-trust/source/anchors/$MY_REPO.crt && update-ca-trust
 ```
