@@ -107,7 +107,7 @@ for i in `cat list.txt`; do ssh-copy-id root@$i; done
 ##### # create your ansible hosts (inventory) file 
 ###### # (see below link for creating this file)
 https://raw.githubusercontent.com/nnachefski/ocpstuff/master/generate-ansible-inventory.txt
-##### run the pre-req check
+##### # run the pre-req check
 ```
 ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/prerequisites.yml
 ```
