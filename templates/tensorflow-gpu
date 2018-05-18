@@ -1,0 +1,185 @@
+apiVersion: project.openshift.io/v1
+kind: Project
+metadata:
+  annotations:
+    openshift.io/description: ""
+    openshift.io/display-name: ""
+    openshift.io/requester: system:admin
+    openshift.io/sa.scc.mcs: s0:c12,c4
+    openshift.io/sa.scc.supplemental-groups: 1000140000/10000
+    openshift.io/sa.scc.uid-range: 1000140000/10000
+  name: nvidia
+  selfLink: /apis/project.openshift.io/v1/projects/nvidia
+spec:
+  finalizers:
+  - openshift.io/origin
+  - kubernetes
+status:
+  phase: Active
+apiVersion: v1
+items:
+- apiVersion: apps.openshift.io/v1
+  kind: DeploymentConfig
+  metadata:
+    annotations:
+      openshift.io/generated-by: OpenShiftWebConsole
+    generation: 12
+    labels:
+      app: tensorflow
+    name: tensorflow
+    namespace: nvidia
+    resourceVersion: "79726"
+    selfLink: /apis/apps.openshift.io/v1/namespaces/nvidia/deploymentconfigs/tensorflow
+  spec:
+    replicas: 1
+    selector:
+      app: tensorflow
+      deploymentconfig: tensorflow
+    strategy:
+      activeDeadlineSeconds: 21600
+      resources: {}
+      rollingParams:
+        intervalSeconds: 1
+        maxSurge: 25%
+        maxUnavailable: 25%
+        timeoutSeconds: 600
+        updatePeriodSeconds: 1
+      type: Rolling
+    template:
+      metadata:
+        annotations:
+          openshift.io/generated-by: OpenShiftWebConsole
+        creationTimestamp: null
+        labels:
+          app: tensorflow
+          deploymentconfig: tensorflow
+      spec:
+        containers:
+        - env:
+          - name: NVIDIA_VISIBLE_DEVICES
+            value: all
+          - name: NVIDIA_DRIVER_CAPABILITIES
+            value: compute,utility
+          - name: NVIDIA_REQUIRE_CUDA
+            value: cuda>=8.0
+          image: tensorflow/tensorflow@sha256:d31c50ce2d31a21cb5396be59fcab4f8dba405dda2fcaf0f747a407ca277c9f0
+          imagePullPolicy: IfNotPresent
+          name: tensorflow
+          ports:
+          - containerPort: 6006
+            protocol: TCP
+          - containerPort: 8888
+            protocol: TCP
+          resources:
+            limits:
+              nvidia.com/gpu: "1"
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+    test: false
+    triggers:
+    - type: ConfigChange
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+        - tensorflow
+        from:
+          kind: ImageStreamTag
+          name: tensorflow:latest-gpu
+          namespace: nvidia
+        lastTriggeredImage: tensorflow/tensorflow@sha256:d31c50ce2d31a21cb5396be59fcab4f8dba405dda2fcaf0f747a407ca277c9f0
+      type: ImageChange
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: 2018-05-18T19:13:18Z
+      lastUpdateTime: 2018-05-18T19:13:18Z
+      message: replication controller "tensorflow-7" successfully rolled out
+      reason: NewReplicationControllerAvailable
+      status: "True"
+      type: Progressing
+    - lastTransitionTime: 2018-05-18T20:29:53Z
+      lastUpdateTime: 2018-05-18T20:29:53Z
+      message: Deployment config has minimum availability.
+      status: "True"
+      type: Available
+    details:
+      causes:
+      - type: ConfigChange
+      message: config change
+    latestVersion: 7
+    observedGeneration: 12
+    readyReplicas: 1
+    replicas: 1
+    unavailableReplicas: 0
+    updatedReplicas: 1
+- apiVersion: route.openshift.io/v1
+  kind: Route
+  metadata:
+    annotations:
+      openshift.io/host.generated: "true"
+    creationTimestamp: 2018-05-18T18:41:45Z
+    labels:
+      app: tensorflow
+    name: tensorflow
+    namespace: nvidia
+    resourceVersion: "58695"
+    selfLink: /apis/route.openshift.io/v1/namespaces/nvidia/routes/tensorflow
+    uid: 1d7f29f0-5acb-11e8-ba23-525400185801
+  spec:
+    host: tensorflow-nvidia.apps.ocp.nicknach.net
+    port:
+      targetPort: 8888-tcp
+    to:
+      kind: Service
+      name: tensorflow
+      weight: 100
+    wildcardPolicy: None
+  status:
+    ingress:
+    - conditions:
+      - lastTransitionTime: 2018-05-18T18:41:45Z
+        status: "True"
+        type: Admitted
+      host: tensorflow-nvidia.apps.ocp.nicknach.net
+      routerName: router
+      wildcardPolicy: None
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      openshift.io/generated-by: OpenShiftWebConsole
+    creationTimestamp: 2018-05-18T18:41:27Z
+    labels:
+      app: tensorflow
+    name: tensorflow
+    namespace: nvidia
+    resourceVersion: "58607"
+    selfLink: /api/v1/namespaces/nvidia/services/tensorflow
+    uid: 12991c4e-5acb-11e8-ba23-525400185801
+  spec:
+    clusterIP: 172.30.154.80
+    ports:
+    - name: 6006-tcp
+      port: 6006
+      protocol: TCP
+      targetPort: 6006
+    - name: 8888-tcp
+      port: 8888
+      protocol: TCP
+      targetPort: 8888
+    selector:
+      deploymentconfig: tensorflow
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+kind: List
+metadata:
+  resourceVersion: ""
+  selfLink: ""
+  
