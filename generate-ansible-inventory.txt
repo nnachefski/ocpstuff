@@ -52,6 +52,17 @@ openshift_deployment_type=openshift-enterprise
 #openshift_storage_glusterfs_heketi_image=$MY_REPO/rhgs3/rhgs-volmanager-rhel7
 #openshift_storage_glusterfs_heketi_version=latest
 
+## temp fix
+#openshift_prometheus_node_exporter_image_version=$OCP_VER
+
+## disable checks
+#openshift_disable_check=disk_availability,docker_storage,memory_availability,docker_image_availability,package_availability,package_version
+
+## cluster stuff (uncomment for multi-master mode)
+#openshift_master_cluster_method=native
+#openshift_master_cluster_hostname=api.$ROOT_DOMAIN
+#openshift_master_cluster_public_hostname=console.$ROOT_DOMAIN
+
 ## release ver
 #openshift_release=$OCP_VER
 #openshift_image_tag=$OCP_VER
@@ -70,9 +81,8 @@ ansible_ssh_user=root
 
 ## authentication stuff
 ## htpasswd file auth
-openshift_master_identity_providers=[{'name': 'htpasswd_auth', 'login': 'true', 'challenge': 'true', 'kind': 'HTPasswdPasswordIdentityProvider', 'filename': '/etc/origin/master/htpasswd'}]
-openshift_master_htpasswd_users={'ocpuser':'welcome1'}
-openshift_master_htpasswd_users={'testuser':'\$apr1\$azF6n0fo\$khEfbcGI6TiDYtv3gaOLm0'}
+#openshift_master_identity_providers=[{'name': 'htpasswd_auth', 'login': 'true', 'challenge': 'true', 'kind': 'HTPasswdPasswordIdentityProvider', 'filename': '/etc/origin/master/htpasswd'}]
+#openshift_master_htpasswd_users={'testuser':'\$apr1\$azF6n0fo\$khEfbcGI6TiDYtv3gaOLm0'}
 
 ## ldap auth (AD)
 #openshift_master_identity_providers=[{"name":"NNWIN","challenge":true,"login":true,"kind":"LDAPPasswordIdentityProvider","attributes":{"id":["dn"],"email":["mail"],"name":["cn"],"preferredUsername":["sAMAccountName"]},"bindDN":"CN=SVC-nn-ose,OU=SVC,OU=FNA,DC=nnwin,DC=ad,DC=nncorp,DC=com","bindPassword":"<REDACTED>","insecure":true,"url":"ldap://uswin.nicknach.com:389/DC=uswin,DC=ad,DC=nncorp,DC=com?sAMAccountName?sub"}]
@@ -85,7 +95,8 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_master_named_certificates=[{"certfile": "/etc/origin/master/ocp.nicknach.net.crt", "keyfile": "/etc/origin/master/ocp.nicknach.net.key", "names": ["console.ocp.nicknach.net"]}]
 #openshift_master_overwrite_named_certificates=false
 
-## registry on nfs
+### everything on nfs
+## registry
 #openshift_hosted_registry_storage_kind=nfs
 #openshift_hosted_registry_storage_access_modes=['ReadWriteMany']
 #openshift_hosted_registry_storage_host=$OCP_NFS_SERVER
@@ -93,8 +104,7 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 ##openshift_hosted_registry_storage_nfs_options='*(rw,root_squash,sync,no_wdelay)'
 #openshift_hosted_registry_storage_volume_name=docker-registry
 #openshift_hosted_registry_storage_volume_size=50Gi
-
-## etcd on nfs
+## etcd
 #openshift_hosted_etcd_storage_kind=nfs
 #openshift_hosted_etcd_storage_access_modes=["ReadWriteOnce"]
 #openshift_hosted_etcd_storage_host=$OCP_NFS_SERVER
@@ -103,8 +113,7 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_hosted_etcd_storage_volume_name=etcd 
 #openshift_hosted_etcd_storage_volume_size=1Gi
 #openshift_hosted_etcd_storage_labels={'storage':'etcd'}
-
-## logging on nfs
+## logging
 #openshift_logging_install_logging=true
 #openshift_logging_storage_kind=nfs
 #openshift_logging_storage_access_modes=['ReadWriteOnce']
@@ -115,8 +124,7 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_logging_storage_volume_size=10Gi
 #openshift_logging_storage_labels={'storage':'logging'}
 #openshift_logging_es_pv_selector=region=infra
-
-## metrics on nfs
+## metrics
 #openshift_metrics_install_metrics=true
 #openshift_metrics_storage_kind=nfs
 #openshift_metrics_storage_access_modes=['ReadWriteOnce']
@@ -129,8 +137,7 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_metrics_hawkular_nodeselector={'region':'infra'}
 #openshift_metrics_heapster_nodeselector={'region':'infra'}
 #openshift_metrics_cassandra_nodeselector={'region':'infra'}
-
-## prometheus on nfs
+## prometheus
 #openshift_hosted_prometheus_deploy=true
 #openshift_prometheus_storage_kind=nfs
 #openshift_prometheus_storage_access_modes=['ReadWriteOnce']
@@ -141,7 +148,7 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_prometheus_storage_volume_size=20Gi
 #openshift_prometheus_storage_labels={'storage':'prometheus'}
 #openshift_prometheus_storage_type='pvc'
-## For prometheus-alertmanager
+## prometheus-alertmanager
 #openshift_prometheus_alertmanager_storage_kind=nfs
 #openshift_prometheus_alertmanager_storage_access_modes=['ReadWriteOnce']
 #openshift_prometheus_alertmanager_storage_host=$OCP_NFS_SERVER
@@ -151,7 +158,7 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_prometheus_alertmanager_storage_volume_size=21Gi
 #openshift_prometheus_alertmanager_storage_labels={'storage':'prometheus-alertmanager'}
 #openshift_prometheus_alertmanager_storage_type='pvc'
-## For prometheus-alertbuffer
+## prometheus-alertbuffer
 #openshift_prometheus_alertbuffer_storage_kind=nfs
 #openshift_prometheus_alertbuffer_storage_access_modes=['ReadWriteOnce']
 #openshift_prometheus_alertbuffer_storage_host=$OCP_NFS_SERVER
@@ -162,18 +169,7 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_prometheus_alertbuffer_storage_labels={'storage':'prometheus-alertbuffer'}
 #openshift_prometheus_alertbuffer_storage_type='pvc'
 
-# temp fix
-openshift_prometheus_node_exporter_image_version=$OCP_VER
-
-## disable checks
-#openshift_disable_check=disk_availability,docker_storage,memory_availability,docker_image_availability,package_availability,package_version
-
-## cluster stuff (uncomment for multi-master mode)
-#openshift_master_cluster_method=native
-#openshift_master_cluster_hostname=api.$ROOT_DOMAIN
-#openshift_master_cluster_public_hostname=console.$ROOT_DOMAIN
-
-# Everything on CNS
+# everything on cns
 openshift_storage_glusterfs_namespace=glusterfs
 openshift_storage_glusterfs_name=storage
 openshift_storage_glusterfs_heketi_wipe=true
@@ -181,11 +177,20 @@ openshift_storage_glusterfs_wipe=true
 openshift_storage_glusterfs_storageclass_default=true
 openshift_storage_glusterfs_block_storageclass=true
 openshift_storage_glusterfs_block_host_vol_size=50
+## registry
 openshift_hosted_manage_registry=true
 openshift_hosted_registry_storage_kind=glusterfs
 openshift_hosted_registry_storage_volume_size=25Gi
 openshift_hosted_registry_selector='region=infra'
 openshift_master_dynamic_provisioning_enabled=true
+## etcd
+openshift_hosted_etcd_storage_kind=dynamic
+openshift_hosted_etcd_storage_volume_name=etcd-vol2
+openshift_hosted_etcd_storage_access_modes=["ReadWriteOnce"]
+openshift_hosted_etcd_storage_volume_size=10Gi
+## asb
+ansible_service_broker_local_registry_whitelist=['.*-apb$']
+## logging
 openshift_logging_install_logging=true
 openshift_logging_es_pvc_dynamic=true
 openshift_logging_es_pvc_size=10Gi
@@ -194,6 +199,7 @@ openshift_logging_curator_nodeselector={'region':'infra'}
 openshift_logging_es_nodeselector={'region':'infra'}
 openshift_logging_kibana_nodeselector={'region':'infra'}
 #openshift_logging_es_memory_limit=4G
+## legacy metrics
 openshift_metrics_install_metrics=true
 openshift_metrics_cassandra_storage_type=dynamic
 openshift_metrics_cassandra_pvc_size=10Gi
@@ -201,6 +207,7 @@ openshift_metrics_cassanda_pvc_storage_class_name=glusterfs-storage-block
 openshift_metrics_hawkular_nodeselector={'region':'infra'}
 openshift_metrics_heapster_nodeselector={'region':'infra'}
 openshift_metrics_cassandra_nodeselector={'region':'infra'}
+## prometheus metrics and alerting
 openshift_hosted_prometheus_deploy=true
 openshift_prometheus_namespace=openshift-metrics
 openshift_prometheus_node_selector={'region':'infra'}
@@ -219,11 +226,6 @@ openshift_prometheus_alertbuffer_storage_volume_name=prometheus-alertbuffer
 openshift_prometheus_alertbuffer_storage_volume_size=10Gi
 openshift_prometheus_alertbuffer_storage_type='pvc'
 openshift_prometheus_alertbuffer_sc_name="glusterfs-storage"
-openshift_hosted_etcd_storage_kind=dynamic
-openshift_hosted_etcd_storage_volume_name=etcd-vol2
-openshift_hosted_etcd_storage_access_modes=["ReadWriteOnce"]
-openshift_hosted_etcd_storage_volume_size=10Gi
-ansible_service_broker_local_registry_whitelist=['.*-apb$']
 
 ##  cloud provider configs
 ##  AWS
