@@ -6,11 +6,13 @@ oc new-project ether
 ```
 ##### # build/deploy ethminer
 ```
-oc new-app -i rhel7-custom https://github.com/nnachefski/ocpstuff.git --context-dir=images/ether --name=ethminer
+oc new-app https://github.com/nnachefski/ocpstuff.git --context-dir=images/ether --name=ethminer
 ```
-##### # then patch the dc to set resource limits and nodeaffinity
+##### # then patch the dc to set resource limits and nodeaffinity (deprecated)
 ```
 oc patch dc ethminer -p '{"spec":{"template":{"spec":{"affinity":{"nodeAffinity":{"requiredDuringSchedulingIgnoredDuringExecution":{"nodeSelectorTerms":[{"matchExpressions":[{"key":"alpha.kubernetes.io/nvidia-gpu-name","operator":"In","values":["GTX"]}]}]}}},"containers":[{"name":"ethminer","resources":{"limits":{"alpha.kubernetes.io/nvidia-gpu":"1"}}}]}}}}'
 ```
-###### # change GTX to match node label for your NVIDIA box   
-###### # change 'ethminer' to match above --name (in both dc and container name)
+##### # new way (nvidia device plugin)
+```
+oc patch dc ethminer -p '{"spec":{"template":{"spec":{"containers":[{"name":"ethminer","resources":{"limits":{"nvidia.com/gpu":1}}}]}}}}'
+``` 

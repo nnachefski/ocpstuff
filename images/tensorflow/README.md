@@ -1,3 +1,4 @@
+# # This way is old way.  Use the new devices plugin for nvidia 
 ### # This repo's content is for building and deploying CUDA/GPU-enabled ML images on Openshift.
 ##### # This example uses Tensorflow and Jupyter
 ###### # this image requires the rhel7-cuda image to be available 
