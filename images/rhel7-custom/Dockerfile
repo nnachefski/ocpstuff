@@ -1,4 +1,4 @@
-FROM registry.access.redhat.com/rhel7.4
+FROM repo.home.niclnach.net/rhel7.5
 
 COPY repos/*.repo /etc/yum.repos.d/
 COPY certs/*.crt /etc/pki/ca-trust/source/
