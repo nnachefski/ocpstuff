@@ -6,7 +6,7 @@ oc new-project ether
 ```
 ##### # build/deploy ethminer
 ```
-oc new-app -i rhel7-base https://github.com/nnachefski/ocpstuff.git --context-dir=images/ether --name=ethminer
+oc new-app -i rhel7-custom https://github.com/nnachefski/ocpstuff.git --context-dir=images/ether --name=ethminer
 ```
 ##### # then patch the dc to set resource limits and nodeaffinity
 ```
