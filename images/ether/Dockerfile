@@ -1,4 +1,4 @@
-FROM rhel7.5:latest
+FROM rhel7-cuda:latest
 ## maintained by nnachefski@gmail.com
 
 ENV APP_DIR=/opt/ethminer
