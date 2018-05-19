@@ -1,5 +1,4 @@
 ### # This image is for building and deploying CUDA/GPU-enabled Ethereum miners on Openshift.
-###### # this image requires the rhel7-cuda image to be available
 ##### # create the project
 ```
 oc new-project ether
@@ -12,7 +11,7 @@ oc new-app https://github.com/nnachefski/ocpstuff.git --context-dir=images/ether
 ```
 oc patch dc ethminer -p '{"spec":{"template":{"spec":{"affinity":{"nodeAffinity":{"requiredDuringSchedulingIgnoredDuringExecution":{"nodeSelectorTerms":[{"matchExpressions":[{"key":"alpha.kubernetes.io/nvidia-gpu-name","operator":"In","values":["GTX"]}]}]}}},"containers":[{"name":"ethminer","resources":{"limits":{"alpha.kubernetes.io/nvidia-gpu":"1"}}}]}}}}'
 ```
-##### # new way (nvidia device plugin)
+##### # new way (nvidia device plugin, OCP 3.9+)
 ```
 oc patch dc ethminer -p '{"spec":{"template":{"spec":{"containers":[{"name":"ethminer","resources":{"limits":{"nvidia.com/gpu":1}}}]}}}}'
 ``` 
