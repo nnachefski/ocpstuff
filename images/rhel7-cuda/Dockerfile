@@ -1,5 +1,5 @@
 FROM registry.access.redhat.com/rhel7.4
-
+## This is the old way.  You dont need to buidl this cuda image anymore.  Use the nvidia devices plugin 
 ENV DNN=http://repo.home.nicknach.net/repo/nvidia/cudnn-8.0-linux-x64-v6.0.tgz \
 	CUDA=cuda-8-0
 	
