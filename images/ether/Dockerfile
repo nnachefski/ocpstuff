@@ -17,7 +17,7 @@ WORKDIR "$APP_DIR"
 
 COPY install_deps.sh .
 RUN ./install_deps.sh
-RUN yum -y install boost-devel
+#RUN yum -y install boost-devel
 
 RUN wget -q https://github.com/ethereum-mining/ethminer/releases/download/v$APP_VER/ethminer-$APP_VER-Linux.tar.gz
 RUN tar -xzvf ethminer-*.tar.gz && cp bin/ethminer . && chmod +x ethminer && rm -rf ethminer-*.Linux.tar.gz
