@@ -13,3 +13,4 @@ oc create -f https://raw.githubusercontent.com/nnachefski/ocpstuff/master/ml/ten
 ```
 oc new-app -i tensorflow:latest-gpu -e NVIDIA_VISIBLE_DEVICES=all -e NVIDIA_DRIVER_CAPABILITIES="compute,utility" -e NVIDIA_REQUIRE_CUDA="cuda>=8.0"
 ```
+
