@@ -5,7 +5,7 @@
 ```
 oc import-image repo.home.nicknach.net/tensorflow/tensorflow:latest-gpu -n openshift --confirm
 ```
-##### # now run the template to create you project and prep it (with service accounts and scc)
+##### # now run the template to create you project and prep it (with serviceaccount, scc, and device plugin daemonset)
 ```
 oc create -f https://raw.githubusercontent.com/nnachefski/ocpstuff/master/ml/tensorflow.yml
 ```
