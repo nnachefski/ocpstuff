@@ -1,7 +1,7 @@
 rhgs3/rhgs-gluster-block-prov-rhel7
 rhgs3/rhgs-volmanager-rhel7
 rhgs3/rhgs-server-rhel7
-rhel7.4
+rhel7.5
 rhel7/etcd
 rhscl/devtoolset-4-perftools-rhel7
 rhscl/devtoolset-4-toolchain-rhel7
