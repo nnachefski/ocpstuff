@@ -1,3 +1,5 @@
+openshift3/mediawiki-apb
+openshift3/postgresql-apb
 openshift3/metrics-schema-installer
 openshift3/ose-node
 openshift3/ose-control-plane
@@ -41,5 +43,3 @@ openshift3/jenkins-2-rhel7
 openshift3/jenkins-slave-base-rhel7
 openshift3/jenkins-slave-maven-rhel7
 openshift3/jenkins-slave-nodejs-rhel7
-openshift3/mediawiki-apb
-openshift3/postgresql-apb
