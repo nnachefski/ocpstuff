@@ -131,12 +131,15 @@ container-storage-setup
 ```
 ##### # add the internal docker registry
 ```
-sed -i "16,/registries =/s/\[\]/\[\'$MY_REPO\'\]/" /etc/containers/registries.conf
-systemctl restart docker
+sed -i 's/registry.access.redhat.com/repo.home.nicknach.net/' /etc/containers/registries.conf && systemctl restart docker
 ```
 ##### # add the registry mirror cert
 ```
 wget http://$MY_REPO/repo/$MY_REPO.crt && mv -f $MY_REPO.crt /etc/pki/ca-trust/source/anchors && restorecon /etc/pki/ca-trust/source/anchors/$MY_REPO.crt && update-ca-trust
+```
+##### # test pulling a base ocp container
+```
+docker pull openshift3/ose-pod:$OCP_VER 
 ```
 ##### # make sure your nodes are up to date
 ```
