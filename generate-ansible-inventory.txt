@@ -51,6 +51,7 @@ openshift_deployment_type=openshift-enterprise
 #openshift_storage_glusterfs_version=latest
 #openshift_storage_glusterfs_heketi_image=$MY_REPO/rhgs3/rhgs-volmanager-rhel7
 #openshift_storage_glusterfs_heketi_version=latest
+#osm_etcd_image=repo.home.nicknach.net/rhel7/etcd
 
 ## temp fix
 #openshift_prometheus_node_exporter_image_version=$OCP_VER
