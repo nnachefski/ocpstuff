@@ -50,7 +50,7 @@ wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/core_im
 wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/app_images.txt
 ./import-images.py docker $SRC_REPO:8888 $MY_REPO -d -t $OCP_VER
 ```
-#### done with repo box
+#### # Done with repo box
 
 ### ################### now on the client systems
 ##### # do this on ALL hosts (master/infra/nodes)
