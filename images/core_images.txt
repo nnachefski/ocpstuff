@@ -1,3 +1,6 @@
+rhgs3/rhgs-gluster-block-prov-rhel7
+rhgs3/rhgs-volmanager-rhel7
+rhgs3/rhgs-server-rhel7
 openshift3/mediawiki-apb
 openshift3/postgresql-apb
 openshift3/metrics-schema-installer
