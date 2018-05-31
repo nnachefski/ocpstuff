@@ -50,11 +50,6 @@ wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/core_im
 wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/app_images.txt
 ./import-images.py docker $SRC_REPO:8888 $MY_REPO -d -t $OCP_VER
 ```
-##### # manually get the etcd and rhel7 images
-```
-skopeo --insecure-policy copy --src-tls-verify=false --dest-tls-verify=false docker://registry.access.redhat.com/rhel7/etcd docker://$MY_REPO/rhel7/etcd
-skopeo --insecure-policy copy --src-tls-verify=false --dest-tls-verify=false docker://registry.access.redhat.com/rhel7.4 docker://$MY_REPO/rhel7.4
-```
 #### done with repo box
 
 ##### # now on the client systems
