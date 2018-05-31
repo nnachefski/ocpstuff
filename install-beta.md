@@ -52,7 +52,7 @@ wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/app_ima
 ```
 #### done with repo box
 
-##### # now on the client systems
+### # now on the client systems
 ##### # do this on ALL hosts (master/infra/nodes)
 #### # BEGIN
 ##### # SET THESE VARIABLES ###
