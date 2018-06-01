@@ -3,7 +3,7 @@
 ##### # https://blog.openshift.com/use-gpus-with-device-plugin-in-openshift-3-9/
 ##### # import the base tensorflow image
 ```
-oc import-image repo.home.nicknach.net/tensorflow/tensorflow:latest-gpu -n openshift --confirm
+oc import-image repo.home.nicknach.net/tensorflow/tensorflow:latest-gpu -n openshift --insecure --confirm
 ```
 ##### # now run the template to create you project and prep it (with serviceaccount, scc, and device plugin daemonset)
 ```
