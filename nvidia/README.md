@@ -39,6 +39,7 @@ yum -y install nvidia-container-runtime-hook
 #!/bin/bash
 /usr/bin/nvidia-container-runtime-hook $1
 EOF
+
 chmod +x /usr/libexec/oci/hooks.d/oci-nvidia-hook
 ```
 ##### # add the SELinux context
