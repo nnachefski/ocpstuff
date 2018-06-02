@@ -55,7 +55,7 @@ wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/app_ima
 ```
 ##### # if you need to add tags to your images, you can do something like this...
 ```
-TAG=v3.10.0-0.56.0 REPO=repo.home.nicknach.net; for i in `cat core_images.txt`; do docker pull $REPO/$i:v3.10; docker tag $REPO/$i:v3.10 $REPO/$i:$TAG; docker push $REPO/$i:$TAG; done
+TAG=v3.10.0-0.57.0 REPO=repo.home.nicknach.net; for i in `cat core_images.txt`; do docker pull $REPO/$i:v3.10; docker tag $REPO/$i:v3.10 $REPO/$i:$TAG; docker push $REPO/$i:$TAG; done
 ```
 #### # Done with repo box
 
