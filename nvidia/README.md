@@ -1,0 +1,73 @@
+####  # follow these instructions to get NVIDIA GPU containers running on Openshift (OCP) 3.10
+##### # the idea in this howto is to create an nvidia project, start up the nvidia devices plugin daemonset, and then configure your OCP node to use it
+
+###### # RHEL 7.5
+##### # start by installing the kernel-devel package for your running kernel
+```
+yum install kernel-devel-`uname -r`
+```
+##### # and enabling epel
+```
+rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+```
+##### # setup the nvidia rhel repo 
+```
+rpm -ivh https://developer.download.nvidia.com/compute/cuda/repos/rhel7/x86_64/cuda-repo-rhel7-9.1.85-1.x86_64.rpm 
+```
+##### # install your nvidia drivers (this should blacklist nouveau)
+```
+yum -y install xorg-x11-drv-nvidia xorg-x11-drv-nvidia-devel
+```
+###### # reboot now
+##### # after reboot, do this to ensure your nvidia drivers have bee properly installed
+```
+nvidia-smi --query-gpu=gpu_name --format=csv,noheader --id=0 | sed -e 's/ /-/g'
+```
+###### # you should see the model of your GPU as the output
+##### # now add the nvidia-container-runtime-hook repo
+```
+curl -s -L https://nvidia.github.io/nvidia-container-runtime/centos7/x86_64/nvidia-container-runtime.repo | tee /etc/yum.repos.d/nvidia-container-runtime.repo
+```
+##### # now install the runtime hook package
+```
+yum -y install nvidia-container-runtime-hook
+```
+##### # add the hook to docker and make it exec
+```
+# cat <<’EOF’ >> /usr/libexec/oci/hooks.d/oci-nvidia-hook
+#!/bin/bash
+/usr/bin/nvidia-container-runtime-hook $1
+EOF
+chmod +x /usr/libexec/oci/hooks.d/oci-nvidia-hook
+```
+##### # add the SELinux context
+```
+chcon -t container_file_t  /dev/nvidia*
+```
+###### # there is still some SELinux work to be done here, i couldnt get gpu containers to work with just this modification.
+##### # set SELinux to permissive until this is fixed
+```
+setenforce 0
+```
+##### # run the vector-add GPU test in docker
+```
+docker run -it --rm docker.io/mirrorgooglecontainers/cuda-vector-add:v0.1
+```
+###### # you should see "Test PASSED"
+##### # now create the nvidia project
+```
+oc new-project nvidia
+```
+##### # and create a ServiceAccount
+```
+oc create serviceaccount nvidia-deviceplugin
+```
+##### # now add privledged nvidia scc (pull file from this repo to avoid copy/paste formatting errors)
+```
+oc create -f 
+```
+
+
+### # Now the fun part, getting feature-gates enable in OCP 3.10.
+#### # Openshift 3.10 now bootstraps node configs from etcd.  This is done by storing node configs (grouped by 'roles') as ConfigMaps in the 'openshift-node' project.  Each node has a 'sync' pod running as a DaemonSet.  These sync pods keep your node config ConfigMaps pushed to the nodes.
+##### #  
