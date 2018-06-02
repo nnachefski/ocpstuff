@@ -88,7 +88,7 @@ oc create -n openshift-node -f node-config-nvidia.yml
 ```
 oc create -n nvidia -f https://raw.githubusercontent.com/nnachefski/ocpstuff/master/nvidia/nvidia-device-plugin.yml
 ```
-##### # test that the DaemonSet deployed correctly to you GPU node
+##### # test that the DaemonSet deployed correctly to your GPU node
 ```
 oc get pods -owide -n nvidia
 ```
