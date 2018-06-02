@@ -10,7 +10,7 @@ oc import-image repo.home.nicknach.net/rhel7.5 --confirm
 oc create -f https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/custom-images-template.yml
 ```
 ###### # this template was generated from the buildconfigs of all five image folders in this context-dir.  The command i used to generate this template is: 
-###### # oc export bc,is rhel7-custom rhel7-cuda s2i-custom-core s2i-custom-base s2i-custom-python35 -n openshift > custom-images-template.yml
+###### # oc export bc,is rhel7-custom s2i-custom-core s2i-custom-base s2i-custom-python35 -n openshift > custom-images-template.yml
 #### # Begin
 ###### # the idea is to clone and then customize the rhel7-custom folder/image.  Insert your org's certs, gpgkeys, repo files, etc...  Then, you can build (and provide) customized runtime images to your developers and operations teams.
 
@@ -78,9 +78,4 @@ oc new-app https://github.com/nnachefski/pydemo.git -i s2i-custom-python35 --nam
 ```
 ###### # click to the terminal tab and look for the files that you added to the rhel7-custom base image
 ##### # now make a change to your rhel7-custom base image and watch all the dependent apps/images get rebuilt auto-magically (via ImageChange triggers)
-
-##### # run through the ML(tensorflow) and/or ether mining howto using the cuda image (if you have a bare-metal OCP node with a GPU handy)
-https://github.com/nnachefski/ocpstuff/tree/master/images/tensorflow
-
-https://github.com/nnachefski/ocpstuff/tree/master/images/ether
 
