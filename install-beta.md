@@ -16,6 +16,7 @@ redhat-internal-cert-install-0.1-7.el7.csb.noarch.rpm
 redhat-internal-NetworkManager-openvpn-profiles-non-gnome-0.1-30.el7.csb.noarch.rpm
 redhat-internal-openvpn-profiles-0.1-30.el7.csb.noarch.rpm
 ```
+###### # if you are an employee, you know where to get these packages from
 ##### # then run
 ``` 
 openvpn --config /etc/openvpn/ovpn-phx2-udp.conf
