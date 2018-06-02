@@ -45,6 +45,7 @@ createrepo rhaos-beta
 ```
 
 ##### # run the import-image.py script
+###### # it requires the python3 interpreter from epel.  Sorry, Python3 is all i know now.... 
 ```
 cd ~ && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/scripts/import-images.py && chmod +x import-images.py
 wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/core_images.txt
