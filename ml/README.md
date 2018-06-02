@@ -5,8 +5,12 @@
 ```
 oc import-image repo.home.nicknach.net/tensorflow/tensorflow:latest-gpu -n openshift --insecure --confirm
 ```
+##### # give the default ServiceAcount 'anyuid' SCC
+```
+oc adm policy add-scc-to-user anyuid -z default
+```
 ##### # now use new-app to launch the image
 ```
-oc new-app -i tensorflow:latest-gpu -e NVIDIA_VISIBLE_DEVICES=all -e NVIDIA_DRIVER_CAPABILITIES="compute,utility" -e NVIDIA_REQUIRE_CUDA="cuda>=8.0"
+oc new-app -n nvidia -i tensorflow:latest-gpu -e NVIDIA_VISIBLE_DEVICES=all -e NVIDIA_DRIVER_CAPABILITIES="compute,utility" -e NVIDIA_REQUIRE_CUDA="cuda>=9.0"
 ```
 
