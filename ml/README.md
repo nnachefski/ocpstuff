@@ -3,7 +3,7 @@
 ##### #  
 ##### # now import the base tensorflow image
 ```
-oc import-image repo.home.nicknach.net/tensorflow/tensorflow:latest-gpu -n openshift --insecure --confirm
+oc import-image repo.home.nicknach.net/tensorflow/tensorflow:latest-gpu -n openshift --confirm
 ```
 ##### # give the default ServiceAccount 'anyuid' SCC
 ```
