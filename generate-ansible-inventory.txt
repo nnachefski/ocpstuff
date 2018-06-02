@@ -22,40 +22,6 @@ openshift_deployment_type=openshift-enterprise
 #openshift_docker_blocked_registries=registry.access.redhat.com,docker.io
 #oreg_url=$MY_REPO/openshift3/ose-\${component}:\${version}
 #openshift_examples_modify_imagestreams=true
-#openshift_metrics_image_prefix=$MY_REPO/openshift3/
-#openshift_metrics_image_version=$OCP_VER
-#openshift_logging_image_prefix=$MY_REPO/openshift3/
-#openshift_logging_image_version=$OCP_VER
-#ansible_service_broker_image_prefix=$MY_REPO/openshift3/ose-
-#ansible_service_broker_image_tag=$OCP_VER
-#ansible_service_broker_etcd_image_prefix=$MY_REPO/rhel7/
-#ansible_service_broker_etcd_image_tag=latest
-#openshift_service_catalog_image_prefix=$MY_REPO/openshift3/ose-
-#openshift_service_catalog_image_version=$OCP_VER
-#openshift_cockpit_deployer_prefix=$MY_REPO/openshift3/
-#openshift_web_console_prefix=$MY_REPO/openshift3/ose-
-#openshift_web_console_version=$OCP_VER
-#openshift_prometheus_image_prefix=$MY_REPO/openshift3/
-#openshift_prometheus_image_version=$OCP_VER
-#openshift_prometheus_alertmanager_image_prefix=$MY_REPO/openshift3/
-#openshift_prometheus_alertmanager_image_version=$OCP_VER
-#openshift_prometheus_alertbuffer_image_prefix=$MY_REPO/openshift3/
-#openshift_prometheus_alertbuffer_image_version=$OCP_VER
-#openshift_prometheus_node_exporter_image_prefix=$MY_REPO/openshift3/
-#openshift_prometheus_node_exporter_image_version=$OCP_VER
-#openshift_prometheus_proxy_image_prefix=$MY_REPO/openshift3/
-#openshift_prometheus_proxy_image_version=$OCP_VER
-#template_service_broker_prefix=$MY_REPO/openshift3/ose-
-#template_service_broker_version=$OCP_VER
-#openshift_storage_glusterfs_image=$MY_REPO/rhgs3/rhgs-server-rhel7
-#openshift_storage_glusterfs_version=latest
-#openshift_storage_glusterfs_heketi_image=$MY_REPO/rhgs3/rhgs-volmanager-rhel7
-#openshift_storage_glusterfs_heketi_version=latest
-#openshift_storage_glusterfs_block_image=$MY_REPO/rhgs3/rhgs-gluster-block-prov-rhel7
-#osm_etcd_image=repo.home.nicknach.net/rhel7/etcd
-
-## temp fix
-#openshift_prometheus_node_exporter_image_version=$OCP_VER
 
 ## disable checks
 #openshift_disable_check=disk_availability,docker_storage,memory_availability,docker_image_availability,package_availability,package_version
@@ -229,7 +195,7 @@ openshift_prometheus_alertbuffer_storage_volume_size=10Gi
 openshift_prometheus_alertbuffer_storage_type='pvc'
 openshift_prometheus_alertbuffer_sc_name="glusterfs-storage"
 
-## CNS for apps only
+## CNS for apps only (no infra)
 #openshift_storage_glusterfs_namespace=app-storage	
 #openshift_storage_glusterfs_storageclass=true
 
