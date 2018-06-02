@@ -13,4 +13,4 @@ oc new-app https://github.com/nnachefski/ocpstuff.git --context-dir=images/ether
 ```
 
 ###### # you can control which NVIDIA devices to use for mining by setting 'NVIDIA_VISIBLE_DEVICES'.  Ex: NVIDIA_VISIBLE_DEVICES=0 will mine on the first device
-##### # you can switch the verison of ethminer that you want to run by setting 'APP_VER' env var.
+###### # you can switch the verison of ethminer that you want to run by setting 'APP_VER' env var.
