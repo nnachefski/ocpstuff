@@ -1,10 +1,5 @@
 #### # Begin post-deployment steps
-##### # aliases for ops
-```
-echo alias allpods=\'watch -n2 oc get pods -owide --all-namespaces\' > /etc/profile.d/ocp.sh
-echo alias allpodsp=\'watch -n1 oc adm manage-node --selector="region=primary" --list-pods\' >> /etc/profile.d/ocp.sh
-chmod +x /etc/profile.d/ocp.sh
-```
+
 ##### # if not using LDAP, you'll need to add some htpasswd users (on all masters)
 ```
 #htpasswd -b /etc/origin/master/htpasswd ocpadmin welcome1
@@ -29,19 +24,6 @@ oc adm policy add-cluster-role-to-user cluster-reader readonly
 ```
 oc adm manage-node --selector=region=masters --schedulable=false
 oc adm manage-node --selector=region=infra --schedulable=false
-```
-##### # pin your metrics and asb projects to infra nodes (if using HA mode)
-```
-oc patch ns openshift-infra -p '{"metadata": {"annotations": {"openshift.io/node-selector": "region=infra"}}}'
-oc patch ns openshift-ansible-service-broker -p '{"metadata": {"annotations": {"openshift.io/node-selector": "region=infra"}}}'
-```
-##### # make CNS the default SC (optional)
-```
-oc patch storageclass glusterfs-storage -p '{"metadata": {"annotations": {"storageclass.kubernetes.io/is-default-class": "true"}}}'
-```
-##### # add infra role for infra nodes (work-around)
-```
-oc label node --selector=region=infra node-role.kubernetes.io/infra=true
 ```
 ## # Done!
 
