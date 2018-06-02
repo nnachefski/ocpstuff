@@ -2,7 +2,7 @@
 ##### # the idea in this howto is to create an nvidia project, start up the nvidia devices plugin daemonset, and then configure your OCP node to use it
 
 ###### # RHEL 7.5
-###### # run all this stuff from your bare-metal GPU host
+###### # run the following from your bare-metal GPU host
 ##### # start by installing the kernel-devel package for your running kernel
 ```
 yum install kernel-devel-`uname -r`
