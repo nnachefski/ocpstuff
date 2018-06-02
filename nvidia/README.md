@@ -94,8 +94,7 @@ oc get pods -owide -n nvidia
 
 ### # All done!  
 #### # now let's use that GPU host with Tensordlow or Ethminer examples located in this repo
-```
-https://github.com/nnachefski/ocpstuff/tree/master/ml
-https://github.com/nnachefski/ocpstuff/tree/master/ethminer
-```
+
+> https://github.com/nnachefski/ocpstuff/tree/master/ml
+> https://github.com/nnachefski/ocpstuff/tree/master/ethminer
  
