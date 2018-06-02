@@ -1,3 +1,4 @@
+## Deprecated, dont use this anymore.  use the devices plugin 
 ### # build a cuda-enabled rhel7 image based on your customized rhel7-custom image
 ###### # this image adds the nvidia cuda libs to rhel7-custom
 ##### # set the project and build the image

@@ -28,7 +28,7 @@ items:
       dockerStrategy:
         from:
           kind: ImageStreamTag
-          name: rhel7.4:latest
+          name: rhel7.5:latest
       type: Docker
     successfulBuildsHistoryLimit: 5
     triggers:
@@ -37,50 +37,6 @@ items:
       type: GitHub
     - generic:
         secret: nXOPielsczZxqO6XUvn2
-      type: Generic
-    - type: ConfigChange
-    - imageChange: {}
-      type: ImageChange
-  status:
-    lastVersion: 0
-- apiVersion: v1
-  kind: BuildConfig
-  metadata:
-    annotations:
-      openshift.io/generated-by: OpenShiftNewBuild
-    creationTimestamp: null
-    labels:
-      build: rhel7-cuda
-    name: rhel7-cuda
-  spec:
-    failedBuildsHistoryLimit: 5
-    nodeSelector: null
-    output:
-      to:
-        kind: ImageStreamTag
-        name: rhel7-cuda:latest
-    postCommit: {}
-    resources: {}
-    runPolicy: Serial
-    source:
-      contextDir: images/rhel7-cuda
-      git:
-        uri: https://github.com/nnachefski/ocpstuff.git
-      type: Git
-    strategy:
-      dockerStrategy:
-        from:
-          kind: ImageStreamTag
-          name: rhel7-custom:latest
-          namespace: openshift
-      type: Docker
-    successfulBuildsHistoryLimit: 5
-    triggers:
-    - github:
-        secret: YAV1xPP_rNreu7iYgJR3
-      type: GitHub
-    - generic:
-        secret: eg94fn_y3i0Zau6r20m7
       type: Generic
     - type: ConfigChange
     - imageChange: {}
@@ -246,22 +202,6 @@ items:
       name: latest
       referencePolicy:
         type: Source
-  status:
-    dockerImageRepository: ""
-- apiVersion: v1
-  kind: ImageStream
-  metadata:
-    annotations:
-      openshift.io/generated-by: OpenShiftNewBuild
-      openshift.io/image.dockerRepositoryCheck: 2018-03-15T21:18:34Z
-    creationTimestamp: null
-    generation: 2
-    labels:
-      build: rhel7-cuda
-    name: rhel7-cuda
-  spec:
-    lookupPolicy:
-      local: false
   status:
     dockerImageRepository: ""
 - apiVersion: v1
