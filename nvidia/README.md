@@ -2,6 +2,7 @@
 ##### # the idea in this howto is to create an nvidia project, start up the nvidia devices plugin daemonset, and then configure your OCP node to use it
 
 ###### # RHEL 7.5
+###### # run all this stuff from your bare-metal GPU host
 ##### # start by installing the kernel-devel package for your running kernel
 ```
 yum install kernel-devel-`uname -r`
@@ -54,6 +55,11 @@ setenforce 0
 docker run -it --rm docker.io/mirrorgooglecontainers/cuda-vector-add:v0.1
 ```
 ###### # you should see "Test PASSED"
+##### # now change this nodes bootstrap profile to one that we will create in the next step
+```
+sed -i 's/BOOTSTRAP_CONFIG_NAME=node-config-compute/BOOTSTRAP_CONFIG_NAME=node-config-nvidia/' /etc/sysconfig/atomic-openshift-node
+```
+#### # using 'oc' from the master now
 ##### # now create the nvidia project
 ```
 oc new-project nvidia
@@ -77,11 +83,6 @@ wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/nvidia/node-co
 oc create -n openshift-node -f node-config-nvidia.yml
 ```
 ###### # this will create a new ConfigMap called 'node-config-nvidia'
-##### # now patch your GPU node's bootstrap file pointing to the newly created CM
-###### # do this on your GPU node only!
-```
-sed -i 's/BOOTSTRAP_CONFIG_NAME=node-config-compute/BOOTSTRAP_CONFIG_NAME=node-config-nvidia/' /etc/sysconfig/atomic-openshift-node
-``` 
 ###### # next, deploy the nvidia device plugin DaemonSet to the 'nvidia' project
 ```
 oc create -n nvidia -f https://raw.githubusercontent.com/nnachefski/ocpstuff/master/nvidia/nvidia-device-plugin.yml
