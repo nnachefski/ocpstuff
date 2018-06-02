@@ -83,7 +83,7 @@ wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/nvidia/node-co
 oc create -n openshift-node -f node-config-nvidia.yml
 ```
 ###### # this will create a new ConfigMap called 'node-config-nvidia'
-###### # next, deploy the nvidia device plugin DaemonSet to the 'nvidia' project
+##### # next, deploy the nvidia device plugin DaemonSet to the 'nvidia' project
 ```
 oc create -n nvidia -f https://raw.githubusercontent.com/nnachefski/ocpstuff/master/nvidia/nvidia-device-plugin.yml
 ```
