@@ -94,7 +94,7 @@ oc get pods -owide -n nvidia
 ```
 
 ### # All done!  
-#### # now let's use that container GPU host with some more interesting workloads
+#### # now let's use that GPU-enabled container host.  Here are some more interesting workloads...
 ##### # Tensorflow
 https://github.com/nnachefski/ocpstuff/tree/master/ml
 ##### # Ethminer
