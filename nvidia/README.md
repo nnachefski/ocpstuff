@@ -56,7 +56,7 @@ setenforce 0
 docker run -it --rm docker.io/mirrorgooglecontainers/cuda-vector-add:v0.1
 ```
 ###### # you should see "Test PASSED"
-##### # now change this nodes bootstrap profile to one that we will create in the next step
+##### # now change this node's bootstrap profile to one that we will create in the next phase
 ```
 sed -i 's/BOOTSTRAP_CONFIG_NAME=node-config-compute/BOOTSTRAP_CONFIG_NAME=node-config-nvidia/' /etc/sysconfig/atomic-openshift-node
 ```
@@ -79,7 +79,7 @@ oc create -n nvidia -f https://raw.githubusercontent.com/nnachefski/ocpstuff/mas
 ```
 wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/nvidia/node-config-nvidia.yml
 ```
-##### # edit the yaml and change the imageConfig to point to *your* image repo.  My local mirror is called 'repo.home.nicknach.net' and will not work for your.
+##### # edit the yaml and change the imageConfig to point to *your* image repo.  My local mirror is called 'repo.home.nicknach.net' and will not work for your.  'registry.access.redhat.com' is the official repo
 ```
 oc create -n openshift-node -f node-config-nvidia.yml
 ```
