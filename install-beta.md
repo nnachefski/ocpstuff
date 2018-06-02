@@ -50,6 +50,7 @@ cd ~ && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/script
 wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/core_images.txt
 wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/app_images.txt
 ./import-images.py docker $SRC_REPO:8888 $MY_REPO -d -t $OCP_VER
+./import-images.py docker $SRC_REPO:8888 $MY_REPO -d -l app_images.txt
 ```
 ##### # if you need to add tags to your images, you can do something like this...
 ```
