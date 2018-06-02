@@ -1,7 +1,7 @@
 ####  # this howto is tensorflow/jupyter running in an openshift container
 ###### # follow these instructions to enable your node for GPU containers
-##### # https://blog.openshift.com/use-gpus-with-device-plugin-in-openshift-3-9/
-##### # import the base tensorflow image
+##### #  
+##### # now import the base tensorflow image
 ```
 oc import-image repo.home.nicknach.net/tensorflow/tensorflow:latest-gpu -n openshift --insecure --confirm
 ```
