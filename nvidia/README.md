@@ -62,11 +62,11 @@ oc new-project nvidia
 ```
 oc create serviceaccount nvidia-deviceplugin
 ```
-##### # now add privledged nvidia scc (pull file from this repo to avoid copy/paste formatting errors)
+##### # now add privledged nvidia scc (use file from this repo to avoid copy/paste formatting errors)
 ```
-oc create -f 
+oc create -f https://raw.githubusercontent.com/nnachefski/ocpstuff/master/nvidia/nvidia-device-plugin-scc.yaml
 ```
-
+##### # and then 
 
 ### # Now the fun part, getting feature-gates enable in OCP 3.10.
 #### # Openshift 3.10 now bootstraps node configs from etcd.  This is done by storing node configs (grouped by 'roles') as ConfigMaps in the 'openshift-node' project.  Each node has a 'sync' pod running as a DaemonSet.  These sync pods keep your node config ConfigMaps pushed to the nodes.
