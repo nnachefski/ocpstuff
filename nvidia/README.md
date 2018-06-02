@@ -60,14 +60,40 @@ oc new-project nvidia
 ```
 ##### # and create a ServiceAccount
 ```
-oc create serviceaccount nvidia-deviceplugin
+oc create serviceaccount nvidia-deviceplugin -n nvidia
 ```
 ##### # now add privledged nvidia scc (use file from this repo to avoid copy/paste formatting errors)
 ```
-oc create -f https://raw.githubusercontent.com/nnachefski/ocpstuff/master/nvidia/nvidia-device-plugin-scc.yaml
+oc create -n nvidia -f https://raw.githubusercontent.com/nnachefski/ocpstuff/master/nvidia/nvidia-device-plugin-scc.yaml
 ```
-##### # and then 
-
 ### # Now the fun part, getting feature-gates enable in OCP 3.10.
 #### # Openshift 3.10 now bootstraps node configs from etcd.  This is done by storing node configs (grouped by 'roles') as ConfigMaps in the 'openshift-node' project.  Each node has a 'sync' pod running as a DaemonSet.  These sync pods keep your node config ConfigMaps pushed to the nodes.
-##### #  
+##### # create a new node sync ConfigMap by using the file from this repo
+```
+wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/nvidia/node-config-nvidia.yml
+```
+##### # edit the yaml and change the imageConfig to point to *your* image repo.  My local mirror is called 'repo.home.nicknach.net' and will not work for your.
+```
+oc create -n openshift-node -f node-config-nvidia.yml
+```
+###### # this will create a new ConfigMap called 'node-config-nvidia'
+##### # now patch your GPU node's bootstrap file pointing to the newly created CM
+###### # do this on your GPU node only!
+```
+sed -i 's/BOOTSTRAP_CONFIG_NAME=node-config-compute/BOOTSTRAP_CONFIG_NAME=node-config-nvidia/' /etc/sysconfig/atomic-openshift-node
+``` 
+###### # next, deploy the nvidia device plugin DaemonSet to the 'nvidia' project
+```
+oc create -n nvidia -f https://raw.githubusercontent.com/nnachefski/ocpstuff/master/nvidia/nvidia-device-plugin.yml
+```
+##### # test that the DaemonSet deployed correctly to you GPU node
+```
+oc get pods -owide -n nvidia
+```
+
+### # All done!  
+#### # now let's use that GPU host with Tensordlow or Ethminer examples located in this repo
+
+https://github.com/nnachefski/ocpstuff/tree/master/ml
+https://github.com/nnachefski/ocpstuff/tree/master/ethminer
+ 
