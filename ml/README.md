@@ -5,7 +5,7 @@
 ```
 oc import-image repo.home.nicknach.net/tensorflow/tensorflow:latest-gpu -n openshift --insecure --confirm
 ```
-##### # give the default ServiceAcount 'anyuid' SCC
+##### # give the default ServiceAccount 'anyuid' SCC
 ```
 oc adm policy add-scc-to-user anyuid -z default
 ```
