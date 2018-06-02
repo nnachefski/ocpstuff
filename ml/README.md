@@ -1,7 +1,8 @@
 ####  # this howto is tensorflow/jupyter running in an openshift container
-###### # follow these instructions to enable your node for GPU containers
-##### #  
-##### # now import the base tensorflow image
+###### # follow these instructions to enable your nvidia node for GPU containers
+##### #  https://github.com/nnachefski/ocpstuff/tree/master/nvidia
+###### # nvidia daemonset pre-req required (see above link)
+##### # import the base tensorflow image
 ```
 oc import-image repo.home.nicknach.net/tensorflow/tensorflow:latest-gpu -n openshift --confirm
 ```
