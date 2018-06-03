@@ -243,7 +243,7 @@ openshift_master_default_subdomain=$APPS_DOMAIN
 
 ## adjust max pods for scale testing
 #openshift_node_kubelet_args={'pods-per-core': ['15'], 'max-pods': ['500'], 'image-gc-high-threshold': ['85'], 'image-gc-low-threshold': ['80']}
-## adjust scheduler
+## adjust scheduler and pod eviction timout for application HA 
 #osm_controller_args={'node-monitor-period': ['2s'], 'node-monitor-grace-period': ['16s'], 'pod-eviction-timeout': ['30s']}
 #osm_controller_args={'resource-quota-sync-period': ['10s']}
 
