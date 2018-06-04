@@ -70,12 +70,13 @@ systemctl restart docker-distribution
 ```
 cp -f /etc/docker/certs.d/$MY_REPO/$MY_REPO.crt /var/www/html/repo && restorecon /var/www/html/repo/$MY_REPO.crt
 ```
-##### # get the import-image.py script and image lists
+##### # get the import-images.py script and image lists (this script is a python3 wrapper for skopeo)
 ```
 cd ~ && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/scripts/import-images.py && chmod +x import-images.py
 wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/core_images.txt
 wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/app_images.txt 
 ```
+###### # sorry, python3 is all i know now.  you can install it from epel
 ##### # now get the core images, setting debug mode and a specific version (this will default to core_images.txt list)
 ``` 
 ./import-images.py docker $SRC_REPO $MY_REPO -d -t $OCP_VER
