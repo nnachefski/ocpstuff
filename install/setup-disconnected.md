@@ -24,6 +24,7 @@ subscription-manager repos \
    --enable=rhel-7-server-rhscl-rpms \
    --enable=rhel-7-server-optional-rpms 
 ```
+###### # you only need the last two if you are going to customize the s2i images
 ##### # install/enable/start httpd
 ```
 yum -y install httpd && systemctl enable httpd --now
