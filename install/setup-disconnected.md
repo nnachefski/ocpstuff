@@ -83,7 +83,7 @@ wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/app_ima
 ```
 ./import-images.py docker $SRC_REPO $MY_REPO -d -l app_images.txt
 ```
-#### # done with repo box
+#### ########################### Done with repo box
 
 ### # now on your client boxes
 ##### # set your docker repo host var
