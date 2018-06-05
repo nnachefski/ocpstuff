@@ -12,7 +12,8 @@ ansible etcd -m shell -a "systemctl stop docker && rm -rf /var/lib/docker && sys
 #ansible all -m yum -a "name=atomic-openshift-utils state=latest"
 
 ## Or, standalone
-yum remove -y openshift* atomic* openvswitch*
+cp -f /etc/origin/node/resolv.conf /etc
+yum remove -y openshift* atomic* openvswitch* ovs* dnsmasq
 rm -rf /etc/origin/*
 rm -rf /etc/sysconfig/atomic*
 rm -rf /root/.kube
@@ -22,5 +23,5 @@ rm -rf /etc/etcd
 rm -rf /var/lib/origin
 rm -rf /var/lib/docker
 #yum install -y atomic-openshift-utils openshift-ansible
-rm -rf /var/lib/docker
-vgremove docker-vg -y
+#rm -rf /var/lib/docker
+#vgremove docker-vg -y
