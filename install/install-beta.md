@@ -190,6 +190,6 @@ journalctl -xlf
 ```
 ###### # verify the install was successful (oc get nodes)
 ### # Now run through the post-deployment steps
-#### # https://github.com/nnachefski/ocpstuff/blob/master/install-post-deployment.md
+#### # https://github.com/nnachefski/ocpstuff/blob/master/install/install-post-deployment.md
 
 
