@@ -1,3 +1,4 @@
+rhel7/rhel-tools
 rhgs3/rhgs-gluster-block-prov-rhel7
 rhgs3/rhgs-volmanager-rhel7
 rhgs3/rhgs-server-rhel7
