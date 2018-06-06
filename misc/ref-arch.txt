@@ -1,5 +1,4 @@
-﻿### created and maintained by nick@redhat.com
-https://access.redhat.com/documentation/en-us/reference_architectures/2017/html/deploying_openshift_container_platform_3.5_on_amazon_web_services/deploying_openshift#Provision-Ansible
+﻿https://access.redhat.com/documentation/en-us/reference_architectures/2017/html/deploying_openshift_container_platform_3.5_on_amazon_web_services/deploying_openshift#Provision-Ansible
 
 
 #create the ssh config and set perms
