@@ -12,7 +12,7 @@ ansible etcd -m shell -a "systemctl stop docker && rm -rf /var/lib/docker && sys
 #ansible all -m yum -a "name=atomic-openshift-utils state=latest"
 
 ## Or, standalone
-cp -f /etc/origin/node/resolv.conf /etc
+#cp -n /etc/origin/node/resolv.conf /etc
 yum remove -y openshift* atomic* openvswitch* ovs* dnsmasq
 rm -rf /etc/origin/*
 rm -rf /etc/sysconfig/atomic*
