@@ -1,7 +1,7 @@
 ### # This image is for building and deploying CUDA/GPU-enabled Ethereum miners on Openshift.
-##### # create the project
+##### # switch to our special nvidia project (has device plugin DS deployed)
 ```
-oc new-project ether
+oc project nvidia
 ```
 ##### # give the default ServiceAccount 'anyuid' SCC
 ```
