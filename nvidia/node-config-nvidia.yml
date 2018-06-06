@@ -30,8 +30,7 @@ data:
       enable-controller-attach-detach:
       - 'true'
       feature-gates:
-      - RotateKubeletClientCertificate=true,RotateKubeletServerCertificate=true
-      - DevicePlugins=true
+      - RotateKubeletClientCertificate=true,RotateKubeletServerCertificate=true,DevicePlugins=true
       node-labels:
       - node-role.kubernetes.io/nvidia=true
       pod-manifest-path:
