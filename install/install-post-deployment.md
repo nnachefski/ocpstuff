@@ -8,7 +8,7 @@
 ```
 #oc adm policy add-cluster-role-to-user cluster-admin ocpadmin
 ```
-##### # setup group sync and run it once
+##### # setup group sync and run it once (LDAP only)
 ```
 wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/ocp_group_sync.conf -O /etc/origin/master/ocp_group_sync.conf
 wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/ocp_group_sync-whitelist.conf -O /etc/origin/master/ocp_group_sync-whitelist.conf 
