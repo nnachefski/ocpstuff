@@ -1,5 +1,6 @@
 rhel7.5
 rhel7/etcd
+rhel7/rhel-tools
 rhscl/devtoolset-4-perftools-rhel7
 rhscl/devtoolset-4-toolchain-rhel7
 rhscl/devtoolset-6-perftools-rhel7
