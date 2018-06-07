@@ -3,10 +3,12 @@
 ##### # if not using LDAP, you'll need to add some htpasswd users (on all masters)
 ```
 #htpasswd -b /etc/origin/master/htpasswd ocpadmin welcome1
+ansible "master*" -a "htpasswd -b /etc/origin/master/htpasswd ocpadmin welcome1"
+
 ```
 ##### # and set cluster-admin perms on admin accounts
 ```
-#oc adm policy add-cluster-role-to-user cluster-admin ocpadmin
+oc adm policy add-cluster-role-to-user cluster-admin ocpadmin
 ```
 ##### # setup group sync and run it once (LDAP only)
 ```
