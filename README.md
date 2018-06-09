@@ -18,7 +18,7 @@ https://github.com/nnachefski/ocpstuff/blob/master/install/install-39.md
 #### Openshift (Beta) install script
 https://github.com/nnachefski/ocpstuff/blob/master/install/install-beta.md
 
-#### Post-install script
+#### Openshift Post-install script
 https://github.com/nnachefski/ocpstuff/blob/master/install/install-post-deployment.md
 
 #### Openshift RBAC setup
