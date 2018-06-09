@@ -82,7 +82,8 @@ oc create -n nvidia -f https://raw.githubusercontent.com/nnachefski/ocpstuff/mas
 oc create -n openshift-node -f https://raw.githubusercontent.com/nnachefski/ocpstuff/master/nvidia/node-config-nvidia.yml
 ```
 ###### # this will create a new ConfigMap called 'node-config-nvidia'
-##### # label your GPU node 
+##### # label your GPU node
+###### # swap out my node name for yours
 ```
 oc label node metal.home.nicknach.net openshift.com/gpu-accelerator=true
 ```
