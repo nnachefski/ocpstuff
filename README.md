@@ -30,7 +30,7 @@ https://github.com/nnachefski/ocpstuff/blob/master/install/setup-disconnected.md
 #### Custom images (RHEL7, ethminer, s2i)
 https://github.com/nnachefski/ocpstuff/tree/master/images
 
-#### Openshift NVIDIA howto (3.10+)
+#### Openshift NVIDIA Device Plugin howto (3.10+)
 https://github.com/nnachefski/ocpstuff/tree/master/nvidia
 
 #### Openshift ethminer howto
