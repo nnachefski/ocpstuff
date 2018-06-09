@@ -4,7 +4,7 @@
 ###### # nvidia daemonset pre-req required (see above link)
 ##### # import the base tensorflow image
 ```
-oc import-image repo.home.nicknach.net/tensorflow/tensorflow:latest-gpu -n openshift --confirm
+oc import-image repo.home.nicknach.net/tensorflow/tensorflow -n openshift --confirm
 ```
 ##### # give the default ServiceAccount 'anyuid' SCC or, switch the DC to use the nvidia SA created in the previous howto
 ```
