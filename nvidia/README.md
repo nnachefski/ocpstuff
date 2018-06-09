@@ -79,11 +79,7 @@ oc create -n nvidia -f https://raw.githubusercontent.com/nnachefski/ocpstuff/mas
 ###### # run from an 'oc' enabled (system:admin) shell (from the master).
 ##### # create a new node sync ConfigMap by using the file from this repo
 ```
-wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/nvidia/node-config-nvidia.yml
-```
-##### # edit the yaml and change the imageConfig to point to *your* image repo.  My local mirror is called 'repo.home.nicknach.net' and will not work for your.  'registry.access.redhat.com' is the official repo
-```
-oc create -n openshift-node -f node-config-nvidia.yml
+oc create -n openshift-node -f https://raw.githubusercontent.com/nnachefski/ocpstuff/master/nvidia/node-config-nvidia.yml
 ```
 ###### # this will create a new ConfigMap called 'node-config-nvidia'
 ##### # label your GPU node 
