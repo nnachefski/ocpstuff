@@ -6,7 +6,7 @@ nodes
 new_nodes
 #etcd
 #lb
-#glusterfs
+glusterfs
 
 ## Set variables common for all OSEv3 hosts
 [OSEv3:vars]
@@ -279,10 +279,10 @@ node02.$ROOT_DOMAIN openshift_node_group_name="node-config-compute" openshift_sc
 node03.$ROOT_DOMAIN openshift_node_group_name="node-config-compute" openshift_schedulable=true
 
 ## if using gluster (Container Native Storage)
-#[glusterfs]
-#infra01.ocp.nicknach.net glusterfs_devices='[ "/dev/vdc" ]'
-#infra02.ocp.nicknach.net glusterfs_devices='[ "/dev/vdc" ]'
-#infra03.ocp.nicknach.net glusterfs_devices='[ "/dev/vdc" ]'
+[glusterfs]
+infra01.ocp.nicknach.net glusterfs_devices='[ "/dev/vdc" ]'
+infra02.ocp.nicknach.net glusterfs_devices='[ "/dev/vdc" ]'
+infra03.ocp.nicknach.net glusterfs_devices='[ "/dev/vdc" ]'
 
 [new_nodes]
 ## hold for use when adding new nodes
