@@ -268,15 +268,15 @@ master01.$ROOT_DOMAIN
 ## openshift_public_hostname=console.openshiftdemo.com
 
 [nodes]
-master01.$ROOT_DOMAIN openshift_node_group_name="node-config-master" openshift_schedulable=true
-#master02.$ROOT_DOMAIN openshift_node_group_name="node-config-master" openshift_schedulable=true
-#master03.$ROOT_DOMAIN openshift_node_group_name="node-config-master" openshift_schedulable=true
-#infra01.$ROOT_DOMAIN openshift_node_group_name="node-config-infra" openshift_schedulable=true
-#infra02.$ROOT_DOMAIN openshift_node_group_name="node-config-infra" openshift_schedulable=true
-#infra03.$ROOT_DOMAIN openshift_node_group_name="node-config-infra" openshift_schedulable=true
-node01.$ROOT_DOMAIN openshift_node_group_name="node-config-compute" openshift_schedulable=true
-node02.$ROOT_DOMAIN openshift_node_group_name="node-config-compute" openshift_schedulable=true
-node03.$ROOT_DOMAIN openshift_node_group_name="node-config-compute" openshift_schedulable=true
+master01.$ROOT_DOMAIN openshift_node_labels="{'region': 'masters', 'zone': 'a', 'role': 'master'}" openshift_node_group_name="node-config-master" openshift_schedulable=true
+#master02.$ROOT_DOMAIN openshift_node_labels="{'region': 'masters', 'zone': 'b', 'role': 'master'}" openshift_node_group_name="node-config-master" openshift_schedulable=true
+#master03.$ROOT_DOMAIN openshift_node_labels="{'region': 'masters', 'zone': 'c', 'role': 'master'}" openshift_node_group_name="node-config-master" openshift_schedulable=true
+#infra01.$ROOT_DOMAIN openshift_node_labels="{'region': 'infra', 'zone': 'a', 'role': 'infra'}" openshift_node_group_name="node-config-infra" openshift_schedulable=true
+#infra02.$ROOT_DOMAIN openshift_node_labels="{'region': 'infra', 'zone': 'b', 'role': 'infra'}" openshift_node_group_name="node-config-infra" openshift_schedulable=true
+#infra03.$ROOT_DOMAIN openshift_node_labels="{'region': 'infra', 'zone': 'c', 'role': 'infra'}" openshift_node_group_name="node-config-infra" openshift_schedulable=true
+node01.$ROOT_DOMAIN openshift_node_labels="{'region': 'primary', 'zone': 'a', 'role': 'compute'}" openshift_node_group_name="node-config-compute" openshift_schedulable=true
+node02.$ROOT_DOMAIN openshift_node_labels="{'region': 'primary', 'zone': 'a', 'role': 'compute'}" openshift_node_group_name="node-config-compute" openshift_schedulable=true
+node03.$ROOT_DOMAIN openshift_node_labels="{'region': 'primary', 'zone': 'a', 'role': 'compute'}" openshift_node_group_name="node-config-compute" openshift_schedulable=true
 
 ## if using gluster (Container Native Storage)
 [glusterfs]
