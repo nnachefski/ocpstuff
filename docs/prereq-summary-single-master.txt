@@ -38,7 +38,7 @@ Activate the Openshift subscriptions provided by Red Hat. If using a Satellite S
    * rhel-7-server-extras-rpms
    * rhel-7-server-ose-3.9-rpms
    * rhel-7-fast-datapath-rpms
-   * rh-gluster-3-for-rhel-7-server-rpms
+   * rh-gluster-3-client-for-rhel-7-server-rpms
    * rhel-7-server-ansible-2.4-rpms
 
 Additional Considerations:
