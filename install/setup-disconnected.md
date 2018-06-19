@@ -102,6 +102,10 @@ rpm --import http://$REPO/RPM-GPG-KEY-redhat-release
 ```
 wget http://$REPO/repo/$REPO.crt && mv -f $REPO.crt /etc/pki/ca-trust/source/anchors && restorecon /etc/pki/ca-trust/source/anchors/$REPO.crt && update-ca-trust
 ```
+##### # add the internal docker registry
+```
+sed -i 's/registry.access.redhat.com/repo.home.nicknach.net/' /etc/containers/registries.conf && systemctl restart docker
+```
 ##### # add your rpm repos
 ```
 yum-config-manager --disable \* && rm -rf /etc/yum.repos.d/*.repo && yum clean all
