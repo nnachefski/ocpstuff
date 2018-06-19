@@ -20,8 +20,8 @@ oc adm policy add-cluster-role-to-user cluster-reader readonly
 ```
 ##### # set your infra/masters regions to unschedulable
 ```
-oc adm manage-node --selector=region=masters --schedulable=false
-oc adm manage-node --selector=region=infra --schedulable=false
+oc adm manage-node --selector=node-role.kubernetes.io/infra=true --schedulable=false
+oc adm manage-node --selector=node-role.kubernetes.io/master=true --schedulable=false
 ```
 ## # Done!
 
