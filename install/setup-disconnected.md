@@ -55,11 +55,13 @@ openssl req  -newkey rsa:4096 -nodes -sha256 -keyout /etc/docker/certs.d/$MY_REP
 ```
 ##### # add this to the http section in /etc/docker-distribution/registry/config.yml
 ```
+cat <<EOF >> /etc/docker-distribution/registry/config.yml
     headers:
         X-Content-Type-Options: [nosniff]
     tls:
         certificate: /etc/docker/certs.d/$MY_REPO/$MY_REPO.crt
         key: /etc/docker/certs.d/$MY_REPO/$MY_REPO.key
+EOF
 ```
 ###### # you may also want to change the default port from 5000 to 443.
 ##### # restart registry for SSL changes
