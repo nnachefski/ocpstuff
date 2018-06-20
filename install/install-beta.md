@@ -43,7 +43,6 @@ cd ~ && reposync -lm --repoid=rhaos-beta
 ```
 createrepo rhaos-beta
 ```
-
 ##### # run import-images.py (skopeo wrapper script written in python3)
 ###### # Sorry, Python3 is all i know now.... you can get it from epel 
 ```
