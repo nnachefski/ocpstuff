@@ -135,6 +135,8 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_prometheus_alertbuffer_storage_labels={'storage':'prometheus-alertbuffer'}
 #openshift_prometheus_alertbuffer_storage_type='pvc'
 
+#openshift_hosted_infra_selector={"node-role.kubernetes.io/infra":"true"}
+
 # everything on cns
 openshift_storage_glusterfs_namespace=glusterfs
 openshift_storage_glusterfs_name=storage
