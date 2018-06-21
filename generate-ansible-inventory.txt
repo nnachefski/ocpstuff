@@ -135,9 +135,6 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_prometheus_alertbuffer_storage_labels={'storage':'prometheus-alertbuffer'}
 #openshift_prometheus_alertbuffer_storage_type='pvc'
 
-#openshift_hosted_infra_selector={"node-role.kubernetes.io/infra":"true"}
-#openshift_master_dynamic_provisioning_enabled=true
-
 # everything on cns
 openshift_storage_glusterfs_namespace=glusterfs
 openshift_storage_glusterfs_name=storage
@@ -150,6 +147,7 @@ openshift_storage_glusterfs_block_host_vol_size=50
 openshift_hosted_manage_registry=true
 openshift_hosted_registry_storage_kind=glusterfs
 openshift_hosted_registry_storage_volume_size=25Gi
+openshift_master_dynamic_provisioning_enabled=true
 ## etcd
 openshift_hosted_etcd_storage_kind=dynamic
 openshift_hosted_etcd_storage_volume_name=etcd-vol2
@@ -186,6 +184,8 @@ openshift_prometheus_alertbuffer_storage_volume_name=prometheus-alertbuffer
 openshift_prometheus_alertbuffer_storage_volume_size=10Gi
 openshift_prometheus_alertbuffer_storage_type='pvc'
 openshift_prometheus_alertbuffer_sc_name="glusterfs-storage"
+
+#openshift_hosted_infra_selector={"node-role.kubernetes.io/infra":"true"}
 
 ## CNS for apps only (no infra)
 #openshift_storage_glusterfs_namespace=app-storage	
