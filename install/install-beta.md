@@ -72,7 +72,7 @@ export OCP_NFS_SERVER=storage.home.nicknach.net
 export LDAP_SERVER=gw.home.nicknach.net
 export ANSIBLE_HOST_KEY_CHECKING=False
 export MY_REPO=repo.home.nicknach.net
-export OCP_VER=v3.10.1
+export OCP_VER=v3.10.2
 ```
 ##### # make them persistent 
 ```
