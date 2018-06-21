@@ -96,10 +96,6 @@ oc create -n nvidia -f https://raw.githubusercontent.com/nnachefski/ocpstuff/mas
 ```
 oc get pods -owide -n nvidia
 ```
-##### # pin all 'nvidia' project pods to 'zone=nvidia'
-```
-oc patch ns nvidia -p '{"metadata": {"annotations": {"openshift.io/node-selector": "zone=nvidia"}}}'
-```
 ### # All done!  
 #### # now let's use that GPU-enabled container host.  Here are some more interesting workloads...
 ##### # Tensorflow
