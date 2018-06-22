@@ -145,10 +145,11 @@ yum -y update
 ```
 ###### # reboot if necessary 
 ## #  On first master only now (or bastion host)
+##### # openshift-ansible and dependencies 
+
 ```
 yum install -y openshift-ansible-playbooks && updatedb
 ```
-###### # this will install openshift-ansible and dependencies 
 ##### #  make password-less key for openshift-ansible usage
 ```
 ssh-keygen
