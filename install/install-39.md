@@ -38,7 +38,7 @@ subscription-manager repos \
    --enable=rhel-server-rhscl-7-rpms \
    --enable=rhel-7-server-optional-rpms   
 ```
-###### # the last two are only required if you will be customizing s2i images
+###### # you only need the last two if you are going to customize the s2i images
 ##### # OR add your internal repos (for disconnected installs)
 ```
 #rm -rf /etc/yum.repos.d/* && yum clean all
