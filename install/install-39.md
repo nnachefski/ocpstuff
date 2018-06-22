@@ -6,12 +6,10 @@
 export ROOT_DOMAIN=ocp.nicknach.net
 export APPS_DOMAIN=apps.$ROOT_DOMAIN 
 export DOCKER_DEV=/dev/vdb
-export OCP_NFS_MOUNT=/data/openshift/enterprise
-export OCP_NFS_SERVER=storage.home.nicknach.net
 export LDAP_SERVER=gw.home.nicknach.net
 export ANSIBLE_HOST_KEY_CHECKING=False
 export MY_REPO=repo.home.nicknach.net
-export OCP_VER=v3.9.27
+export OCP_VER=v3.9.30
 ```
 ##### # make them persistent 
 ```
@@ -19,8 +17,6 @@ cat <<EOF >> ~/.bashrc
 export ROOT_DOMAIN=$ROOT_DOMAIN
 export APPS_DOMAIN=$APPS_DOMAIN
 export DOCKER_DEV=$DOCKER_DEV
-export OCP_NFS_MOUNT=$OCP_NFS_MOUNT
-export OCP_NFS_SERVER=$OCP_NFS_SERVER
 export LDAP_SERVER=$LDAP_SERVER
 export ANSIBLE_HOST_KEY_CHECKING=False
 export MY_REPO=$MY_REPO
@@ -29,34 +25,35 @@ EOF
 ```
 ##### # subscribe to RHN
 ```
-#subscription-manager register --username=nnachefs@redhat.com --password <REDACTED> --force
-#subscription-manager attach --pool=8a85f98260c27fc50160c323263339ff
-#subscription-manager repos --disable="*"
-#subscription-manager repos \
-#   --enable=rhel-7-server-rpms \
-#   --enable=rhel-7-server-extras-rpms \
-#   --enable=rhel-7-server-ose-3.9-rpms \
-#   --enable=rhel-7-fast-datapath-rpms \
-#   --enable=rhel-server-rhscl-7-rpms \
-#   --enable=rhel-7-server-optional-rpms \
-#   --enable=rhel-7-server-ansible-2.4-rpms \
-#   --enable=rh-gluster-3-client-for-rhel-7-server-rpms
-```   
+subscription-manager register --username=<RHNID> --password <REDACTED> --force
+subscription-manager attach --pool=8a85f98260c27fc50160c323263339ff
+subscription-manager repos --disable="*"
+subscription-manager repos \
+   --enable=rhel-7-server-rpms \
+   --enable=rhel-7-server-extras-rpms \
+   --enable=rhel-7-server-ose-3.9-rpms \
+   --enable=rhel-7-fast-datapath-rpms \
+   --enable=rhel-7-server-ansible-2.4-rpms \
+   --enable=rh-gluster-3-client-for-rhel-7-server-rpms \
+   --enable=rhel-server-rhscl-7-rpms \
+   --enable=rhel-7-server-optional-rpms   
+```
+###### # the last two are only required if you will be customizing s2i images
 ##### # OR add your internal repos (for disconnected installs)
 ```
-rm -rf /etc/yum.repos.d/* && yum clean all
-yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-ose-3.9-rpms
-yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-fast-datapath-rpms
-yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-rpms
-yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-extras-rpms
-yum-config-manager --add-repo http://$MY_REPO/repo/rhel-server-rhscl-7-rpms
-yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-optional-rpms 
-yum-config-manager --add-repo http://$MY_REPO/repo/rh-gluster-3-client-for-rhel-7-server-rpms
-yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-ansible-2.4-rpms
+#rm -rf /etc/yum.repos.d/* && yum clean all
+#yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-ose-3.9-rpms
+#yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-fast-datapath-rpms
+#yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-rpms
+#yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-extras-rpms
+#yum-config-manager --add-repo http://$MY_REPO/repo/rhel-server-rhscl-7-rpms
+#yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-optional-rpms 
+#yum-config-manager --add-repo http://$MY_REPO/repo/rh-gluster-3-client-for-rhel-7-server-rpms
+#yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-ansible-2.4-rpms
 ```
 ##### # add the docker repo cert to the pki store (for disconnected installs)
 ```
-wget http://$MY_REPO/repo/$MY_REPO.crt && mv -f $MY_REPO.crt /etc/pki/ca-trust/source/anchors && restorecon /etc/pki/ca-trust/source/anchors/$MY_REPO.crt && update-ca-trust
+#wget http://$MY_REPO/repo/$MY_REPO.crt && mv -f $MY_REPO.crt /etc/pki/ca-trust/source/anchors && restorecon /etc/pki/ca-trust/source/anchors/$MY_REPO.crt && update-ca-trust
 ```
 ##### # install some general pre-req packages
 ``` 
