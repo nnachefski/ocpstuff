@@ -89,10 +89,10 @@ yum -y update
 ```
 ###### # reboot if necessary 
 ## #  On first master only now (or bastion host)
+##### # install openshift-ansible and dependencies 
 ```
 yum install -y atomic-openshift-utils && updatedb
 ```
-###### # this will install openshift-ansible and dependencies 
 ##### #  make password-less key for ansible usage
 ```
 ssh-keygen
