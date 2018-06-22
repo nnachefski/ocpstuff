@@ -70,7 +70,7 @@ export DOCKER_DEV=/dev/vdb
 export LDAP_SERVER=gw.home.nicknach.net
 export ANSIBLE_HOST_KEY_CHECKING=False
 export MY_REPO=repo.home.nicknach.net
-export OCP_VER=v3.10.2
+export OCP_VER=v3.10.6
 ```
 ##### # make them persistent 
 ```
