@@ -31,7 +31,7 @@ fi
 qemu-img create -f raw $UM 15G
 RUNLINE="$RUNLINE --disk path=$UM,bus=virtio "
 
-if [[ $HOST == infra* ]] || [[ $HOST == node* ]];
+if [[ $HOST == infra* ]];
 then
 CNS_DISK="$HOME/$HOST-2.qcow2"
     echo "adding CNS disk '$CNS_DISK'"
