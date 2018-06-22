@@ -239,7 +239,17 @@ ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/byo/openshift-cl
 ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/byo/openshift-cluster/openshift-logging.yml -e openshift_logging_install_logging=false
 ```
 
-## do this to get a complete list of missing images/tags in your ISs
+##### # do this to get a complete list of missing images/tags in your ISs
 ```
 for i in `oc get is -n openshift |awk '{print $1}'`; do oc get is $i -n openshift -o json; done |grep 'not found' |awk '{print $3}' |awk -F \/ '{print $2,$3}' | awk -F \: '{print $1}' |sed 's/ /\//g' |sort -u
 ```
+
+##### # nasty docker-registry DC patch
+```
+oc patch dc docker-registry -p '{"spec":{"template":{"spec":{"containers":[{"name":"registry","volumeMounts":[{"mountPath":"/etc/pki","name":"certs"}]}],"volumes":[{"hostPath":{"path":"/etc/pki","type":"Directory"},"name":"certs"}]}}}}'
+```
+
+##### # allow hostmounts
+```
+oc adm policy add-scc-to-user hostaccess -z registry
+``` 
