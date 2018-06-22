@@ -39,7 +39,7 @@ Summary: 9 VMs recommended for multi master install.  Additional VM if NFS servi
 * Ex:  A record '*.ocp' IN zone 'example.com' (resolves to all three infra nodes)
 **This DNS record is absolutely required and is often the most time consuming task to get done (internal approvals are likely required)**
 
-Activate the Openshift subscriptions provided by Red Hat. If using a Satellite Server, synchronize the relevant channels to the Satellite Server.
+Activate the Openshift subscriptions provided by Red Hat. If using a Satellite Server, synchronize the relevant channels.
    * rhel-7-server-rpms
    * rhel-7-server-extras-rpms
    * rhel-7-server-ose-3.9-rpms
@@ -48,12 +48,12 @@ Activate the Openshift subscriptions provided by Red Hat. If using a Satellite S
    * rhel-7-server-ansible-2.4-rpms
 
 Additional Considerations:
-   1. RHEL7.5 (Vanilla ISO is recommended)
+   1. RHEL7.5 vanilla is recommended (unmodified ISO as it comes from RH)
     - The “Minimum” installation is recommended
-   2. SELinux must be in “Enforcing” (this is the default in vanilla image)
+   2. SELinux must be in “Enforcing” (default in vanilla image)
     - Test with 'getenforce'
-   3. NetworkManager must be enabled (this is the default in vanilla image)
+   3. NetworkManager must be enabled (default in vanilla image)
     - Test with 'nmcli dev status'
-   4. iptables must be enabled (this is the default in vanilla image)
+   4. iptables must be enabled (default in vanilla image)
     - Test with 'systemctl status iptables'
     
