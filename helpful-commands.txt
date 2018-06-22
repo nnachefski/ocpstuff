@@ -1,4 +1,7 @@
-﻿## patch an IS to be pulled from http (vs https) registry
+﻿# get recent SELinux denials
+ausearch -m avc -ts recent 
+
+## patch an IS to be pulled from http (vs https) registry
 oc patch is mysql -p '{"spec":{"tags":[{"importPolicy":{"insecure":true},"name":"latest"}]}}'
 
 # fix ssh to allow remote root
