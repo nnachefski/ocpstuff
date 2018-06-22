@@ -67,8 +67,6 @@ TAG=v3.10.0-0.57.0 REPO=repo.home.nicknach.net; for i in `cat core_images.txt`; 
 export ROOT_DOMAIN=ocp.nicknach.net
 export APPS_DOMAIN=apps.$ROOT_DOMAIN 
 export DOCKER_DEV=/dev/vdb
-export OCP_NFS_MOUNT=/data/openshift/enterprise
-export OCP_NFS_SERVER=storage.home.nicknach.net
 export LDAP_SERVER=gw.home.nicknach.net
 export ANSIBLE_HOST_KEY_CHECKING=False
 export MY_REPO=repo.home.nicknach.net
@@ -80,8 +78,6 @@ cat <<EOF >> ~/.bashrc
 export ROOT_DOMAIN=$ROOT_DOMAIN
 export APPS_DOMAIN=$APPS_DOMAIN
 export DOCKER_DEV=$DOCKER_DEV
-export OCP_NFS_MOUNT=$OCP_NFS_MOUNT
-export OCP_NFS_SERVER=$OCP_NFS_SERVER
 export LDAP_SERVER=$LDAP_SERVER
 export ANSIBLE_HOST_KEY_CHECKING=False
 export MY_REPO=$MY_REPO
