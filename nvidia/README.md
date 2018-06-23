@@ -53,7 +53,7 @@ setenforce 0
 ```
 ##### # run the vector-add GPU test in docker
 ```
-docker run -it --rm docker.io/mirrorgooglecontainers/cuda-vector-add:v0.1
+docker run -it --rm repo.home.nicknach.net/mirrorgooglecontainers/cuda-vector-add:v0.1
 ```
 ###### # you should see "Test PASSED"
 ##### # now change this node's bootstrap profile to one that we will create in the next phase
@@ -61,7 +61,7 @@ docker run -it --rm docker.io/mirrorgooglecontainers/cuda-vector-add:v0.1
 sed -i 's/BOOTSTRAP_CONFIG_NAME=node-config-compute/BOOTSTRAP_CONFIG_NAME=node-config-nvidia/' /etc/sysconfig/atomic-openshift-node
 systemctl restart atomic-openshift-node
 ```
-#### # using 'oc' from the master now
+#### ################################### using 'oc' from the master now
 ##### # now create the nvidia project
 ```
 oc new-project nvidia
