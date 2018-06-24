@@ -1,4 +1,4 @@
-## this scripts is used to syncronize my local repo server with the upstream RHN repos.  Cron this to run nightly
+## this script is used to syncronize my local repo server with the upstream RHN repos.  Cron this to run nightly
 
 export REPODIR=repo
 
