@@ -91,7 +91,6 @@ cd ~ && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/script
 wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/core_images.txt
 wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/app_images.txt 
 ```
-###### # sorry, python3 is all i know now.  you can install it from epel
 ##### # now get the core images, setting debug mode and a specific version (this will default to core_images.txt list)
 ``` 
 ./import-images.py docker $SRC_REPO $MY_REPO -d -t $OCP_VER
