@@ -85,6 +85,10 @@ rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 yum install -y python34
 yum-config-manager --disable epel
 ```
+##### # make sure skopeo is installed
+```
+yum install -y skopeo
+```
 ##### # get the import-images.py script and image lists (this script is a python3 wrapper for skopeo)
 ```
 cd ~ && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/scripts/import-images.py && chmod +x import-images.py
