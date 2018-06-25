@@ -75,6 +75,10 @@ systemctl restart docker-distribution
 ```
 cp -f /etc/docker/certs.d/$MY_REPO/$MY_REPO.crt /var/www/html/repo && restorecon /var/www/html/repo/$MY_REPO.crt
 ```
+##### # copy the gpp key for the official channel to the web root
+```
+cp -f /etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release /var/www/html/repo
+```
 ##### # get the import-images.py script and image lists (this script is a python3 wrapper for skopeo)
 ```
 cd ~ && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/scripts/import-images.py && chmod +x import-images.py
@@ -99,8 +103,8 @@ export REPO=repo.home.nicknach.net
 ```
 ##### # import keys from repo
 ```
-rpm --import http://$REPO/7fa2af80.pub
-rpm --import http://$REPO/RPM-GPG-KEY-EPEL-7
+#rpm --import http://$REPO/7fa2af80.pub  #nvidia repo
+#rpm --import http://$REPO/RPM-GPG-KEY-EPEL-7 #elpel (not needed)
 rpm --import http://$REPO/RPM-GPG-KEY-redhat-release
 ```
 ##### # add the docker repo cert to the pki store
