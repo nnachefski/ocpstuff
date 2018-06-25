@@ -79,6 +79,12 @@ cp -f /etc/docker/certs.d/$MY_REPO/$MY_REPO.crt /var/www/html/repo && restorecon
 ```
 cp -f /etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release /var/www/html/repo
 ```
+##### # setup the epel repo so we can get python34 package, then disable it
+```
+rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+yum install -y python34
+yum-config-manager --disable epel
+```
 ##### # get the import-images.py script and image lists (this script is a python3 wrapper for skopeo)
 ```
 cd ~ && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/scripts/import-images.py && chmod +x import-images.py
