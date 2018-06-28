@@ -45,6 +45,7 @@ openshift_deployment_type=openshift-enterprise
 ## release ver
 #openshift_release=$OCP_VER
 #openshift_image_tag=$OCP_VER
+##openshift_pkg_version=-3.9.27
 
 ## enable ntp
 #openshift_clock_enabled=false
