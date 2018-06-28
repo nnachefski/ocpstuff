@@ -51,7 +51,7 @@ yum -y install docker-distribution.x86_64 && systemctl enable docker-distributio
 ##### # create certs for this registry (so you can enable https, required for v2 images)
 ```
 mkdir -p /etc/docker/certs.d/$MY_REPO
-openssl req  -newkey rsa:4096 -nodes -sha256 -keyout /etc/docker/certs.d/$MY_REPO/$MY_REPO.key -x509 -days 365 -out /etc/docker/certs.d/$MY_REPO/$MY_REPO.crt
+openssl req  -newkey rsa:4096 -nodes -sha256 -keyout /etc/docker/certs.d/$MY_REPO/$MY_REPO.key -x509 -days 365 -out /etc/docker/certs.d/$MY_REPO/$MY_REPO.cert
 ```
 ##### # add this to the http section in /etc/docker-distribution/registry/config.yml
 ```
@@ -59,7 +59,7 @@ cat <<EOF >> /etc/docker-distribution/registry/config.yml
     headers:
         X-Content-Type-Options: [nosniff]
     tls:
-        certificate: /etc/docker/certs.d/$MY_REPO/$MY_REPO.crt
+        certificate: /etc/docker/certs.d/$MY_REPO/$MY_REPO.cert
         key: /etc/docker/certs.d/$MY_REPO/$MY_REPO.key
 EOF
 ```
@@ -73,7 +73,7 @@ systemctl restart docker-distribution
 ```
 ##### # copy the cert to the webroot for your clients to pull from
 ```
-cp -f /etc/docker/certs.d/$MY_REPO/$MY_REPO.crt /var/www/html/repo && restorecon /var/www/html/repo/$MY_REPO.crt
+cp -f /etc/docker/certs.d/$MY_REPO/$MY_REPO.cert /var/www/html/repo && restorecon /var/www/html/repo/$MY_REPO.cert
 ```
 ##### # copy the gpp key for the official channel to the web root
 ```
@@ -118,7 +118,7 @@ rpm --import http://$REPO/RPM-GPG-KEY-redhat-release
 ```
 ##### # add the docker repo cert to the pki store
 ```
-wget http://$REPO/repo/$REPO.crt && mv -f $REPO.crt /etc/pki/ca-trust/source/anchors && restorecon /etc/pki/ca-trust/source/anchors/$REPO.crt && update-ca-trust
+wget http://$REPO/repo/$REPO.cert && mv -f $REPO.cert /etc/pki/ca-trust/source/anchors && restorecon /etc/pki/ca-trust/source/anchors/$REPO.cert && update-ca-trust
 ```
 ##### # add the internal docker registry
 ```

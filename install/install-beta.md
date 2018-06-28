@@ -133,7 +133,7 @@ sed -i 's/registry.access.redhat.com/repo.home.nicknach.net/' /etc/containers/re
 ```
 ##### # add the registry mirror cert
 ```
-wget http://$MY_REPO/repo/$MY_REPO.crt && mv -f $MY_REPO.crt /etc/pki/ca-trust/source/anchors && restorecon /etc/pki/ca-trust/source/anchors/$MY_REPO.crt && update-ca-trust
+wget http://$MY_REPO/repo/$MY_REPO.cert && mv -f $MY_REPO.cert /etc/pki/ca-trust/source/anchors && restorecon /etc/pki/ca-trust/source/anchors/$MY_REPO.cert && update-ca-trust
 ```
 ##### # test pulling a base ocp container
 ```

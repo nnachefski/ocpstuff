@@ -24,6 +24,14 @@ openshift_deployment_type=openshift-enterprise
 #oreg_url=$MY_REPO/openshift3/ose-\${component}:\${version}
 #openshift_examples_modify_imagestreams=true
 
+## If oreg_url points to a registry requiring authentication, provide the following:
+#oreg_auth_user=some_user
+#oreg_auth_password='my-pass'
+## NOTE: oreg_url must be defined by the user for oreg_auth_* to have any affect.
+## oreg_auth_pass should be generated from running docker login.
+## To update registry auth credentials, uncomment the following:
+#oreg_auth_credentials_replace: True
+
 #openshift_additional_ca=/etc/pki/ca-trust/source/anchors/repo.home.nicknach.net.crt
 
 ## disable checks
