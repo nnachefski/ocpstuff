@@ -137,10 +137,6 @@ yum -y install cns-deploy heketi-client
 ```
 wget http://$MY_REPO/repo/$MY_REPO.cert && mv -f $MY_REPO.crt /etc/pki/ca-trust/source/anchors && restorecon /etc/pki/ca-trust/source/anchors/$MY_REPO.crt && update-ca-trust
 ```
-##### # test pulling a base ocp container
-```
-docker pull openshift3/ose-pod:$OCP_VER 
-```
 ##### # make sure your nodes are up to date
 ```
 yum -y update
