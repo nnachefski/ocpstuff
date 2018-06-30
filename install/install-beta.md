@@ -115,25 +115,27 @@ yum install -y docker docker-logrotate
 ```
 yum -y install cns-deploy heketi-client
 ```
-##### # configure the docker pool device
+##### # configure the docker pool device manually
+###### # this not required anymore, set the docker device in the ansible hosts file
 ```
-cat <<EOF > /etc/sysconfig/docker-storage-setup
-DEVS=$DOCKER_DEV
-VG=docker-vg
-WIPE_SIGNATURES=true
-EOF
+#cat <<EOF > /etc/sysconfig/docker-storage-setup
+#DEVS=$DOCKER_DEV
+#VG=docker-vg
+#WIPE_SIGNATURES=true
+#EOF
 ```
 ##### # and setup the storage
 ```
-container-storage-setup
+#container-storage-setup
 ```
-##### # add the internal docker registry
+##### # add the internal docker registry manually
+###### # not required anymore, set the registry in the ansible hosts file
 ```
-sed -i 's/registry.access.redhat.com/repo.home.nicknach.net/' /etc/containers/registries.conf && systemctl restart docker
+#sed -i 's/registry.access.redhat.com/repo.home.nicknach.net/' /etc/containers/registries.conf && systemctl restart docker
 ```
 ##### # add the registry mirror cert
 ```
-wget http://$MY_REPO/repo/$MY_REPO.cert && mv -f $MY_REPO.cert /etc/pki/ca-trust/source/anchors && restorecon /etc/pki/ca-trust/source/anchors/$MY_REPO.cert && update-ca-trust
+wget http://$MY_REPO/repo/$MY_REPO.cert && mv -f $MY_REPO.crt /etc/pki/ca-trust/source/anchors && restorecon /etc/pki/ca-trust/source/anchors/$MY_REPO.crt && update-ca-trust
 ```
 ##### # test pulling a base ocp container
 ```
