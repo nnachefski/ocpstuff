@@ -8,7 +8,7 @@
 ```
 export MY_REPO=repo.home.nicknach.net
 export SRC_REPO=download-node-02.eng.bos.redhat.com
-export OCP_VER=3.10.6
+export OCP_VER=3.10.10
 ```
 ##### # start by connecting your repo box to the RH VPN.  You can setup a command line VPN client by installing these rpms
 ```
@@ -53,9 +53,9 @@ wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/app_ima
 ./import-images.py docker $SRC_REPO:8888 $MY_REPO -d -l app_images.txt
 ```
 ##### # openshift from the puddle servers will expect your images to be tagged like this 'ose-pod:v3.10.0-0.57.0'.  
-###### # to mitigate, add a tag alias to the images you just imported.  Run this....
+###### # to mitigate, add a tag alias to the images you just imported.  Normalize the tag like this....
 ```
-TAG=v3.10.6 REPO=repo.home.nicknach.net; for i in `cat core_images.txt`; do docker pull $REPO/$i:$OCP_VER; docker tag $REPO/$i:$OCP_VER $REPO/$i:$TAG; docker push $REPO/$i:$TAG; done
+TAG=$OCP_VER REPO=repo.home.nicknach.net; for i in `cat core_images.txt`; do docker pull $REPO/$i:$OCP_VER; docker tag $REPO/$i:$OCP_VER $REPO/$i:$TAG; docker push $REPO/$i:$TAG; done
 ```
 #### # Done with repo box
 
