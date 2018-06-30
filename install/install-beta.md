@@ -116,7 +116,7 @@ yum install -y docker docker-logrotate
 yum -y install cns-deploy heketi-client
 ```
 ##### # configure the docker pool device manually
-###### # this not required anymore, set the docker device in the ansible hosts file
+###### # this required anymore, set the docker device in the ansible hosts file
 ```
 #cat <<EOF > /etc/sysconfig/docker-storage-setup
 #DEVS=$DOCKER_DEV
