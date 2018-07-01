@@ -32,8 +32,6 @@ container_runtime_docker_storage_setup_device=$DOCKER_DEV
 ## To update registry auth credentials, uncomment the following:
 #oreg_auth_credentials_replace: True
 
-#openshift_additional_ca=/etc/pki/ca-trust/source/anchors/repo.home.nicknach.net.crt
-
 ## disable checks
 #openshift_disable_check=disk_availability,docker_storage,memory_availability,docker_image_availability,package_availability,package_version
 
