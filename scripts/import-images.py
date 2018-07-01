@@ -76,7 +76,7 @@ for image in list:
 # iterate over the pass list and copy the images
 for image in pass_list:
 	print(image)
-	cmdline = ['skopeo', '--insecure-policy', 'copy', '--dest-cert-dir=/etc/docker/certs.d/repo.home.nicknach.net', '--src-tls-verify=false', '--dest-tls-verify=false', "docker://%s/%s"%(args.source, image), "%s/%s:%s"%(uri_string, image)]
+	cmdline = ['skopeo', '--insecure-policy', 'copy', '--dest-cert-dir=/etc/docker/certs.d/repo.home.nicknach.net', '--src-tls-verify=false', '--dest-tls-verify=false', "docker://%s/%s"%(args.source, image), "%s/%s"%(uri_string, image)]
 	if args.d: print('- '+' '.join(cmdline))
 	try:
 		check_call(cmdline, stdout=DEVNULL, stderr=STDOUT)
