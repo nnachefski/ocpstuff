@@ -110,24 +110,6 @@ yum install -y docker docker-logrotate
 ```
 yum -y install cns-deploy heketi-client
 ```
-##### # configure the docker pool device manually
-###### # not required anymore, set the docker device in the ansible hosts file
-```
-#cat <<EOF > /etc/sysconfig/docker-storage-setup
-#DEVS=$DOCKER_DEV
-#VG=docker-vg
-#WIPE_SIGNATURES=true
-#EOF
-```
-##### # and setup the storage
-```
-#container-storage-setup
-```
-##### # add the internal docker registry manually
-###### # not required anymore, set the registry in the ansible hosts file
-```
-#sed -i 's/registry.access.redhat.com/repo.home.nicknach.net/' /etc/containers/registries.conf && systemctl restart docker
-```
 ##### # add the registry mirror cert
 ```
 wget http://$MY_REPO/repo/$MY_REPO.cert && mv -f $MY_REPO.crt /etc/pki/ca-trust/source/anchors && restorecon /etc/pki/ca-trust/source/anchors/$MY_REPO.crt && update-ca-trust
@@ -139,7 +121,6 @@ yum -y update
 ###### # reboot if necessary 
 ## #  On first master only now (or bastion host)
 ##### # install openshift-ansible and dependencies 
-
 ```
 yum install -y openshift-ansible-playbooks && updatedb
 ```
