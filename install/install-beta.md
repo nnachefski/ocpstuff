@@ -8,7 +8,7 @@
 ```
 export MY_REPO=repo.home.nicknach.net
 export SRC_REPO=download-node-02.eng.bos.redhat.com
-export OCP_VER=3.10
+export OCP_VER=3.10.10
 ```
 ##### # start by connecting your repo box to the RH VPN.  You can setup a command line VPN client by installing these rpms
 ```
@@ -54,7 +54,7 @@ cd ~ && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/script
 wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/core_images.txt
 wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/app_images.txt
 ./import-images.py docker $SRC_REPO:8888 $MY_REPO -d -t $OCP_VER
-./import-images.py docker $SRC_REPO:8888 $MY_REPO -d -l app_images.txt -t ''
+./import-images.py docker $SRC_REPO:8888 $MY_REPO -d -l app_images.txt
 ```
 #### # Done with repo box
 
@@ -69,7 +69,7 @@ export DOCKER_DEV=/dev/vdb
 export LDAP_SERVER=gw.home.nicknach.net
 export ANSIBLE_HOST_KEY_CHECKING=False
 export MY_REPO=repo.home.nicknach.net
-export OCP_VER=v3.10
+export OCP_VER=v3.10.10
 ```
 ##### # make them persistent 
 ```
