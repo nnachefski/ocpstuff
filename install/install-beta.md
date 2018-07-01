@@ -128,9 +128,9 @@ yum install -y openshift-ansible-playbooks && updatedb
 ```
 ssh-keygen
 ```
-##### # copy keys to all hosts(masters/infras/nodes).  make a list.txt of IPs and then do...
+##### # copy keys to all hosts(masters/infras/nodes).
 ```
-for i in `cat list.txt`; do ssh-copy-id root@$i; done
+for i in master01.ocp.nicknach.net master02.ocp.nicknach.net master03.ocp.nicknach.net infra01.ocp.nicknach.net infra02.ocp.nicknach.net infra03.ocp.nicknach.net node01.ocp.nicknach.net node02.ocp.nicknach.net node03.ocp.nicknach.net; do ssh-copy-id root@$i; done
 ```
 ##### # create your ansible hosts (inventory) file 
 ###### # (see below link for creating this file)
