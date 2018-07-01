@@ -1,4 +1,3 @@
-openshift3/ose
 openshift3/ose:v3.10.10
 openshift3/ose-pod:v3.10.10
 openshift3/node:v3.10.10
