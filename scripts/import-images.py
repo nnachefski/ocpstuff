@@ -7,7 +7,7 @@ parser.add_argument('type', action="store", help='type of copy to perform, docke
 parser.add_argument('source', action="store", help='Ex: brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888')
 parser.add_argument('dest', action="store", help='destination, Ex: 192.168.0.4:1234')
 parser.add_argument('-d', action="store_true", default=False, help='debug mode')
-parser.add_argument('-t', action="store", dest="tag", help="tag to use, default is latest", default='latest')
+parser.add_argument('-t', action="store", dest="tag", help="override the tag", default=False)
 parser.add_argument('-l', action="store", dest="list", help="image list, default is core_images.txt", default='core_images.txt')
 args = parser.parse_args()
 
@@ -42,7 +42,13 @@ pass_list = []
 for image in list:
 	if image.startswith('#'):
 		continue
-	cmdline = ['skopeo', '--insecure-policy', 'inspect', '--tls-verify=false', "docker://%s/%s:%s"%(args.source, image, args.tag)]
+	args = [args.source, image]
+	tag = image.split(':')[1]
+	if tag:
+		args.append(tag)
+	print "TEST"
+	sys.exit()
+	cmdline = ['skopeo', '--insecure-policy', 'inspect', '--tls-verify=false', "docker://%s/%s:%s"%args]
 	#if args.d: print('- '+' '.join(cmdline))
 	try:
 		check_call(cmdline, stdout=DEVNULL, stderr=STDOUT)
