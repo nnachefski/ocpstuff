@@ -37,40 +37,52 @@ try:
 except: 
 	print("\n ERROR: skopeo is not installed"); sys.exit(3)
 
+def parse_tag(image):
+	try:
+		(img, tag) = image.split(':')
+	except:
+		img = image
+		tag = None
+	if args.tag:
+		tag = args.tag
+	if tag:
+		image_string = img+':'+tag
+	else:
+		image_string = img
+	return image_string
+
 pass_list = []
 # iterate over the list and verify they are accessible
 for image in list:
 	if image.startswith('#'):
 		continue
-	args = [args.source, image]
-	tag = image.split(':')[1]
-	if tag:
-		args.append(tag)
-	print "TEST"
-	sys.exit()
-	cmdline = ['skopeo', '--insecure-policy', 'inspect', '--tls-verify=false', "docker://%s/%s:%s"%args]
+	else:
+		image_string = parse_tag(image)
+	
+	cmdline = ['skopeo', '--insecure-policy', 'inspect', '--tls-verify=false', "docker://%s"%image_string]
 	#if args.d: print('- '+' '.join(cmdline))
 	try:
 		check_call(cmdline, stdout=DEVNULL, stderr=STDOUT)
 	except KeyboardInterrupt:
 		print("\nbye..."); sys.exit(1)
 	except:
-	 	print("- failed to inspect docker://%s/%s:%s"%(args.source, image, args.tag))
+	 	print("- failed to inspect docker://%s/%s"%(args.source, image_string))
 	else:
-		if args.d: print("- inspected %s/%s:%s"%(args.source, image, args.tag))
-		pass_list.append(image)
+		if args.d: print("- inspected %s/%s"%(args.source, image_string))
+		pass_list.append(image_string)
 
 # iterate over the pass list and copy the images
 for image in pass_list:
-	cmdline = ['skopeo', '--insecure-policy', 'copy', '--dest-cert-dir=/etc/docker/certs.d/repo.home.nicknach.net', '--src-tls-verify=false', '--dest-tls-verify=false', "docker://%s/%s:%s"%(args.source, image, args.tag), "%s/%s:%s"%(uri_string, image, args.tag)]
+	cmdline = ['skopeo', '--insecure-policy', 'copy', '--dest-cert-dir=/etc/docker/certs.d/repo.home.nicknach.net', '--src-tls-verify=false', '--dest-tls-verify=false', "docker://%s/%s"%(args.source, image), "%s/%s:%s"%(uri_string, image)]
 	if args.d: print('- '+' '.join(cmdline))
 	try:
 		check_call(cmdline, stdout=DEVNULL, stderr=STDOUT)
 	except KeyboardInterrupt:
 		print("\nbye..."); sys.exit(1)
 	except:
-		print("- failed to save docker://%s/%s:%s"%(args.dest, image, args.tag))
+		print("- failed to save docker://%s/%s"%(args.dest, image))
 	else:
-		print("- saved %s/%s:%s"%(uri_string, image, args.tag))
+		print("- saved %s/%s"%(uri_string, image))
     
  
+
