@@ -63,7 +63,7 @@ for image in list:
 	
 	cmdline = ['skopeo', '--insecure-policy', 'inspect', '--tls-verify=false', "docker://%s"%image_string]
 	#if args.d: print('- '+' '.join(cmdline))
-	print cmdline
+	print(cmdline)
 	try:
 		check_call(cmdline, stdout=DEVNULL, stderr=STDOUT)
 	except KeyboardInterrupt:
