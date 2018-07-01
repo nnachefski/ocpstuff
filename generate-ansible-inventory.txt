@@ -73,6 +73,12 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_master_named_certificates=[{"certfile": "/etc/origin/master/ocp.nicknach.net.crt", "keyfile": "/etc/origin/master/ocp.nicknach.net.key", "names": ["console.ocp.nicknach.net"]}]
 #openshift_master_overwrite_named_certificates=false
 
+## enable dynamic provisioning
+openshift_master_dynamic_provisioning_enabled=true
+openshift_hosted_etcd_storage_kind=dynamic
+openshift_logging_es_pvc_dynamic=true
+openshift_metrics_cassandra_storage_type=dynamic
+
 # everything on cns
 openshift_storage_glusterfs_namespace=glusterfs
 openshift_storage_glusterfs_name=storage
@@ -85,9 +91,7 @@ openshift_storage_glusterfs_block_host_vol_size=50
 openshift_hosted_manage_registry=true
 openshift_hosted_registry_storage_kind=glusterfs
 openshift_hosted_registry_storage_volume_size=25Gi
-openshift_master_dynamic_provisioning_enabled=true
 ## etcd
-openshift_hosted_etcd_storage_kind=dynamic
 openshift_hosted_etcd_storage_volume_name=etcd-vol2
 openshift_hosted_etcd_storage_access_modes=["ReadWriteOnce"]
 openshift_hosted_etcd_storage_volume_size=10Gi
@@ -95,13 +99,11 @@ openshift_hosted_etcd_storage_volume_size=10Gi
 ansible_service_broker_local_registry_whitelist=['.*-apb$']
 ## logging
 openshift_logging_install_logging=true
-openshift_logging_es_pvc_dynamic=true
 openshift_logging_es_pvc_size=10Gi
 openshift_logging_es_pvc_storage_class_name=glusterfs-storage-block
 #openshift_logging_es_memory_limit=4G
 ## legacy metrics
 openshift_metrics_install_metrics=true
-openshift_metrics_cassandra_storage_type=dynamic
 openshift_metrics_cassandra_pvc_size=10Gi
 openshift_metrics_cassandra_pvc_storage_class_name=glusterfs-storage-block
 ## prometheus metrics and alerting
@@ -123,7 +125,7 @@ openshift_prometheus_alertbuffer_storage_volume_size=10Gi
 openshift_prometheus_alertbuffer_storage_type='pvc'
 openshift_prometheus_alertbuffer_sc_name="glusterfs-storage"
 
-#openshift_hosted_infra_selector={"node-role.kubernetes.io/infra":"true"}
+##openshift_hosted_infra_selector={"node-role.kubernetes.io/infra":"true"}
 
 ## CNS for apps only (no infra)
 #openshift_storage_glusterfs_namespace=app-storage	
