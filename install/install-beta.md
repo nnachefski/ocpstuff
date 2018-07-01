@@ -50,12 +50,7 @@ cd ~ && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/script
 wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/core_images.txt
 wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/app_images.txt
 ./import-images.py docker $SRC_REPO:8888 $MY_REPO -d -t $OCP_VER
-./import-images.py docker $SRC_REPO:8888 $MY_REPO -d -l app_images.txt
-```
-##### # openshift from the puddle servers will expect your images to be tagged like this 'ose-pod:v3.10.0-0.57.0'.  
-###### # to mitigate, add a tag alias to the images you just imported.  Normalize the tag like this....
-```
-TAG=$OCP_VER REPO=repo.home.nicknach.net; for i in `cat core_images.txt`; do docker pull $REPO/$i:$OCP_VER; docker tag $REPO/$i:$OCP_VER $REPO/$i:$TAG; docker push $REPO/$i:$TAG; done
+./import-images.py docker $SRC_REPO:8888 $MY_REPO -d -l app_images.txt -t ''
 ```
 #### # Done with repo box
 
