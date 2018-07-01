@@ -61,7 +61,7 @@ for image in list:
 	else:
 		image_string = parse_tag(image)
 	
-	cmdline = ['skopeo', '--insecure-policy', 'inspect', '--tls-verify=false', "docker:/%s/%s/"%(args.source, image_string)]
+	cmdline = ['skopeo', '--insecure-policy', 'inspect', '--tls-verify=false', "docker:/%s/%s"%(args.source, image_string)]
 	if args.d: print('- '+' '.join(cmdline))
 	try:
 		check_call(cmdline, stdout=DEVNULL, stderr=STDOUT)
