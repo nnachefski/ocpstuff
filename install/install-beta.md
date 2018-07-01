@@ -43,6 +43,10 @@ cd ~ && reposync -lm --repoid=rhaos-beta
 ```
 createrepo rhaos-beta
 ```
+##### # move the dir into your web root
+```
+mv rhaos-beta /var/www/html/repo && restorecon -R /var/www/html/repo/rhaos-beta
+```
 ##### # run import-images.py (skopeo wrapper script written in python3)
 ###### # Sorry, Python3 is all i know now.... you can get it from epel 
 ```
