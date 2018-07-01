@@ -118,7 +118,7 @@ rpm --import http://$REPO/RPM-GPG-KEY-redhat-release
 ```
 ##### # add the docker repo cert to the pki store
 ```
-wget http://$REPO/repo/$REPO.cert && mv -f $REPO.cert /etc/pki/ca-trust/source/anchors && restorecon /etc/pki/ca-trust/source/anchors/$REPO.crt && update-ca-trust
+wget http://$REPO/repo/$REPO.cert && mv -f $REPO.cert /etc/pki/ca-trust/source/anchors && restorecon /etc/pki/ca-trust/source/anchors/$REPO.cert && update-ca-trust
 ```
 ##### # add the internal docker registry
 ###### # not required anymore, use openshift_docker_additional_registries in /etc/ansible/hosts
