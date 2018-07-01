@@ -101,7 +101,7 @@ wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/app_ima
 ```
 ##### # now get the other app images, specifying the app_images.txt list (this will default to 'latest' tag)
 ```
-./import-images.py docker $SRC_REPO $MY_REPO -d -l app_images.txt -t ''
+./import-images.py docker $SRC_REPO $MY_REPO -d -l app_images.txt
 ```
 #### ########################### Done with repo box
 
@@ -118,11 +118,12 @@ rpm --import http://$REPO/RPM-GPG-KEY-redhat-release
 ```
 ##### # add the docker repo cert to the pki store
 ```
-wget http://$REPO/repo/$REPO.cert && mv -f $REPO.cert /etc/pki/ca-trust/source/anchors && restorecon /etc/pki/ca-trust/source/anchors/$REPO.cert && update-ca-trust
+wget http://$REPO/repo/$REPO.cert && mv -f $REPO.cert /etc/pki/ca-trust/source/anchors && restorecon /etc/pki/ca-trust/source/anchors/$REPO.crt && update-ca-trust
 ```
 ##### # add the internal docker registry
+###### # not required anymore, use openshift_docker_additional_registries in /etc/ansible/hosts
 ```
-sed -i 's/registry.access.redhat.com/repo.home.nicknach.net/' /etc/containers/registries.conf && systemctl restart docker
+#sed -i 's/registry.access.redhat.com/repo.home.nicknach.net/' /etc/containers/registries.conf && systemctl restart docker
 ```
 ##### # add your rpm repos
 ```
