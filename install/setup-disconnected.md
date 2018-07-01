@@ -101,7 +101,7 @@ wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/app_ima
 ```
 ##### # now get the other app images, specifying the app_images.txt list (this will default to 'latest' tag)
 ```
-./import-images.py docker $SRC_REPO $MY_REPO -d -l app_images.txt
+./import-images.py docker $SRC_REPO $MY_REPO -d -l app_images.txt -t ''
 ```
 #### ########################### Done with repo box
 
@@ -112,8 +112,8 @@ export REPO=repo.home.nicknach.net
 ```
 ##### # import keys from repo
 ```
-#rpm --import http://$REPO/7fa2af80.pub  #nvidia repo
-#rpm --import http://$REPO/RPM-GPG-KEY-EPEL-7 #elpel (not needed)
+#rpm --import http://$REPO/7fa2af80.pub
+#rpm --import http://$REPO/RPM-GPG-KEY-EPEL-7
 rpm --import http://$REPO/RPM-GPG-KEY-redhat-release
 ```
 ##### # add the docker repo cert to the pki store
