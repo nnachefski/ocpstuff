@@ -7,7 +7,7 @@
 ```
 export MY_REPO=repo.home.nicknach.net
 export SRC_REPO=registry.access.redhat.com
-export OCP_VER=v3.9.30
+export OCP_VER=v3.9
 ```
 ##### # subscribe your repo box to the proper channels for OCP
 ```

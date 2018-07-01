@@ -1,13 +1,9 @@
-openshift3/ose:v3.10
 openshift3/ose-pod:v3.10
-openshift3/node:v3.10
 openshift3/ose-node:v3.10
 openshift3/ose-control-plane:v3.10
 openshift3/ose-ansible:v3.10
 openshift3/ose-deployer:v3.10
-openshift3/openvswitch:v3.10
 openshift3/ose-web-console:v3.10
-openshift3/registry-console:v3.10
 openshift3/ose-service-catalog:v3.10
 openshift3/ose-ansible-service-broker:v3.10
 openshift3/ose-template-service-broker:v3.10
@@ -21,6 +17,8 @@ openshift3/ose-federation:v3.10
 openshift3/ose-haproxy-router:v3.10
 openshift3/ose-keepalived-ipfailover:v3.10
 openshift3/ose-sti-builder:v3.10
+openshift3/registry-console:v3.10
+openshift3/openvswitch:v3.10
 openshift3/prometheus-node-exporter:v3.10
 openshift3/prometheus-alertmanager:v3.10
 openshift3/prometheus-alert-buffer:v3.10
