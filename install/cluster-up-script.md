@@ -4,7 +4,7 @@
 ###### # https://github.com/openshift/origin/releases
 ##### # set the oc binary version corresponding to the version that you want to deploy.
 ```
-export PACKAGE_LINK=https://github.com/openshift/origin/releases/download/v3.9.0-alpha.3/openshift-origin-client-tools-v3.9.0-alpha.3-78ddc10-linux-64bit.tar.gz
+export PACKAGE_LINK=https://github.com/openshift/origin/releases/download/v3.10.0-rc.0/openshift-origin-client-tools-v3.10.0-rc.0-c20e215-linux-64bit.tar.gz
 ```
 ##### # You need a wildcard (domain) for Openshift to manage.  If you have easy access to a DNS server (like IPA), then you can create one.  If not, and you can send recursive DNS lookups to the public internet, then you can use xip.io. 
 ##### # notice below how the console is with the app domain (wildcard).  

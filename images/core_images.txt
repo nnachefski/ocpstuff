@@ -1,4 +1,4 @@
-export TAG=v3.10.12
+export TAG=v3.10.13
 cat <<EOF > ~/core_images.txt
 openshift3/ose-pod:$TAG
 openshift3/ose-node:$TAG
