@@ -7,19 +7,18 @@ TEMPLATE=rhel7
 if [ "$TYPE" == "oso" ]; then
 	TEMPLATE=centos7
 	echo "- using $TEMPLATE base image"
-	ssh root@hv2.home.nicknach.net /cloud/scripts/new.sh omaster01 $TEMPLATE 16384 2 52:54:00:18:55:49 &
+	ssh root@hv4.home.nicknach.net /cloud/scripts/new.sh omaster01 $TEMPLATE 16384 2 52:54:00:18:55:49 &
 	ssh root@hv3.home.nicknach.net /cloud/scripts/new.sh omaster02 $TEMPLATE 16384 2 52:54:00:19:57:49 &
 	ssh root@hv5.home.nicknach.net /cloud/scripts/new.sh omaster03 $TEMPLATE 16384 2 52:54:00:18:58:49 &
-	ssh root@hv2.home.nicknach.net /cloud/scripts/new.sh onode01 $TEMPLATE 16384 2 52:54:00:18:56:49 &
+	ssh root@hv4.home.nicknach.net /cloud/scripts/new.sh onode01 $TEMPLATE 16384 2 52:54:00:18:56:49 &
 	ssh root@hv3.home.nicknach.net /cloud/scripts/new.sh onode02 $TEMPLATE 16385 2 52:54:00:18:57:49 &
 	ssh root@hv5.home.nicknach.net /cloud/scripts/new.sh onode03 $TEMPLATE 16384 2 52:54:00:12:58:49 &
-    ssh root@hv2.home.nicknach.net /cloud/scripts/new.sh oinfra01 $TEMPLATE 16384 2 52:54:00:01:58:49 &
+    ssh root@hv4.home.nicknach.net /cloud/scripts/new.sh oinfra01 $TEMPLATE 16384 2 52:54:00:01:58:49 &
     ssh root@hv3.home.nicknach.net /cloud/scripts/new.sh oinfra02 $TEMPLATE 16384 2 52:54:00:02:58:49 &
     ssh root@hv5.home.nicknach.net /cloud/scripts/new.sh oinfra03 $TEMPLATE 16384 2 52:54:00:03:58:49 &
 
 elif [ "$TYPE" == "ocp" ]; then
 	echo "- using $TEMPLATE base image"
-    ssh root@storage.home.nicknach.net /cloud/scripts/new.sh lb $TEMPLATE 4196 2 52:54:00:18:58:16
 	ssh root@hv4.home.nicknach.net /cloud/scripts/new.sh master01 $TEMPLATE 16384 2 52:54:00:fb:09:ec &
 	ssh root@hv3.home.nicknach.net /cloud/scripts/new.sh master02 $TEMPLATE 16384 2 52:54:00:18:58:01 &
 	ssh root@hv5.home.nicknach.net /cloud/scripts/new.sh master03 $TEMPLATE 16384 2 52:54:00:18:58:02 &
