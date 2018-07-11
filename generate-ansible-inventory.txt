@@ -146,8 +146,6 @@ openshift_prometheus_alertbuffer_storage_volume_size=10Gi
 #openshift_hosted_etcd_storage_access_modes=["ReadWriteOnce"]
 #openshift_prometheus_storage_access_modes=['ReadWriteOnce']
 
-##openshift_hosted_infra_selector={"node-role.kubernetes.io/infra":"true"}
-
 ## CNS for apps only (no infra)
 #openshift_storage_glusterfs_namespace=app-storage	
 #openshift_storage_glusterfs_storageclass=true
@@ -231,6 +229,8 @@ openshift_master_default_subdomain=$APPS_DOMAIN
 #openshift_http_proxy=http://192.168.0.254:3128
 #openshift_https_proxy=http://192.168.0.254:3128
 #openshift_no_proxy=
+
+##openshift_hosted_infra_selector={"node-role.kubernetes.io/infra":"true"}
 
 ## use these if there is a conflict with the docker bridge and/or SDN networks
 #osm_cluster_network_cidr=10.129.0.0/14
