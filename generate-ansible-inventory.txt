@@ -23,6 +23,7 @@ openshift_deployment_type=openshift-enterprise
 #oreg_url=$MY_REPO/openshift3/ose-\${component}:\${version}
 #openshift_examples_modify_imagestreams=true
 container_runtime_docker_storage_setup_device=$DOCKER_DEV
+container_runtime_docker_storage_type=overlay2
 
 ## If oreg_url points to a registry requiring authentication, provide the following:
 #oreg_auth_user=some_user
