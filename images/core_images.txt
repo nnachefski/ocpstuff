@@ -13,12 +13,9 @@ openshift3/ose-docker-registry:v3.10.17
 openshift3/ose-egress-http-proxy:v3.10.17
 openshift3/ose-egress-router:v3.10.17
 openshift3/ose-f5-router:v3.10.17
-#openshift3/ose-federation:v3.10.17
 openshift3/ose-haproxy-router:v3.10.17
 openshift3/ose-keepalived-ipfailover:v3.10.17
-#openshift3/ose-sti-builder:v3.10.17
 openshift3/registry-console:v3.10.17
-#openshift3/openvswitch:v3.10.17
 openshift3/prometheus-node-exporter:v3.10.17
 openshift3/prometheus-alertmanager:v3.10.17
 openshift3/prometheus-alert-buffer:v3.10.17
