@@ -13,9 +13,9 @@ oc create -f openshift-template.json
 ```
 ##### # give the default sa 'anyuid' scc on this project
 ```
-oc adm policy add-scc-to-user anyuid -z default
+oc adm policy add-scc-to-user anyuid -z gitlab-ce-user
 ```
 ##### # now deploy gitlab
 ```
-oc new-app --template gitlab-ce
+oc new-app --template gitlab-ce 
 ```
