@@ -18,8 +18,8 @@ openshift_deployment_type=openshift-enterprise
 ##internal image repos
 ##openshift_additional_repos=[{'id': 'ose-devel', 'name': 'rhaos-beta', 'baseurl': 'http://$MY_REPO/repo/rhaos-beta', 'enabled': 1, 'gpgcheck': 0}]
 ##openshift_docker_insecure_registries=$MY_REPO
+##openshift_docker_blocked_registries=registry.access.redhat.com,docker.io
 #openshift_docker_additional_registries=$MY_REPO
-#openshift_docker_blocked_registries=registry.access.redhat.com,docker.io
 #oreg_url=$MY_REPO/openshift3/ose-\${component}:\${version}
 #openshift_examples_modify_imagestreams=true
 
@@ -227,7 +227,7 @@ openshift_master_default_subdomain=$APPS_DOMAIN
 
 ## network stuff
 #os_sdn_network_plugin_name='redhat/openshift-ovs-multitenant'
-# set these if you are behind a proxy
+## set these if you are behind a proxy
 #openshift_http_proxy=http://192.168.0.254:3128
 #openshift_https_proxy=http://192.168.0.254:3128
 #openshift_no_proxy=
