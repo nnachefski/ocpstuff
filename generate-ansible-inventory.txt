@@ -132,7 +132,7 @@ openshift_logging_es_memory_limit=8G
 ## legacy metrics
 openshift_metrics_install_metrics=true
 openshift_metrics_cassandra_pvc_size=10Gi
-openshift_metrics_cassandra_nodeselector={'node-role.kubernetes.io/infra':'true'}
+#openshift_metrics_cassandra_nodeselector={'node-role.kubernetes.io/infra':'true'}
 ## prometheus metrics and alerting
 openshift_hosted_prometheus_deploy=true
 openshift_prometheus_namespace=openshift-metrics
