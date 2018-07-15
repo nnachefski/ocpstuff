@@ -1,9 +1,5 @@
 ### # misc stuff
 
-##### # deploy ai-duet app
-```
-oc new-app --docker-image=http://docker.io/marcelmaatkamp/aiexperiments-ai-duet --name ai-duet
-```
 ##### # change roles
 ```
 oc label node --selector=region=infra node-role.kubernetes.io/infra=true
