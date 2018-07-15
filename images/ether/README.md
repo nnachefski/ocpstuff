@@ -1,4 +1,5 @@
 ### # This image is for building and deploying CUDA/GPU-enabled Ethereum miners on Openshift.
+# # This is the old way.  Dont build ethminer this way if using 3.10+
 ###### # this image requires the rhel7-cuda image to be available
 ##### # create the project
 ```
