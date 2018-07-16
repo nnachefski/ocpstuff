@@ -3,28 +3,28 @@
 Summary: 9 VMs recommended for multi master install.  Additional VM if NFS services are needed.
 * Infrastructure (physical or virtual machines, assuming virtual):
 * Master Nodes (3 VMs required)
-  * 32GB RAM (more is better)
-  * 4 vCPUs (more is better)
+  * 32GB RAM 
+  * 4 vCPUs 
   * 20GB Disk (for OS)
   * 30GB Disk (for Docker, raw/unformatted)
   * RHEL7.5 upgraded to latest patchset
 * Infrastructure Nodes (3 VMs required)
-  * 32GB RAM (more is better)
-  * 4 vCPUs (more is better)
+  * 32GB RAM 
+  * 4 vCPUs 
   * 20GB Disk (for OS)
   * 30GB Disk (for Docker, raw/unformatted)
   * 200GB Disk (for CNS, raw/unformatted)  
   * RHEL7.5 upgraded to latest patchset
 * Application Nodes (3 VMs recommended) 
-  * 32GB RAM (more is better)
-  * 4 vCPUs (more is better)
+  * 32GB RAM 
+  * 4 vCPUs 
   * 20GB Disk (for OS)
   * 30GB Disk (for Docker, raw/unformatted)
   * RHEL7.5 upgraded to latest patchset
 * Additional VM if NFS is needed
   * 8GB RAM
   * 4 vCPUs
-  * 100GB Disk (more is better)
+  * 100GB Disk 
   * RHEL7.5 upgraded to latest patchset
 * Internet connectivity is recommended
   * HTTPS Whitelist these trusted hosts in proxies and/or firewalls (if needed)

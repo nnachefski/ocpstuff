@@ -3,14 +3,14 @@
 Summary: 4 VMs recommended for single master install.  Additional VM if NFS services are needed.
 * Infrastructure (physical or virtual machines, assuming virtual):
 * Master (1 VM Required)
-  * 32GB RAM (more is better)
-  * 4 vCPUs (more is better)
+  * 32GB RAM
+  * 4 vCPUs
   * 20GB Disk (for OS)
   * 30GB Disk (for Docker, raw/unformatted)
   * RHEL7.5 upgraded to latest patchset
 * Container Hosts (3 VMs required) 
-  * 32GB RAM (more is better)
-  * 4 vCPUs (more is better)
+  * 32GB RAM
+  * 4 vCPUs
   * 20GB Disk (for OS)
   * 30GB Disk (for Docker, raw/unformatted)
   * RHEL7.5 upgraded to latest patchset
@@ -18,7 +18,7 @@ Summary: 4 VMs recommended for single master install.  Additional VM if NFS serv
 * Additional VM if NFS is needed
   * 8GB RAM (no more memory is needed)
   * 4 vCPUs
-  * 100GB Disk (more is better)
+  * 100GB Disk
   * RHEL7.5 upgraded to latest patchset
 * Internet connectivity is recommended
   * HTTPS Whitelist these trusted hosts in proxies and/or firewalls (if needed)
