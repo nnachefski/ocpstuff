@@ -1,6 +1,13 @@
 ### # misc stuff
-
-##### # change roles
+##### # mount /etc/pki in the docker-registry pod
+```
+oc patch dc docker-registry -p '{"spec":{"template":{"spec":{"containers":[{"name":"registry","volumeMounts":[{"mountPath":"/etc/pki","name":"certs"}]}],"volumes":[{"hostPath":{"path":"/etc/pki","type":"Directory"},"name":"certs"}]}}}}'
+```
+##### # and then adjust the docker-registry scc to allow the hostPath:
+```
+oc adm policy add-scc-to-user hostaccess -z registry -n default
+```
+##### # change node role
 ```
 oc label node --selector=region=infra node-role.kubernetes.io/infra=true
 ```
