@@ -1,7 +1,7 @@
 ####  # this howto is for gitlab-ce running in it's own openshift project
 ##### # create the project
 ```
-oc new-project source
+oc new-project cicd
 ```
 ##### # get the template
 ```
