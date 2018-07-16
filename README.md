@@ -34,7 +34,7 @@ https://github.com/nnachefski/ocpstuff/tree/master/images
 https://github.com/nnachefski/ocpstuff/tree/master/nvidia
 
 #### Openshift ethminer howto
-https://github.com/nnachefski/ocpstuff/tree/master/ethminer
+https://github.com/nnachefski/ocpstuff/tree/master/crypto/ethminer
 
 #### Openshift Tensorflow howto
 https://github.com/nnachefski/ocpstuff/tree/master/ml
