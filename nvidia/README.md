@@ -103,7 +103,7 @@ oc patch ns nvidia -p '{"metadata": {"annotations": {"openshift.io/node-selector
 ### # All done!  
 #### # now let's use that GPU-enabled container host.  Here are some more interesting workloads...
 ##### # Tensorflow
-https://github.com/nnachefski/ocpstuff/tree/master/ml
+https://github.com/nnachefski/ocpstuff/tree/master/ml/tensorflow
 ##### # Ethminer
-https://github.com/nnachefski/ocpstuff/tree/master/ethminer
+https://github.com/nnachefski/ocpstuff/tree/master/crypto/ethminer
  
