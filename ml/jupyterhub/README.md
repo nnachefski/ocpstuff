@@ -19,6 +19,6 @@ oc create -f https://raw.githubusercontent.com/jupyter-on-openshift/jupyterhub-q
 ##### # now deploy and use the PythonDataScienceHandbook repo for the notebook source
 ```
 oc new-app --template jupyterhub-quickstart \
-  --param APPLICATION_NAME=dsdemo \
+  --param APPLICATION_NAME=datasci \
   --param GIT_REPOSITORY_URL=https://github.com/jakevdp/PythonDataScienceHandbook
 ```
