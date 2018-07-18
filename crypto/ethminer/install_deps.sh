@@ -256,7 +256,7 @@ Linux)
 
 #------------------------------------------------------------------------------
 # Other platform (not Linux, FreeBSD or macOS).
-# Not sure what might end up here?
+# Not sure what might end up here? 
 # Maybe OpenBSD, NetBSD, AIX, Solaris, HP-UX?
 #------------------------------------------------------------------------------
 *)
