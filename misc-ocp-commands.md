@@ -1,4 +1,5 @@
 ### # misc stuff
+
 ##### # mount /etc/pki in the docker-registry pod
 ```
 oc patch dc docker-registry -p '{"spec":{"template":{"spec":{"containers":[{"name":"registry","volumeMounts":[{"mountPath":"/etc/pki","name":"certs"}]}],"volumes":[{"hostPath":{"path":"/etc/pki","type":"Directory"},"name":"certs"}]}}}}'
@@ -260,3 +261,15 @@ oc patch dc docker-registry -p '{"spec":{"template":{"spec":{"containers":[{"nam
 ```
 oc adm policy add-scc-to-user hostaccess -z registry
 ``` 
+
+To un-install logging, do this:
+/usr/share/ansible/openshift-ansible/playbooks/byo/openshift-cluster/openshift-logging.yml -e openshift_logging_install_logging=False
+
+Then to re-install, do this:
+/usr/share/ansible/openshift-ansible/playbooks/byo/openshift-cluster/openshift-logging.yml -e openshift_logging_install_logging=True -e openshift_logging_es_pvc_storage_class_name=glusterfs-storage-block -e openshift_logging_es_pvc_dynamic=true openshift_logging_es_memory_limit=4G -e openshift_logging_es_pvc_size=10Gi
+
+To un-install metrics, do this:
+ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/byo/openshift-cluster/openshift-metrics.yml -e openshift_metrics_install_metrics=False
+
+To re-deploy metrics, do this:
+ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/byo/openshift-cluster/openshift-metrics.yml -e openshift_metrics_install_metrics=True -e openshift_metrics_cassandra_pvc_storage_class_name=glusterfs-storage-block -e openshift_metrics_cassandra_storage_type=dynamic -e openshift_metrics_cassandra_pvc_size=10Gi 
