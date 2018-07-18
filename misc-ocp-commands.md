@@ -263,10 +263,10 @@ oc adm policy add-scc-to-user hostaccess -z registry
 ``` 
 
 To un-install logging, do this:
-/usr/share/ansible/openshift-ansible/playbooks/byo/openshift-cluster/openshift-logging.yml -e openshift_logging_install_logging=False
+ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/byo/openshift-cluster/openshift-logging.yml -e openshift_logging_install_logging=False
 
 Then to re-install, do this:
-/usr/share/ansible/openshift-ansible/playbooks/byo/openshift-cluster/openshift-logging.yml -e openshift_logging_install_logging=True -e openshift_logging_es_pvc_storage_class_name=glusterfs-storage-block -e openshift_logging_es_pvc_dynamic=true openshift_logging_es_memory_limit=4G -e openshift_logging_es_pvc_size=10Gi
+ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/byo/openshift-cluster/openshift-logging.yml -e openshift_logging_install_logging=True -e openshift_logging_es_pvc_storage_class_name=glusterfs-storage-block -e openshift_logging_es_pvc_dynamic=true openshift_logging_es_memory_limit=4G -e openshift_logging_es_pvc_size=10Gi
 
 To un-install metrics, do this:
 ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/byo/openshift-cluster/openshift-metrics.yml -e openshift_metrics_install_metrics=False
