@@ -4,6 +4,8 @@
 ```
 oc new-project jupyterhub-s2i
 ```
+##### # create a minimal Jupyter notebook image
+```
 oc create -f https://raw.githubusercontent.com/jupyter-on-openshift/jupyter-notebooks/master/images.json
 ```
 ##### # build the JupyterHub image
@@ -20,4 +22,3 @@ oc new-app --template jupyterhub-quickstart \
   --param APPLICATION_NAME=dsdemo \
   --param GIT_REPOSITORY_URL=https://github.com/jakevdp/PythonDataScienceHandbook
 ```
-
