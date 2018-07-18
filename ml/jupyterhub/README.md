@@ -20,3 +20,4 @@ oc new-app --template jupyterhub-quickstart \
   --param APPLICATION_NAME=dsdemo \
   --param GIT_REPOSITORY_URL=https://github.com/jakevdp/PythonDataScienceHandbook
 ```
+
