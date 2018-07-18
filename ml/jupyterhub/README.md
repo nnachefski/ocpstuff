@@ -4,12 +4,6 @@
 ```
 oc new-project jupyterhub-s2i
 ```
-##### # give the default sa 'anyuid' scc on this project
-```
-#oc adm policy add-scc-to-user anyuid -z default
-```
-##### # create a minimal Jupyter notebook image
-```
 oc create -f https://raw.githubusercontent.com/jupyter-on-openshift/jupyter-notebooks/master/images.json
 ```
 ##### # build the JupyterHub image
