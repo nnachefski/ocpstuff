@@ -27,8 +27,8 @@ https://github.com/nnachefski/ocpstuff/tree/master/rbac
 #### Openshift disconnected install
 https://github.com/nnachefski/ocpstuff/blob/master/install/setup-disconnected.md
 
-#### Custom images (RHEL7, ethminer, s2i)
-https://github.com/nnachefski/ocpstuff/tree/master/images
+#### Custom RHEL7 image based on the official rhel7 image for RH
+https://github.com/nnachefski/ocpstuff/tree/master/rhel7-custom
 
 #### Openshift NVIDIA Device Plugin howto (3.10+)
 https://github.com/nnachefski/ocpstuff/tree/master/nvidia
