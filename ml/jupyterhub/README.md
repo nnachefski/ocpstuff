@@ -2,7 +2,7 @@
 ###### # from: https://github.com/jupyter-on-openshift/jupyterhub-quickstart
 ##### # create the project
 ```
-oc new-project jupyterhub-s2i
+oc new-project data-sci
 ```
 ##### # create a minimal Jupyter notebook image
 ```
@@ -19,6 +19,6 @@ oc create -f https://raw.githubusercontent.com/jupyter-on-openshift/jupyterhub-q
 ##### # now deploy and use the PythonDataScienceHandbook repo for the notebook source
 ```
 oc new-app --template jupyterhub-quickstart \
-  --param APPLICATION_NAME=datasci \
+  --param APPLICATION_NAME=demo \
   --param GIT_REPOSITORY_URL=https://github.com/jakevdp/PythonDataScienceHandbook
 ```
