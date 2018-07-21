@@ -106,9 +106,9 @@ yum install -y yum-utils wget git net-tools bind-utils iptables-services bridge-
 ```
 yum install -y atomic atomic-openshift-clients
 ```
-##### # install docker
+##### # install cri-o
 ```
-yum install -y cri-o
+yum install -y cri-o cri-tools podman
 ```
 ##### # install gluster packages 
 ```
