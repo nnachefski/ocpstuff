@@ -13,7 +13,7 @@ https://github.com/nnachefski/ocpstuff/blob/master/docs/prereq-summary-single-ma
 https://github.com/nnachefski/ocpstuff/blob/master/docs/prereq-summary-multi-master.txt
 
 #### Openshift (GA) install script
-https://github.com/nnachefski/ocpstuff/blob/master/install/install-39.md
+https://github.com/nnachefski/ocpstuff/blob/master/install/install-ga.md
 
 #### Openshift (Beta) install script
 https://github.com/nnachefski/ocpstuff/blob/master/install/install-beta.md
