@@ -122,6 +122,10 @@ wget http://$MY_REPO/repo/$MY_REPO.cert && mv -f $MY_REPO.cert /etc/pki/ca-trust
 ```
 sed -i 's/registry.access.redhat.com/repo.home.nicknach.net/' /etc/containers/registries.conf && systemctl restart docker
 ```
+##### # add the internal registry to crio.conf
+```
+sed -i "s/#registries = \[/registries = [ 'repo.home.nicknach.net' ]/" /etc/crio/crio.conf
+```
 ##### # make sure your nodes are up to date
 ```
 yum -y update
