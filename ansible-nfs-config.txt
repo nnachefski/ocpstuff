@@ -1,0 +1,69 @@
+### everything on nfs	
+## registry	
+#openshift_hosted_registry_storage_kind=nfs	
+#openshift_hosted_registry_storage_access_modes=['ReadWriteMany']	
+#openshift_hosted_registry_storage_host=$OCP_NFS_SERVER	
+#openshift_hosted_registry_storage_nfs_directory=$OCP_NFS_MOUNT	
+##openshift_hosted_registry_storage_nfs_options='*(rw,root_squash,sync,no_wdelay)'	
+#openshift_hosted_registry_storage_volume_name=docker-registry	
+#openshift_hosted_registry_storage_volume_size=50Gi	
+## etcd	
+#openshift_hosted_etcd_storage_kind=nfs	
+#openshift_hosted_etcd_storage_access_modes=["ReadWriteOnce"]	
+#openshift_hosted_etcd_storage_host=$OCP_NFS_SERVER	
+#openshift_hosted_etcd_storage_nfs_directory=$OCP_NFS_MOUNT	
+##openshift_hosted_etcd_storage_nfs_options="*(rw,root_squash,sync,no_wdelay)"	
+#openshift_hosted_etcd_storage_volume_name=etcd 	
+#openshift_hosted_etcd_storage_volume_size=1Gi	
+#openshift_hosted_etcd_storage_labels={'storage':'etcd'}	
+## logging	
+#openshift_logging_install_logging=true	
+#openshift_logging_storage_kind=nfs	
+#openshift_logging_storage_access_modes=['ReadWriteOnce']	
+#openshift_logging_storage_host=$OCP_NFS_SERVER	
+#openshift_logging_storage_nfs_directory=$OCP_NFS_MOUNT	
+##openshift_logging_storage_nfs_options='*(rw,root_squash,sync,no_wdelay)'	
+#openshift_logging_storage_volume_name=logging	
+#openshift_logging_storage_volume_size=10Gi	
+#openshift_logging_storage_labels={'storage':'logging'}	
+## metrics	
+#openshift_metrics_install_metrics=true	
+#openshift_metrics_storage_kind=nfs	
+#openshift_metrics_storage_access_modes=['ReadWriteOnce']	
+#openshift_metrics_storage_host=$OCP_NFS_SERVER	
+#openshift_metrics_storage_nfs_directory=$OCP_NFS_MOUNT	
+##openshift_metrics_storage_nfs_options='*(rw,root_squash,sync,no_wdelay)'	
+#openshift_metrics_storage_volume_name=metrics	
+#openshift_metrics_storage_volume_size=20Gi	
+#openshift_metrics_storage_labels={'storage':'metrics'}	
+## prometheus	
+#openshift_hosted_prometheus_deploy=true	
+#openshift_prometheus_storage_kind=nfs	
+#openshift_prometheus_storage_access_modes=['ReadWriteOnce']	
+#openshift_prometheus_storage_host=$OCP_NFS_SERVER	
+#openshift_prometheus_storage_nfs_directory=$OCP_NFS_MOUNT	
+##openshift_prometheus_storage_nfs_options='*(rw,root_squash,sync,no_wdelay)'	
+#openshift_prometheus_storage_volume_name=prometheus	
+#openshift_prometheus_storage_volume_size=20Gi	
+#openshift_prometheus_storage_labels={'storage':'prometheus'}	
+#openshift_prometheus_storage_type='pvc'	
+## prometheus-alertmanager	
+#openshift_prometheus_alertmanager_storage_kind=nfs	
+#openshift_prometheus_alertmanager_storage_access_modes=['ReadWriteOnce']	
+#openshift_prometheus_alertmanager_storage_host=$OCP_NFS_SERVER	
+#openshift_prometheus_alertmanager_storage_nfs_directory=$OCP_NFS_MOUNT	
+##openshift_prometheus_alertmanager_storage_nfs_options='*(rw,root_squash,sync,no_wdelay)'	
+#openshift_prometheus_alertmanager_storage_volume_name=prometheus-alertmanager	
+#openshift_prometheus_alertmanager_storage_volume_size=21Gi	
+#openshift_prometheus_alertmanager_storage_labels={'storage':'prometheus-alertmanager'}	
+#openshift_prometheus_alertmanager_storage_type='pvc'	
+## prometheus-alertbuffer	
+#openshift_prometheus_alertbuffer_storage_kind=nfs	
+#openshift_prometheus_alertbuffer_storage_access_modes=['ReadWriteOnce']	
+#openshift_prometheus_alertbuffer_storage_host=$OCP_NFS_SERVER	
+#openshift_prometheus_alertbuffer_storage_nfs_directory=$OCP_NFS_MOUNT	
+##openshift_prometheus_alertbuffer_storage_nfs_options='*(rw,root_squash,sync,no_wdelay)'	
+#openshift_prometheus_alertbuffer_storage_volume_name=prometheus-alertbuffer	
+#openshift_prometheus_alertbuffer_storage_volume_size=22Gi	
+#openshift_prometheus_alertbuffer_storage_labels={'storage':'prometheus-alertbuffer'}	
+#openshift_prometheus_alertbuffer_storage_type='pvc'
