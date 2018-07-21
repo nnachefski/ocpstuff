@@ -110,6 +110,10 @@ yum install -y atomic atomic-openshift-clients
 ```
 yum install -y cri-o cri-tools podman runc
 ```
+##### # install docker
+```
+yum install -y docker && systemctl enable docker --now 
+```
 ##### # install gluster packages 
 ```
 yum -y install cns-deploy heketi-client
