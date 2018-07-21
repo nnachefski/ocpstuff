@@ -156,11 +156,11 @@ ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/deploy_cluster.y
 
 ##### # during the install, do these commands in separate terminals to trouble shoot any issues
 ```
-watch -n2 oc get pods -owide --all-namespaces
+watch oc get pods -owide --all-namespaces
 
 and
 
-watch -n2 oc get pv
+watch oc get pv
 
 and
 
