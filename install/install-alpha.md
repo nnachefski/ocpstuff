@@ -108,7 +108,7 @@ yum install -y atomic atomic-openshift-clients
 ```
 ##### # install docker
 ```
-yum install -y crio crio-tools
+yum install -y cri-o
 ```
 ##### # install gluster packages 
 ```
