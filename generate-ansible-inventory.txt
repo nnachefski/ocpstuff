@@ -23,7 +23,7 @@ openshift_use_crio_only=True
 openshift_crio_enable_docker_gc=True
 openshift_crio_docker_gc_node_selector={'runtime': 'cri-o'}
 
-##internal image repos
+## internal image repos
 ##openshift_additional_repos=[{'id': 'ose-devel', 'name': 'rhaos-beta', 'baseurl': 'http://$MY_REPO/repo/rhaos-beta', 'enabled': 1, 'gpgcheck': 0}]
 ##openshift_docker_insecure_registries=$MY_REPO
 ##openshift_docker_blocked_registries=registry.access.redhat.com,docker.io
