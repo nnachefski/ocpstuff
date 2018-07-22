@@ -108,7 +108,7 @@ yum install -y atomic atomic-openshift-clients-3.10.18
 ```
 ##### # install docker
 ```
-#yum install -y docker docker-logrotate
+yum install -y docker && systemctl enable docker --now
 ```
 ##### # or, if using crio
 ```
