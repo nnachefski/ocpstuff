@@ -1,4 +1,4 @@
-####  # follow these instructions to get NVIDIA GPU containers running on Openshift (OCP) 3.10
+####  # NVIDIA GPU containers running on Openshift (OCP) 3.10
 ##### # the idea in this howto is to create an nvidia project, start up the nvidia devices plugin daemonset, and then configure your OCP node to use it
 
 ###### # RHEL 7.5
