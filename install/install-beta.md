@@ -128,7 +128,7 @@ wget http://$MY_REPO/repo/$MY_REPO.cert && mv -f $MY_REPO.cert /etc/pki/ca-trust
 ```
 ##### # or, if using crio
 ```
-sed -i "s/#registries = \[/registries = [ 'repo.home.nicknach.net' ]/" /etc/crio/crio.conf && systemctl restart crio
+sed -i "s/registries = \[/registries = [ 'repo.home.nicknach.net' /" /etc/crio/crio.conf && systemctl restart crio
 ```
 ##### # make sure your nodes are up to date
 ```
