@@ -6,7 +6,7 @@
 
 ```
 oc import-image repo.home.nicknach.net/rhel7.5 --confirm -n openshift
-oc create -f https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/custom-images-template.yml -n openshift
+oc create -f https://raw.githubusercontent.com/nnachefski/ocpstuff/master/rhel7-custom/custom-images-template.yml -n openshift
 ```
 ###### # this template was generated from the buildconfigs of all five image folders in this context-dir.  The command used to generate this template is: 
 ###### # oc export bc,is rhel7-custom s2i-custom-core s2i-custom-base s2i-custom-python35 -n openshift > custom-images-template.yml
