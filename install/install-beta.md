@@ -104,11 +104,15 @@ yum install -y yum-utils wget git net-tools bind-utils iptables-services bridge-
 ```
 ##### # install openshift specific pre-reqs
 ```
-yum install -y atomic atomic-openshift-clients
+yum install -y atomic atomic-openshift-clients-3.10.18
 ```
 ##### # install docker
 ```
-yum install -y docker docker-logrotate
+#yum install -y docker docker-logrotate
+```
+##### # or, if using crio
+```
+yum install -y yum install -y cri-o cri-tools
 ```
 ##### # install gluster packages 
 ```
@@ -120,17 +124,21 @@ wget http://$MY_REPO/repo/$MY_REPO.cert && mv -f $MY_REPO.cert /etc/pki/ca-trust
 ```
 ##### # add the internal docker registry
 ```
-sed -i 's/registry.access.redhat.com/repo.home.nicknach.net/' /etc/containers/registries.conf && systemctl restart docker
+#sed -i 's/registry.access.redhat.com/repo.home.nicknach.net/' /etc/containers/registries.conf && systemctl restart docker
+```
+##### # or, if using crio
+```
+sed -i "s/#registries = \[/registries = [ 'repo.home.nicknach.net' ]/" /etc/crio/crio.conf && systemctl restart crio
 ```
 ##### # make sure your nodes are up to date
 ```
-yum -y update
+#yum -y update
 ```
 ###### # reboot if necessary 
 ## #  On first master only now (or bastion host)
 ##### # install openshift-ansible and dependencies 
 ```
-yum install -y openshift-ansible-playbooks && updatedb
+yum install -y openshift-ansible-playbooks-3.10.18 && updatedb
 ```
 ##### #  make password-less key for openshift-ansible usage
 ```
