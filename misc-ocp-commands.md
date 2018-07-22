@@ -1,8 +1,12 @@
 ### # misc stuff
 
-##### # mount /etc/pki in the docker-registry pod
+##### # add system and repo certs to docker-registry pod
 ```
-oc patch dc docker-registry -p '{"spec":{"template":{"spec":{"containers":[{"name":"registry","volumeMounts":[{"mountPath":"/etc/pki","name":"certs"}]}],"volumes":[{"hostPath":{"path":"/etc/pki","type":"Directory"},"name":"certs"}]}}}}'
+oc create configmap mycert --from-file=repo.crt=/etc/pki/tls/repo.home.nicknach.net.cert -n default
+
+oc create configmap systemcert --from-file=repo.crt=/etc/pki/tls/cert.pem -n default
+
+oc patch dc docker-registry -p '{"spec":{"template":{"spec":{"containers":[{"name":"registry","volumeMounts":[{"mountPath":"/etc/pki/tls","name":"certs"},{"mountPath":"/etc/pki/ca-trust/source/anchors","name":"repocert"}]}],"volumes":[{"configMap":{"defaultMode":420,"name":"systemcert"},"name":"certs"},{"configMap":{"defaultMode":420,"name":"mycert"},"name":"repocert"}]}}}}' -n default
 ```
 ##### # and then adjust the docker-registry scc to allow the hostPath:
 ```
