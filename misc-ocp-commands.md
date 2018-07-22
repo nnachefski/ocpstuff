@@ -8,7 +8,14 @@ oc create configmap systemcert --from-file=cert.pem=/etc/pki/tls/cert.pem -n def
 
 oc patch dc docker-registry -p '{"spec":{"template":{"spec":{"containers":[{"name":"registry","volumeMounts":[{"mountPath":"/etc/pki/tls","name":"certs"},{"mountPath":"/etc/pki/ca-trust/source/anchors","name":"repocert"}]}],"volumes":[{"configMap":{"defaultMode":420,"name":"systemcert"},"name":"certs"},{"configMap":{"defaultMode":420,"name":"mycert"},"name":"repocert"}]}}}}' -n default
 ```
-##### # and then adjust the docker-registry scc to allow the hostPath:
+##### # add just /etc/pki to docker-registry
+```
+oc create configmap systemcert --from-file=cert.pem=/etc/pki/tls/cert.pem -n default
+
+oc patch dc docker-registry -p ''
+```
+
+##### # adjust the docker-registry scc to allow the hostPath
 ```
 oc adm policy add-scc-to-user hostaccess -z registry -n default
 ```
