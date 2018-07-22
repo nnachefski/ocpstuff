@@ -112,7 +112,7 @@ yum install -y docker && systemctl enable docker --now
 ```
 ##### # or, if using crio
 ```
-yum install -y yum install -y cri-o cri-tools
+#yum install -y yum install -y cri-o cri-tools
 ```
 ##### # install gluster packages 
 ```
@@ -124,11 +124,11 @@ wget http://$MY_REPO/repo/$MY_REPO.cert && mv -f $MY_REPO.cert /etc/pki/ca-trust
 ```
 ##### # add the internal docker registry
 ```
-#sed -i 's/registry.access.redhat.com/repo.home.nicknach.net/' /etc/containers/registries.conf && systemctl restart docker
+sed -i 's/registry.access.redhat.com/repo.home.nicknach.net/' /etc/containers/registries.conf && systemctl restart docker
 ```
 ##### # or, if using crio
 ```
-sed -i "s/registries = \[/registries = [ 'repo.home.nicknach.net' /" /etc/crio/crio.conf && systemctl restart crio
+#sed -i "s/registries = \[/registries = [ 'repo.home.nicknach.net' /" /etc/crio/crio.conf && systemctl restart crio
 ```
 ##### # make sure your nodes are up to date
 ```
