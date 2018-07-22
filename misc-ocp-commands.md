@@ -2,7 +2,7 @@
 
 ##### # add system and repo certs to docker-registry pod
 ```
-oc create configmap mycert --from-file=repo.cert=/etc/pki/tls/repo.home.nicknach.net.cert -n default
+oc create configmap mycert --from-file=repo.cert=/etc/pki/ca-trust/source/anchors/repo.home.nicknach.net.cert -n default
 
 oc create configmap systemcert --from-file=cert.pem=/etc/pki/tls/cert.pem -n default
 
