@@ -20,7 +20,7 @@ items:
     resources: {}
     runPolicy: Serial
     source:
-      contextDir: images/rhel7-custom
+      contextDir: rhel7-custom
       git:
         uri: https://github.com/nnachefski/ocpstuff.git
       type: Git
