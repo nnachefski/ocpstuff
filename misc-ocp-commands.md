@@ -2,9 +2,9 @@
 
 ##### # add system and repo certs to docker-registry pod
 ```
-oc create configmap mycert --from-file=repo.crt=/etc/pki/tls/repo.home.nicknach.net.cert -n default
+oc create configmap mycert --from-file=repo.cert=/etc/pki/tls/repo.home.nicknach.net.cert -n default
 
-oc create configmap systemcert --from-file=repo.crt=/etc/pki/tls/cert.pem -n default
+oc create configmap systemcert --from-file=cert.pem=/etc/pki/tls/cert.pem -n default
 
 oc patch dc docker-registry -p '{"spec":{"template":{"spec":{"containers":[{"name":"registry","volumeMounts":[{"mountPath":"/etc/pki/tls","name":"certs"},{"mountPath":"/etc/pki/ca-trust/source/anchors","name":"repocert"}]}],"volumes":[{"configMap":{"defaultMode":420,"name":"systemcert"},"name":"certs"},{"configMap":{"defaultMode":420,"name":"mycert"},"name":"repocert"}]}}}}' -n default
 ```
