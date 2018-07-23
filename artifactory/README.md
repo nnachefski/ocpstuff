@@ -9,11 +9,11 @@ wget https://raw.githubusercontent.com/jfrog/artifactory-docker-examples/master/
 ```
 ##### # now create the template
 ```
-oc create -f artifactory.yml
+oc create -f artifactory.yml -e artifactory.image.repository=docker.bintray.io/jfrog/artifactory-oss
 ```
 ##### # give the default sa 'anyuid' scc on this project
 ```
-oc adm policy add-scc-to-user anyuid -z gitlab-ce-user
+oc adm policy add-scc-to-user anyuid -z default
 ```
 ##### # now deploy gitlab
 ```
