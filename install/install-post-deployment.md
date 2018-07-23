@@ -26,4 +26,4 @@ oc adm manage-node --selector=node-role.kubernetes.io/master=true --schedulable=
 ## # Done!
 
 ### # Now run through the rhel7-custom image build guide
-#### # https://github.com/nnachefski/ocpstuff/tree/master/images
+#### # https://github.com/nnachefski/ocpstuff/tree/master/rhel7-custom
