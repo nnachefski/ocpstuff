@@ -104,7 +104,7 @@ yum install -y yum-utils wget git net-tools bind-utils iptables-services bridge-
 ```
 ##### # install openshift specific pre-reqs
 ```
-yum install -y atomic atomic-openshift-clients-3.10.18
+yum install -y atomic atomic-openshift-clients
 ```
 ##### # install docker
 ```
@@ -138,7 +138,7 @@ sed -i 's/registry.access.redhat.com/repo.home.nicknach.net/' /etc/containers/re
 ## #  On first master only now (or bastion host)
 ##### # install openshift-ansible and dependencies 
 ```
-yum install -y openshift-ansible-playbooks-3.10.18 && updatedb
+yum install -y openshift-ansible-playbooks && updatedb
 ```
 ##### #  make password-less key for openshift-ansible usage
 ```
