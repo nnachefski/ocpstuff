@@ -5,11 +5,11 @@ oc new-project cicd
 ```
 ##### # get the template
 ```
-wget https://raw.githubusercontent.com/jfrog/artifactory-docker-examples/master/kubernetes/artifactory.yml
+wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/artifactory/artifactory.yml
 ```
 ##### # now create the template
 ```
-oc create -f artifactory.yml -e artifactory.image.repository=docker.bintray.io/jfrog/artifactory-oss
+oc create -f artifactory.yml
 ```
 ##### # give the default sa 'anyuid' scc on this project
 ```
