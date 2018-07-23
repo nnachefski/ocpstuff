@@ -1,4 +1,4 @@
-####  # this howto is for gitlab-ce running in it's own openshift project
+####  # gitlab-ce on openshift
 ##### # create the project
 ```
 oc new-project cicd

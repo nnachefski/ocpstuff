@@ -1,5 +1,5 @@
-### # This image is for building and deploying CUDA/GPU-enabled Ethereum miners on Openshift.
-##### # switch to our special nvidia project (has device plugin DS deployed)
+### # deploying CUDA/GPU-enabled Ethereum miners on Openshift.
+##### # switch nvidia project (with device plugin DS deployed)
 ```
 oc project nvidia
 ```
