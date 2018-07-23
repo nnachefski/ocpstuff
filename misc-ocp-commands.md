@@ -1,5 +1,9 @@
 ### # misc stuff
 
+##### # re-import all ISs from cli
+```
+for i in `oc get is -n openshift |awk '{print $1}'`; do oc import-image $i -n openshift --all; done
+```
 ##### # add system and repo certs to docker-registry pod
 ```
 oc create configmap mycert --from-file=repo.cert=/etc/pki/ca-trust/source/anchors/repo.home.nicknach.net.cert -n default
