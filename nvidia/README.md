@@ -1,5 +1,5 @@
 ####  # NVIDIA GPU containers running on Openshift (OCP) 3.10
-###### # https://blog.openshift.com/use-gpus-with-device-plugin-in-openshift-3-9/ 
+###### # from: https://blog.openshift.com/use-gpus-with-device-plugin-in-openshift-3-9/ 
 
 ###### # RHEL 7.5
 ###### # run the following from your bare-metal GPU host
