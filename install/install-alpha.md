@@ -67,7 +67,7 @@ sed -i "s/registry.access.redhat.com/$MY_REPO/" /etc/containers/registries.conf 
 ```
 ##### # add the internal registry to crio.conf
 ```
-sed -i "s/#registries = \[/registries = [ 'repo.home.nicknach.net' ]/" /etc/crio/crio.conf
+sed -i "s/#registries = \[/registries = [ 'repo.home.nicknach.net' ]/" /etc/crio/crio.conf && systemctl restart crio
 ```
 ##### # make sure your nodes are up to date
 ```

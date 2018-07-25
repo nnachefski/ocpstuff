@@ -9,6 +9,12 @@ export MY_REPO=repo.home.nicknach.net
 export SRC_REPO=registry.access.redhat.com
 export OCP_VER=v3.10
 ```
+##### # or, if doing an internal puddle build
+```
+export MY_REPO=repo.home.nicknach.net	
+export SRC_REPO=download-node-02.eng.bos.redhat.com	
+export OCP_VER=v3.10.0
+```
 ##### # subscribe your repo box to the proper channels for OCP
 ```
 subscription-manager register --username=nnachefs@redhat.com --password <REDACTED> --force
