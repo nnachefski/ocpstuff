@@ -118,11 +118,11 @@ TAG=v3.11.0-0.9.0 REPO=$MY_REPO; for i in `cat core_images.txt`; do docker pull 
 #### # Troubleshooting disconnected installs
 ##### # during the install, do these commands in separate terminals to trouble shoot any missing images
 ```
-watch -n2 oc get pods -owide --all-namespaces
+watch oc get pods -owide --all-namespaces
 
 and
 
-watch -n2 oc get pv
+watch oc get pv
 
 and
 
