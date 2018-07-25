@@ -7,7 +7,7 @@
 ```
 export MY_REPO=repo.home.nicknach.net
 export SRC_REPO=registry.access.redhat.com
-export OCP_VER=v3.9.31
+export OCP_VER=v3.10
 ```
 ##### # subscribe your repo box to the proper channels for OCP
 ```
@@ -17,9 +17,9 @@ subscription-manager repos --disable="*"
 subscription-manager repos \
    --enable=rhel-7-server-rpms \
    --enable=rhel-7-server-extras-rpms \
-   --enable=rhel-7-server-ose-3.9-rpms \
+   --enable=rhel-7-server-ose-3.10-rpms \
    --enable=rhel-7-fast-datapath-rpms \
-   --enable=rhel-7-server-ansible-2.4-rpms \
+   --enable=rhel-7-server-ansible-2.5-rpms \
    --enable=rh-gluster-3-client-for-rhel-7-server-rpms \
    --enable=rhel-server-rhscl-7-rpms \
    --enable=rhel-7-server-optional-rpms 
@@ -122,7 +122,7 @@ wget http://$REPO/repo/$REPO.cert && mv -f $REPO.cert /etc/pki/ca-trust/source/a
 ```
 ##### # add the internal docker registry
 ```
-sed -i 's/registry.access.redhat.com/repo.home.nicknach.net/' /etc/containers/registries.conf && systemctl restart docker
+sed -i "s/registry.access.redhat.com/$REPO/" /etc/containers/registries.conf && systemctl restart docker
 ```
 ##### # add your rpm repos
 ```
@@ -130,11 +130,11 @@ yum-config-manager --disable \* && rm -rf /etc/yum.repos.d/*.repo && yum clean a
 yum-config-manager --add-repo http://$REPO/repo/rhel-7-server-rpms
 yum-config-manager --add-repo http://$REPO/repo/rhel-7-fast-datapath-rpms
 yum-config-manager --add-repo http://$REPO/repo/rhel-7-server-extras-rpms
-yum-config-manager --add-repo http://$REPO/repo/rhel-7-server-ose-3.9-rpms
+yum-config-manager --add-repo http://$REPO/repo/rhel-7-server-ose-3.10-rpms
 yum-config-manager --add-repo http://$REPO/repo/rhel-server-rhscl-7-rpms
 yum-config-manager --add-repo http://$REPO/repo/rhel-7-server-optional-rpms 
 yum-config-manager --add-repo http://$REPO/repo/rh-gluster-3-client-for-rhel-7-server-rpms
-yum-config-manager --add-repo http://$REPO/repo/rhel-7-server-ansible-2.4-rpms
+yum-config-manager --add-repo http://$REPO/repo/rhel-7-server-ansible-2.5-rpms
 ```
 #### # Troubleshooting disconnected installs
 ##### # during the install, do these commands in separate terminals to trouble shoot any missing images
