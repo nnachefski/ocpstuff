@@ -8,7 +8,7 @@
 ```
 export MY_REPO=repo.home.nicknach.net
 export SRC_REPO=download-node-02.eng.bos.redhat.com
-export OCP_VER=3.11.0
+export OCP_VER=v3.11.0
 ```
 ##### # start by connecting your repo box to the RH VPN.  You can setup a command line VPN client by installing these rpms
 ```
@@ -24,12 +24,12 @@ openvpn --config /etc/openvpn/ovpn-phx2-udp.conf
 ###### # your repo box is now connected to the RH vpn
 ##### # now run this command to import the puddle repo
 ```
-yum-config-manager --add-repo http://$SRC_REPO/brewroot/repos/rhaos-$OCP_VER-rhel-7-build/latest/x86_64/
+yum-config-manager --add-repo http://$SRC_REPO/brewroot/repos/rhaos-$OCP_VER-rhel-7-container-build/latest/x86_64/
 ```
 ##### # change the name to something more simple (rhaos-beta)
 ```
-sed -i "s/\[.*\]/\[rhaos-beta\]/" /etc/yum.repos.d/download-node-02.eng.bos.redhat.com_brewroot_repos_rhaos-$OCP_VER-rhel-7-build_latest_x86_64_.repo
-mv /etc/yum.repos.d/download-node-02.eng.bos.redhat.com_brewroot_repos_rhaos-$OCP_VER-rhel-7-build_latest_x86_64_.repo /etc/yum.repos.d/rhaos-beta.repo
+sed -i "s/\[.*\]/\[rhaos-beta\]/" /etc/yum.repos.d/download-node-02.eng.bos.redhat.com_brewroot_repos_rhaos-$OCP_VER-rhel-7-container-build_latest_x86_64_.repo
+mv /etc/yum.repos.d/download-node-02.eng.bos.redhat.com_brewroot_repos_rhaos-$OCP_VER-rhel-7-containre-build_latest_x86_64_.repo /etc/yum.repos.d/rhaos-beta.repo
 ```
 ##### # disable gpg checking (for beta/puddle builds only)
 ```
@@ -53,7 +53,7 @@ mv rhaos-beta /var/www/html/repo && restorecon -R /var/www/html/repo/rhaos-beta
 cd ~ && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/scripts/import-images.py && chmod +x import-images.py
 wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/core_images.txt
 wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/app_images.txt
-./import-images.py docker $SRC_REPO:8888 $MY_REPO -d -t $OCP_VER
+./import-images.py docker $SRC_REPO:8888 $MY_REPO -d
 ./import-images.py docker $SRC_REPO:8888 $MY_REPO -d -l app_images.txt
 ```
 #### # Done with repo box
