@@ -1,64 +1,3 @@
-## This doc describes how to perform a disconnected installation of puddle builds (internal RH release candidates)
-
-#### # You must first sync the development rpm repos from the internal build servers
-###### # make sure you have ample space available on your local repo box (called repo.home.nicknach.net in my lab).  
-###### # You need at least 30GB total.  (~10GB  for rpms and ~20GB for images)
-
-##### # set your repo host var
-```
-export MY_REPO=repo.home.nicknach.net
-export SRC_REPO=download-node-02.eng.bos.redhat.com
-export OCP_VER=v3.11.0
-```
-##### # start by connecting your repo box to the RH VPN.  You can setup a command line VPN client by installing these rpms
-```
-redhat-internal-cert-install-0.1-7.el7.csb.noarch.rpm
-redhat-internal-NetworkManager-openvpn-profiles-non-gnome-0.1-30.el7.csb.noarch.rpm
-redhat-internal-openvpn-profiles-0.1-30.el7.csb.noarch.rpm
-```
-###### # if you are an employee, you know where to get these packages from
-##### # then run
-``` 
-openvpn --config /etc/openvpn/ovpn-phx2-udp.conf
-```
-###### # your repo box is now connected to the RH vpn
-##### # now run this command to import the puddle repo
-```
-yum-config-manager --add-repo http://$SRC_REPO/brewroot/repos/rhaos-$OCP_VER-rhel-7-container-build/latest/x86_64/
-```
-##### # change the name to something more simple (rhaos-beta)
-```
-sed -i "s/\[.*\]/\[rhaos-beta\]/" /etc/yum.repos.d/download-node-02.eng.bos.redhat.com_brewroot_repos_rhaos-$OCP_VER-rhel-7-container-build_latest_x86_64_.repo
-mv /etc/yum.repos.d/download-node-02.eng.bos.redhat.com_brewroot_repos_rhaos-$OCP_VER-rhel-7-containre-build_latest_x86_64_.repo /etc/yum.repos.d/rhaos-beta.repo
-```
-##### # disable gpg checking (for beta/puddle builds only)
-```
-echo gpgcheck=0 >> /etc/yum.repos.d/rhaos-beta.repo
-```
-##### # start the reposync
-```
-cd ~ && reposync -lm --repoid=rhaos-beta
-```
-##### # create the repodata xml
-```
-createrepo rhaos-alpha
-```
-##### # move the dir into your web root
-```
-mv rhaos-beta /var/www/html/repo && restorecon -R /var/www/html/repo/rhaos-beta
-```
-##### # run import-images.py (skopeo wrapper script written in python3)
-###### # Sorry, Python3 is all i know now.... you can get it from epel 
-```
-cd ~ && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/scripts/import-images.py && chmod +x import-images.py
-wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/core_images.txt
-wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/app_images.txt
-./import-images.py docker $SRC_REPO:8888 $MY_REPO -d
-./import-images.py docker $SRC_REPO:8888 $MY_REPO -d -l app_images.txt
-```
-#### # Done with repo box
-
-### ################### now on the client systems
 ##### # do this on ALL hosts (master/infra/nodes)
 #### # BEGIN
 ##### # SET THESE VARIABLES ###
@@ -96,7 +35,7 @@ yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-ansible-2.6-rpm
 ```
 ##### # disable gpg checks (because these are beta bits)
 ```
-echo gpgcheck=0 >> /etc/yum.repos.d/repo.home.nicknach.net_repo_rhaos-alpha.repo
+echo gpgcheck=0 >> /etc/yum.repos.d/$MY_REPO_repo_rhaos-alpha.repo
 ```
 ##### # install some general pre-req packages
 ``` 
@@ -124,7 +63,7 @@ wget http://$MY_REPO/repo/$MY_REPO.cert && mv -f $MY_REPO.cert /etc/pki/ca-trust
 ```
 ##### # add the internal docker registry
 ```
-sed -i 's/registry.access.redhat.com/repo.home.nicknach.net/' /etc/containers/registries.conf && systemctl restart docker
+sed -i "s/registry.access.redhat.com/$MY_REPO/" /etc/containers/registries.conf && systemctl restart docker
 ```
 ##### # add the internal registry to crio.conf
 ```
