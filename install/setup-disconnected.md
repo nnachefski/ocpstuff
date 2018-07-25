@@ -8,8 +8,9 @@
 export MY_REPO=repo.home.nicknach.net
 export SRC_REPO=registry.access.redhat.com
 export OCP_VER=v3.10
-export OCP_CHANNEL=rhel-7-server-ose-3.10-rpms
-export ANSIBLE_CHANNEL=rhel-7-server-ansible-2.5-rpms
+export POOLID=8a85f98260c27fc50160c323263339ff
+export RHN_ID=nnachefs@redhat.com
+export RHN_PWD=
 ```
 ##### # or, if doing an internal puddle build
 ```
@@ -17,15 +18,15 @@ export SRC_REPO=brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888
 ```
 ##### # subscribe your repo box to the proper channels for OCP
 ```
-subscription-manager register --username=nnachefs@redhat.com --password <REDACTED> --force
-subscription-manager attach --pool=8a85f98260c27fc50160c323263339ff
+subscription-manager register --username=$RHN_ID --password $RHN_PWD --force
+subscription-manager attach --pool=$POOLID
 subscription-manager repos --disable="*"
 subscription-manager repos \
    --enable=rhel-7-server-rpms \
    --enable=rhel-7-server-extras-rpms \
-   --enable=$OCP_CHANNEL \
+   --enable=rhel-7-server-ose-3.10-rpms \
    --enable=rhel-7-fast-datapath-rpms \
-   --enable=$ANSIBLE_CHANNEL \
+   --enable=rhel-7-server-ansible-2.5-rpms \
    --enable=rh-gluster-3-client-for-rhel-7-server-rpms \
    --enable=rhel-server-rhscl-7-rpms \
    --enable=rhel-7-server-optional-rpms 
@@ -81,9 +82,9 @@ systemctl restart docker-distribution
 ```
 cp -f /etc/docker/certs.d/$MY_REPO/$MY_REPO.cert /var/www/html/repo && restorecon /var/www/html/repo/$MY_REPO.cert
 ```
-##### # copy the gpp key for the official channel to the web root
+##### # copy cert to local pki store and update
 ```
-cp -f /etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release /var/www/html/repo
+cp -f /etc/docker/certs.d/$MY_REPO/$MY_REPO.cert /etc/pki/ca-trust/source/anchors/$MY_REPO.cert && restorecon /etc/pki/ca-trust/source/anchors/$MY_REPO.cert && update-ca-trust
 ```
 ##### # setup the epel repo so we can get python34 package, then disable it
 ```
@@ -108,6 +109,11 @@ wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/app_ima
 ##### # now get the other app images, specifying the app_images.txt list (this will default to 'latest' tag)
 ```
 ./import-images.py docker $SRC_REPO $MY_REPO -d -l app_images.txt
+```
+##### # if using internal puddle build, then you'll have to re-tag the images (add an alias).
+###### # for some reason, the installer will try to pull a tag that looks like this 'v3.11.0-0.9.0'
+```
+TAG=v3.11.0-0.9.0 REPO=$MY_REPO; for i in `cat core_images.txt`; do docker pull $REPO/$i; docker tag $REPO/$i $REPO/`echo $i |awk -F: '{print $1}'`:$TAG; docker push $REPO/`echo $i |awk -F: '{print $1}'`:$TAG; done
 ```
 #### # Troubleshooting disconnected installs
 ##### # during the install, do these commands in separate terminals to trouble shoot any missing images
