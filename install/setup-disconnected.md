@@ -8,12 +8,12 @@
 export MY_REPO=repo.home.nicknach.net
 export SRC_REPO=registry.access.redhat.com
 export OCP_VER=v3.10
+export OCP_CHANNEL=rhel-7-server-ose-3.10-rpms
+export ANSIBLE_CHANNEL=rhel-7-server-ansible-2.5-rpms
 ```
 ##### # or, if doing an internal puddle build
 ```
-export MY_REPO=repo.home.nicknach.net	
-export SRC_REPO=download-node-02.eng.bos.redhat.com	
-export OCP_VER=v3.10.0
+export SRC_REPO=brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888
 ```
 ##### # subscribe your repo box to the proper channels for OCP
 ```
@@ -23,9 +23,9 @@ subscription-manager repos --disable="*"
 subscription-manager repos \
    --enable=rhel-7-server-rpms \
    --enable=rhel-7-server-extras-rpms \
-   --enable=rhel-7-server-ose-3.10-rpms \
+   --enable=$OCP_CHANNEL \
    --enable=rhel-7-fast-datapath-rpms \
-   --enable=rhel-7-server-ansible-2.5-rpms \
+   --enable=$ANSIBLE_CHANNEL \
    --enable=rh-gluster-3-client-for-rhel-7-server-rpms \
    --enable=rhel-server-rhscl-7-rpms \
    --enable=rhel-7-server-optional-rpms 
@@ -108,39 +108,6 @@ wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/app_ima
 ##### # now get the other app images, specifying the app_images.txt list (this will default to 'latest' tag)
 ```
 ./import-images.py docker $SRC_REPO $MY_REPO -d -l app_images.txt
-```
-#### ########################### Done with repo box
-
-### # now on your client boxes
-##### # set your docker repo host var
-```
-export REPO=repo.home.nicknach.net
-```
-##### # import keys from repo
-```
-#rpm --import http://$REPO/7fa2af80.pub
-#rpm --import http://$REPO/RPM-GPG-KEY-EPEL-7
-rpm --import http://$REPO/RPM-GPG-KEY-redhat-release
-```
-##### # add the docker repo cert to the pki store
-```
-wget http://$REPO/repo/$REPO.cert && mv -f $REPO.cert /etc/pki/ca-trust/source/anchors && restorecon /etc/pki/ca-trust/source/anchors/$REPO.cert && update-ca-trust
-```
-##### # add the internal docker registry
-```
-sed -i "s/registry.access.redhat.com/$REPO/" /etc/containers/registries.conf && systemctl restart docker
-```
-##### # add your rpm repos
-```
-yum-config-manager --disable \* && rm -rf /etc/yum.repos.d/*.repo && yum clean all
-yum-config-manager --add-repo http://$REPO/repo/rhel-7-server-rpms
-yum-config-manager --add-repo http://$REPO/repo/rhel-7-fast-datapath-rpms
-yum-config-manager --add-repo http://$REPO/repo/rhel-7-server-extras-rpms
-yum-config-manager --add-repo http://$REPO/repo/rhel-7-server-ose-3.10-rpms
-yum-config-manager --add-repo http://$REPO/repo/rhel-server-rhscl-7-rpms
-yum-config-manager --add-repo http://$REPO/repo/rhel-7-server-optional-rpms 
-yum-config-manager --add-repo http://$REPO/repo/rh-gluster-3-client-for-rhel-7-server-rpms
-yum-config-manager --add-repo http://$REPO/repo/rhel-7-server-ansible-2.5-rpms
 ```
 #### # Troubleshooting disconnected installs
 ##### # during the install, do these commands in separate terminals to trouble shoot any missing images
