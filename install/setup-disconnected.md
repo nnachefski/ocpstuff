@@ -21,7 +21,7 @@ subscription-manager repos \
    --enable=rhel-7-fast-datapath-rpms \
    --enable=rhel-7-server-ansible-2.4-rpms \
    --enable=rh-gluster-3-client-for-rhel-7-server-rpms \
-   --enable=rhel-7-server-rhscl-rpms \
+   --enable=rhel-server-rhscl-7-rpms \
    --enable=rhel-7-server-optional-rpms 
 ```
 ###### # you only need the last two if you are going to customize the s2i images
