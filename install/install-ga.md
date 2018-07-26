@@ -1,4 +1,3 @@
-## This doc describes how to perform an installation of OCP 3.9
 ### # BEGIN
 ##### # do this on ALL hosts (master/infra/nodes)
 ##### # SET THESE VARIABLES ###
@@ -23,6 +22,10 @@ export MY_REPO=$MY_REPO
 export OCP_VER=$OCP_VER
 EOF
 ```
+##### # install sub manager
+```
+yum install -y subscription-manager yum-utils wget
+```
 ##### # subscribe to RHN
 ```
 subscription-manager register --username=<RHNID> --password <REDACTED> --force
@@ -34,11 +37,11 @@ subscription-manager repos \
    --enable=rhel-7-server-ose-3.9-rpms \
    --enable=rhel-7-fast-datapath-rpms \
    --enable=rhel-7-server-ansible-2.4-rpms \
-   --enable=rh-gluster-3-client-for-rhel-7-server-rpms \
-   --enable=rhel-server-rhscl-7-rpms \
-   --enable=rhel-7-server-optional-rpms   
+   --enable=rh-gluster-3-client-for-rhel-7-server-rpms
+   
+#   --enable=rhel-server-rhscl-7-rpms \
+#   --enable=rhel-7-server-optional-rpms   
 ```
-###### # you only need the last two if you are going to customize the s2i images
 ##### # OR add your internal repos (for disconnected installs)
 ```
 #rm -rf /etc/yum.repos.d/* && yum clean all
