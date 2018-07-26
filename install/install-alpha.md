@@ -83,17 +83,9 @@ yum -y update
 ```
 yum install -y openshift-ansible-playbooks && updatedb
 ```
-##### #  make password-less key for openshift-ansible usage
-```
-ssh-keygen
-```
-##### # copy keys to all hosts(masters/infras/nodes).
-```
-for i in master01.ocp.nicknach.net master02.ocp.nicknach.net master03.ocp.nicknach.net infra01.ocp.nicknach.net infra02.ocp.nicknach.net infra03.ocp.nicknach.net node01.ocp.nicknach.net node02.ocp.nicknach.net node03.ocp.nicknach.net; do ssh-copy-id root@$i; done
-```
 ##### # create your ansible hosts (inventory) file 
 ###### # (see below link for creating this file)
-https://raw.githubusercontent.com/nnachefski/ocpstuff/master/generate-ansible-inventory.txt
+https://raw.githubusercontent.com/nnachefski/ocpstuff/master/generate-ansible-inventory.sh
 ##### # run the pre-req check
 ```
 ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/prerequisites.yml
