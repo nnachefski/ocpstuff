@@ -133,6 +133,8 @@ openshift_hosted_etcd_storage_volume_name=etcd-vol2
 openshift_hosted_etcd_storage_volume_size=10Gi
 ## asb
 ansible_service_broker_local_registry_whitelist=['.*-apb$']
+#ansible_service_broker_install=false
+#ansible_service_broker_remove=true
 ## logging
 openshift_logging_install_logging=true
 openshift_logging_es_pvc_size=10Gi
