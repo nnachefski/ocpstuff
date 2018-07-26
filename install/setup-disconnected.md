@@ -14,7 +14,7 @@ export RHN_PWD=
 ```
 ##### # or, if doing an internal puddle build
 ```
-export SRC_REPO=brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888
+#export SRC_REPO=brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888
 ```
 ##### # subscribe your repo box to the proper channels for OCP
 ```
@@ -27,11 +27,11 @@ subscription-manager repos \
    --enable=rhel-7-server-ose-3.10-rpms \
    --enable=rhel-7-fast-datapath-rpms \
    --enable=rhel-7-server-ansible-2.5-rpms \
-   --enable=rh-gluster-3-client-for-rhel-7-server-rpms \
-   --enable=rhel-server-rhscl-7-rpms \
-   --enable=rhel-7-server-optional-rpms 
+   --enable=rh-gluster-3-client-for-rhel-7-server-rpms
+   
+#   --enable=rhel-server-rhscl-7-rpms \
+#   --enable=rhel-7-server-optional-rpms 
 ```
-###### # you only need the last two if you are going to customize the s2i images
 ##### # install/enable/start httpd
 ```
 yum -y install httpd && systemctl enable httpd --now
@@ -89,7 +89,7 @@ cp -f /etc/docker/certs.d/$MY_REPO/$MY_REPO.cert /etc/pki/ca-trust/source/anchor
 ##### # setup the epel repo so we can get python34 package, then disable it
 ```
 rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-yum install -y python34
+yum install -y python34 python34-pip
 yum-config-manager --disable epel
 ```
 ##### # make sure skopeo is installed
