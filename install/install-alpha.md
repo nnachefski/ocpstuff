@@ -22,6 +22,10 @@ export MY_REPO=$MY_REPO
 export OCP_VER=$OCP_VER
 EOF
 ```
+##### # install sub manager
+```
+yum install -y subscription-manager yum-utils
+```
 ##### # add your internal repos
 ```
 rm -rf /etc/yum.repos.d/* && yum clean all
