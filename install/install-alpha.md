@@ -24,7 +24,7 @@ EOF
 ```
 ##### # install sub manager
 ```
-yum install -y subscription-manager yum-utils
+yum install -y subscription-manager yum-utils wget
 ```
 ##### # add your internal repos
 ```
