@@ -9,6 +9,9 @@ export LDAP_SERVER=gw.home.nicknach.net
 export ANSIBLE_HOST_KEY_CHECKING=False
 export MY_REPO=repo.home.nicknach.net
 export OCP_VER=v3.10.21
+export RHN_ID=nnachefs@redhat.com
+export RHN_PASSWD=
+export RHN_POOL=8a85f98260c27fc50160c323263339ff
 ```
 ##### # make them persistent 
 ```
@@ -20,14 +23,14 @@ export LDAP_SERVER=$LDAP_SERVER
 export ANSIBLE_HOST_KEY_CHECKING=False
 export MY_REPO=$MY_REPO
 export OCP_VER=$OCP_VER
-export RHN_ID=nnachefs@redhat.com
-export RHN_PASSWD=
-export RHN_POOL=8a85f98260c27fc50160c323263339ff
+export RHN_ID=$RHN_ID
+export RHN_PASSWD=$RHN_PASSWD
+export RHN_POOL=$RHN_POOL
 EOF
 ```
 ##### # install sub manager
 ```
-yum install -y subscription-manager yum-utils wget
+yum install -y subscription-manager yum-utils wget 
 ```
 ##### # subscribe to RHN
 ```
@@ -52,8 +55,6 @@ subscription-manager repos \
 #yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-fast-datapath-rpms
 #yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-rpms
 #yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-extras-rpms
-#yum-config-manager --add-repo http://$MY_REPO/repo/rhel-server-rhscl-7-rpms
-#yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-optional-rpms 
 #yum-config-manager --add-repo http://$MY_REPO/repo/rh-gluster-3-client-for-rhel-7-server-rpms
 #yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-ansible-2.5-rpms
 ```
