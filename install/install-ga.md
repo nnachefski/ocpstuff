@@ -8,7 +8,7 @@ export DOCKER_DEV=/dev/vdb
 export LDAP_SERVER=gw.home.nicknach.net
 export ANSIBLE_HOST_KEY_CHECKING=False
 export MY_REPO=repo.home.nicknach.net
-export OCP_VER=v3.9.31
+export OCP_VER=v3.10.21
 ```
 ##### # make them persistent 
 ```
@@ -34,9 +34,9 @@ subscription-manager repos --disable="*"
 subscription-manager repos \
    --enable=rhel-7-server-rpms \
    --enable=rhel-7-server-extras-rpms \
-   --enable=rhel-7-server-ose-3.9-rpms \
+   --enable=rhel-7-server-ose-3.10-rpms \
    --enable=rhel-7-fast-datapath-rpms \
-   --enable=rhel-7-server-ansible-2.4-rpms \
+   --enable=rhel-7-server-ansible-2.5-rpms \
    --enable=rh-gluster-3-client-for-rhel-7-server-rpms
    
 #   --enable=rhel-server-rhscl-7-rpms \
@@ -76,15 +76,15 @@ yum install -y cns-deploy heketi-client
 ```
 ##### # configure the docker pool device
 ```
-cat <<EOF > /etc/sysconfig/docker-storage-setup
-DEVS=$DOCKER_DEV
-VG=docker-vg
-WIPE_SIGNATURES=true
-EOF
+#cat <<EOF > /etc/sysconfig/docker-storage-setup
+#DEVS=$DOCKER_DEV
+#VG=docker-vg
+#WIPE_SIGNATURES=true
+#EOF
 ```
 ##### # and setup the storage
 ```
-container-storage-setup
+#container-storage-setup
 ```
 ##### # make sure your nodes are up-to-date
 ```
@@ -94,7 +94,7 @@ yum -y update
 ## #  On first master only now (or bastion host)
 ##### # install openshift-ansible and dependencies 
 ```
-yum install -y atomic-openshift-utils && updatedb
+yum install -y openshift-ansible-playbooks && updatedb
 ```
 ##### #  make password-less key for ansible usage
 ```
