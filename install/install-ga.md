@@ -20,6 +20,9 @@ export LDAP_SERVER=$LDAP_SERVER
 export ANSIBLE_HOST_KEY_CHECKING=False
 export MY_REPO=$MY_REPO
 export OCP_VER=$OCP_VER
+export RHN_ID=nnachefs@redhat.com
+export RHN_PASSWD=
+export RHN_POOL=8a85f98260c27fc50160c323263339ff
 EOF
 ```
 ##### # install sub manager
@@ -28,8 +31,8 @@ yum install -y subscription-manager yum-utils wget
 ```
 ##### # subscribe to RHN
 ```
-subscription-manager register --username=<RHNID> --password <REDACTED> --force
-subscription-manager attach --pool=8a85f98260c27fc50160c323263339ff
+subscription-manager register --username=$RHN_ID --password $RHN_PASSWD --force
+subscription-manager attach --pool=$RHN_POOL
 subscription-manager repos --disable="*"
 subscription-manager repos \
    --enable=rhel-7-server-rpms \
@@ -45,14 +48,14 @@ subscription-manager repos \
 ##### # OR add your internal repos (for disconnected installs)
 ```
 #rm -rf /etc/yum.repos.d/* && yum clean all
-#yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-ose-3.9-rpms
+#yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-ose-3.10-rpms
 #yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-fast-datapath-rpms
 #yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-rpms
 #yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-extras-rpms
 #yum-config-manager --add-repo http://$MY_REPO/repo/rhel-server-rhscl-7-rpms
 #yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-optional-rpms 
 #yum-config-manager --add-repo http://$MY_REPO/repo/rh-gluster-3-client-for-rhel-7-server-rpms
-#yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-ansible-2.4-rpms
+#yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-ansible-2.5-rpms
 ```
 ##### # add the docker repo cert to the pki store (for disconnected installs)
 ```
