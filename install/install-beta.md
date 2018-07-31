@@ -8,7 +8,10 @@ export DOCKER_DEV=/dev/vdb
 export LDAP_SERVER=gw.home.nicknach.net
 export ANSIBLE_HOST_KEY_CHECKING=False
 export MY_REPO=repo.home.nicknach.net
-export OCP_VER=v3.10.23
+export OCP_VER=v3.11.0
+export RHN_ID=nnachefs@redhat.com
+export RHN_PASSWD=
+export RHN_POOL=8a85f98260c27fc50160c323263339ff
 ```
 ##### # make them persistent 
 ```
@@ -20,6 +23,9 @@ export LDAP_SERVER=$LDAP_SERVER
 export ANSIBLE_HOST_KEY_CHECKING=False
 export MY_REPO=$MY_REPO
 export OCP_VER=$OCP_VER
+export RHN_ID=$RHN_ID
+export RHN_PASSWD=$RHN_PASSWD
+export RHN_POOL=$RHN_POOL
 EOF
 ```
 ##### # add your internal repos
@@ -28,10 +34,10 @@ rm -rf /etc/yum.repos.d/* && yum clean all
 yum-config-manager --add-repo http://$MY_REPO/repo/rhaos-beta
 yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-fast-datapath-rpms
 yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-extras-rpms
-yum-config-manager --add-repo http://$MY_REPO/repo/rhel-server-rhscl-7-rpms
-yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-optional-rpms 
+#yum-config-manager --add-repo http://$MY_REPO/repo/rhel-server-rhscl-7-rpms
+#yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-optional-rpms 
 yum-config-manager --add-repo http://$MY_REPO/repo/rh-gluster-3-client-for-rhel-7-server-rpms
-yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-ansible-2.5-rpms
+yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-ansible-2.6-rpms
 ```
 ##### # disable gpg checks (because these are beta bits)
 ```
@@ -45,13 +51,13 @@ yum install -y yum-utils wget git net-tools bind-utils iptables-services bridge-
 ```
 yum install -y atomic atomic-openshift-clients
 ```
+##### # install cri-o
+```
+yum install -y cri-o cri-tools podman runc && systemctl enable crio --now
+```
 ##### # install docker
 ```
 yum install -y docker && systemctl enable docker --now
-```
-##### # or, if using crio
-```
-#yum install -y yum install -y cri-o cri-tools
 ```
 ##### # install gluster packages 
 ```
@@ -67,11 +73,11 @@ sed -i 's/registry.access.redhat.com/repo.home.nicknach.net/' /etc/containers/re
 ```
 ##### # or, if using crio
 ```
-#sed -i "s/registries = \[/registries = [ 'repo.home.nicknach.net' /" /etc/crio/crio.conf && systemctl restart crio
+sed -i "s/registries = \[/registries = [ 'repo.home.nicknach.net' /" /etc/crio/crio.conf && systemctl restart crio
 ```
 ##### # make sure your nodes are up to date
 ```
-#yum -y update
+yum -y update
 ```
 ###### # reboot if necessary 
 ## #  On first master only now (or bastion host)

@@ -72,7 +72,7 @@ yum install -y atomic-openshift-clients
 ```
 ##### # install docker
 ```
-yum install -y docker
+yum install -y docker && systemctl enable docker --now
 ```
 ##### # install gluster packages 
 ```
