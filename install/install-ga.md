@@ -72,23 +72,11 @@ yum install -y atomic-openshift-clients
 ```
 ##### # install docker
 ```
-yum install -y docker docker-logrotate
+yum install -y docker
 ```
 ##### # install gluster packages 
 ```
 yum install -y cns-deploy heketi-client
-```
-##### # configure the docker pool device
-```
-#cat <<EOF > /etc/sysconfig/docker-storage-setup
-#DEVS=$DOCKER_DEV
-#VG=docker-vg
-#WIPE_SIGNATURES=true
-#EOF
-```
-##### # and setup the storage
-```
-#container-storage-setup
 ```
 ##### # make sure your nodes are up-to-date
 ```
