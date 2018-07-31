@@ -24,7 +24,6 @@ export ANSIBLE_HOST_KEY_CHECKING=False
 export MY_REPO=$MY_REPO
 export OCP_VER=$OCP_VER
 export RHN_ID=$RHN_ID
-export RHN_PASSWD=$RHN_PASSWD
 export RHN_POOL=$RHN_POOL
 EOF
 ```
