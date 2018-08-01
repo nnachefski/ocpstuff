@@ -114,7 +114,7 @@ ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/prerequisites.ym
 ```
 ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/deploy_cluster.yml
 ```
-###### #  if you to need explicitly provide a private key file (like with AWS) --private-key ~/.ssh/nick-west2.pem
+###### # --private-key ~/.ssh/nick-west2.pem
 
 ##### # during the install, do these commands in separate terminals to trouble shoot any issues
 ```
