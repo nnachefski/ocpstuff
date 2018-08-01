@@ -120,11 +120,11 @@ ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/deploy_cluster.y
 ```
 watch oc get pods -owide --all-namespaces
 
-and
+# and
 
 watch oc get pv
 
-and
+# and
 
 journalctl -xlf
 ```
