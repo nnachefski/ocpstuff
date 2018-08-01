@@ -71,7 +71,15 @@ yum install -y atomic-openshift-clients
 ```
 ##### # install docker
 ```
-yum install -y docker && systemctl enable docker --now
+yum install -y docker
+```
+##### # setup docker storage (devicemapper)
+```
+cat <<EOF > /etc/sysconfig/docker-storage-setup
+DEVS=$DOCKER_DEV
+VG=docker-vg
+WIPE_SIGNATURES=true
+EOF
 ```
 ##### # install gluster packages 
 ```

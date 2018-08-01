@@ -32,7 +32,7 @@ openshift_deployment_type=openshift-enterprise
 #openshift_examples_modify_imagestreams=true
 
 ## container runtime options
-container_runtime_docker_storage_setup_device=$DOCKER_DEV
+#container_runtime_docker_storage_setup_device=$DOCKER_DEV
 #container_runtime_docker_storage_type=overlay2
 ## If oreg_url points to a registry requiring authentication, provide the following:
 #oreg_auth_user=some_user
@@ -53,7 +53,7 @@ container_runtime_docker_storage_setup_device=$DOCKER_DEV
 ## release ver
 #openshift_release=$OCP_VER
 #openshift_image_tag=$OCP_VER
-##openshift_pkg_version=-3.9.27
+##openshift_pkg_version=-3.10.14
 
 ## enable ntp
 #openshift_clock_enabled=false
@@ -69,7 +69,7 @@ ansible_ssh_user=root
 
 ## authentication stuff
 ## htpasswd file auth
-#openshift_master_identity_providers=[{"name": "htpasswd_auth", "login": "true", "challenge": "true", "kind": "HTPasswdPasswordIdentityProvider", "filename": "/etc/origin/master/htpasswd"}]
+#openshift_master_identity_providers=[{"name": "htpasswd_auth", "login": "true", "challenge": "true", "kind": "HTPasswdPasswordIdentityProvider"}]
 #openshift_master_htpasswd_users={'testuser':'\$apr1\$azF6n0fo\$khEfbcGI6TiDYtv3gaOLm0'}
 
 ## ldap auth (AD)
