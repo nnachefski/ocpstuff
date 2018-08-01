@@ -96,17 +96,18 @@ ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/prerequisites.ym
 ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/deploy_cluster.yml
 ```
 ###### #  if you to need explicitly provide a private keyfile (like with AWS)
---private-key ~/.ssh/nick-west2.pem
-
+```
+# --private-key ~/.ssh/nick-west2.pem
+```
 ##### # during the install, do these commands in separate terminals to trouble shoot any issues
 ```
 watch oc get pods -owide --all-namespaces
 
-and
+# and
 
 watch oc get pv
 
-and
+# and
 
 journalctl -xlf
 ```
