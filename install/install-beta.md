@@ -52,7 +52,7 @@ yum install -y atomic atomic-openshift-clients
 ```
 ##### # install cri-o
 ```
-yum install -y cri-o cri-tools podman runc && systemctl enable crio --now
+yum install -y cri-o cri-tools podman runc
 ```
 ##### # install docker
 ```

@@ -33,7 +33,7 @@ openshift_deployment_type=openshift-enterprise
 
 ## container runtime options
 #container_runtime_docker_storage_setup_device=$DOCKER_DEV
-#container_runtime_docker_storage_type=overlay2
+#container_runtime_docker_storage_type=devicemapper
 ## If oreg_url points to a registry requiring authentication, provide the following:
 #oreg_auth_user=some_user
 #oreg_auth_password='my-pass'
