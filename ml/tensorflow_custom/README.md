@@ -19,7 +19,7 @@ oc adm policy add-scc-to-user anyuid -z default
 ```
 ##### # now build/deploy the ML framework
 ```
-oc new-app https://github.com/nnachefski/ocpstuff.git --context-dir=images/tensorflow --name=jupyter
+oc new-app https://github.com/nnachefski/ocpstuff.git --context-dir=ml/tensorflow_custom --name=jupyter
 ```
 ##### # expose the jupyter UI port
 ```
@@ -27,7 +27,7 @@ oc expose svc jupyter --port 8888
 ```
 ##### # then patch the dc to set resource limits and nodeaffinity
 ```
-oc patch dc jupyter -p '{"spec":{"template":{"spec":{"affinity":{"nodeAffinity":{"requiredDuringSchedulingIgnoredDuringExecution":{"nodeSelectorTerms":[{"matchExpressions":[{"key":"alpha.kubernetes.io/nvidia-gpu-name","operator":"In","values":["GTX"]}]}]}}},"containers":[{"name":"jupyter","resources":{"limits":{"alpha.kubernetes.io/nvidia-gpu":"1"}}}]}}}}'
+#oc patch dc jupyter -p '{"spec":{"template":{"spec":{"affinity":{"nodeAffinity":{"requiredDuringSchedulingIgnoredDuringExecution":{"nodeSelectorTerms":[{"matchExpressions":[{"key":"alpha.kubernetes.io/nvidia-gpu-name","operator":"In","values":["GTX"]}]}]}}},"containers":[{"name":"jupyter","resources":{"limits":{"alpha.kubernetes.io/nvidia-gpu":"1"}}}]}}}}'
 ```
 ###### # change 'GTX' to match above node label
 ###### # change 'jupyter' to match above --name (in both dc and container name)
