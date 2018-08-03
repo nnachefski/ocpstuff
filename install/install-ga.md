@@ -8,7 +8,10 @@ export DOCKER_DEV=/dev/vdb
 export LDAP_SERVER=gw.home.nicknach.net
 export ANSIBLE_HOST_KEY_CHECKING=False
 export MY_REPO=repo.home.nicknach.net
-export OCP_VER=v3.9.31
+export OCP_VER=v3.10.14
+export RHN_ID=nnachefs@redhat.com
+export RHN_PASSWD=
+export RHN_POOL=8a85f98260c27fc50160c323263339ff
 ```
 ##### # make them persistent 
 ```
@@ -20,23 +23,25 @@ export LDAP_SERVER=$LDAP_SERVER
 export ANSIBLE_HOST_KEY_CHECKING=False
 export MY_REPO=$MY_REPO
 export OCP_VER=$OCP_VER
+export RHN_ID=$RHN_ID
+export RHN_POOL=$RHN_POOL
 EOF
 ```
 ##### # install sub manager
 ```
-yum install -y subscription-manager yum-utils wget
+yum install -y subscription-manager yum-utils wget 
 ```
 ##### # subscribe to RHN
 ```
-subscription-manager register --username=<RHNID> --password <REDACTED> --force
-subscription-manager attach --pool=8a85f98260c27fc50160c323263339ff
+subscription-manager register --username=$RHN_ID --password $RHN_PASSWD --force
+subscription-manager attach --pool=$RHN_POOL
 subscription-manager repos --disable="*"
 subscription-manager repos \
    --enable=rhel-7-server-rpms \
    --enable=rhel-7-server-extras-rpms \
-   --enable=rhel-7-server-ose-3.9-rpms \
+   --enable=rhel-7-server-ose-3.10-rpms \
    --enable=rhel-7-fast-datapath-rpms \
-   --enable=rhel-7-server-ansible-2.4-rpms \
+   --enable=rhel-7-server-ansible-2.5-rpms \
    --enable=rh-gluster-3-client-for-rhel-7-server-rpms
    
 #   --enable=rhel-server-rhscl-7-rpms \
@@ -45,14 +50,12 @@ subscription-manager repos \
 ##### # OR add your internal repos (for disconnected installs)
 ```
 #rm -rf /etc/yum.repos.d/* && yum clean all
-#yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-ose-3.9-rpms
+#yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-ose-3.10-rpms
 #yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-fast-datapath-rpms
 #yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-rpms
 #yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-extras-rpms
-#yum-config-manager --add-repo http://$MY_REPO/repo/rhel-server-rhscl-7-rpms
-#yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-optional-rpms 
 #yum-config-manager --add-repo http://$MY_REPO/repo/rh-gluster-3-client-for-rhel-7-server-rpms
-#yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-ansible-2.4-rpms
+#yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-ansible-2.5-rpms
 ```
 ##### # add the docker repo cert to the pki store (for disconnected installs)
 ```
@@ -68,13 +71,9 @@ yum install -y atomic-openshift-clients
 ```
 ##### # install docker
 ```
-yum install -y docker docker-logrotate
+yum install -y docker
 ```
-##### # install gluster packages 
-```
-yum install -y cns-deploy heketi-client
-```
-##### # configure the docker pool device
+##### # setup docker storage (devicemapper)
 ```
 cat <<EOF > /etc/sysconfig/docker-storage-setup
 DEVS=$DOCKER_DEV
@@ -82,9 +81,9 @@ VG=docker-vg
 WIPE_SIGNATURES=true
 EOF
 ```
-##### # and setup the storage
+##### # install gluster packages 
 ```
-container-storage-setup
+yum install -y cns-deploy heketi-client
 ```
 ##### # make sure your nodes are up-to-date
 ```
@@ -94,7 +93,7 @@ yum -y update
 ## #  On first master only now (or bastion host)
 ##### # install openshift-ansible and dependencies 
 ```
-yum install -y atomic-openshift-utils && updatedb
+yum install -y openshift-ansible-playbooks && updatedb
 ```
 ##### #  make password-less key for ansible usage
 ```
@@ -115,18 +114,17 @@ ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/prerequisites.ym
 ```
 ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/deploy_cluster.yml
 ```
-###### #  if you to need explicitly provide a private key file (like with AWS)
---private-key ~/.ssh/nick-west2.pem
+###### # --private-key ~/.ssh/nick-west2.pem
 
 ##### # during the install, do these commands in separate terminals to trouble shoot any issues
 ```
 watch oc get pods -owide --all-namespaces
 
-and
+# and
 
 watch oc get pv
 
-and
+# and
 
 journalctl -xlf
 ```

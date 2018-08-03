@@ -113,18 +113,18 @@ wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/app_ima
 ##### # if using internal puddle build, then you'll have to re-tag the images (add an alias).
 ###### # for some reason, the installer will try to pull a tag that looks like this 'v3.11.0-0.9.0'
 ```
-TAG=v3.11.0-0.9.0 REPO=$MY_REPO; for i in `cat core_images.txt`; do docker pull $REPO/$i; docker tag $REPO/$i $REPO/`echo $i |awk -F: '{print $1}'`:$TAG; docker push $REPO/`echo $i |awk -F: '{print $1}'`:$TAG; done
+TAG=v3.11.0-0.10.0 REPO=$MY_REPO; for i in `cat core_images.txt`; do docker pull $REPO/$i; docker tag $REPO/$i $REPO/`echo $i |awk -F: '{print $1}'`:$TAG; docker push $REPO/`echo $i |awk -F: '{print $1}'`:$TAG; done
 ```
 #### # Troubleshooting disconnected installs
 ##### # during the install, do these commands in separate terminals to trouble shoot any missing images
 ```
 watch oc get pods -owide --all-namespaces
 
-and
+# and
 
 watch oc get pv
 
-and
+# and
 
 journalctl -xlf
 ```

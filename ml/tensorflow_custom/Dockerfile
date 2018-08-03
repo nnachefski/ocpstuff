@@ -3,9 +3,9 @@ FROM rhel7-custom:latest
 ENV APP_DIR=/opt/ml-on-ocp
 ENV NVIDIA_VISIBLE_DEVICES=all
 ENV NVIDIA_DRIVER_CAPABILITIES=compute,utility
-ENV NVIDIA_REQUIRE_CUDA="cuda>=8.0"
+ENV NVIDIA_REQUIRE_CUDA="cuda>=9.0"
 
-RUN yum -y install python-pip python-devel && yum clean all
+RUN yum -y install python-pip python-devel gcc && yum clean all
 RUN pip install --no-cache-dir --upgrade pip
 RUN pip install --no-cache-dir tensorflow-gpu==1.3.0
 RUN pip install --no-cache-dir jupyter
