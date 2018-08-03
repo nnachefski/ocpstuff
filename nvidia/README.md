@@ -46,11 +46,6 @@ chmod +x /usr/libexec/oci/hooks.d/oci-nvidia-hook
 ```
 chcon -t container_file_t  /dev/nvidia*
 ```
-###### # there is still some SELinux work to be done here, i couldnt get gpu containers to work with just this modification.
-##### # set SELinux to permissive until this is fixed
-```
-setenforce 0
-```
 ##### # run the vector-add GPU test in docker
 ```
 docker run -it --rm repo.home.nicknach.net/mirrorgooglecontainers/cuda-vector-add:v0.1
