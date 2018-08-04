@@ -61,7 +61,7 @@ yum install -y docker
 ```
 cat <<EOF > /etc/sysconfig/docker-storage-setup
 DEVS=$CONTAINER_STORAGE_DEV
-VG=docker-vg
+VG=container-vg
 WIPE_SIGNATURES=true
 EOF
 container-storage-setup
