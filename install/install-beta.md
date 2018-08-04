@@ -56,7 +56,20 @@ yum install -y cri-o cri-tools podman runc
 ```
 ##### # install docker
 ```
-yum install -y docker && systemctl enable docker --now
+yum install -y docker
+```
+##### # setup container runtime storage (devicemapper)
+```
+cat <<EOF > /etc/sysconfig/docker-storage-setup
+DEVS=$DOCKER_DEV
+VG=docker-vg
+WIPE_SIGNATURES=true
+EOF
+container-storage-setup
+```
+##### # enabled container runtime(s)
+```
+systemctl enable docker crio --now
 ```
 ##### # install gluster packages 
 ```
