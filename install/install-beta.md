@@ -4,7 +4,7 @@
 ```
 export ROOT_DOMAIN=ocp.nicknach.net
 export APPS_DOMAIN=apps.$ROOT_DOMAIN 
-export DOCKER_DEV=/dev/vdb
+export CONTAINER_STORAGE_DEV=/dev/vdb
 export LDAP_SERVER=gw.home.nicknach.net
 export ANSIBLE_HOST_KEY_CHECKING=False
 export MY_REPO=repo.home.nicknach.net
@@ -18,7 +18,7 @@ export RHN_POOL=8a85f98260c27fc50160c323263339ff
 cat <<EOF >> ~/.bashrc
 export ROOT_DOMAIN=$ROOT_DOMAIN
 export APPS_DOMAIN=$APPS_DOMAIN
-export DOCKER_DEV=$DOCKER_DEV
+export CONTAINER_STORAGE_DEV=$CONTAINER_STORAGE_DEV
 export LDAP_SERVER=$LDAP_SERVER
 export ANSIBLE_HOST_KEY_CHECKING=False
 export MY_REPO=$MY_REPO
@@ -61,8 +61,8 @@ yum install -y docker
 ##### # setup container runtime storage (devicemapper)
 ```
 cat <<EOF > /etc/sysconfig/docker-storage-setup
-DEVS=$DOCKER_DEV
-VG=docker-vg
+DEVS=$CONTAINER_STORAGE_DEV
+VG=container-vg
 WIPE_SIGNATURES=true
 EOF
 container-storage-setup
