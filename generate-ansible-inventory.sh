@@ -177,7 +177,7 @@ openshift_master_default_subdomain=$APPS_DOMAIN
 ## set these if you are behind a proxy
 #openshift_http_proxy=http://192.168.0.254:3128
 #openshift_https_proxy=http://192.168.0.254:3128
-#openshift_no_proxy=
+#openshift_no_proxy=.$APPS_DOMAIN,$ROOT_DOMAIN
 
 ##openshift_hosted_infra_selector={"node-role.kubernetes.io/infra":"true"}
 
