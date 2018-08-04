@@ -80,6 +80,7 @@ DEVS=$DOCKER_DEV
 VG=docker-vg
 WIPE_SIGNATURES=true
 EOF
+container-storage-setup
 ```
 ##### # install gluster packages 
 ```
