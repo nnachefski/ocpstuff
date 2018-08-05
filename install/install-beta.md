@@ -86,7 +86,7 @@ EOF
 ```
 ##### # enabled container runtime(s)
 ```
-systemctl enable docker crio --now
+systemctl enable crio --now
 ```
 ##### # install gluster packages 
 ```
