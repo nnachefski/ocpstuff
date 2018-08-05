@@ -57,7 +57,7 @@ subscription-manager repos \
 #yum-config-manager --add-repo http://$MY_REPO/repo/rh-gluster-3-client-for-rhel-7-server-rpms
 #yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-ansible-2.5-rpms
 ```
-##### # add the docker repo cert to the pki store (for disconnected installs)
+##### # add the repo cert to the pki store (for disconnected installs)
 ```
 #wget http://$MY_REPO/repo/$MY_REPO.crt && mv -f $MY_REPO.crt /etc/pki/ca-trust/source/anchors && restorecon /etc/pki/ca-trust/source/anchors/$MY_REPO.crt && update-ca-trust
 ```
