@@ -84,7 +84,7 @@ container-storage-setup
 ```
 ##### # enable container runtime
 ```
-systemctl enable docker crio --now
+systemctl enable docker --now
 ```
 ##### # install gluster packages 
 ```
