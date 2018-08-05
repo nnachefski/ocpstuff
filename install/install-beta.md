@@ -84,9 +84,15 @@ cat <<EOF > /etc/sysconfig/crio-storage
 CRIO_STORAGE_OPTIONS=--storage-driver devicemapper --storage-opt dm.fs=ext4 --storage-opt dm.thinpooldev=/dev/mapper/container--vg-container--thinpool
 EOF
 ```
+##### # manaully set docker for overlay2 so it starts
+```
+cat <<EOF > /etc/sysconfig/docker-storage
+DOCKER_STORAGE_OPTIONS="--storage-driver overlay2"
+EOF
+```
 ##### # enable container runtime
 ```
-systemctl enable crio --now
+systemctl enable docker crio --now
 ```
 ##### # install gluster packages 
 ```
