@@ -70,7 +70,7 @@ cat <<EOF >> /etc/docker-distribution/registry/config.yml
         key: /etc/docker/certs.d/$MY_REPO/$MY_REPO.key
 EOF
 ```
-##### # change the default port from 5000 to 443
+##### # change the port from 5000 to 443
 ```
 sed -i 's/\:5000/\:443/' /etc/docker-distribution/registry/config.yml
 ```
