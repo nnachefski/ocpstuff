@@ -56,6 +56,7 @@ subscription-manager repos \
 #yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-extras-rpms
 #yum-config-manager --add-repo http://$MY_REPO/repo/rh-gluster-3-client-for-rhel-7-server-rpms
 #yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-ansible-2.5-rpms
+##yum-config-manager --add-repo http://$MY_REPO/repo/rhaos-beta
 ##yum-config-manager --add-repo http://$MY_REPO/repo/rhel-server-rhscl-7-rpms
 ##yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-optional-rpms
 ```
