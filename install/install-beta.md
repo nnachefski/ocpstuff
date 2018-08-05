@@ -92,8 +92,10 @@ EOF
 ```
 ##### # enable container runtime
 ```
-systemctl enable docker crio --now
+systemctl enable crio --now
+systemctl enable docker --now
 ```
+
 ##### # install gluster packages 
 ```
 yum -y install cns-deploy heketi-client
