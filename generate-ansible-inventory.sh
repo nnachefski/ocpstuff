@@ -32,6 +32,7 @@ openshift_deployment_type=openshift-enterprise
 #openshift_examples_modify_imagestreams=true
 
 ## container runtime options
+## these vars dont work yet, manually setup storage for the container runtime
 #container_runtime_docker_storage_setup_device=$DOCKER_DEV
 #container_runtime_docker_storage_type=devicemapper
 ## If oreg_url points to a registry requiring authentication, provide the following:
