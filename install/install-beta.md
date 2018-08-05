@@ -62,10 +62,27 @@ yum install -y docker
 ```
 cat <<EOF > /etc/sysconfig/docker-storage-setup
 DEVS=$CONTAINER_STORAGE_DEV
+STORAGE_DRIVER=devicemapper
+CONTAINER_THINPOOL=container-thinpool
 VG=container-vg
+DATA_SIZE=40%FREE
+MIN_DATA_SIZE=2G
+CHUNK_SIZE=512K
+GROWPART=false
+AUTO_EXTEND_POOL=yes
+POOL_AUTOEXTEND_THRESHOLD=60
+POOL_AUTOEXTEND_PERCENT=20
+DEVICE_WAIT_TIMEOUT=60
+CONTAINER_ROOT_LV_SIZE=40%FREE
 WIPE_SIGNATURES=true
 EOF
 container-storage-setup
+```
+##### # add devicemapper options to crio
+```
+cat <<EOF > /etc/sysconfig/crio-storage
+CRIO_STORAGE_OPTIONS=--storage-driver devicemapper --storage-opt dm.fs=ext4 --storage-opt dm.thinpooldev=/dev/mapper/container--vg-container--thinpool
+EOF
 ```
 ##### # enabled container runtime(s)
 ```
