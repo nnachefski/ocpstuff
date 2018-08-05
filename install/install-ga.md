@@ -125,7 +125,7 @@ ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/deploy_cluster.y
 ```
 watch oc get pods -owide --all-namespaces
 # and
-oc get pods -owide --all-namespaces -w
+oc get events -owide --all-namespaces -w
 # and
 watch oc get pv
 # and
