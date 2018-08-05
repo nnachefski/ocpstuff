@@ -82,7 +82,7 @@ WIPE_SIGNATURES=true
 EOF
 container-storage-setup
 ```
-##### # enabled container runtime(s)
+##### # enable container runtime
 ```
 systemctl enable docker crio --now
 ```
