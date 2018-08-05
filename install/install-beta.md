@@ -84,7 +84,7 @@ cat <<EOF > /etc/sysconfig/crio-storage
 CRIO_STORAGE_OPTIONS=--storage-driver devicemapper --storage-opt dm.fs=ext4 --storage-opt dm.thinpooldev=/dev/mapper/container--vg-container--thinpool
 EOF
 ```
-##### # enabled container runtime(s)
+##### # enable container runtime
 ```
 systemctl enable crio --now
 ```
