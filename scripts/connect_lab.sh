@@ -8,5 +8,6 @@ gnome-terminal  --tab -e "ssh root@master01.$TYPE.nicknach.net" \
 		--tab -e "ssh root@node01.$TYPE.nicknach.net" \
 		--tab -e "ssh root@node02.$TYPE.nicknach.net" \
 		--tab -e "ssh root@node03.$TYPE.nicknach.net" \
+		--tab -e "ssh root@lb.$TYPE.nicknach.net" \
 
 echo "Done!"
