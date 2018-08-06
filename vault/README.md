@@ -1,17 +1,25 @@
 #### # This is an example of how to deploy vault and associated operator on Openshift
-##### # 
+###### # The Vault operator employs the etcd operator to deploy an etcd cluster as the storage backend.
+
+##### # Create the etcd operator Custom Resource Definitions (CRD):
 ```
-oc create -f https://raw.githubusercontent.com/coreos/vault-operator/master/example/etcd_crds.yaml
+kubectl create -f example/etcd_crds.yaml
 ```
-##### # 
+##### # Deploy the etcd operator:
 ```
-oc create -f https://raw.githubusercontent.com/coreos/vault-operator/master/example/etcd-operator-deploy.yaml -n default
+kubectl -n default create -f example/etcd-operator-deploy.yaml
 ```
-##### #
+##### # Deploying the Vault operator
 ```
-oc create -f https://raw.githubusercontent.com/coreos/vault-operator/master/example/vault_crd.yaml
+kubectl create -f example/vault_crd.yaml
+kubectl -n default create -f example/deployment.yaml
 ```
-##### # 
+###### # Verify that the operators are running:
 ```
-oc create -f https://raw.githubusercontent.com/coreos/vault-operator/master/example/deployment.yml
+kubectl -n default get deploy
+```
+##### # Deploying a Vault cluster
+###### # A Vault cluster can be deployed by creating a VaultService Custom Resource(CR). For each Vault cluster the Vault operator will also create an etcd cluster for the storage backend.
+```
+kubectl -n default create -f example/example_vault.yaml
 ```
