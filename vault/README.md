@@ -1,4 +1,4 @@
-#### # This is an example of how to deploy the vault operator
+#### # This is an example of how to deploy vault and associated operator on Openshift
 ##### # 
 ```
 oc create -f https://raw.githubusercontent.com/coreos/vault-operator/master/example/etcd_crds.yaml
