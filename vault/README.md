@@ -1,6 +1,10 @@
 #### # This is an example of how to deploy vault and associated operator on Openshift
 ###### # The Vault operator employs the etcd operator to deploy an etcd cluster as the storage backend.
-
+##### # clone the repo
+```
+git clone https://github.com/coreos/vault-operator.git
+cd vault-operator
+```
 ##### # Create the etcd operator Custom Resource Definitions (CRD):
 ```
 kubectl create -f example/etcd_crds.yaml
