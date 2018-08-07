@@ -27,13 +27,13 @@ https://github.com/nnachefski/ocpstuff/blob/master/install/setup-disconnected.md
 #### Custom RHEL7 image based on the official rhel7 image for RH
 https://github.com/nnachefski/ocpstuff/tree/master/rhel7-custom
 
-#### Openshift NVIDIA Device Plugin howto (3.10+)
+#### Openshift NVIDIA Device Plugin howto (3.10+) (GPU)
 https://github.com/nnachefski/ocpstuff/tree/master/nvidia
 
-#### ethminer on Openshift
+#### ethminer on Openshift (GPU)
 https://github.com/nnachefski/ocpstuff/tree/master/crypto/ethminer
 
-#### Vanilla Tensorflow on Openshift
+#### Vanilla Tensorflow on Openshift (GPU)
 https://github.com/nnachefski/ocpstuff/tree/master/ml
 
 #### Nick's KVM lab scripts
