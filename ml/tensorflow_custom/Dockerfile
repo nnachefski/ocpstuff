@@ -5,7 +5,7 @@ ENV NVIDIA_VISIBLE_DEVICES=all
 ENV NVIDIA_DRIVER_CAPABILITIES=compute,utility
 ENV NVIDIA_REQUIRE_CUDA="cuda>=9.0"
 
-RUN yum -y install python34-pip python34-devel gcc && yum clean all
+RUN yum -y install python34-pip python34-devel gcc gcc-c++ && yum clean all
 RUN pip3 install --no-cache-dir --upgrade pip
 RUN pip3 install --no-cache-dir tensorflow-gpu
 RUN pip3 install --no-cache-dir jupyter
