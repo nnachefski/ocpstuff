@@ -30,7 +30,7 @@ oc new-app https://raw.githubusercontent.com/jupyter-on-openshift/poc-hub-tensor
 ```
 ##### # clone the test repo
 ```
-git clone http://gitlab-cicd.apps.ocp.nicknach.net/root/poc-hub-tensorflow-gpu.git
+git clone https://github.com/jupyter-on-openshift/poc-hub-tensorflow-gpu.git
 ```
 ##### # get the cudnn package
 ```
