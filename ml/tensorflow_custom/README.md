@@ -14,5 +14,5 @@ oc new-app https://github.com/nnachefski/ocpstuff.git --context-dir=ml/tensorflo
 ```
 ##### # expose the jupyter UI port
 ```
-oc expose svc jupyter --port 8888
+oc expose svc tensorflow-custom-gpu --port 8888
 ```
