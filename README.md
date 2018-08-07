@@ -12,7 +12,7 @@ https://github.com/nnachefski/ocpstuff/blob/master/docs/prereq-summary-single-ma
 #### Multi-master (HA) pre-req checklist
 https://github.com/nnachefski/ocpstuff/blob/master/docs/prereq-summary-multi-master.txt
 
-#### Openshift (GA) install script
+#### Openshift install script
 https://github.com/nnachefski/ocpstuff/blob/master/install/README.md
 
 #### Openshift Post-install script
@@ -30,13 +30,22 @@ https://github.com/nnachefski/ocpstuff/tree/master/rhel7-custom
 #### Openshift NVIDIA Device Plugin howto (3.10+)
 https://github.com/nnachefski/ocpstuff/tree/master/nvidia
 
-#### Openshift ethminer howto
+#### ethminer on Openshift
 https://github.com/nnachefski/ocpstuff/tree/master/crypto/ethminer
 
-#### Openshift Tensorflow howto
+#### Vanilla Tensorflow on Openshift
 https://github.com/nnachefski/ocpstuff/tree/master/ml
 
 #### Nick's KVM lab scripts
 https://github.com/nnachefski/ocpstuff/tree/master/scripts
+
+#### Gitlab-ce on openshift 
+https://github.com/nnachefski/ocpstuff/tree/master/gitlab
+
+#### Vault on Openshift
+https://github.com/nnachefski/ocpstuff/tree/master/vault
+
+#### Snort IDS on Openshift
+https://github.com/nnachefski/ocpstuff/tree/master/infosec/snort
 
 
