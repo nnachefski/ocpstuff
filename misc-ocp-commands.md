@@ -1,5 +1,10 @@
 ### # misc stuff
 
+##### # start a build from a local dir
+```
+oc start-build jupyterhub-nb-tfg --from-dir .
+```
+
 ##### # re-import all ISs from cli
 ```
 for i in `oc get is -n openshift |awk '{print $1}'`; do oc import-image $i -n openshift --all; done
