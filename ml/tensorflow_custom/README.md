@@ -10,7 +10,7 @@ oc adm policy add-scc-to-user anyuid -z default
 ```
 ##### # now build/deploy the ML framework
 ```
-oc new-app https://github.com/nnachefski/ocpstuff.git --context-dir=ml/tensorflow_custom --name=jupyter
+oc new-app https://github.com/nnachefski/ocpstuff.git --context-dir=ml/tensorflow_custom --name=tensorflow-custom-gpu
 ```
 ##### # expose the jupyter UI port
 ```
