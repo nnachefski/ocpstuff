@@ -17,5 +17,5 @@ oc adm policy add-scc-to-user anyuid -z gitlab-ce-user
 ```
 ##### # now deploy gitlab
 ```
-oc new-app --template gitlab-ce 
+oc new-app --template gitlab-ce -p APPLICATION_HOSTNAME=gitlab-cicd.apps.ocp.nicknach.net
 ```
