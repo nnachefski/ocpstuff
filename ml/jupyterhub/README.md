@@ -26,7 +26,7 @@ oc new-app --template jupyterhub-quickstart \
 
 ##### # deploy jupyterhub w/ keycloak
 ```
-oc new-app https://raw.githubusercontent.com/jupyter-on-openshift/poc-hub-tensorflow-gpu/master/templates/jupyterhub.json
+oc new-app https://raw.githubusercontent.com/jupyter-on-openshift/poc-hub-tensorflow-gpu/master/templates/jupyterhub.json -e NVIDIA_VISIBLE_DEVICES=0 -e NVIDIA_DRIVER_CAPABILITIES="compute,utility" -e NVIDIA_REQUIRE_CUDA="cuda>=9.0"
 ```
 ##### # clone the test repo
 ```
@@ -38,7 +38,7 @@ wget http://developer.download.nvidia.com/compute/redist/cudnn/v7.1.4/cudnn-9.0-
 ```
 ##### # cp the tgz into 'notebook' dir
 ```
-cp cudnn-9.0-linux-x64-v7.1.tgz poc-hub-tensorflow-gpu/notebook
+mv cudnn-9.0-linux-x64-v7.1.tgz poc-hub-tensorflow-gpu/notebook
 ```
 ###### # wait for the images to build
 ##### # now build tensorflow image
