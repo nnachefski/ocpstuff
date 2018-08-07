@@ -5,6 +5,10 @@
 git clone https://github.com/coreos/vault-operator.git
 cd vault-operator
 ```
+##### # create project for the vault
+```
+oc new-project vault
+```
 ##### # Create the etcd operator Custom Resource Definitions (CRD):
 ```
 oc create -f example/etcd_crds.yaml
