@@ -5,12 +5,12 @@ ENV NVIDIA_VISIBLE_DEVICES=all
 ENV NVIDIA_DRIVER_CAPABILITIES=compute,utility
 ENV NVIDIA_REQUIRE_CUDA="cuda>=9.0"
 
-RUN yum -y install python-pip python-devel gcc && yum clean all
-RUN pip install --no-cache-dir --upgrade pip
-RUN pip install --no-cache-dir tensorflow-gpu==1.3.0
-RUN pip install --no-cache-dir jupyter
-RUN pip install --no-cache-dir matplotlib
-RUN pip install --no-cache-dir keras
+RUN yum -y install python34-pip python34-devel gcc && yum clean all
+RUN pip3 install --no-cache-dir --upgrade pip
+RUN pip3 install --no-cache-dir tensorflow-gpu
+RUN pip3 install --no-cache-dir jupyter
+RUN pip3 install --no-cache-dir matplotlib
+RUN pip3 install --no-cache-dir keras
 
 #setup dir
 RUN mkdir -p $APP_DIR
