@@ -22,7 +22,12 @@ oc new-app --template jupyterhub-quickstart \
   --param APPLICATION_NAME=demo \
   --param GIT_REPOSITORY_URL=https://github.com/jakevdp/PythonDataScienceHandbook
 ```
-### # deploy jupyterhub w/ keycloak
+### # Or, deploy jupyterhub w/ keycloak
+##### # grant 'anyuid' to 'default' serviceaccount
+```
+oc adm policy add-scc-to-user anyuid -z default
+```
+##### # now deploy the stack
 ```
 oc new-app https://raw.githubusercontent.com/jupyter-on-openshift/poc-hub-keycloak-auth/master/templates/jupyterhub.json -e NVIDIA_VISIBLE_DEVICES=0 -e NVIDIA_DRIVER_CAPABILITIES="compute,utility" -e NVIDIA_REQUIRE_CUDA="cuda>=9.0"
 ```
