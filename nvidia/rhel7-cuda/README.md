@@ -1,0 +1,1 @@
+oc new-build https://github.com/nnachefski/ocpstuff.git --context-dir=nvidia/rhel7-cuda --name=rhel7-cuda -n openshift
