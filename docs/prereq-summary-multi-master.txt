@@ -6,20 +6,17 @@ Summary: 9 VMs recommended for multi master install.  Additional VM if NFS servi
   * 32GB RAM 
   * 4 vCPUs 
   * 20GB Disk (for OS) **(put all the space in '/' partition.  Do not bother splitting up /var, /usr, /home, etc...)**
-  * 30GB Disk (for Docker, raw/unformatted)
   * RHEL7.5 upgraded to latest patchset
 * Infrastructure Nodes (3 VMs required)
   * 32GB RAM 
   * 4 vCPUs 
   * 20GB Disk (for OS)
-  * 30GB Disk (for Docker, raw/unformatted)
   * 200GB Disk (for CNS, raw/unformatted)  
   * RHEL7.5 upgraded to latest patchset
 * Application Nodes (3 VMs recommended) 
   * 32GB RAM 
   * 4 vCPUs 
   * 20GB Disk (for OS)
-  * 30GB Disk (for Docker, raw/unformatted)
   * RHEL7.5 upgraded to latest patchset
 * Additional VM if NFS is needed
   * 8GB RAM
@@ -42,10 +39,10 @@ Summary: 9 VMs recommended for multi master install.  Additional VM if NFS servi
 Activate the Openshift subscriptions provided by Red Hat. If using a Satellite Server, synchronize the relevant channels.
    * rhel-7-server-rpms
    * rhel-7-server-extras-rpms
-   * rhel-7-server-ose-3.9-rpms
+   * rhel-7-server-ose-3.10-rpms
    * rhel-7-fast-datapath-rpms
    * rh-gluster-3-client-for-rhel-7-server-rpms
-   * rhel-7-server-ansible-2.4-rpms
+   * rhel-7-server-ansible-2.5-rpms
 
 Additional Considerations:
    1. RHEL7.5 vanilla is recommended (unmodified ISO as it comes from RH)
