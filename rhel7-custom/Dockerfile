@@ -1,5 +1,8 @@
 FROM repo.home.nicknach.net/rhel7.5
 
+ENV SKIP_REPOS_ENABLE=true \
+SKIP_REPOS_DISABLE=true
+
 COPY repos/*.repo /etc/yum.repos.d/
 COPY certs/*.crt /etc/pki/ca-trust/source/
 COPY gpgkeys/* /etc/pki/rpm-gpg/ 
