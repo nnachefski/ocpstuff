@@ -13,4 +13,4 @@ RUN rpm --import /etc/pki/rpm-gpg/7fa2af80.pub
 
 RUN update-ca-trust
 
-CMD sleep 60
+RUN yum repolist
