@@ -1,4 +1,4 @@
-FROM rhel7-custom
+FROM openshift/rhel7-custom
 
 ENV DNN=http://repo.home.nicknach.net/repo/misc/cudnn-9.0-linux-x64-v7.1.tgz \
 CUDA=cuda-9-0 \
