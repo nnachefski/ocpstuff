@@ -4,7 +4,6 @@
 ```
 export ROOT_DOMAIN=ocp.nicknach.net
 export APPS_DOMAIN=apps.$ROOT_DOMAIN 
-export CONTAINER_STORAGE_DEV=/dev/vdb
 export LDAP_SERVER=gw.home.nicknach.net
 export ANSIBLE_HOST_KEY_CHECKING=False
 export MY_REPO=repo.home.nicknach.net
@@ -18,7 +17,6 @@ export RHN_POOL=8a85f98260c27fc50160c323263339ff
 cat <<EOF >> ~/.bashrc
 export ROOT_DOMAIN=$ROOT_DOMAIN
 export APPS_DOMAIN=$APPS_DOMAIN
-export CONTAINER_STORAGE_DEV=$CONTAINER_STORAGE_DEV
 export LDAP_SERVER=$LDAP_SERVER
 export ANSIBLE_HOST_KEY_CHECKING=False
 export MY_REPO=$MY_REPO
@@ -76,16 +74,6 @@ yum install -y atomic-openshift-clients
 ```
 yum install -y docker
 ```
-##### # setup container runtime storage (devicemapper)
-```
-cat <<EOF > /etc/sysconfig/docker-storage-setup
-DEVS=$CONTAINER_STORAGE_DEV
-VG=container-vg
-WIPE_SIGNATURES=true
-EOF
-
-container-storage-setup
-```
 ##### # enable container runtime
 ```
 systemctl enable docker --now
@@ -102,7 +90,7 @@ yum -y update
 ## #  On first master only now (or bastion host)
 ##### # install openshift-ansible and dependencies 
 ```
-yum install -y openshift-ansible-playbooks && updatedb
+yum install -y openshift-ansible-playbooks
 ```
 ##### #  make password-less key for ansible usage
 ```
