@@ -17,6 +17,6 @@ RUN echo -e 'export CUDA_HOME=/usr/local/cuda \nexport CUDA_PATH=${CUDA_HOME} \n
 
 RUN yum -y install $CUDA && yum clean all
 
-RUN ldconifg
+RUN ldconfig
 RUN wget -q $DNN -O /tmp/cudnn.tar.gz
 RUN cd /tmp && tar -C /usr/local -xf /tmp/cudnn.tar.gz && /bin/rm /tmp/cudnn.tar.gz
