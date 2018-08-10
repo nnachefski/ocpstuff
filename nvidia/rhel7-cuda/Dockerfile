@@ -16,4 +16,3 @@ RUN echo -e 'export CUDA_HOME=/usr/local/cuda \nexport CUDA_PATH=${CUDA_HOME} \n
 RUN cd /tmp && tar -C /usr/local -xf /tmp/cudnn.tar.gz && /bin/rm /tmp/cudnn.tar.gz
 RUN ldconfig
 #RUN nvidia-smi
-CMD sleep 60
