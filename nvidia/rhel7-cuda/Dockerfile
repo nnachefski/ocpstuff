@@ -15,9 +15,8 @@ RUN yum -y install wget cmake gcc gcc-c++ git make patch pciutils unzip vim-enha
 RUN export CUDA_HOME="/usr/local/cuda" CUDA_PATH="${CUDA_HOME}" PATH="${CUDA_HOME}/bin${PATH:+:${PATH}}" LD_LIBRARY_PATH="${CUDA_HOME}/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"; 
 RUN echo -e 'export CUDA_HOME=/usr/local/cuda \nexport CUDA_PATH=${CUDA_HOME} \nexport PATH=${CUDA_HOME}/bin:${PATH} \nexport LD_LIBRARY_PATH=${CUDA_HOME}/lib64:/usr/local/lib:$LD_LIBRARY_PATH \n' >> ~/.bashrc;
 
-RUN ldconfig
-
 RUN yum -y install $CUDA && yum clean all
 
+RUN ldconifg
 RUN wget -q $DNN -O /tmp/cudnn.tar.gz
 RUN cd /tmp && tar -C /usr/local -xf /tmp/cudnn.tar.gz && /bin/rm /tmp/cudnn.tar.gz
