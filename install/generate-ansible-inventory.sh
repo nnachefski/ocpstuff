@@ -160,6 +160,13 @@ openshift_prometheus_alertbuffer_storage_volume_name=prometheus-alertbuffer
 openshift_prometheus_alertbuffer_storage_volume_size=10Gi
 #openshift_prometheus_node_selector={'node-role.kubernetes.io/infra':'true'}
 
+## grafana
+openshift_grafana_storage_type='pvc'
+openshift_grafana_sc_name="glusterfs-storage"
+openshift_grafana_storage_volume_size=10Gi
+openshift_grafana_node_exporter=true
+#openshift_grafana_node_selector={'node-role.kubernetes.io/infra':'true'}
+
 ## change PV access modes
 #openshift_prometheus_alertbuffer_storage_access_modes=['ReadWriteOnce']
 #openshift_prometheus_alertmanager_storage_access_modes=['ReadWriteOnce']
