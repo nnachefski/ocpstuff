@@ -21,12 +21,12 @@ export PROJECT=openshift
 
 ##### # build the base rhel7 images from a git repo (clone mine or use it directly to get started)
 ```
-oc new-build https://github.com/nnachefski/ocpstuff.git --context-dir=rhel7-custom --name=rhel7-custom -n $PROJECT
+oc new-build https://github.com/nnachefski/ocpstuff.git --context-dir=rhel7-custom --name=rhel7-custom -e SKIP_REPOS_ENABLE=true -e SKIP_REPOS_DISABLE=true -n $PROJECT
 ```
 ##### # now build the 'core' s2i image.  this build will initially fail because there is no way to pass dockerfilePath on new-build
 ###### # see next step for work-around
 ```
-oc new-build https://github.com/sclorg/s2i-base-container.git -i rhel7-custom --context-dir=core --name=s2i-custom-core --strategy=docker -n $PROJECT
+oc new-build https://github.com/sclorg/s2i-base-container.git -i rhel7-custom --context-dir=core --name=s2i-custom-core --strategy=docker -e SKIP_REPOS_ENABLE=true -e SKIP_REPOS_DISABLE=true -n $PROJECT
 ```
 ###### # a feature is needed to allow a new-build to pass a "Dockerfile" to build (within the context-dir). 
 ##### # work-around by patching the bc after you create it, https://bugzilla.redhat.com/show_bug.cgi?id=1382938 
@@ -36,7 +36,7 @@ oc start-build s2i-custom-core -n $PROJECT
 ```
 ##### # now build the 'base' s2i image
 ```
-oc new-build https://github.com/sclorg/s2i-base-container.git -i s2i-custom-core --context-dir=base --name=s2i-custom-base --strategy=docker -n $PROJECT
+oc new-build https://github.com/sclorg/s2i-base-container.git -i s2i-custom-core --context-dir=base --name=s2i-custom-base --strategy=docker -e SKIP_REPOS_ENABLE=true -e SKIP_REPOS_DISABLE=true -n $PROJECT
 ```
 ##### # work-around, see above
 ```
@@ -47,7 +47,7 @@ oc start-build s2i-custom-base -n $PROJECT
 
 #### # python 3.5
 ```
-oc new-build https://github.com/sclorg/s2i-python-container.git -i s2i-custom-base --context-dir=3.5 --name=s2i-custom-python35 --strategy=docker -n $PROJECT
+oc new-build https://github.com/sclorg/s2i-python-container.git -i s2i-custom-base --context-dir=3.5 --name=s2i-custom-python35 --strategy=docker -e SKIP_REPOS_ENABLE=true -e SKIP_REPOS_DISABLE=true -n $PROJECT
 ```
 ##### # work-around, again
 ```
