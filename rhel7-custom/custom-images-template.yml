@@ -26,6 +26,11 @@ items:
       type: Git
     strategy:
       dockerStrategy:
+        env:
+        - name: SKIP_REPOS_DISABLE
+          value: "true"
+        - name: SKIP_REPOS_ENABLE
+          value: "true"
         from:
           kind: ImageStreamTag
           name: rhel7.5:latest
@@ -33,10 +38,10 @@ items:
     successfulBuildsHistoryLimit: 5
     triggers:
     - github:
-        secret: OlE9rmpMOFr-QFCnXA3t
+        secret: _jV_tw6WovuYnvMazrPK
       type: GitHub
     - generic:
-        secret: nXOPielsczZxqO6XUvn2
+        secret: noFL_lm6PqqKx8ibpwx0
       type: Generic
     - type: ConfigChange
     - imageChange: {}
@@ -70,6 +75,11 @@ items:
     strategy:
       dockerStrategy:
         dockerfilePath: Dockerfile.rhel7
+        env:
+        - name: SKIP_REPOS_DISABLE
+          value: "true"
+        - name: SKIP_REPOS_ENABLE
+          value: "true"
         from:
           kind: ImageStreamTag
           name: rhel7-custom:latest
@@ -78,10 +88,10 @@ items:
     successfulBuildsHistoryLimit: 5
     triggers:
     - github:
-        secret: QRMj2l00IGVA2LvgODO3
+        secret: OP1snJ5d-_w8l90GLCu-
       type: GitHub
     - generic:
-        secret: 9wENfUFd0dmOe-ruxtF7
+        secret: DGYQOuOzmAXgmHJmeAM1
       type: Generic
     - type: ConfigChange
     - imageChange: {}
@@ -115,6 +125,11 @@ items:
     strategy:
       dockerStrategy:
         dockerfilePath: Dockerfile.rhel7
+        env:
+        - name: SKIP_REPOS_DISABLE
+          value: "true"
+        - name: SKIP_REPOS_ENABLE
+          value: "true"
         from:
           kind: ImageStreamTag
           name: s2i-custom-core:latest
@@ -123,10 +138,10 @@ items:
     successfulBuildsHistoryLimit: 5
     triggers:
     - github:
-        secret: MkYNbNuCGcKfJKA2-nfS
+        secret: mnOgbT7frtioCY8awFaG
       type: GitHub
     - generic:
-        secret: RP9JzgZ86xiH04F9U0dv
+        secret: dnbHB_dQm7XsKvXQQqN_
       type: Generic
     - type: ConfigChange
     - imageChange: {}
@@ -160,6 +175,11 @@ items:
     strategy:
       dockerStrategy:
         dockerfilePath: Dockerfile.rhel7
+        env:
+        - name: SKIP_REPOS_DISABLE
+          value: "true"
+        - name: SKIP_REPOS_ENABLE
+          value: "true"
         from:
           kind: ImageStreamTag
           name: s2i-custom-base:latest
@@ -168,10 +188,10 @@ items:
     successfulBuildsHistoryLimit: 5
     triggers:
     - github:
-        secret: rkt1tLalcK-IehIJ2YRl
+        secret: 3Ph8kOB5ckf4fB4FhDj9
       type: GitHub
     - generic:
-        secret: tzLiD7J9ewcZNVj4aZN2
+        secret: HF9kgiKxubH6TdUFtS_6
       type: Generic
     - type: ConfigChange
     - imageChange: {}
@@ -183,9 +203,8 @@ items:
   metadata:
     annotations:
       openshift.io/generated-by: OpenShiftNewBuild
-      openshift.io/image.dockerRepositoryCheck: 2018-03-15T21:18:34Z
     creationTimestamp: null
-    generation: 2
+    generation: 1
     labels:
       build: rhel7-custom
     name: rhel7-custom
@@ -197,11 +216,11 @@ items:
       from:
         kind: DockerImage
         name: docker-registry.default.svc:5000/openshift/rhel7-custom:latest
-      generation: 2
+      generation: null
       importPolicy: {}
       name: latest
       referencePolicy:
-        type: Source
+        type: ""
   status:
     dockerImageRepository: ""
 - apiVersion: v1
@@ -209,9 +228,8 @@ items:
   metadata:
     annotations:
       openshift.io/generated-by: OpenShiftNewBuild
-      openshift.io/image.dockerRepositoryCheck: 2018-03-15T21:18:34Z
     creationTimestamp: null
-    generation: 2
+    generation: 1
     labels:
       build: s2i-custom-core
     name: s2i-custom-core
@@ -223,11 +241,11 @@ items:
       from:
         kind: DockerImage
         name: docker-registry.default.svc:5000/openshift/s2i-custom-core:latest
-      generation: 2
+      generation: null
       importPolicy: {}
       name: latest
       referencePolicy:
-        type: Source
+        type: ""
   status:
     dockerImageRepository: ""
 - apiVersion: v1
@@ -235,9 +253,8 @@ items:
   metadata:
     annotations:
       openshift.io/generated-by: OpenShiftNewBuild
-      openshift.io/image.dockerRepositoryCheck: 2018-03-15T21:18:34Z
     creationTimestamp: null
-    generation: 2
+    generation: 1
     labels:
       build: s2i-custom-base
     name: s2i-custom-base
@@ -249,11 +266,11 @@ items:
       from:
         kind: DockerImage
         name: docker-registry.default.svc:5000/openshift/s2i-custom-base:latest
-      generation: 2
+      generation: null
       importPolicy: {}
       name: latest
       referencePolicy:
-        type: Source
+        type: ""
   status:
     dockerImageRepository: ""
 - apiVersion: v1
@@ -261,9 +278,8 @@ items:
   metadata:
     annotations:
       openshift.io/generated-by: OpenShiftNewBuild
-      openshift.io/image.dockerRepositoryCheck: 2018-03-15T21:18:34Z
     creationTimestamp: null
-    generation: 3
+    generation: 1
     labels:
       build: s2i-custom-python35
     name: s2i-custom-python35
@@ -271,16 +287,15 @@ items:
     lookupPolicy:
       local: false
     tags:
-    - annotations:
-        tags: builder,python
+    - annotations: null
       from:
         kind: DockerImage
         name: docker-registry.default.svc:5000/openshift/s2i-custom-python35:latest
-      generation: 2
+      generation: null
       importPolicy: {}
       name: latest
       referencePolicy:
-        type: Source
+        type: ""
   status:
     dockerImageRepository: ""
 kind: List
