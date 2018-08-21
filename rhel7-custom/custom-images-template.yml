@@ -38,10 +38,10 @@ items:
     successfulBuildsHistoryLimit: 5
     triggers:
     - github:
-        secret: _jV_tw6WovuYnvMazrPK
+        secret: D1TrddLwyzAjFkSqMzEF
       type: GitHub
     - generic:
-        secret: noFL_lm6PqqKx8ibpwx0
+        secret: AdnCXHma5JEPC5denSfm
       type: Generic
     - type: ConfigChange
     - imageChange: {}
@@ -88,10 +88,10 @@ items:
     successfulBuildsHistoryLimit: 5
     triggers:
     - github:
-        secret: OP1snJ5d-_w8l90GLCu-
+        secret: v3zbMLxCWREpDFXRbp99
       type: GitHub
     - generic:
-        secret: DGYQOuOzmAXgmHJmeAM1
+        secret: ydECzmX2Wot1sssfrD7g
       type: Generic
     - type: ConfigChange
     - imageChange: {}
@@ -138,10 +138,10 @@ items:
     successfulBuildsHistoryLimit: 5
     triggers:
     - github:
-        secret: mnOgbT7frtioCY8awFaG
+        secret: jDNI2KW10TuOFmYdbQ4o
       type: GitHub
     - generic:
-        secret: dnbHB_dQm7XsKvXQQqN_
+        secret: my6lSMGRq7LfH1fJPQth
       type: Generic
     - type: ConfigChange
     - imageChange: {}
@@ -188,10 +188,60 @@ items:
     successfulBuildsHistoryLimit: 5
     triggers:
     - github:
-        secret: 3Ph8kOB5ckf4fB4FhDj9
+        secret: cXXSZwX2UqhYYhWHlW9x
       type: GitHub
     - generic:
-        secret: HF9kgiKxubH6TdUFtS_6
+        secret: 1pA1by3znq8_fSWqtem1
+      type: Generic
+    - type: ConfigChange
+    - imageChange: {}
+      type: ImageChange
+  status:
+    lastVersion: 0
+- apiVersion: v1
+  kind: BuildConfig
+  metadata:
+    annotations:
+      openshift.io/generated-by: OpenShiftNewBuild
+    creationTimestamp: null
+    labels:
+      build: s2i-custom-nodejs8
+    name: s2i-custom-nodejs8
+  spec:
+    failedBuildsHistoryLimit: 5
+    nodeSelector: null
+    output:
+      to:
+        kind: ImageStreamTag
+        name: s2i-custom-nodejs8:latest
+    postCommit: {}
+    resources: {}
+    runPolicy: Serial
+    source:
+      contextDir: "8"
+      git:
+        uri: https://github.com/sclorg/s2i-nodejs-container.git
+      type: Git
+    strategy:
+      dockerStrategy:
+        dockerfilePath: Dockerfile.rhel7
+        env:
+        - name: SKIP_REPOS_DISABLE
+          value: "true"
+        - name: SKIP_REPOS_ENABLE
+          value: "true"
+        from:
+          kind: ImageStreamTag
+          name: s2i-custom-base:latest
+          namespace: openshift
+      type: Docker
+    successfulBuildsHistoryLimit: 5
+    triggers:
+    - github:
+        secret: d3PTCfkAwZVWc902wn1y
+      type: GitHub
+    - generic:
+        secret: ClzMdpB8aKKWqveKBxJn
       type: Generic
     - type: ConfigChange
     - imageChange: {}
@@ -203,9 +253,8 @@ items:
   metadata:
     annotations:
       openshift.io/generated-by: OpenShiftNewBuild
-      openshift.io/image.dockerRepositoryCheck: 2018-08-21T12:06:03Z
     creationTimestamp: null
-    generation: 2
+    generation: 1
     labels:
       build: rhel7-custom
     name: rhel7-custom
@@ -217,11 +266,11 @@ items:
       from:
         kind: DockerImage
         name: docker-registry.default.svc:5000/openshift/rhel7-custom:latest
-      generation: 2
+      generation: null
       importPolicy: {}
       name: latest
       referencePolicy:
-        type: Source
+        type: ""
   status:
     dockerImageRepository: ""
 - apiVersion: v1
@@ -229,9 +278,8 @@ items:
   metadata:
     annotations:
       openshift.io/generated-by: OpenShiftNewBuild
-      openshift.io/image.dockerRepositoryCheck: 2018-08-21T12:06:03Z
     creationTimestamp: null
-    generation: 2
+    generation: 1
     labels:
       build: s2i-custom-core
     name: s2i-custom-core
@@ -243,11 +291,11 @@ items:
       from:
         kind: DockerImage
         name: docker-registry.default.svc:5000/openshift/s2i-custom-core:latest
-      generation: 2
+      generation: null
       importPolicy: {}
       name: latest
       referencePolicy:
-        type: Source
+        type: ""
   status:
     dockerImageRepository: ""
 - apiVersion: v1
@@ -255,9 +303,8 @@ items:
   metadata:
     annotations:
       openshift.io/generated-by: OpenShiftNewBuild
-      openshift.io/image.dockerRepositoryCheck: 2018-08-21T12:06:03Z
     creationTimestamp: null
-    generation: 2
+    generation: 1
     labels:
       build: s2i-custom-base
     name: s2i-custom-base
@@ -269,11 +316,11 @@ items:
       from:
         kind: DockerImage
         name: docker-registry.default.svc:5000/openshift/s2i-custom-base:latest
-      generation: 2
+      generation: null
       importPolicy: {}
       name: latest
       referencePolicy:
-        type: Source
+        type: ""
   status:
     dockerImageRepository: ""
 - apiVersion: v1
@@ -281,9 +328,8 @@ items:
   metadata:
     annotations:
       openshift.io/generated-by: OpenShiftNewBuild
-      openshift.io/image.dockerRepositoryCheck: 2018-08-21T12:06:03Z
     creationTimestamp: null
-    generation: 3
+    generation: 2
     labels:
       build: s2i-custom-python35
     name: s2i-custom-python35
@@ -296,6 +342,32 @@ items:
       from:
         kind: DockerImage
         name: docker-registry.default.svc:5000/openshift/s2i-custom-python35:latest
+      generation: 2
+      importPolicy: {}
+      name: latest
+      referencePolicy:
+        type: Source
+  status:
+    dockerImageRepository: ""
+- apiVersion: v1
+  kind: ImageStream
+  metadata:
+    annotations:
+      openshift.io/generated-by: OpenShiftNewBuild
+    creationTimestamp: null
+    generation: 2
+    labels:
+      build: s2i-custom-nodejs8
+    name: s2i-custom-nodejs8
+  spec:
+    lookupPolicy:
+      local: false
+    tags:
+    - annotations:
+        tags: builder,nodejs
+      from:
+        kind: DockerImage
+        name: docker-registry.default.svc:5000/openshift/s2i-custom-nodejs8:latest
       generation: 2
       importPolicy: {}
       name: latest
