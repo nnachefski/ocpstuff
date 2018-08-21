@@ -9,7 +9,7 @@ oc import-image repo.home.nicknach.net/rhel7.5 --confirm -n openshift
 oc create -f https://raw.githubusercontent.com/nnachefski/ocpstuff/master/rhel7-custom/custom-images-template.yml -n openshift
 ```
 ###### # this template was generated from the buildconfigs of all five image folders in this context-dir.  The command used to generate this template is: 
-###### # oc export bc,is rhel7-custom s2i-custom-core s2i-custom-base s2i-custom-python35 -n openshift > custom-images-template.yml
+###### # oc export bc,is rhel7-custom s2i-custom-core s2i-custom-base s2i-custom-python35 s2i-custom-nodejs8 -n openshift > custom-images-template.yml
 #### # Begin
 ###### # the idea is to clone and then customize the rhel7-custom folder/image.  Insert your org's certs, gpgkeys, repo files, etc...  Then, you can build (and provide) customized runtime images to your developers and operations teams.
 
@@ -53,6 +53,15 @@ oc new-build https://github.com/sclorg/s2i-python-container.git -i s2i-custom-ba
 ```
 oc patch bc s2i-custom-python35 -p '{"spec":{"strategy":{"dockerStrategy":{"dockerfilePath": "Dockerfile.rhel7"}}}}' -n $PROJECT
 oc start-build s2i-custom-python35 -n $PROJECT
+```
+##### # now build nodejs 8 custom image
+```
+oc new-build https://github.com/sclorg/s2i-nodejs-container.git -i s2i-custom-base --context-dir=8 --name=s2i-custom-nodejs8 --strategy=docker -e SKIP_REPOS_ENABLE=true -e SKIP_REPOS_DISABLE=true -n $PROJECT
+```
+##### # work-around, again
+```
+oc patch bc s2i-custom-nodejs8 -p '{"spec":{"strategy":{"dockerStrategy":{"dockerfilePath": "Dockerfile.rhel7"}}}}' -n $PROJECT
+oc start-build s2i-custom-nodejs8 -n $PROJECT
 ```
 #### # build whatever else runtimes you need
 #### # https://github.com/sclorg
