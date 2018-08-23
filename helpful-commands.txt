@@ -1,4 +1,7 @@
-﻿# get recent SELinux denials
+﻿# check out a specific branch
+git clone --single-branch -b release-3.10 https://github.com/openshift/openshift-ansible.git
+
+# get recent SELinux denials
 ausearch -m avc -ts recent 
 
 ## patch an IS to be pulled from http (vs https) registry
