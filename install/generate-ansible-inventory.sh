@@ -236,9 +236,9 @@ node03.$ROOT_DOMAIN openshift_node_group_name="node-config-compute" openshift_sc
 
 ## if using gluster (Container Native Storage)
 [glusterfs]
-infra01.$ROOT_DOMAIN glusterfs_devices='[ "/dev/vdc" ]'
-infra02.$ROOT_DOMAIN glusterfs_devices='[ "/dev/vdc" ]'
-infra03.$ROOT_DOMAIN glusterfs_devices='[ "/dev/vdc" ]'
+infra01.$ROOT_DOMAIN glusterfs_devices='[ "/dev/vdb" ]'
+infra02.$ROOT_DOMAIN glusterfs_devices='[ "/dev/vdb" ]'
+infra03.$ROOT_DOMAIN glusterfs_devices='[ "/dev/vdb" ]'
 
 [new_nodes]
 ## hold for use when adding new nodes
