@@ -22,5 +22,4 @@ ssh root@hv4.home.nicknach.net /cloud/scripts/new.sh infra01 $TEMPLATE 16384 2 5
 ssh root@hv3.home.nicknach.net /cloud/scripts/new.sh infra02 $TEMPLATE 16384 2 52:54:00:18:59:04 &
 ssh root@hv5.home.nicknach.net /cloud/scripts/new.sh infra03 $TEMPLATE 16384 2 52:54:00:18:73:04 &
 
-echo "Done!"
 
