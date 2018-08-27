@@ -4,7 +4,10 @@
 ```
 oc start-build jupyterhub-nb-tfg --from-dir .
 ```
-
+##### # add post hook 
+```
+oc set deployment-hook dc/tensorflow --post -- /bin/sh -c 'curl http://repo.home.nicknach.net/repo/foo.ipynb -o /notebooks/foo.ipynb'
+```
 ##### # re-import all ISs from cli
 ```
 for i in `oc get is -n openshift |awk '{print $1}'`; do oc import-image $i -n openshift --all; done
