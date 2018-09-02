@@ -32,7 +32,6 @@ openshift_deployment_type=openshift-enterprise
 #openshift_examples_modify_imagestreams=true
 
 ## container runtime options
-## these vars dont work yet, manually setup storage for the container runtime
 #container_runtime_docker_storage_setup_device=$DOCKER_DEV
 #container_runtime_docker_storage_type=devicemapper
 ## If oreg_url points to a registry requiring authentication, provide the following:
@@ -52,8 +51,8 @@ openshift_deployment_type=openshift-enterprise
 #openshift_master_cluster_public_hostname=console.$ROOT_DOMAIN
 
 ## release ver
-#openshift_release=$OCP_VER
-#openshift_image_tag=$OCP_VER
+openshift_release=$OCP_VER
+openshift_image_tag=$OCP_VER
 ##openshift_pkg_version=-3.10.14
 
 ## enable ntp
