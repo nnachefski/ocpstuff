@@ -65,7 +65,7 @@ yum install -y docker crio
 ##### # enable container runtime
 ```
 systemctl enable docker --now
-systemctl enable crio --now
+systemctl enable crio cri-tools --now
 ```
 ##### # install gluster packages 
 ```
