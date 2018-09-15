@@ -7,7 +7,7 @@ export APPS_DOMAIN=apps.$ROOT_DOMAIN
 export LDAP_SERVER=gw.home.nicknach.net
 export ANSIBLE_HOST_KEY_CHECKING=False
 export MY_REPO=repo.home.nicknach.net
-export OCP_VER=v3.10
+export OCP_VER=v3.11
 export RHN_ID=nnachefs@redhat.com
 export RHN_PASSWD=
 export RHN_POOL=8a85f98260c27fc50160c323263339ff
@@ -29,42 +29,26 @@ EOF
 ```
 yum install -y subscription-manager yum-utils wget 
 ```
-##### # subscribe to RHN
-```
-subscription-manager register --username=$RHN_ID --password $RHN_PASSWD --force
-subscription-manager attach --pool=$RHN_POOL
-subscription-manager repos --disable="*"
-subscription-manager repos \
-   --enable=rhel-7-server-rpms \
-   --enable=rhel-7-server-extras-rpms \
-   --enable=rhel-7-server-ose-3.10-rpms \
-   --enable=rhel-7-fast-datapath-rpms \
-   --enable=rhel-7-server-ansible-2.5-rpms \
-   --enable=rh-gluster-3-client-for-rhel-7-server-rpms
-   
-#   --enable=rhel-server-rhscl-7-rpms \
-#   --enable=rhel-7-server-optional-rpms   
-```
 ##### # OR add your internal repos (for disconnected installs)
 ```
-#rm -rf /etc/yum.repos.d/* && yum clean all
+rm -rf /etc/yum.repos.d/* && yum clean all
 #yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-ose-3.10-rpms
-#yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-fast-datapath-rpms
-#yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-rpms
-#yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-extras-rpms
-#yum-config-manager --add-repo http://$MY_REPO/repo/rh-gluster-3-client-for-rhel-7-server-rpms
-#yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-ansible-2.5-rpms
-##yum-config-manager --add-repo http://$MY_REPO/repo/rhaos-beta
+yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-fast-datapath-rpms
+yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-rpms
+yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-extras-rpms
+yum-config-manager --add-repo http://$MY_REPO/repo/rh-gluster-3-client-for-rhel-7-server-rpms
+yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-ansible-2.6-rpms
+yum-config-manager --add-repo http://$MY_REPO/repo/rhaos-beta
 ##yum-config-manager --add-repo http://$MY_REPO/repo/rhel-server-rhscl-7-rpms
 ##yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-optional-rpms
 ```
 ##### # add the repo cert to the pki store (for disconnected installs)
 ```
-#wget http://$MY_REPO/repo/$MY_REPO.crt && mv -f $MY_REPO.crt /etc/pki/ca-trust/source/anchors && restorecon /etc/pki/ca-trust/source/anchors/$MY_REPO.crt && update-ca-trust
+wget http://$MY_REPO/repo/$MY_REPO.crt && mv -f $MY_REPO.crt /etc/pki/ca-trust/source/anchors && restorecon /etc/pki/ca-trust/source/anchors/$MY_REPO.crt && update-ca-trust
 ```
 ##### # if installing beta repo, disable gpgcheck
 ```
-#echo gpgcheck=0 >> /etc/yum.repos.d/repo.home.nicknach.net_repo_rhaos-beta.repo
+echo gpgcheck=0 >> /etc/yum.repos.d/repo.home.nicknach.net_repo_rhaos-beta.repo
 ```
 ##### # install some general pre-req packages
 ``` 
@@ -76,11 +60,12 @@ yum install -y atomic-openshift-clients
 ```
 ##### # install docker
 ```
-yum install -y docker
+yum install -y docker crio
 ```
 ##### # enable container runtime
 ```
 systemctl enable docker --now
+systemctl enable crio --now
 ```
 ##### # install gluster packages 
 ```
@@ -120,11 +105,17 @@ ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/deploy_cluster.y
 ##### # during the install, do these commands in separate terminals to trouble shoot any issues
 ```
 watch oc get pods -owide --all-namespaces
+
 # and
+
 oc get events -owide --all-namespaces -w
+###### # this only works after the API becomes available
 # and
+
 watch oc get pv
+
 # and
+
 journalctl -xlf
 ```
 ###### # verify the install was successful (oc get nodes)
