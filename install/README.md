@@ -1,29 +1,20 @@
 ### # BEGIN
-##### # do this on ALL hosts (master/infra/nodes)
+cat <<’EOF’ >> ~/prep.sh
 ##### # SET THESE VARIABLES ###
 ```
-export ROOT_DOMAIN=ocp.nicknach.net
-export APPS_DOMAIN=apps.$ROOT_DOMAIN 
-export LDAP_SERVER=gw.home.nicknach.net
-export ANSIBLE_HOST_KEY_CHECKING=False
-export MY_REPO=repo.home.nicknach.net
-export OCP_VER=v3.11
-export RHN_ID=nnachefs@redhat.com
-export RHN_PASSWD=
-export RHN_POOL=8a85f98260c27fc50160c323263339ff
+echo ROOT_DOMAIN=ocp.nicknach.net               >> /etc/environment
+echo APPS_DOMAIN=apps.$ROOT_DOMAIN              >> /etc/environment
+echo LDAP_SERVER=gw.home.nicknach.net           >> /etc/environment
+echo ANSIBLE_HOST_KEY_CHECKING=False            >> /etc/environment
+echo MY_REPO=repo.home.nicknach.net             >> /etc/environment
+echo OCP_VER=v3.11                              >> /etc/environment
+echo RHN_ID=nnachefs@redhat.com                 >> /etc/environment
+echo RHN_PASSWD=                                >> /etc/environment
+echo RHN_POOL=8a85f98260c27fc50160c323263339ff  >> /etc/environment
 ```
-##### # make them persistent 
+##### # set vars in running shell
 ```
-cat <<EOF >> ~/.bashrc
-export ROOT_DOMAIN=$ROOT_DOMAIN
-export APPS_DOMAIN=$APPS_DOMAIN
-export LDAP_SERVER=$LDAP_SERVER
-export ANSIBLE_HOST_KEY_CHECKING=False
-export MY_REPO=$MY_REPO
-export OCP_VER=$OCP_VER
-export RHN_ID=$RHN_ID
-export RHN_POOL=$RHN_POOL
-EOF
+for i in `cat /etc/environment`; do `echo export $i`; done
 ```
 ##### # install sub manager
 ```
@@ -75,21 +66,23 @@ yum install -y cns-deploy heketi-client
 ```
 yum -y update
 ```
-###### # reboot if necessary 
-## #  On first master only now (or bastion host)
+```
+EOF
+```
+##### # run the prep.sh script on all hosts using ansible
+###### # if on AWS, use --private-key=your_key.pem
+```
+ansible "*" -m script -a prep.sh
+```
+###### # reboot if necessary
+```
+ansible "*" -m script -a "reboot"
+```
 ##### # install openshift-ansible and dependencies 
 ```
 yum install -y openshift-ansible-playbooks
 ```
-##### #  make password-less key for ansible usage
-```
-ssh-keygen
-```
-##### # copy key to all hosts(masters/infras/nodes).  make a list.txt of hostnames/IPs and then do...
-```
-for i in `cat list.txt`; do ssh-copy-id root@$i; done
-```
-##### # create your ansible hosts (inventory) file 
+##### # now create your ansible hosts (inventory) file 
 ###### # (see below link for creating this file)
 https://raw.githubusercontent.com/nnachefski/ocpstuff/master/install/generate-ansible-inventory.sh
 ##### # run the pre-req check
