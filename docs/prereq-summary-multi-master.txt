@@ -5,7 +5,7 @@ Summary: 9 VMs recommended for multi master install.  Additional VM if NFS servi
 * Master Nodes (3 VMs required)
   * 32GB RAM 
   * 4 vCPUs 
-  * 50GB Disk (for OS) **(put all the space in '/' partition.  Do not bother splitting up /var, /usr, /home, etc...)**
+  * 50GB Disk (for OS) **(put all of the space in '/' partition.  Do not bother splitting up /var, /usr, /home, etc...)**
   * RHEL7.5 upgraded to latest patchset
 * Infrastructure Nodes (3 VMs required)
   * 32GB RAM 
