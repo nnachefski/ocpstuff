@@ -1,5 +1,4 @@
 ### # BEGIN
-cat <<’EOF’ >> ~/prep.sh
 ##### # SET THESE VARIABLES ###
 ```
 echo ROOT_DOMAIN=ocp.nicknach.net               >> /etc/environment
@@ -66,9 +65,6 @@ yum install -y cns-deploy heketi-client
 ```
 yum -y update
 ```
-
-EOF
-
 
 ##### # now run the prep.sh script on all hosts using ansible
 ###### # if on AWS, use --private-key=your_key.pem
