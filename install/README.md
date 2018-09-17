@@ -1,4 +1,5 @@
-### # BEGIN
+### # Make a prep.sh script on the master/ansible host.
+##### use the contend below to make this file (copy and paste)
 ##### # SET THESE VARIABLES ###
 ```
 echo ROOT_DOMAIN=ocp.nicknach.net               >> /etc/environment
@@ -66,7 +67,7 @@ yum install -y cns-deploy heketi-client
 yum -y update
 ```
 
-##### # now run the prep.sh script on all hosts using ansible
+#### # now run the prep.sh script on all hosts (using ansible)
 ###### # if on AWS, use --private-key=your_key.pem
 ```
 ansible "*" -m script -a prep.sh
