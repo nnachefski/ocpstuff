@@ -19,3 +19,11 @@ systemctl restart atomic-openshift-master*
 ansible --private-key=.ssh/nicknach-ca.pem "*" -m shell -a "echo 'vm.max_map_count = 262144' > /etc/sysctl.d/99-elasticsearch.conf"
 ansible --private-key=.ssh/nicknach-ca.pem "*" -m shell -a "sysctl vm.max_map_count=262144"
 ```
+##### # label the openshift namespace 
+```
+oc label namespace openshift istio-injection=enabled
+```
+##### # create the sample app
+```
+oc create -f https://raw.githubusercontent.com/istio/istio/master/samples/bookinfo/platform/kube/bookinfo.yaml
+```
