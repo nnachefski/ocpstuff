@@ -66,10 +66,11 @@ yum install -y cns-deploy heketi-client
 ```
 yum -y update
 ```
-```
+
 EOF
-```
-##### # run the prep.sh script on all hosts using ansible
+
+
+##### # now run the prep.sh script on all hosts using ansible
 ###### # if on AWS, use --private-key=your_key.pem
 ```
 ansible "*" -m script -a prep.sh
