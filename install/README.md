@@ -5,19 +5,26 @@ cat <<EOF > prep.sh
 ```
 ##### # SET THESE VARIABLES ###
 ```
-echo ROOT_DOMAIN=ocp.nicknach.net               >> /etc/environment
-echo APPS_DOMAIN=apps.ocp.nicknach.net             >> /etc/environment
-echo LDAP_SERVER=gw.home.nicknach.net           >> /etc/environment
-echo ANSIBLE_HOST_KEY_CHECKING=False            >> /etc/environment
-echo MY_REPO=repo.home.nicknach.net             >> /etc/environment
-echo OCP_VER=v3.11                              >> /etc/environment
-echo RHN_ID=nnachefs@redhat.com                 >> /etc/environment
-echo RHN_PASSWD=                                >> /etc/environment
-echo RHN_POOL=8a85f98260c27fc50160c323263339ff  >> /etc/environment
-```
-##### # set vars in running shell
-```
-for i in `cat /etc/environment`; do `echo export $i`; done
+export ROOT_DOMAIN=ocp.nicknach.net
+export APPS_DOMAIN=apps.$ROOT_DOMAIN
+export LDAP_SERVER=gw.home.nicknach.net
+export ANSIBLE_HOST_KEY_CHECKING=False
+export MY_REPO=repo.home.nicknach.net
+export OCP_VER=v3.11
+export RHN_ID=nnachefs@redhat.com
+export RHN_PASSWD= 
+export RHN_POOL=8a85f98260c27fc50160c323263339ff
+
+##### # and make them persistent
+echo ROOT_DOMAIN=$ROOT_DOMAIN >> /etc/environment
+echo APPS_DOMAIN=$APPS_DOMAIN >> /etc/environment
+echo LDAP_SERVER=$LDAP_SERVER >> /etc/environment
+echo ANSIBLE_HOST_KEY_CHECKING=False >> /etc/environment
+echo MY_REPO=$MY_REPO >> /etc/environment
+echo OCP_VER=$OCP_VER >> /etc/environment
+echo RHN_ID=$RHN_ID >> /etc/environment
+echo RHN_PASSWD=$RHN_PASSWD >> /etc/environment
+echo RHN_POOL=$RHN_POOL >> /etc/environment
 ```
 ##### # install sub manager
 ```
