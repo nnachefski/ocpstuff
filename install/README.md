@@ -45,6 +45,10 @@ echo gpgcheck=0 >> /etc/yum.repos.d/repo.home.nicknach.net_repo_rhaos-beta.repo
 ``` 
 yum install -y yum-utils wget git net-tools bind-utils iptables-services bridge-utils bash-completion nfs-utils dstat mlocate screen
 ```
+##### # install openshift client package (oc)
+```
+yum install -y atomic-openshift-clients
+```
 ##### # install docker
 ```
 yum install -y docker crio
@@ -63,18 +67,10 @@ yum install -y cns-deploy heketi-client
 yum -y update
 ```
 #### # done with prep.sh
-##### # install openshift client package (oc)
+##### # run the prep.sh script manually on the ansible control host(can be master node)
 ```
-yum install -y atomic-openshift-clients
-```
-#### # now run the prep.sh script on all hosts (using ansible)
-###### # if on AWS, use --private-key=your_key.pem
-```
-ansible "*" -m script -a prep.sh
-```
-###### # reboot if necessary
-```
-ansible "*" -m script -a "reboot"
+chmod +x prep.sh
+./prep.sh
 ```
 ##### # install openshift-ansible and dependencies 
 ```
@@ -83,6 +79,15 @@ yum install -y openshift-ansible-playbooks
 ##### # now create your ansible hosts (inventory) file 
 ###### # (see below link for creating this file)
 https://raw.githubusercontent.com/nnachefski/ocpstuff/master/install/generate-ansible-inventory.sh
+##### # use the new inventory file to run the prep.sh script on all hosts (using ansible)
+###### # if on AWS, use --private-key=your_key.pem
+```
+ansible "*" -m script -a prep.sh
+```
+###### # reboot if necessary
+```
+ansible "*" -m script -a "reboot"
+```
 ##### # run the pre-req check
 ```
 ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/prerequisites.yml
