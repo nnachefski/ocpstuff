@@ -79,10 +79,13 @@ yum -y update
 ```
 EOF
 ```
+##### # make it executable 
+```
+chmod +x prep.sh
+```
 #### # done with prep.sh
 ##### # run the prep.sh script manually on the ansible control host(can be master node)
 ```
-chmod +x prep.sh
 ./prep.sh
 ```
 ##### # update install vars on control host
