@@ -121,7 +121,7 @@ watch oc get pods -owide --all-namespaces
 # and
 
 oc get events -owide --all-namespaces -w
-###### # this only works after the API becomes available
+
 # and
 
 watch oc get pv
