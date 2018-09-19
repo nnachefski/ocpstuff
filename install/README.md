@@ -1,6 +1,8 @@
 ### # Make a prep.sh script on the master and/or ansible control host.
 ##### use the content below to make this file (copy and paste)
-#### cat <<EOF > prep.sh
+```
+cat <<EOF > prep.sh
+```
 ##### # SET THESE VARIABLES ###
 ```
 echo ROOT_DOMAIN=ocp.nicknach.net               >> /etc/environment
@@ -67,7 +69,9 @@ yum install -y cns-deploy heketi-client
 ```
 yum -y update
 ```
-#### EOF
+```
+EOF
+```
 #### # done with prep.sh
 ##### # run the prep.sh script manually on the ansible control host(can be master node)
 ```
