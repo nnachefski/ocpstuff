@@ -16,11 +16,13 @@ systemctl restart atomic-openshift-master*
 ```
 #### # use ansible to set elasticsearch vars on all nodes
 ```
-ansible --private-key=.ssh/nicknach-ca.pem "*" -m shell -a "echo 'vm.max_map_count = 262144' > /etc/sysctl.d/99-elasticsearch.conf"
-ansible --private-key=.ssh/nicknach-ca.pem "*" -m shell -a "sysctl vm.max_map_count=262144"
+ansible "*" -m shell -a "echo 'vm.max_map_count = 262144' > /etc/sysctl.d/99-elasticsearch.conf"
+ansible "*" -m shell -a "sysctl vm.max_map_count=262144"
 ```
+###### # use --private-key= if you are on AWS
 ##### # create a project
 ```
+cd ~
 oc new-project testing
 ```
 ##### # add priv SCC (temp)
@@ -35,5 +37,10 @@ oc get namespace -L istio-injection
 ```
 ##### # create the sample app
 ```
-oc create -f https://raw.githubusercontent.com/istio/istio/master/samples/bookinfo/platform/kube/bookinfo.yaml
+wget https://raw.githubusercontent.com/istio/istio/master/samples/bookinfo/platform/kube/bookinfo.yaml
+oc create -f bookinfo.yaml
+```
+##### # or, if you need to manually inject the sidecar, do this
+```
+oc apply -f <(istioctl kube-inject -f ~/istio/samples/bookinfo/platform/kube/bookinfo.yaml)
 ```
