@@ -1,4 +1,4 @@
-### # Make a prep.sh script on the master/ansible host.
+### # Make a prep.sh script on the master and/or ansible control host.
 ##### use the contend below to make this file (copy and paste)
 ##### # SET THESE VARIABLES ###
 ```
@@ -51,12 +51,12 @@ yum install -y atomic-openshift-clients
 ```
 ##### # install docker
 ```
-yum install -y docker crio
+yum install -y docker crio cri-tools
 ```
 ##### # enable container runtime
 ```
 systemctl enable docker --now
-systemctl enable crio cri-tools --now
+systemctl enable crio --now
 ```
 ##### # install gluster packages 
 ```
