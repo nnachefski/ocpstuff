@@ -45,10 +45,6 @@ echo gpgcheck=0 >> /etc/yum.repos.d/repo.home.nicknach.net_repo_rhaos-beta.repo
 ``` 
 yum install -y yum-utils wget git net-tools bind-utils iptables-services bridge-utils bash-completion nfs-utils dstat mlocate screen
 ```
-##### # install openshift client package (oc)
-```
-yum install -y atomic-openshift-clients
-```
 ##### # install docker
 ```
 yum install -y docker crio
@@ -67,7 +63,10 @@ yum install -y cns-deploy heketi-client
 yum -y update
 ```
 #### # done with prep.sh
-
+##### # install openshift client package (oc)
+```
+yum install -y atomic-openshift-clients
+```
 #### # now run the prep.sh script on all hosts (using ansible)
 ###### # if on AWS, use --private-key=your_key.pem
 ```
