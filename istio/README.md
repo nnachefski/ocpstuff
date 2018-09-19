@@ -42,5 +42,5 @@ oc create -f bookinfo.yaml
 ```
 ##### # or, if you need to manually inject the sidecar, do this
 ```
-oc apply -f <(istioctl kube-inject -f ~/istio/samples/bookinfo/platform/kube/bookinfo.yaml)
+oc apply -f <(istioctl kube-inject -f istio/samples/bookinfo/platform/kube/bookinfo.yaml)
 ```
