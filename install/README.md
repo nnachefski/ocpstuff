@@ -1,5 +1,5 @@
 ### # Make a prep.sh script on the master and/or ansible control host.
-##### use the contend below to make this file (copy and paste)
+##### use the content below to make this file (copy and paste)
 ##### # SET THESE VARIABLES ###
 ```
 echo ROOT_DOMAIN=ocp.nicknach.net               >> /etc/environment
