@@ -72,6 +72,10 @@ yum -y update
 chmod +x prep.sh
 ./prep.sh
 ```
+##### # update install vars on control host
+```
+for i in `cat /etc/environment`; do `echo export $i`; done
+```
 ##### # install openshift-ansible and dependencies 
 ```
 yum install -y openshift-ansible-playbooks
