@@ -5,7 +5,7 @@ cat <<EOF > prep.sh
 ##### # SET THESE VARIABLES ###
 ```
 echo ROOT_DOMAIN=ocp.nicknach.net               >> /etc/environment
-echo APPS_DOMAIN=apps.$ROOT_DOMAIN              >> /etc/environment
+echo APPS_DOMAIN=apps.ocp.nicknach.net             >> /etc/environment
 echo LDAP_SERVER=gw.home.nicknach.net           >> /etc/environment
 echo ANSIBLE_HOST_KEY_CHECKING=False            >> /etc/environment
 echo MY_REPO=repo.home.nicknach.net             >> /etc/environment
