@@ -1,4 +1,5 @@
 ### # Make a prep.sh script on the master and/or ansible control host.
+##### copy and paste the script below to generate this prep.sh file.  Set your variables below first
 ```
 cat <<EOF > prep.sh
 ```
