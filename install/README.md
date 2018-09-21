@@ -16,6 +16,16 @@ export RHN_POOL=8a85f98260c27fc50160c323263339ff
 cat <<EOF > prep.sh
 ```
 ```
+export ROOT_DOMAIN=$ROOT_DOMAIN
+export APPS_DOMAIN=$APPS_DOMAIN
+export LDAP_SERVER=$LDAP_SERVER
+export ANSIBLE_HOST_KEY_CHECKING=False
+export MY_REPO=$MY_REPO
+export OCP_VER=$OCP_VER
+export RHN_ID=$RHN_ID
+export RHN_PASSWD=$RHN_PASSWD 
+export RHN_POOL=$RHN_POOL
+
 echo ROOT_DOMAIN=$ROOT_DOMAIN >> /etc/environment
 echo APPS_DOMAIN=$APPS_DOMAIN >> /etc/environment
 echo LDAP_SERVER=$LDAP_SERVER >> /etc/environment
@@ -25,10 +35,6 @@ echo OCP_VER=$OCP_VER >> /etc/environment
 echo RHN_ID=$RHN_ID >> /etc/environment
 echo RHN_PASSWD=$RHN_PASSWD >> /etc/environment
 echo RHN_POOL=$RHN_POOL >> /etc/environment
-```
-##### # refresh vars	
-```	
-for i in `cat /etc/environment`; do `echo export $i`; done	
 ```
 ##### # install sub manager
 ```
