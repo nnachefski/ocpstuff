@@ -1,7 +1,7 @@
 ## This doc describes how setup content mirrors for disconnected installs
 
-###### # make sure you have ample space available on your local repo box (called repo.home.nicknach.net in my lab).  
-###### # Recommended 100GB storage for this repo server.
+###### # make sure you have ample space available on your local repo box (called 'repo.home.nicknach.net' in my lab).  
+###### # Recommended 200GB storage for this repo server.
 
 ##### # set your repo host vars
 ```
@@ -16,7 +16,7 @@ export RHN_PWD=
 ```
 #export SRC_REPO=brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888
 ```
-##### # subscribe your repo box to the proper channels for OCP
+##### # subscribe the repo box to the proper channels for OCP
 ```
 subscription-manager register --username=$RHN_ID --password $RHN_PWD --force
 subscription-manager attach --pool=$POOLID
@@ -32,25 +32,12 @@ subscription-manager repos \
 #   --enable=rhel-server-rhscl-7-rpms \
 #   --enable=rhel-7-server-optional-rpms 
 ```
-##### # install/enable/start httpd
-```
-yum -y install httpd && systemctl enable httpd --now
-```
-##### # start the reposync
-```
-cd ~ && mkdir repo && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/scripts/sync_repos.sh && chmod +x sync_repos.sh
-./sync_repos.sh
-```
-##### # move and fix repo dir selinux
-```
-mv repo /var/www/html && restorecon -R /var/www/html
-```
 ##### # open the firewall up
 ###### # you can get more strict with this if you want
 ```
 firewall-cmd --set-default-zone trusted
 ```
-### # now lets create the docker image mirror on our repo server
+### # create the docker image mirror on our repo server
 ##### # install/enable/start docker-distribution on the repo box
 ```
 yum -y install docker-distribution.x86_64 && systemctl enable docker-distribution --now
@@ -103,22 +90,31 @@ wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/core_im
 wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/app_images.txt
 wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/mw_images.txt  
 ```
-##### # now get the core images, setting debug mode and a specific version (this will default to core_images.txt list)
+##### # now copy the images to your repo (./import-images.py --help)
 ``` 
-./import-images.py docker $SRC_REPO $MY_REPO -d
-```
-##### # now get the other app images, specifying the app_images.txt list
-```
-./import-images.py docker $SRC_REPO $MY_REPO -d -l app_images.txt
-```
-##### # now get the other app images, specifying the app_images.txt list
-```
-./import-images.py docker $SRC_REPO $MY_REPO -d -l mw_images.txt
+for i in core_images.txt app_images.txt mw_images.txt; do
+./import-images.py docker $SRC_REPO $MY_REPO -d -l $i
+./import-images.py docker $SRC_REPO $MY_REPO -d -l $i
+./import-images.py docker $SRC_REPO $MY_REPO -d -l $i
+done
 ```
 ##### # if using internal puddle build, then you'll have to re-tag the images (add an alias).
-###### # for some reason, the installer will try to pull a tag that looks like this 'v3.11.0-0.9.0'
+###### # for some reason, the installer will try to pull a tag that looks like this 'v3.11.0-0.9.0' ¯\_(ツ)_/¯
 ```
 TAG=v3.11.0-0.10.0 REPO=$MY_REPO; for i in `cat core_images.txt`; do docker pull $REPO/$i; docker tag $REPO/$i $REPO/`echo $i |awk -F: '{print $1}'`:$TAG; docker push $REPO/`echo $i |awk -F: '{print $1}'`:$TAG; done
+```
+##### # install/enable/start httpd
+```
+yum -y install httpd && systemctl enable httpd --now
+```
+##### # start the reposync
+```
+cd ~ && mkdir repo && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/scripts/sync_repos.sh && chmod +x sync_repos.sh
+./sync_repos.sh
+```
+##### # move and fix repo dir selinux
+```
+mv repo /var/www/html && restorecon -R /var/www/html
 ```
 #### # Troubleshooting disconnected installs
 ##### # during the install, do these commands in separate terminals to trouble shoot any missing images
