@@ -111,6 +111,10 @@ wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/mw_imag
 ```
 ./import-images.py docker $SRC_REPO $MY_REPO -d -l app_images.txt
 ```
+##### # now get the other app images, specifying the app_images.txt list (this will default to 'latest' tag)
+```
+./import-images.py docker $SRC_REPO $MY_REPO -d -l mw_images.txt
+```
 ##### # if using internal puddle build, then you'll have to re-tag the images (add an alias).
 ###### # for some reason, the installer will try to pull a tag that looks like this 'v3.11.0-0.9.0'
 ```
