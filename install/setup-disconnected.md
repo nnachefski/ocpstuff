@@ -107,11 +107,11 @@ wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/mw_imag
 ``` 
 ./import-images.py docker $SRC_REPO $MY_REPO -d
 ```
-##### # now get the other app images, specifying the app_images.txt list (this will default to 'latest' tag)
+##### # now get the other app images, specifying the app_images.txt list
 ```
 ./import-images.py docker $SRC_REPO $MY_REPO -d -l app_images.txt
 ```
-##### # now get the other app images, specifying the app_images.txt list (this will default to 'latest' tag)
+##### # now get the other app images, specifying the app_images.txt list
 ```
 ./import-images.py docker $SRC_REPO $MY_REPO -d -l mw_images.txt
 ```
