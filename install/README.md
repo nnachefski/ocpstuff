@@ -1,8 +1,3 @@
-### # Make a prep.sh script on the master and/or ansible control host.
-##### copy and paste the script below to generate this prep.sh file.  Set your variables below first
-```
-cat <<EOF > prep.sh
-```
 ##### # SET THESE VARIABLES ###
 ```
 export ROOT_DOMAIN=ocp.nicknach.net
@@ -14,8 +9,12 @@ export OCP_VER=v3.11
 export RHN_ID=nnachefs@redhat.com
 export RHN_PASSWD= 
 export RHN_POOL=8a85f98260c27fc50160c323263339ff
-
-##### # and make them persistent
+```
+### # Make a prep.sh script on the master and/or ansible control host.
+##### copy and paste the script below to generate this prep.sh file.
+```
+cat <<EOF > prep.sh
+```
 echo ROOT_DOMAIN=$ROOT_DOMAIN >> /etc/environment
 echo APPS_DOMAIN=$APPS_DOMAIN >> /etc/environment
 echo LDAP_SERVER=$LDAP_SERVER >> /etc/environment
@@ -79,11 +78,11 @@ yum -y update
 ```
 EOF
 ```
-##### # make it executable 
+#### # done with prep.sh
+##### # now make it executable 
 ```
 chmod +x prep.sh
 ```
-#### # done with prep.sh
 ##### # run the prep.sh script manually on the ansible control host(can be master node)
 ```
 ./prep.sh
