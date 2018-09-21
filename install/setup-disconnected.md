@@ -100,7 +100,8 @@ yum install -y skopeo
 ```
 cd ~ && wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/scripts/import-images.py && chmod +x import-images.py
 wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/core_images.txt
-wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/app_images.txt 
+wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/app_images.txt
+wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/mw_images.txt  
 ```
 ##### # now get the core images, setting debug mode and a specific version (this will default to core_images.txt list)
 ``` 
