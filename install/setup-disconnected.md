@@ -40,13 +40,13 @@ firewall-cmd --set-default-zone trusted
 ##### # if doing puddle builds, you'll need to connect to the RH vpn first.
 ###### # you'll need these packages (look on mojo)
 ```
-redhat-internal-NetworkManager-openvpn-profiles-0.1-30.el7.csb.noarch.rpm
-redhat-internal-NetworkManager-openvpn-profiles-non-gnome-0.1-30.el7.csb.noarch.rpm
-redhat-internal-openvpn-profiles-0.1-30.el7.csb.noarch.rpm
+# redhat-internal-NetworkManager-openvpn-profiles-0.1-30.el7.csb.noarch.rpm
+# redhat-internal-NetworkManager-openvpn-profiles-non-gnome-0.1-30.el7.csb.noarch.rpm
+# redhat-internal-openvpn-profiles-0.1-30.el7.csb.noarch.rpm
 ```
-##### # now connect with your two-factor 
+##### # now connect with your two-factor (puddle builds only) 
 ```
-openvpn --config /etc/openvpn/ovpn-phx2-udp.conf
+#openvpn --config /etc/openvpn/ovpn-phx2-udp.conf
 ```
 ###### # ctrl+z then 'bg'
 
