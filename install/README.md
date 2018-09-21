@@ -11,7 +11,7 @@ export RHN_PASSWD=
 export RHN_POOL=8a85f98260c27fc50160c323263339ff
 ```
 ### # Make a prep.sh script on the master and/or ansible control host.
-##### copy and paste the script below to generate this prep.sh file.
+##### # copy and paste the script below to generate this prep.sh file.
 ```
 cat <<EOF > prep.sh
 ```
