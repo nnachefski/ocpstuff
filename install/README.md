@@ -15,6 +15,7 @@ export RHN_POOL=8a85f98260c27fc50160c323263339ff
 ```
 cat <<EOF > prep.sh
 ```
+```
 echo ROOT_DOMAIN=$ROOT_DOMAIN >> /etc/environment
 echo APPS_DOMAIN=$APPS_DOMAIN >> /etc/environment
 echo LDAP_SERVER=$LDAP_SERVER >> /etc/environment
