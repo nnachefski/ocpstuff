@@ -93,9 +93,9 @@ wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/mw_imag
 ##### # now copy the images to your repo (./import-images.py --help)
 ``` 
 for i in core_images.txt app_images.txt mw_images.txt; do
-./import-images.py docker $SRC_REPO $MY_REPO -d -l $i
-./import-images.py docker $SRC_REPO $MY_REPO -d -l $i
-./import-images.py docker $SRC_REPO $MY_REPO -d -l $i
+  ./import-images.py docker $SRC_REPO $MY_REPO -d -l $i
+  ./import-images.py docker $SRC_REPO $MY_REPO -d -l $i
+  ./import-images.py docker $SRC_REPO $MY_REPO -d -l $i
 done
 ```
 ##### # if using internal puddle build, then you'll have to re-tag the images (add an alias).
