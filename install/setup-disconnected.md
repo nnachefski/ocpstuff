@@ -112,7 +112,7 @@ for i in core_images.txt app_images.txt mw_images.txt; do
 done
 ```
 ##### # if using internal puddle build, then you'll have to re-tag the images (add an alias).
-###### # for some reason, the installer will try to pull a tag that looks like this 'v3.11.0-0.9.0' ¯\_(ツ)_/¯
+###### # for some reason, the installer will try to pull a tag that looks like this 'v3.11.0-0.9.0'
 ```
 TAG=v3.11.0-0.10.0 REPO=$MY_REPO; for i in `cat core_images.txt`; do docker pull $REPO/$i; docker tag $REPO/$i $REPO/`echo $i |awk -F: '{print $1}'`:$TAG; docker push $REPO/`echo $i |awk -F: '{print $1}'`:$TAG; done
 ```
