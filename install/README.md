@@ -26,6 +26,10 @@ echo RHN_ID=$RHN_ID >> /etc/environment
 echo RHN_PASSWD=$RHN_PASSWD >> /etc/environment
 echo RHN_POOL=$RHN_POOL >> /etc/environment
 ```
+##### # refresh vars	
+```	
+for i in `cat /etc/environment`; do `echo export $i`; done	
+```
 ##### # install sub manager
 ```
 yum install -y subscription-manager yum-utils wget 
