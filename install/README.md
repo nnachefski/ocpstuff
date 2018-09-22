@@ -14,8 +14,7 @@ export RHN_POOL=8a85f98260c27fc50160c323263339ff
 ##### # copy and paste the script below to generate this prep.sh file.
 ```
 cat <<EOF > prep.sh
-```
-```
+
 export ROOT_DOMAIN=$ROOT_DOMAIN
 export APPS_DOMAIN=$APPS_DOMAIN
 export LDAP_SERVER=$LDAP_SERVER
@@ -85,8 +84,7 @@ yum install -y cns-deploy heketi-client
 ##### # make sure your nodes are up-to-date
 ```
 yum -y update
-```
-```
+
 EOF
 ```
 #### # done with prep.sh
