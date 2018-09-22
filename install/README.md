@@ -1,5 +1,5 @@
 ### # Make a prep.sh script on the ansible control host (can be master node).
-##### # Set these variables ###
+##### # set these variables ###
 ```
 export ROOT_DOMAIN=ocp.nicknach.net
 export APPS_DOMAIN=apps.$ROOT_DOMAIN
@@ -76,7 +76,7 @@ chmod +x prep.sh
 ```
 ./prep.sh
 ```
-##### # install openshift-ansible and dependencies 
+##### # install 'openshift-ansible' package and dependencies 
 ```
 yum install -y openshift-ansible-playbooks
 ```
@@ -90,7 +90,7 @@ ansible "*" -m script -a prep.sh
 ```
 ###### # reboot if necessary
 ```
-ansible "*" -m script -a "reboot"
+#ansible "*" -m script -a "reboot"
 ```
 ##### # run the pre-req check
 ```
