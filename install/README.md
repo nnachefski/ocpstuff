@@ -1,4 +1,4 @@
-##### # SET THESE VARIABLES ###
+##### # Set these variables on the ansible control host. ###
 ```
 export ROOT_DOMAIN=ocp.nicknach.net
 export APPS_DOMAIN=apps.$ROOT_DOMAIN
