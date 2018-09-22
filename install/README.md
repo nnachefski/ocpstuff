@@ -1,4 +1,4 @@
-### # Make a prep.sh script on the ansible control host.
+### # Make a prep.sh script on the ansible control host (can be master node).
 ##### # Set these variables ###
 ```
 export ROOT_DOMAIN=ocp.nicknach.net
@@ -72,7 +72,7 @@ EOF
 ```
 chmod +x prep.sh
 ```
-##### # run the prep.sh script manually on the ansible control host(can be master node)
+##### # run the prep.sh script manually on the ansible control host
 ```
 ./prep.sh
 ```
