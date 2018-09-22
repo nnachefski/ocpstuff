@@ -34,7 +34,6 @@ echo OCP_VER=$OCP_VER >> /etc/environment
 echo RHN_ID=$RHN_ID >> /etc/environment
 echo RHN_PASSWD=$RHN_PASSWD >> /etc/environment
 echo RHN_POOL=$RHN_POOL >> /etc/environment
-```
 ## install sub manager
 yum install -y subscription-manager yum-utils wget 
 ## OR add your internal repos (for disconnected installs)
@@ -46,8 +45,8 @@ yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-extras-rpms
 yum-config-manager --add-repo http://$MY_REPO/repo/rh-gluster-3-client-for-rhel-7-server-rpms
 yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-ansible-2.6-rpms
 yum-config-manager --add-repo http://$MY_REPO/repo/rhaos-beta
-##yum-config-manager --add-repo http://$MY_REPO/repo/rhel-server-rhscl-7-rpms
-##yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-optional-rpms
+#yum-config-manager --add-repo http://$MY_REPO/repo/rhel-server-rhscl-7-rpms
+#yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-optional-rpms
 ## add the repo cert to the pki store (for disconnected installs)
 wget http://$MY_REPO/repo/$MY_REPO.crt && mv -f $MY_REPO.crt /etc/pki/ca-trust/source/anchors && restorecon /etc/pki/ca-trust/source/anchors/$MY_REPO.crt && update-ca-trust
 ## if installing beta repo, disable gpgcheck
