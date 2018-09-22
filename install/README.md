@@ -35,12 +35,9 @@ echo RHN_ID=$RHN_ID >> /etc/environment
 echo RHN_PASSWD=$RHN_PASSWD >> /etc/environment
 echo RHN_POOL=$RHN_POOL >> /etc/environment
 ```
-##### # install sub manager
-```
+## install sub manager
 yum install -y subscription-manager yum-utils wget 
-```
-##### # OR add your internal repos (for disconnected installs)
-```
+## OR add your internal repos (for disconnected installs)
 rm -rf /etc/yum.repos.d/* && yum clean all
 #yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-ose-3.10-rpms
 yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-fast-datapath-rpms
@@ -51,38 +48,22 @@ yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-ansible-2.6-rpm
 yum-config-manager --add-repo http://$MY_REPO/repo/rhaos-beta
 ##yum-config-manager --add-repo http://$MY_REPO/repo/rhel-server-rhscl-7-rpms
 ##yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-optional-rpms
-```
-##### # add the repo cert to the pki store (for disconnected installs)
-```
+## add the repo cert to the pki store (for disconnected installs)
 wget http://$MY_REPO/repo/$MY_REPO.crt && mv -f $MY_REPO.crt /etc/pki/ca-trust/source/anchors && restorecon /etc/pki/ca-trust/source/anchors/$MY_REPO.crt && update-ca-trust
-```
-##### # if installing beta repo, disable gpgcheck
-```
+## if installing beta repo, disable gpgcheck
 echo gpgcheck=0 >> /etc/yum.repos.d/repo.home.nicknach.net_repo_rhaos-beta.repo
-```
-##### # install some general pre-req packages
-``` 
+## install some general pre-req packages
 yum install -y yum-utils wget git net-tools bind-utils iptables-services bridge-utils bash-completion nfs-utils dstat mlocate screen
-```
-##### # install openshift client package (oc)
-```
+## install openshift client package (oc)
 yum install -y atomic-openshift-clients
-```
-##### # install docker
-```
+## install docker
 yum install -y docker crio cri-tools
-```
-##### # enable container runtime
-```
+## enable container runtime
 systemctl enable docker --now
 systemctl enable crio --now
-```
-##### # install gluster packages 
-```
+## install gluster packages 
 yum install -y cns-deploy heketi-client
-```
-##### # make sure your nodes are up-to-date
-```
+## make sure your nodes are up-to-date
 yum -y update
 
 EOF
