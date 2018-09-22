@@ -1,4 +1,5 @@
-##### # Set these variables on the ansible control host. ###
+### # Make a prep.sh script on the ansible control host.
+##### # Set these variables ###
 ```
 export ROOT_DOMAIN=ocp.nicknach.net
 export APPS_DOMAIN=apps.$ROOT_DOMAIN
@@ -10,8 +11,7 @@ export RHN_ID=nnachefs@redhat.com
 export RHN_PASSWD= 
 export RHN_POOL=8a85f98260c27fc50160c323263339ff
 ```
-### # Make a prep.sh script on the ansible control host.
-##### # copy and paste the script below to generate this prep.sh file.
+##### # copy and paste the script below to generate the prep.sh file
 ```
 cat <<EOF > prep.sh
 
