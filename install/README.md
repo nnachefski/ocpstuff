@@ -61,7 +61,7 @@ yum install -y docker crio cri-tools
 systemctl enable docker --now
 systemctl enable crio --now
 ## install gluster packages 
-yum install -y cns-deploy-6.0.0 heketi-client-6.0.0
+yum install -y cns-deploy heketi-client
 ## make sure your nodes are up-to-date
 #yum -y update
 
