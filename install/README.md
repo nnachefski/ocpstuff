@@ -63,7 +63,7 @@ systemctl enable crio --now
 ## install gluster packages 
 yum install -y cns-deploy heketi-client
 ## make sure your nodes are up-to-date
-yum -y update
+#yum -y update
 
 EOF
 ```
