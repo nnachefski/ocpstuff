@@ -48,6 +48,7 @@ oc get namespace -L istio-injection
 ```
 wget https://raw.githubusercontent.com/istio/istio/master/samples/bookinfo/platform/kube/bookinfo.yaml
 oc create -f bookinfo.yaml
+oc expose svc productpage
 ```
 ##### # or, if you need to manually inject the sidecar, do this
 ```
