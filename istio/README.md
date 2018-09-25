@@ -21,6 +21,14 @@ ansible "*" -m shell -a "echo 'vm.max_map_count = 262144' > /etc/sysctl.d/99-ela
 ansible "*" -m shell -a "sysctl vm.max_map_count=262144"
 ```
 ###### # use --private-key= if you are on AWS
+##### # deploy the istio
+```
+oc new-project istio-system
+oc create sa openshift-ansible
+oc adm policy add-scc-to-user privileged -z openshift-ansible
+oc adm policy add-cluster-role-to-user cluster-admin -z openshift-ansible
+oc new-app istio_installer_template.yaml --param=OPENSHIFT_ISTIO_MASTER_PUBLIC_URL=console.openshiftdemo.com --param=OPENSHIFT_ISTIO_KIALI_USERNAME=ocpadmin --param=OPENSHIFT_ISTIO_KIALI_PASSWORD=welcome1
+```
 ##### # create a project
 ```
 cd ~
