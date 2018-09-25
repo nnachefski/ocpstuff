@@ -41,7 +41,7 @@ oc adm policy add-scc-to-user privileged -z default
 ```
 ##### # label the openshift namespace 
 ```
-oc label namespace -n testing istio-injection=enabled
+oc label namespace testing istio-injection=enabled
 oc get namespace -L istio-injection
 ```
 ##### # create the sample app
