@@ -17,9 +17,10 @@ openshift_deployment_type=openshift-enterprise
 
 ## sandbox
 ##openshift_enable_unsupported_configurations=True
+##openshift_additional_ca=/etc/pki/ca-trust/source/anchors/repo.home.nicknach.net.crt
+##openshift_use_crio_only=True
 #openshift_crio_use_rpm=True
 #openshift_use_crio=True
-#openshift_use_crio_only=True
 #openshift_crio_enable_docker_gc=True
 #openshift_crio_docker_gc_node_selector={'runtime': 'cri-o'}
 
