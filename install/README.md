@@ -27,7 +27,7 @@ EOF
 ```
 ##### # install sub manager
 ```
-yum install -y subscription-manager yum-utils wget 
+yum install -d1  -y subscription-manager yum-utils wget 
 ```
 ##### # subscribe to RHN
 ```
@@ -68,15 +68,15 @@ subscription-manager repos \
 ```
 ##### # install some general pre-req packages
 ``` 
-yum install -y yum-utils wget git net-tools bind-utils iptables-services bridge-utils bash-completion nfs-utils dstat mlocate screen
+yum install -d1  -y yum-utils wget git net-tools bind-utils iptables-services bridge-utils bash-completion nfs-utils dstat mlocate screen
 ```
 ##### # install openshift client package (oc)
 ```
-yum install -y atomic-openshift-clients
+yum install -d1  -y atomic-openshift-clients
 ```
 ##### # install docker
 ```
-yum install -y docker
+yum install -d1  -y docker
 ```
 ##### # enable container runtime
 ```
@@ -84,7 +84,7 @@ systemctl enable docker --now
 ```
 ##### # install gluster packages 
 ```
-yum install -y cns-deploy heketi-client
+yum install -d1  -y cns-deploy heketi-client
 ```
 ##### # make sure your nodes are up-to-date
 ```
@@ -94,7 +94,7 @@ yum -y update
 ## #  On first master only now (or bastion host)
 ##### # install openshift-ansible and dependencies 
 ```
-yum install -y openshift-ansible-playbooks
+yum install -d1  -y openshift-ansible-playbooks
 ```
 ##### #  make password-less key for ansible usage
 ```
