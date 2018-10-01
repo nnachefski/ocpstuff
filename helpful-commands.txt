@@ -1,4 +1,7 @@
-﻿# check out a specific branch
+﻿# get crt from IPA server
+curl  http://gw.home.nicknach.net/ipa/config/ca.crt >> /etc/origin/master/my-ldap-ca-bundle.crt
+
+# check out a specific branch
 git clone --single-branch -b release-3.10 https://github.com/openshift/openshift-ansible.git
 
 # get recent SELinux denials
