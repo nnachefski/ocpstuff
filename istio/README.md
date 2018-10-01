@@ -27,7 +27,7 @@ oc new-project istio-system
 oc create sa openshift-ansible
 oc adm policy add-scc-to-user privileged -z openshift-ansible
 oc adm policy add-cluster-role-to-user cluster-admin -z openshift-ansible
-oc new-app istio_installer_template.yaml --param=OPENSHIFT_ISTIO_MASTER_PUBLIC_URL=console.openshiftdemo.com --param=OPENSHIFT_ISTIO_KIALI_USERNAME=ocpadmin --param=OPENSHIFT_ISTIO_KIALI_PASSWORD=welcome1
+oc new-app istio_installer_template.yaml --param=OPENSHIFT_ISTIO_MASTER_PUBLIC_URL=console.openshiftdemo.com --param=OPENSHIFT_ISTIO_KIALI_USERNAME=ocpadmin --param=OPENSHIFT_ISTIO_KIALI_PASSWORD=welcome1 --param=OPENSHIFT_ISTIO_IMAGE_VERSION=1.0.0-snapshot.2 --param=OPENSHIFT_RELEASE=3.11
 ```
 ##### # create a project
 ```
