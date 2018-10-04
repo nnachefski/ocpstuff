@@ -22,6 +22,7 @@ cd ~
 oc new-project istio-operator
 wget https://raw.githubusercontent.com/Maistra/openshift-ansible/maistra-0.1.0-ocp-3.1.0-istio-1.0.0/istio/istio_product_operator_template.yaml
 oc new-app -f istio_product_operator_template.yaml --param=OPENSHIFT_ISTIO_MASTER_PUBLIC_URL=api.ocp.nicknach.net
+oc create -f https://raw.githubusercontent.com/nnachefski/ocpstuff/master/istio/istio-crd.yaml
 ```
 ##### # create a project
 ```
