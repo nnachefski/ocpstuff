@@ -1,11 +1,5 @@
 #### # on the master
 
-##### # grab the files
-```
-cd ~
-wget https://raw.githubusercontent.com/openshift-istio/openshift-ansible/istio-3.10-1.0.0-snapshot.2/istio/istio_installer_template.yaml
-wget https://raw.githubusercontent.com/openshift-istio/openshift-ansible/istio-3.10-1.0.0-snapshot.2/istio/istio_removal_template.yaml
-```
 ##### # patch the master-config (do this on all masters)
 ```
 wget https://raw.githubusercontent.com/openshift-istio/openshift-ansible/istio-3.10-1.0.0-snapshot.2/istio/master-config.patch
@@ -24,15 +18,13 @@ ansible "*" -m shell -a "sysctl vm.max_map_count=262144"
 ###### # use --private-key= if you are on AWS
 ##### # deploy the istio
 ```
-oc new-project istio-system
-oc create sa openshift-ansible
-oc adm policy add-scc-to-user privileged -z openshift-ansible
-oc adm policy add-cluster-role-to-user cluster-admin -z openshift-ansible
-oc new-app istio_installer_template.yaml --param=OPENSHIFT_ISTIO_MASTER_PUBLIC_URL=console.openshiftdemo.com --param=OPENSHIFT_ISTIO_KIALI_USERNAME=ocpadmin --param=OPENSHIFT_ISTIO_KIALI_PASSWORD=welcome1 --param=OPENSHIFT_ISTIO_IMAGE_VERSION=1.0.0-snapshot.2 --param=OPENSHIFT_RELEASE=v3.11.0
+cd ~
+oc new-project istio-operator
+wget https://raw.githubusercontent.com/Maistra/openshift-ansible/maistra-0.1.0-ocp-3.1.0-istio-1.0.0/istio/istio_product_operator_template.yaml
+oc new-app -f istio_product_operator_template.yaml --param=OPENSHIFT_ISTIO_MASTER_PUBLIC_URL=api.ocp.nicknach.net
 ```
 ##### # create a project
 ```
-cd ~
 oc new-project testing
 ```
 ##### # add priv SCC (temp)
