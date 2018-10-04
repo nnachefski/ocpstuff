@@ -3,10 +3,9 @@ openshift3/jenkins-slave-base-rhel7:v3.10
 openshift3/jenkins-slave-maven-rhel7:v3.10
 openshift3/jenkins-slave-nodejs-rhel7:v3.10
 openshift3/logging-auth-proxy:v3.10
-openshift3/logging-curator:v3.10
-openshift3/logging-elasticsearch:v3.10
-openshift3/logging-fluentd:v3.10
-openshift3/logging-kibana:v3.10
+openshift3/ose-logging-elasticsearch5:v3.10
+openshift3/ose-logging-fluentd:v3.10
+openshift3/ose-logging-kibana5:v3.10
 openshift3/mediawiki-apb:v3.10
 openshift3/metrics-cassandra:v3.10
 openshift3/metrics-hawkular-metrics:v3.10
