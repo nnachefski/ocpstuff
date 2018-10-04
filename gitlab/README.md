@@ -1,4 +1,8 @@
 ####  # gitlab-ce on openshift
+##### # set the wildcar variable
+```
+export WILDCARD=apps.ocp.nicknach.net
+```
 ##### # create the project
 ```
 oc new-project cicd
@@ -17,5 +21,5 @@ oc adm policy add-scc-to-user anyuid -z gitlab-ce-user
 ```
 ##### # now deploy gitlab
 ```
-oc new-app --template gitlab-ce -p APPLICATION_HOSTNAME=gitlab-cicd.apps.ocp.nicknach.net
+oc new-app --template gitlab-ce -p APPLICATION_HOSTNAME=gitlab-cicd.$WILDCARD
 ```

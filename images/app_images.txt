@@ -84,4 +84,6 @@ rhscl/thermostat-16-agent-rhel7:latest
 rhscl/thermostat-16-storage-rhel7:latest
 rhscl/thermostat-1-agent-rhel7:latest
 rhscl/varnish-4-rhel7:latest
-
+rhscl/mongodb-36-rhel7:latest
+rhscl/perl-526-rhel7:latest
+rhscl/postgresql-10-rhel7:latest

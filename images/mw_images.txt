@@ -128,6 +128,3 @@ rhpam-7/rhpam70-businesscentral-openshift:1.0
 rhpam-7/rhpam70-controller-openshift:1.0
 rhpam-7/rhpam70-kieserver-openshift:1.0
 rhpam-7/rhpam70-smartrouter-openshift:1.0
-rhscl/mongodb-36-rhel7:latest
-rhscl/perl-526-rhel7:latest
-rhscl/postgresql-10-rhel7:latest
