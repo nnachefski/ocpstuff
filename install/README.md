@@ -69,6 +69,8 @@ yum install -d1 -y docker crio cri-tools
 ## enable container runtime
 systemctl enable docker --now
 systemctl enable crio --now
+## set the repo
+sed -i "s/registry.access.redhat.com'/registry.access.redhat.com\', \'repo.home.nicknach.net\'/" /etc/containers/registries.conf && systemctl restart docker && systemctl restart crio
 ## install gluster packages 
 yum install -d1 -y cns-deploy heketi-client
 ## make sure your nodes are up-to-date
