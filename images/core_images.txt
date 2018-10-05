@@ -1,6 +1,7 @@
 openshift3/ose-logging-elasticsearch5:v3.11
 openshift3/ose-logging-fluentd:v3.11
 openshift3/ose-logging-kibana5:v3.11
+openshift3/ose-logging-curator5:v3.11
 openshift3/grafana:v3.11
 openshift3/jenkins-2-rhel7:v3.11
 openshift3/jenkins-slave-base-rhel7:v3.11
