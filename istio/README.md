@@ -21,6 +21,13 @@ wget https://raw.githubusercontent.com/Maistra/openshift-ansible/maistra-0.1.0-o
 oc new-app -f istio_product_operator_template.yaml --param=OPENSHIFT_ISTIO_MASTER_PUBLIC_URL=api.ocp.nicknach.net
 oc create -f https://raw.githubusercontent.com/nnachefski/ocpstuff/master/istio/istio-crd.yaml
 ```
+##### # to un-install
+```
+oc delete -n istio-operator installation istio-installation
+oc process -f istio_product_operator_template.yaml | oc delete -f -
+oc delete project istio-operator
+oc delete project istio-system 
+```
 ##### # create a project
 ```
 oc new-project testing
