@@ -67,14 +67,14 @@ oc create serviceaccount nvidia-deviceplugin -n kube-system
 ```
 ##### # now add privledged nvidia scc (use file from this repo to avoid copy/paste formatting errors)
 ```
-oc create -n kube-system -f https://raw.githubusercontent.com/nnachefski/ocpstuff/master/nvidia/nvidia-device-plugin-scc.yaml
+oc create -f https://raw.githubusercontent.com/nnachefski/ocpstuff/master/nvidia/nvidia-device-plugin-scc.yaml -n kube-system
 ```
 ##### # Now the fun part, getting feature-gates enable in OCP 3.10.
 ##### # Openshift 3.10 now bootstraps node configs from etcd.  This is done by storing node configs (grouped by 'roles') as ConfigMaps in the 'openshift-node' project.  Each node has a 'sync' pod running as a DaemonSet.  These sync pods keep your node config ConfigMaps pushed to the nodes.
 ###### # run from an 'oc' enabled (system:admin) shell (from the master).
 ##### # create a new node sync ConfigMap by using the file from this repo
 ```
-oc create -n openshift-node -f https://raw.githubusercontent.com/nnachefski/ocpstuff/master/nvidia/node-config-nvidia.yml
+oc create -f https://raw.githubusercontent.com/nnachefski/ocpstuff/master/nvidia/node-config-nvidia.yml -n openshift-node 
 ```
 ###### # this will create a new ConfigMap called 'node-config-nvidia'
 ###### # i created this new config map by cloning the standard 'compute' CM and changing a few things 
@@ -83,9 +83,9 @@ oc create -n openshift-node -f https://raw.githubusercontent.com/nnachefski/ocps
 ```
 oc label node metal.home.nicknach.net openshift.com/gpu-accelerator=true
 ```
-##### # next, deploy the nvidia device plugin DaemonSet to the 'nvidia' project
+##### # next, deploy the nvidia device plugin DaemonSet to the 'kube-system' project
 ```
-oc create -f https://raw.githubusercontent.com/nnachefski/ocpstuff/master/nvidia/nvidia-device-plugin.yml
+oc create -f https://raw.githubusercontent.com/nnachefski/ocpstuff/master/nvidia/nvidia-device-plugin.yml -n kube-system
 ```
 #### # now let's use that GPU-enabled container host.  Here are some more interesting workloads...
 ##### # Tensorflow
