@@ -6,4 +6,4 @@ SKIP_REPOS_DISABLE=true
 RUN yum install -y -d1 python34 python34-pip python34
 RUN pip3 install --upgrade pip
 
-USER 0
+USER 1001
