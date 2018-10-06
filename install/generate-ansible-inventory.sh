@@ -18,7 +18,7 @@ openshift_deployment_type=openshift-enterprise
 ## sandbox
 ##openshift_enable_unsupported_configurations=True
 ##openshift_additional_ca=/etc/pki/ca-trust/source/anchors/repo.home.nicknach.net.crt
-##openshift_use_crio_only=True
+#openshift_use_crio_only=True
 #openshift_crio_use_rpm=True
 #openshift_use_crio=True
 #openshift_crio_enable_docker_gc=True
@@ -159,7 +159,6 @@ openshift_prometheus_alertmanager_storage_volume_size=10Gi
 openshift_prometheus_alertbuffer_storage_volume_name=prometheus-alertbuffer
 openshift_prometheus_alertbuffer_storage_volume_size=10Gi
 #openshift_prometheus_node_selector={'node-role.kubernetes.io/infra':'true'}
-
 ## grafana
 openshift_grafana_storage_type='pvc'
 openshift_grafana_sc_name="glusterfs-storage"
