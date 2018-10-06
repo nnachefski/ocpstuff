@@ -29,6 +29,6 @@ oc adm policy add-scc-to-user anyuid -z default
 ```
 ##### # now deploy the stack
 ```
-oc new-app https://raw.githubusercontent.com/jupyter-on-openshift/poc-hub-keycloak-auth/master/templates/jupyterhub.json -e NVIDIA_VISIBLE_DEVICES=0 -e NVIDIA_DRIVER_CAPABILITIES="compute,utility" -e NVIDIA_REQUIRE_CUDA="cuda>=9.0"
+oc new-app https://raw.githubusercontent.com/jupyter-on-openshift/poc-hub-keycloak-auth/master/templates/jupyterhub.json -e NVIDIA_VISIBLE_DEVICES=1 -e NVIDIA_DRIVER_CAPABILITIES="compute,utility" -e NVIDIA_REQUIRE_CUDA="cuda>=9.0"
 ```
 
