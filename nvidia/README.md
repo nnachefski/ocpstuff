@@ -63,7 +63,7 @@ oc new-project nvidia
 ```
 ##### # and create a ServiceAccount
 ```
-oc create serviceaccount nvidia-deviceplugin -n nvidia
+oc create serviceaccount nvidia-deviceplugin -n kube-system
 ```
 ##### # now add privledged nvidia scc (use file from this repo to avoid copy/paste formatting errors)
 ```
