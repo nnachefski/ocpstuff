@@ -1,5 +1,7 @@
 FROM rhel7-custom
 
+USER root
+
 ENV SKIP_REPOS_ENABLE=true \
 SKIP_REPOS_DISABLE=true
 
