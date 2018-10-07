@@ -1,7 +1,7 @@
 ### # deploying CUDA/GPU-enabled Ethereum miners on Openshift.
 ##### # switch nvidia project (with device plugin DS deployed)
 ```
-oc project crypto
+oc new-project crypto
 ```
 ##### # give the default ServiceAccount 'anyuid' SCC
 ```
