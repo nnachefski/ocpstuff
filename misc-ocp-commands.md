@@ -1,5 +1,9 @@
 ### # misc stuff
 
+##### # pin project pods to a specific nodeselector
+```
+oc patch ns glusterfs -p '{"metadata": {"annotations": {"openshift.io/node-selector": "node-role.kubernetes.io/infra=true"}}}'
+```
 ##### # start a build from a local dir
 ```
 oc start-build jupyterhub-nb-tfg --from-dir .
