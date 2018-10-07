@@ -57,11 +57,7 @@ sed -i 's/BOOTSTRAP_CONFIG_NAME=node-config-compute/BOOTSTRAP_CONFIG_NAME=node-c
 systemctl restart atomic-openshift-node
 ```
 #### ################################### using 'oc' from the master now
-##### # now create the nvidia project
-```
-oc new-project nvidia
-```
-##### # and create a ServiceAccount
+##### # create a ServiceAccount
 ```
 oc create serviceaccount nvidia-deviceplugin -n kube-system
 ```
