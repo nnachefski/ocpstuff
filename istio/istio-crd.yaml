@@ -13,14 +13,3 @@ spec:
     prefix: distributed-tracing-tech-preview/
     version: 1.6.0
     elasticsearch_memory: 1Gi
-  launcher:
-    openshift:
-      user: user
-      password: password
-    github:
-      username: username
-      token: token
-    catalog:
-      filter: filter
-      branch: branch
-      repo: repo
