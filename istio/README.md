@@ -22,8 +22,8 @@ oc create -f https://raw.githubusercontent.com/nnachefski/ocpstuff/master/istio/
 ```
 ##### # to uninstall
 ```
-oc delete -n istio-operator installation istio-installation
 oc process -n istio-operator -f istio_product_operator_template.yaml | oc delete -f -
+oc delete -n istio-operator installation istio-installation
 oc delete project istio-operator
 oc delete project istio-system 
 ```
