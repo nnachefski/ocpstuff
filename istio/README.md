@@ -2,6 +2,7 @@
 
 ##### # patch the master-config (do this on all masters)
 ```
+cd ~
 wget https://raw.githubusercontent.com/openshift-istio/openshift-ansible/istio-3.10-1.0.0-snapshot.2/istio/master-config.patch
 cp -p /etc/origin/master/master-config.yaml /etc/origin/master/master-config.yaml.prepatch
 oc ex config patch /etc/origin/master/master-config.yaml.prepatch -p "$(cat ~/master-config.patch)" > /etc/origin/master/master-config.yaml
@@ -15,7 +16,6 @@ ansible "*" -m shell -a "sysctl vm.max_map_count=262144"
 ###### # use --private-key= if you are on AWS
 ##### # deploy the istio
 ```
-cd ~
 oc new-project istio-operator
 wget https://raw.githubusercontent.com/Maistra/openshift-ansible/maistra-0.1.0-ocp-3.1.0-istio-1.0.0/istio/istio_product_operator_template.yaml
 oc new-app -f istio_product_operator_template.yaml --param=OPENSHIFT_ISTIO_MASTER_PUBLIC_URL=api.ocp.nicknach.net
