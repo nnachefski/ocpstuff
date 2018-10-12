@@ -64,8 +64,8 @@ echo gpgcheck=0 >> /etc/yum.repos.d/repo.home.nicknach.net_repo_rhaos-beta.repo
 yum install -d1 -y yum-utils wget git net-tools bind-utils iptables-services bridge-utils bash-completion nfs-utils dstat mlocate screen
 ## install openshift client package (oc)
 yum install -d1 -y atomic-openshift-clients
-## install docker
-yum install -d1 -y docker crio cri-tools
+## install container runtime
+yum install -d1 -y docker crio cri-tools podman
 ## enable container runtime
 systemctl enable docker --now
 systemctl enable crio --now
