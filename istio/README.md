@@ -16,9 +16,10 @@ ansible "*" -m shell -a "sysctl vm.max_map_count=262144"
 ###### # use --private-key= if you are on AWS
 ##### # deploy the istio
 ```
+wget 
 oc new-project istio-operator
 wget https://raw.githubusercontent.com/Maistra/openshift-ansible/maistra-0.1.0-ocp-3.1.0-istio-1.0.0/istio/istio_product_operator_template.yaml
-oc new-app -f istio_product_operator_template.yaml --param=OPENSHIFT_ISTIO_MASTER_PUBLIC_URL=api.ocp.nicknach.net
+oc new-app -f istio_product_operator_template.yaml --param OPENSHIFT_ISTIO_MASTER_PUBLIC_URL=api.ocp.nicknach.net --param OPENSHIFT_RELEASE=v3.11.0
 oc create -f https://raw.githubusercontent.com/nnachefski/ocpstuff/master/istio/istio-crd.yaml
 ```
 ##### # to uninstall
