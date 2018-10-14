@@ -79,7 +79,7 @@ ansible "*" -m script -a prep.sh
 ```
 ###### # reboot if necessary
 ```
-#ansible "*" -m script -a "reboot"
+#ansible "*" -a "reboot"
 ```
 ##### # run the pre-req check
 ```
