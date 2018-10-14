@@ -2,7 +2,7 @@
 
 export REPODIR=repo
 # rhel-server-rhscl-7-rpms rhel-7-server-optional-rpms epel nvidia
-for repo in rh-gluster-3-client-for-rhel-7-server-rpms rhel-7-server-ose-3.10-rpms rhel-7-server-rpms rhel-7-fast-datapath-rpms rhel-7-server-extras-rpms rhel-7-server-ansible-2.5-rpms rhel-7-server-ansible-2.6-rpms;
+for repo in rh-gluster-3-client-for-rhel-7-server-rpms rhel-7-server-ose-3.11-rpms rhel-7-server-rpms rhel-7-fast-datapath-rpms rhel-7-server-extras-rpms rhel-7-server-ansible-2.6-rpms;
 do
   echo "############## ${repo} ##################"
   reposync --gpgcheck -lm --repoid=${repo} --download_path=$REPODIR
