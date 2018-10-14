@@ -1,0 +1,7 @@
+cat <<EOF >> ~/.bashrc
+export ROOT_DOMAIN=$ROOT_DOMAIN
+export APPS_DOMAIN=$APPS_DOMAIN
+export DOCKER_DEV=$DOCKER_DEV
+export ANSIBLE_HOST_KEY_CHECKING=False
+export OCP_VER=$OCP_VER
+EOF
