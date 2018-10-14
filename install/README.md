@@ -43,7 +43,7 @@ yum install -d1 -y yum-utils wget git net-tools bind-utils iptables-services bri
 ## install openshift client package (oc)
 yum install -d1 -y atomic-openshift-clients
 ## install container runtime
-yum install -d1 -y docker crio cri-tools podman
+yum install -d1 -y docker crio cri-tools podman skopeo
 ## enable container runtime
 systemctl enable docker --now
 systemctl enable crio --now
