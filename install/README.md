@@ -9,32 +9,13 @@ export ANSIBLE_HOST_KEY_CHECKING=False
 export SRC_REPO=registry.access.redhat.com
 export OCP_VER=v3.11
 export RHN_ID=nnachefs@redhat.com
-export RHN_PASSWD=
 export RHN_POOL=8a85f98260c27fc50160c323263339ff
+export RHN_PASSWD=
 ```
 ##### # copy and paste the script below to generate the prep.sh file
 ```
 cat <<EOF > prep.sh
 
-export ROOT_DOMAIN=$ROOT_DOMAIN
-export APPS_DOMAIN=$APPS_DOMAIN
-export LDAP_SERVER=$LDAP_SERVER
-export ANSIBLE_HOST_KEY_CHECKING=False
-export SRC_REPO=$SRC_REPO
-export OCP_VER=$OCP_VER
-export RHN_ID=$RHN_ID
-export RHN_PASSWD=$RHN_PASSWD 
-export RHN_POOL=$RHN_POOL
-
-echo ROOT_DOMAIN=$ROOT_DOMAIN >> /etc/environment
-echo APPS_DOMAIN=$APPS_DOMAIN >> /etc/environment
-echo LDAP_SERVER=$LDAP_SERVER >> /etc/environment
-echo ANSIBLE_HOST_KEY_CHECKING=False >> /etc/environment
-echo SRC_REPO=$SRC_REPO >> /etc/environment
-echo OCP_VER=$OCP_VER >> /etc/environment
-echo RHN_ID=$RHN_ID >> /etc/environment
-echo RHN_PASSWD=$RHN_PASSWD >> /etc/environment
-echo RHN_POOL=$RHN_POOL >> /etc/environment
 ## install sub manager
 yum install -d1 -y -q subscription-manager yum-utils wget
 ## setup repos with RHN
@@ -94,7 +75,7 @@ https://raw.githubusercontent.com/nnachefski/ocpstuff/master/install/generate-an
 ##### # use the new inventory file to run the prep.sh script on all hosts (using ansible)
 ###### # if on AWS, use --private-key=your_key.pem
 ```
-ansible "*" -m script -a prep.sh
+ansible "*" -m script -a prep.sh --extra-vars "ROOT_DOMAIN=$ROOT_DOMAIN APPS_DOMAIN=$APPS_DOMAIN LDAP_SERVER=$LDAP_SERVER SRC_REPO=$SRC_REPO OCP_VER=$OCP_VER RHN_ID=$RHN_ID RHN_PASSWD=$RHN_PASSWD RHN_POOL=$RHN_POOL" 
 ```
 ###### # reboot if necessary
 ```
