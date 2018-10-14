@@ -7,7 +7,7 @@
 ```
 export MY_REPO=repo.home.nicknach.net
 export SRC_REPO=registry.access.redhat.com
-export OCP_VER=v3.10
+export OCP_VER=v3.11
 export POOLID=8a85f98260c27fc50160c323263339ff
 export RHN_ID=nnachefs@redhat.com
 export RHN_PWD=
@@ -24,9 +24,9 @@ subscription-manager repos --disable="*"
 subscription-manager repos \
    --enable=rhel-7-server-rpms \
    --enable=rhel-7-server-extras-rpms \
-   --enable=rhel-7-server-ose-3.10-rpms \
+   --enable=rhel-7-server-ose-3.11-rpms \
    --enable=rhel-7-fast-datapath-rpms \
-   --enable=rhel-7-server-ansible-2.5-rpms \
+   --enable=rhel-7-server-ansible-2.6-rpms \
    --enable=rh-gluster-3-client-for-rhel-7-server-rpms
    
 #   --enable=rhel-server-rhscl-7-rpms \
@@ -114,7 +114,7 @@ done
 ##### # if using internal puddle build, then you'll have to re-tag the images (add an alias).
 ###### # for some reason, the installer will try to pull a tag that looks like this 'v3.11.0-0.9.0'
 ```
-TAG=v3.11.0-0.10.0 REPO=$MY_REPO; for i in `cat core_images.txt`; do docker pull $REPO/$i; docker tag $REPO/$i $REPO/`echo $i |awk -F: '{print $1}'`:$TAG; docker push $REPO/`echo $i |awk -F: '{print $1}'`:$TAG; done
+#TAG=v3.11.0-0.10.0 REPO=$MY_REPO; for i in `cat core_images.txt`; do docker pull $REPO/$i; docker tag $REPO/$i $REPO/`echo $i |awk -F: '{print $1}'`:$TAG; docker push $REPO/`echo $i |awk -F: '{print $1}'`:$TAG; done
 ```
 ##### # install/enable/start httpd
 ```
