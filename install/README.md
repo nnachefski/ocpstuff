@@ -19,7 +19,7 @@ cat <<EOF > prep.sh
 ## install sub manager
 yum install -d1 -y -q subscription-manager yum-utils wget
 ## setup repos with RHN
-subscription-manager register --username=$RHN_ID --password \$RHN_PASSWD --force
+subscription-manager register --username=$RHN_ID --password \$1 --force
 subscription-manager attach --pool=$RHN_POOL
 subscription-manager repos --disable="*"
 subscription-manager repos --enable=rhel-7-server-extras-rpms --enable=rhel-7-fast-datapath-rpms --enable=rhel-7-server-ansible-2.6-rpms --enable=rh-gluster-3-client-for-rhel-7-server-rpms --enable=rhel-7-server-ose-3.11-rpms
@@ -75,7 +75,7 @@ https://raw.githubusercontent.com/nnachefski/ocpstuff/master/install/generate-an
 ##### # use the new inventory file to run the prep.sh script on all hosts (using ansible)
 ###### # if on AWS, use --private-key=your_key.pem
 ```
-ansible "*" -m script -a prep.sh --extra-vars "RHN_PASSWD=$RHN_PASSWD"
+ansible "*" -m script -a "prep.sh $RHN_PASSWD"
 ```
 ###### # reboot if necessary
 ```
