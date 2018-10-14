@@ -5,10 +5,11 @@ export ROOT_DOMAIN=ocp.nicknach.net
 export APPS_DOMAIN=apps.$ROOT_DOMAIN
 export LDAP_SERVER=gw.home.nicknach.net
 export ANSIBLE_HOST_KEY_CHECKING=False
-export MY_REPO=repo.home.nicknach.net
+#export SRC_REPO=repo.home.nicknach.net
+export SRC_REPO=registry.access.redhat.com
 export OCP_VER=v3.11
 export RHN_ID=nnachefs@redhat.com
-export RHN_PASSWD= 
+export RHN_PASSWD=
 export RHN_POOL=8a85f98260c27fc50160c323263339ff
 ```
 ##### # copy and paste the script below to generate the prep.sh file
@@ -19,7 +20,7 @@ export ROOT_DOMAIN=$ROOT_DOMAIN
 export APPS_DOMAIN=$APPS_DOMAIN
 export LDAP_SERVER=$LDAP_SERVER
 export ANSIBLE_HOST_KEY_CHECKING=False
-export MY_REPO=$MY_REPO
+export SRC_REPO=$SRC_REPO
 export OCP_VER=$OCP_VER
 export RHN_ID=$RHN_ID
 export RHN_PASSWD=$RHN_PASSWD 
@@ -29,31 +30,31 @@ echo ROOT_DOMAIN=$ROOT_DOMAIN >> /etc/environment
 echo APPS_DOMAIN=$APPS_DOMAIN >> /etc/environment
 echo LDAP_SERVER=$LDAP_SERVER >> /etc/environment
 echo ANSIBLE_HOST_KEY_CHECKING=False >> /etc/environment
-echo MY_REPO=$MY_REPO >> /etc/environment
+echo SRC_REPO=$SRC_REPO >> /etc/environment
 echo OCP_VER=$OCP_VER >> /etc/environment
 echo RHN_ID=$RHN_ID >> /etc/environment
 echo RHN_PASSWD=$RHN_PASSWD >> /etc/environment
 echo RHN_POOL=$RHN_POOL >> /etc/environment
 ## install sub manager
-yum install -d1 -y subscription-manager yum-utils wget
+yum install -d1 -y -q subscription-manager yum-utils wget
 ## setup repos with RHN
-#subscription-manager register --username=nnachefs@redhat.com --password PASSWD --force
-#subscription-manager attach --pool=8a85f98260c27fc50160c323263339ff
-#subscription-manager repos --disable="*"
-#subscription-manager repos --enable=rhel-7-server-extras-rpms --enable=rhel-7-fast-datapath-rpms --enable=rhel-7-server-ansible-2.6-rpms --enable=rh-gluster-3-client-for-rhel-7-server-rpms --enable=rhel-7-server-ose-3.11-rpms
+subscription-manager register --username=$RHN_ID --password $RHN_PASSWD --force
+subscription-manager attach --pool=$RHN_POOL
+subscription-manager repos --disable="*"
+subscription-manager repos --enable=rhel-7-server-extras-rpms --enable=rhel-7-fast-datapath-rpms --enable=rhel-7-server-ansible-2.6-rpms --enable=rh-gluster-3-client-for-rhel-7-server-rpms --enable=rhel-7-server-ose-3.11-rpms
 ## OR add your internal repos (for disconnected installs)
-rm -rf /etc/yum.repos.d/* && yum clean all
-yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-ose-3.11-rpms
-yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-fast-datapath-rpms
-yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-rpms
-yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-extras-rpms
-yum-config-manager --add-repo http://$MY_REPO/repo/rh-gluster-3-client-for-rhel-7-server-rpms
-yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-ansible-2.6-rpms
-##yum-config-manager --add-repo http://$MY_REPO/repo/rhaos-beta
-##yum-config-manager --add-repo http://$MY_REPO/repo/rhel-server-rhscl-7-rpms
-##yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-optional-rpms
+#rm -rf /etc/yum.repos.d/* && yum clean all
+#yum-config-manager --add-repo http://$SRC_REPO/repo/rhel-7-server-ose-3.11-rpms
+#yum-config-manager --add-repo http://$SRC_REPO/repo/rhel-7-fast-datapath-rpms
+#yum-config-manager --add-repo http://$SRC_REPO/repo/rhel-7-server-rpms
+#yum-config-manager --add-repo http://$SRC_REPO/repo/rhel-7-server-extras-rpms
+#yum-config-manager --add-repo http://$SRC_REPO/repo/rh-gluster-3-client-for-rhel-7-server-rpms
+#yum-config-manager --add-repo http://$SRC_REPO/repo/rhel-7-server-ansible-2.6-rpms
+##yum-config-manager --add-repo http://$SRC_REPO/repo/rhaos-beta
+##yum-config-manager --add-repo http://$SRC_REPO/repo/rhel-server-rhscl-7-rpms
+##yum-config-manager --add-repo http://$SRC_REPO/repo/rhel-7-server-optional-rpms
 ## add the repo cert to the pki store (for disconnected installs)
-wget http://$MY_REPO/repo/$MY_REPO.crt && mv -f $MY_REPO.crt /etc/pki/ca-trust/source/anchors && restorecon /etc/pki/ca-trust/source/anchors/$MY_REPO.crt && update-ca-trust
+#wget http://$SRC_REPO/repo/$SRC_REPO.crt && mv -f $SRC_REPO.crt /etc/pki/ca-trust/source/anchors && restorecon /etc/pki/ca-trust/source/anchors/$SRC_REPO.crt && update-ca-trust
 ## if installing beta repo, disable gpgcheck
 #echo gpgcheck=0 >> /etc/yum.repos.d/repo.home.nicknach.net_repo_rhaos-beta.repo
 ## install some general pre-req packages
@@ -66,11 +67,11 @@ yum install -d1 -y docker crio cri-tools podman
 systemctl enable docker --now
 systemctl enable crio --now
 ## set the repo
-sed -i "s/registry.access.redhat.com'/registry.access.redhat.com\', \'repo.home.nicknach.net\'/" /etc/containers/registries.conf && systemctl restart docker && systemctl restart crio
+#sed -i "s/registry.access.redhat.com'/registry.access.redhat.com\', \'repo.home.nicknach.net\'/" /etc/containers/registries.conf && systemctl restart docker && systemctl restart crio
 ## install gluster packages 
 yum install -d1 -y cns-deploy heketi-client
 ## make sure your nodes are up-to-date
-#yum -y update
+yum -d1 -y update
 
 EOF
 ```

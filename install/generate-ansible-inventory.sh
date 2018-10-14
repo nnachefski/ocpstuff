@@ -25,12 +25,12 @@ openshift_deployment_type=openshift-enterprise
 #openshift_crio_docker_gc_node_selector={'runtime': 'cri-o'}
 
 ## internal image repos
-##openshift_additional_repos=[{'id': 'ose-devel', 'name': 'rhaos-beta', 'baseurl': 'http://$MY_REPO/repo/rhaos-beta', 'enabled': 1, 'gpgcheck': 0}]
-##openshift_docker_insecure_registries=$MY_REPO
+##openshift_additional_repos=[{'id': 'ose-devel', 'name': 'rhaos-beta', 'baseurl': 'http://$SRC_REPO/repo/rhaos-beta', 'enabled': 1, 'gpgcheck': 0}]
+##openshift_docker_insecure_registries=$SRC_REPO
 ##openshift_docker_blocked_registries=registry.access.redhat.com,docker.io
-#openshift_docker_additional_registries=$MY_REPO
-#oreg_url=$MY_REPO/openshift3/ose-\${component}:\${version}
-#openshift_examples_modify_imagestreams=true
+#openshift_docker_additional_registries=$SRC_REPO
+oreg_url=$SRC_REPO/openshift3/ose-\${component}:\${version}
+openshift_examples_modify_imagestreams=true
 
 ## container runtime options
 #container_runtime_docker_storage_setup_device=$DOCKER_DEV
@@ -54,7 +54,7 @@ openshift_deployment_type=openshift-enterprise
 ## release ver
 openshift_release=$OCP_VER
 openshift_image_tag=$OCP_VER
-##openshift_pkg_version=-3.10.14
+##openshift_pkg_version=-3.11.16
 
 ## enable ntp
 #openshift_clock_enabled=false
