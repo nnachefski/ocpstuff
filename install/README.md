@@ -44,22 +44,23 @@ yum install -d1 -y subscription-manager yum-utils wget
 #   --enable=rhel-7-server-extras-rpms \
 #   --enable=rhel-7-fast-datapath-rpms \
 #   --enable=rhel-7-server-ansible-2.6-rpms \
-#   --enable=rh-gluster-3-client-for-rhel-7-server-rpms 
+#   --enable=rh-gluster-3-client-for-rhel-7-server-rpms \
+#   --enable=rhel-7-server-ose-3.11-rpms
 ## OR add your internal repos (for disconnected installs)
 rm -rf /etc/yum.repos.d/* && yum clean all
-#yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-ose-3.11-rpms
+yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-ose-3.11-rpms
 yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-fast-datapath-rpms
 yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-rpms
 yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-extras-rpms
 yum-config-manager --add-repo http://$MY_REPO/repo/rh-gluster-3-client-for-rhel-7-server-rpms
 yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-ansible-2.6-rpms
-yum-config-manager --add-repo http://$MY_REPO/repo/rhaos-beta
+##yum-config-manager --add-repo http://$MY_REPO/repo/rhaos-beta
 ##yum-config-manager --add-repo http://$MY_REPO/repo/rhel-server-rhscl-7-rpms
 ##yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-optional-rpms
 ## add the repo cert to the pki store (for disconnected installs)
 wget http://$MY_REPO/repo/$MY_REPO.crt && mv -f $MY_REPO.crt /etc/pki/ca-trust/source/anchors && restorecon /etc/pki/ca-trust/source/anchors/$MY_REPO.crt && update-ca-trust
 ## if installing beta repo, disable gpgcheck
-echo gpgcheck=0 >> /etc/yum.repos.d/repo.home.nicknach.net_repo_rhaos-beta.repo
+#echo gpgcheck=0 >> /etc/yum.repos.d/repo.home.nicknach.net_repo_rhaos-beta.repo
 ## install some general pre-req packages
 yum install -d1 -y yum-utils wget git net-tools bind-utils iptables-services bridge-utils bash-completion nfs-utils dstat mlocate screen
 ## install openshift client package (oc)
@@ -74,7 +75,7 @@ sed -i "s/registry.access.redhat.com'/registry.access.redhat.com\', \'repo.home.
 ## install gluster packages 
 yum install -d1 -y cns-deploy heketi-client
 ## make sure your nodes are up-to-date
-#yum -y update
+yum -y update
 
 EOF
 ```
