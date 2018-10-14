@@ -40,12 +40,7 @@ yum install -d1 -y subscription-manager yum-utils wget
 #subscription-manager register --username=nnachefs@redhat.com --password PASSWD --force
 #subscription-manager attach --pool=8a85f98260c27fc50160c323263339ff
 #subscription-manager repos --disable="*"
-#subscription-manager repos \
-#   --enable=rhel-7-server-extras-rpms \
-#   --enable=rhel-7-fast-datapath-rpms \
-#   --enable=rhel-7-server-ansible-2.6-rpms \
-#   --enable=rh-gluster-3-client-for-rhel-7-server-rpms \
-#   --enable=rhel-7-server-ose-3.11-rpms
+#subscription-manager repos --enable=rhel-7-server-extras-rpms --enable=rhel-7-fast-datapath-rpms --enable=rhel-7-server-ansible-2.6-rpms --enable=rh-gluster-3-client-for-rhel-7-server-rpms --enable=rhel-7-server-ose-3.11-rpms
 ## OR add your internal repos (for disconnected installs)
 rm -rf /etc/yum.repos.d/* && yum clean all
 yum-config-manager --add-repo http://$MY_REPO/repo/rhel-7-server-ose-3.11-rpms
