@@ -75,7 +75,7 @@ sed -i "s/registry.access.redhat.com'/registry.access.redhat.com\', \'repo.home.
 ## install gluster packages 
 yum install -d1 -y cns-deploy heketi-client
 ## make sure your nodes are up-to-date
-yum -y update
+#yum -y update
 
 EOF
 ```
