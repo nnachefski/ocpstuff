@@ -75,7 +75,7 @@ https://raw.githubusercontent.com/nnachefski/ocpstuff/master/install/generate-an
 ##### # use the new inventory file to run the prep.sh script on all hosts (using ansible)
 ###### # if on AWS, use --private-key=your_key.pem
 ```
-ansible "*" -m script -a prep.sh --extra-vars "ROOT_DOMAIN=$ROOT_DOMAIN APPS_DOMAIN=$APPS_DOMAIN LDAP_SERVER=$LDAP_SERVER SRC_REPO=$SRC_REPO OCP_VER=$OCP_VER RHN_ID=$RHN_ID RHN_PASSWD=$RHN_PASSWD RHN_POOL=$RHN_POOL" 
+ansible "*" -m script -a prep.sh
 ```
 ###### # reboot if necessary
 ```
