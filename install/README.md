@@ -63,7 +63,7 @@ chmod +x prep.sh
 ```
 ##### # run the prep.sh script manually on the ansible control host
 ```
-./prep.sh
+./prep.sh $RHN_PASSWD
 ```
 ##### # install 'openshift-ansible' package and dependencies 
 ```
