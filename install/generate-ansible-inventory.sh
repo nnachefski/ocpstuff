@@ -36,8 +36,8 @@ openshift_deployment_type=openshift-enterprise
 #container_runtime_docker_storage_setup_device=$DOCKER_DEV
 #container_runtime_docker_storage_type=devicemapper
 ## If oreg_url points to a registry requiring authentication, provide the following:
-oreg_auth_user=$RHN_USER
-oreg_auth_password="$1"
+oreg_auth_user=$RHN_ID
+oreg_auth_password="$RHN_PASSWD"
 ## NOTE: oreg_url must be defined by the user for oreg_auth_* to have any affect.
 ## oreg_auth_pass should be generated from running docker login.
 ## To update registry auth credentials, uncomment the following:
