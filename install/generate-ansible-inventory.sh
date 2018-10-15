@@ -29,15 +29,15 @@ openshift_deployment_type=openshift-enterprise
 ##openshift_docker_insecure_registries=$SRC_REPO
 ##openshift_docker_blocked_registries=registry.access.redhat.com,docker.io
 #openshift_docker_additional_registries=$SRC_REPO
-oreg_url=$SRC_REPO/openshift3/ose-\${component}:\${version}
-openshift_examples_modify_imagestreams=true
+#oreg_url=$SRC_REPO/openshift3/ose-\${component}:\${version}
+#openshift_examples_modify_imagestreams=true
 
 ## container runtime options
 #container_runtime_docker_storage_setup_device=$DOCKER_DEV
 #container_runtime_docker_storage_type=devicemapper
 ## If oreg_url points to a registry requiring authentication, provide the following:
-#oreg_auth_user=some_user
-#oreg_auth_password='my-pass'
+oreg_auth_user=$RHN_USER
+oreg_auth_password="$1"
 ## NOTE: oreg_url must be defined by the user for oreg_auth_* to have any affect.
 ## oreg_auth_pass should be generated from running docker login.
 ## To update registry auth credentials, uncomment the following:
