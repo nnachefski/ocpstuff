@@ -22,7 +22,7 @@ oc create -f https://raw.githubusercontent.com/nnachefski/ocpstuff/master/istio/
 ```
 ##### # to uninstall
 ```
-oc process -n istio-operator -f istio_product_operator_template.yaml | oc delete -f -
+oc process -n istio-operator -f https://raw.githubusercontent.com/Maistra/openshift-ansible/maistra-0.2.0-ocp-3.1.0-istio-1.0.2/istio/istio_product_operator_template.yaml | oc delete -f -
 oc delete -n istio-operator installation istio-installation
 oc delete project istio-operator
 oc delete project istio-system 
