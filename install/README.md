@@ -43,12 +43,15 @@ yum install -d1 -y yum-utils wget git net-tools bind-utils iptables-services bri
 ## install openshift client package (oc)
 yum install -d1 -y atomic-openshift-clients
 ## install container runtime
-yum install -d1 -y docker crio cri-tools podman skopeo
+yum install -d1 -y docker
+#yum install -d1 -y crio cri-tools podman skopeo
 ## enable container runtime
 systemctl enable docker --now
-systemctl enable crio --now
+#systemctl enable crio --now
 ## set the repo
-#sed -i "s/registry.access.redhat.com'/registry.access.redhat.com\', \'repo.home.nicknach.net\'/" /etc/containers/registries.conf && systemctl restart docker && systemctl restart crio
+#sed -i "s/registry.access.redhat.com'/registry.access.redhat.com\', \'$SRC_REPO\'/" /etc/containers/registries.conf
+systemctl restart docker 
+#systemctl restart crio
 ## install gluster packages 
 yum install -d1 -y cns-deploy heketi-client
 ## make sure your nodes are up-to-date
