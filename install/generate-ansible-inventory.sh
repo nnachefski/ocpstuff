@@ -140,15 +140,15 @@ ansible_service_broker_local_registry_whitelist=['.*-apb$']
 openshift_logging_install_logging=true
 openshift_logging_es_pvc_size=10Gi
 openshift_logging_es_memory_limit=4G
-#openshift_logging_curator_nodeselector={'node-role.kubernetes.io/infra':'true'}
-#openshift_logging_es_nodeselector={'node-role.kubernetes.io/infra':'true'}
-#openshift_logging_kibana_nodeselector={'node-role.kubernetes.io/infra':'true'}
+openshift_logging_es_nodeselector={'node-role.kubernetes.io/infra':'true'}
+openshift_logging_curator_nodeselector={'node-role.kubernetes.io/infra':'true'}
+openshift_logging_kibana_nodeselector={'node-role.kubernetes.io/infra':'true'}
 ## legacy metrics
 openshift_metrics_install_metrics=true
 openshift_metrics_cassandra_pvc_size=10Gi
-#openshift_metrics_cassandra_nodeselector={'node-role.kubernetes.io/infra':'true'}
-#openshift_metrics_hawkular_nodeselector={'node-role.kubernetes.io/infra':'true'}
-#openshift_metrics_heapster_nodeselector={'node-role.kubernetes.io/infra':'true'}
+openshift_metrics_cassandra_nodeselector={'node-role.kubernetes.io/infra':'true'}
+openshift_metrics_hawkular_nodeselector={'node-role.kubernetes.io/infra':'true'}
+openshift_metrics_heapster_nodeselector={'node-role.kubernetes.io/infra':'true'}
 ## prometheus metrics and alerting
 openshift_hosted_prometheus_deploy=true
 openshift_prometheus_namespace=openshift-metrics
