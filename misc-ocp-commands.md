@@ -1,5 +1,9 @@
 ### # misc stuff
 
+##### # wipe CNS/OCS
+```
+rm -fr /var/lib/heketi /etc/glusterfs /var/lib/glusterd; wipefs --all /dev/vdb -f
+```
 ##### # pin project pods to a specific nodeselector
 ```
 oc patch ns glusterfs -p '{"metadata": {"annotations": {"openshift.io/node-selector": "node-role.kubernetes.io/infra=true"}}}'
