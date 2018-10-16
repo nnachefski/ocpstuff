@@ -50,7 +50,7 @@ systemctl enable docker --now
 #systemctl enable crio --now
 ## set the repo
 #sed -i "s/registry.access.redhat.com'/registry.access.redhat.com\', \'$SRC_REPO\'/" /etc/containers/registries.conf
-systemctl restart docker 
+#systemctl restart docker 
 #systemctl restart crio
 ## install gluster packages 
 yum install -d1 -y cns-deploy heketi-client
