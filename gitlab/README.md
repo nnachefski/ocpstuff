@@ -5,7 +5,7 @@ export WILDCARD=apps.ocp.nicknach.net
 ```
 ##### # create the project
 ```
-oc new-project cicd
+oc new-project cicd || oc project cicd
 ```
 ##### # get the template
 ```
