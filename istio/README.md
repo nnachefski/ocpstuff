@@ -21,7 +21,6 @@ oc create -f https://raw.githubusercontent.com/Maistra/istio-operator/maistra-0.
 oc create -f https://raw.githubusercontent.com/Maistra/istio-operator/maistra-0.3/deploy/crd.yaml
 oc create -f https://raw.githubusercontent.com/Maistra/istio-operator/maistra-0.3/deploy/cr.yaml
 oc create -f https://raw.githubusercontent.com/Maistra/istio-operator/maistra-0.3/deploy/operator.yaml
-#--param OPENSHIFT_ISTIO_MASTER_PUBLIC_URL=api.ocp.nicknach.net --param OPENSHIFT_RELEASE=v3.11.0
 ```
 ##### # to uninstall
 ```
