@@ -17,6 +17,11 @@ ansible "*" -m shell -a "sysctl vm.max_map_count=262144"
 ##### # deploy istio
 ```
 oc new-project istio-operator
+#oc create -f https://raw.githubusercontent.com/Maistra/istio-operator/maistra-0.3/deploy/rbac.yaml
+#oc create -f https://raw.githubusercontent.com/Maistra/istio-operator/maistra-0.3/deploy/crd.yaml
+#oc create -f https://raw.githubusercontent.com/Maistra/istio-operator/maistra-0.3/deploy/cr.yaml
+#oc create -f https://raw.githubusercontent.com/Maistra/istio-operator/maistra-0.3/deploy/operator.yaml
+
 wget https://raw.githubusercontent.com/Maistra/openshift-ansible/maistra-0.3/istio/istio_product_operator_template.yaml
 wget https://raw.githubusercontent.com/Maistra/openshift-ansible/maistra-0.3/istio/cr-full.yaml
 wget https://raw.githubusercontent.com/Maistra/openshift-ansible/maistra-0.3/istio/cr-kiali.yaml
