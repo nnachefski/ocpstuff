@@ -3,10 +3,10 @@
 ##### # patch the master-config (do this on all masters)
 ```
 cd ~
-wget https://raw.githubusercontent.com/openshift-istio/openshift-ansible/istio-3.10-1.0.0-snapshot.2/istio/master-config.patch
-cp -p /etc/origin/master/master-config.yaml /etc/origin/master/master-config.yaml.prepatch
-oc ex config patch /etc/origin/master/master-config.yaml.prepatch -p "$(cat ~/master-config.patch)" > /etc/origin/master/master-config.yaml
-systemctl restart atomic-openshift-master*
+wget https://raw.githubusercontent.com/Maistra/openshift-ansible/maistra-0.3/istio/master-config.patch
+cp -p master-config.yaml master-config.yaml.prepatch
+oc ex config patch master-config.yaml.prepatch -p "$(cat master-config.patch)" > master-config.yaml
+/usr/local/bin/master-restart api && /usr/local/bin/master-restart controllers
 ```
 #### # use ansible to set elasticsearch vars on all nodes
 ```
@@ -17,16 +17,18 @@ ansible "*" -m shell -a "sysctl vm.max_map_count=262144"
 ##### # deploy istio
 ```
 oc new-project istio-operator
-oc create -f https://raw.githubusercontent.com/Maistra/istio-operator/maistra-0.3/deploy/rbac.yaml
-oc create -f https://raw.githubusercontent.com/Maistra/istio-operator/maistra-0.3/deploy/crd.yaml
-oc create -f https://raw.githubusercontent.com/Maistra/istio-operator/maistra-0.3/deploy/cr.yaml
-oc create -f https://raw.githubusercontent.com/Maistra/istio-operator/maistra-0.3/deploy/operator.yaml
+wget https://raw.githubusercontent.com/Maistra/openshift-ansible/maistra-0.3/istio/istio_product_operator_template.yaml
+wget https://raw.githubusercontent.com/Maistra/openshift-ansible/maistra-0.3/istio/cr-full.yaml
+wget https://raw.githubusercontent.com/Maistra/openshift-ansible/maistra-0.3/istio/cr-kiali.yaml
+oc new-app -f istio_product_operator_template.yaml --param OPENSHIFT_ISTIO_MASTER_PUBLIC_URL=api.ocp.nicknach.net --param OPENSHIFT_RELEASE=v3.11.0
+oc create -f cr-full.yaml
+oc create -f cr-kiali.yaml
 ```
 ##### # to uninstall
 ```
 oc project istio-operator
 oc delete -n istio-operator installation istio-installation
-oc process -n istio-operator  | oc delete -f -
+oc process -n istio-operator -f istio_product_operator_template.yaml | oc delete -f -
 oc delete project istio-operator
 oc delete project istio-system 
 ```
