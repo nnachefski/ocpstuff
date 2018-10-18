@@ -1,6 +1,6 @@
 ﻿https://docs.openshift.com/container-platform/latest/install_config/install/planning.html
 
-Summary: 4 VMs recommended for single master install.  Additional VM if NFS services are needed.
+Summary: 4 VMs recommended for single master install.  
 * Infrastructure (physical or virtual machines, assuming virtual):
 * Master (1 VM Required)
   * 32GB RAM
@@ -13,11 +13,7 @@ Summary: 4 VMs recommended for single master install.  Additional VM if NFS serv
   * 50GB Disk (for OS)
   * RHEL7.5 upgraded to latest patchset
   * 200GB Disk (for CNS, raw/unformatted)
-* Additional VM if NFS is needed
-  * 8GB RAM (no more memory is needed)
-  * 4 vCPUs
-  * 100GB Disk
-  * RHEL7.5 upgraded to latest patchset
+
 * Internet connectivity is recommended
   * HTTPS Whitelist these trusted hosts in proxies and/or firewalls (if needed)
 	For content (RPM packages):
