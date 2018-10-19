@@ -16,11 +16,6 @@ ansible "*" -m shell -a "sysctl vm.max_map_count=262144"
 ###### # use --private-key= if you are on AWS
 ##### # deploy istio
 ```
-#oc create -f https://raw.githubusercontent.com/Maistra/istio-operator/maistra-0.3/deploy/rbac.yaml
-oc create -f https://raw.githubusercontent.com/Maistra/istio-operator/maistra-0.3/deploy/crd.yaml
-#oc create -f https://raw.githubusercontent.com/Maistra/istio-operator/maistra-0.3/deploy/cr.yaml
-#oc create -f https://raw.githubusercontent.com/Maistra/istio-operator/maistra-0.3/deploy/operator.yaml
-
 oc new-project istio-operator
 oc create -f https://raw.githubusercontent.com/Maistra/openshift-ansible/maistra-0.2.0-ocp-3.1.0-istio-1.0.2/istio/cr-kiali.yaml
 oc create -f  https://raw.githubusercontent.com/Maistra/openshift-ansible/maistra-0.2.0-ocp-3.1.0-istio-1.0.2/istio/istio_product_operator_template.yaml
