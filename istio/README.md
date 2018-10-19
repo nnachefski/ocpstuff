@@ -15,6 +15,8 @@ ansible "*" -m shell -a "sysctl vm.max_map_count=262144"
 ```
 ###### # use --private-key= if you are on AWS
 ##### # deploy istio
+###### # if deploying 0.3.0, you'll need this image 
+###### # brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888/openshift-istio-tech-preview/istio-operator:0.3.0
 ```
 oc new-project istio-operator
 #oc create -f https://raw.githubusercontent.com/Maistra/openshift-ansible/maistra-0.2.0-ocp-3.1.0-istio-1.0.2/istio/istio_product_operator_template.yaml 
