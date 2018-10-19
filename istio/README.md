@@ -17,7 +17,7 @@ ansible "*" -m shell -a "sysctl vm.max_map_count=262144"
 ##### # deploy istio
 ```
 oc new-project istio-operator
-oc create -f  https://raw.githubusercontent.com/Maistra/openshift-ansible/maistra-0.2.0-ocp-3.1.0-istio-1.0.2/istio/istio_product_operator_template.yaml
+oc create -f https://raw.githubusercontent.com/Maistra/openshift-ansible/maistra-0.3/istio/istio_product_operator_template.yaml
 oc new-app istio-operator-job --param OPENSHIFT_ISTIO_MASTER_PUBLIC_URL=api.ocp.nicknach.net --param OPENSHIFT_RELEASE=v3.11.0
 oc create -f https://raw.githubusercontent.com/nnachefski/ocpstuff/master/istio/istio-installation.yaml
 ```
@@ -25,7 +25,7 @@ oc create -f https://raw.githubusercontent.com/nnachefski/ocpstuff/master/istio/
 ```
 oc project istio-operator
 oc delete -n istio-operator installation istio-installation
-oc process -n istio-operator -f https://raw.githubusercontent.com/Maistra/openshift-ansible/maistra-0.2.0-ocp-3.1.0-istio-1.0.2/istio/istio_product_operator_template.yaml | oc delete -f -
+oc process -n istio-operator -f https://raw.githubusercontent.com/Maistra/openshift-ansible/maistra-0.3/istio/istio_product_operator_template.yaml | oc delete -f -
 oc delete project istio-operator
 oc delete project istio-system 
 ```
