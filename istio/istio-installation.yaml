@@ -14,8 +14,8 @@ spec:
     version: 1.7.0
     elasticsearch_memory: 1Gi
   kiali:
-    username: username
-    password: password
+    username: ocpadmin
+    password: welcome1
     prefix: openshift-istio-tech-preview/
     version: v0.7.2
   launcher:
