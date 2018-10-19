@@ -20,12 +20,5 @@ spec:
     version: v0.7.2
   launcher:
     openshift:
-      user: user
-      password: password
-    github:
-      username: username
-      token: token
-    catalog:
-      filter: booster.mission.metadata.istio
-      branch: v62
-      repo: https://github.com/fabric8-launcher/launcher-booster-catalog.git
+      user: ocpadmin
+      password: welcome1
