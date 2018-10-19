@@ -7,7 +7,6 @@ openshift3/jenkins-2-rhel7:v3.11
 openshift3/jenkins-slave-base-rhel7:v3.11
 openshift3/jenkins-slave-maven-rhel7:v3.11
 openshift3/jenkins-slave-nodejs-rhel7:v3.11
-openshift3/logging-auth-proxy:v3.11
 openshift3/mediawiki-apb:v3.11
 openshift3/metrics-cassandra:v3.11
 openshift3/metrics-hawkular-metrics:v3.11
