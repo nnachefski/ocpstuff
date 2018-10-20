@@ -89,7 +89,7 @@ for image in pass_list:
 
 	if args.alias:
 		try:
-			check_call(['skopeo', '--insecure-policy', 'copy', '--src-tls-verify=false', '--dest-tls-verify=false', "docker://%s/%s"%(args.source, image.split(':')[0]+':'+args.alias), "%s/%s"%(uri_string, image)], stdout=DEVNULL, stderr=STDOUT)
+			check_call(['skopeo', '--insecure-policy', 'copy', '--src-tls-verify=false', '--dest-tls-verify=false', "docker://%s/%s"%(args.source, image), "%s/%s"%(uri_string, image.split(':')[0]+':'+args.alias)], stdout=DEVNULL, stderr=STDOUT)
 		except KeyboardInterrupt:
 			print("\nbye..."); sys.exit(1)
 		else:
