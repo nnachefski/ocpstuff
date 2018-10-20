@@ -8,6 +8,7 @@ parser.add_argument('source', action="store", help='Ex: brew-pulp-docker01.web.p
 parser.add_argument('dest', action="store", help='destination, Ex: 192.168.0.4:1234')
 parser.add_argument('-d', action="store_true", default=False, help='debug mode')
 parser.add_argument('-t', action="store", dest="tag", help="override the tag", default=False)
+parser.add_argument('-a', action="store", dest="alias", help="set a tag alias", default=False)
 parser.add_argument('-l', action="store", dest="list", help="image list, default is core_images.txt", default='core_images.txt')
 args = parser.parse_args()
 
@@ -85,6 +86,12 @@ for image in pass_list:
 		print("- failed to save docker://%s/%s"%(args.dest, image))
 	else:
 		print("- saved %s/%s"%(uri_string, image))
-    
- 
 
+	if args.alias:
+		try:
+			check_call(['skopeo', '--insecure-policy', 'copy', '--src-tls-verify=false', '--dest-tls-verify=false', "docker://%s/%s"%(args.source, image.split(':')[0]+':'+args.alias), "%s/%s"%(uri_string, image)], stdout=DEVNULL, stderr=STDOUT)
+		except KeyboardInterrupt:
+			print("\nbye..."); sys.exit(1)
+		else:
+			print("  - added tag alias '%s'"%(args.alias))
+ 
