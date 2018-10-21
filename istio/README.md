@@ -3,6 +3,7 @@
 ##### # patch the master-config (do this on all masters)
 ```
 cd ~
+#wget https://raw.githubusercontent.com/Maistra/openshift-ansible/maistra-0.2.0-ocp-3.1.0-istio-1.0.2/istio/master-config.patch
 wget https://raw.githubusercontent.com/Maistra/openshift-ansible/maistra-0.3/istio/master-config.patch
 cp -p /etc/origin/master/master-config.yaml master-config.yaml.prepatch
 oc ex config patch master-config.yaml.prepatch -p "$(cat master-config.patch)" > /etc/origin/master/master-config.yaml
