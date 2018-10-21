@@ -21,5 +21,5 @@ oc adm policy add-scc-to-user anyuid -z gitlab-ce-user
 ```
 ##### # now deploy gitlab
 ```
-oc new-app --template gitlab-ce -p APPLICATION_HOSTNAME=gitlab-cicd.$WILDCARD
+oc new-app --template gitlab-ce -p APPLICATION_HOSTNAME=gitlab-cicd.$WILDCARD -p GITLAB_ROOT_PASSWORD=welcome1
 ```
