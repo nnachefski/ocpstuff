@@ -9,5 +9,5 @@ oc new-project cool
 ```
 ##### # deploy ai-duet app
 ```
-oc new-app --docker-image=http://docker.io/marcelmaatkamp/aiexperiments-ai-duet --name ai-duet
+oc new-app --docker-image=docker.io/marcelmaatkamp/aiexperiments-ai-duet:latest --name ai-duet
 ```
