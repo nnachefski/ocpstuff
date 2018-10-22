@@ -5,7 +5,7 @@
 ###### # run the following from your bare-metal GPU host
 ##### # start by installing the kernel-devel package for your running kernel
 ```
-yum install kernel-devel-`uname -r`
+yum -y install kernel-devel-`uname -r`
 ```
 ##### # and enabling epel
 ```
