@@ -13,7 +13,7 @@ wget https://gitlab.com/gitlab-org/omnibus-gitlab/raw/master/docker/openshift-te
 ```
 ##### # now create the template
 ```
-oc create -f openshift-template.json
+oc create -f openshift-template.json -n openshift
 ```
 ##### # give the default sa 'anyuid' scc on this project
 ```
