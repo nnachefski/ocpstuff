@@ -22,7 +22,7 @@ yum -y install xorg-x11-drv-nvidia xorg-x11-drv-nvidia-devel
 ###### # reboot now
 ##### # after reboot, install cuda
 ```
-yum -y install cuda-9-0
+yum -y install cuda-9-1
 ```
 ##### # after reboot, do this to ensure your nvidia drivers have bee properly installed
 ```
@@ -41,7 +41,7 @@ yum -y install nvidia-container-runtime-hook
 ```
 cat <<’EOF’ >> /usr/libexec/oci/hooks.d/oci-nvidia-hook
 #!/bin/bash
-/usr/bin/nvidia-container-runtime-hook $1
+/usr/bin/nvidia-container-runtime-hook $@
 EOF
 
 chmod +x /usr/libexec/oci/hooks.d/oci-nvidia-hook
@@ -52,7 +52,7 @@ chcon -t container_file_t  /dev/nvidia*
 ```
 ##### # run the vector-add GPU test in docker
 ```
-docker run -it --rm repo.home.nicknach.net/mirrorgooglecontainers/cuda-vector-add:v0.1
+docker run --privileged -it --rm docker.io/mirrorgooglecontainers/cuda-vector-add:v0.1
 ```
 ###### # you should see "Test PASSED"
 ##### # now change this node's bootstrap profile to one that we will create in the next phase
