@@ -93,5 +93,5 @@ for image in pass_list:
 		except KeyboardInterrupt:
 			print("\nbye..."); sys.exit(1)
 		else:
-			print("  - added tag alias '%s'"%(args.alias))
+			print("  + added tag alias '%s'"%(args.alias))
  
