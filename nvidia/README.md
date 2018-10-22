@@ -39,9 +39,9 @@ yum -y install nvidia-container-runtime-hook
 ```
 ##### # add the hook to docker and make it exec
 ```
-cat <<’EOF’ >> /usr/libexec/oci/hooks.d/oci-nvidia-hook
+cat <<EOF > /usr/libexec/oci/hooks.d/oci-nvidia-hook
 #!/bin/bash
-/usr/bin/nvidia-container-runtime-hook $@
+/usr/bin/nvidia-container-runtime-hook \$@
 EOF
 
 chmod +x /usr/libexec/oci/hooks.d/oci-nvidia-hook
