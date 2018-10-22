@@ -20,6 +20,10 @@ rpm -ivh https://developer.download.nvidia.com/compute/cuda/repos/rhel7/x86_64/c
 yum -y install xorg-x11-drv-nvidia xorg-x11-drv-nvidia-devel
 ```
 ###### # reboot now
+##### # after reboot, install cuda
+```
+yum -y install cuda-9-0
+```
 ##### # after reboot, do this to ensure your nvidia drivers have bee properly installed
 ```
 nvidia-smi --query-gpu=gpu_name --format=csv,noheader --id=0 | sed -e 's/ /-/g'
