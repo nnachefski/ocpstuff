@@ -1,3 +1,4 @@
+openshift3/local-storage-provisioner:v3.11
 openshift3/ose-logging-elasticsearch5:v3.11
 openshift3/ose-logging-fluentd:v3.11
 openshift3/ose-logging-kibana5:v3.11
