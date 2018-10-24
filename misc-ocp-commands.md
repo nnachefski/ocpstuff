@@ -6,7 +6,7 @@ oc patch dc pydemo -p '{"spec":{"template":{"spec":{"containers":[{"name":"pydem
 
 oc adm policy add-scc-to-user hostaccess -z default
 
-ansible "*" -m shell -a "chcon -R unconfined_u:object_r:svirt_sandbox_file_t:s0 /mnt/test"
+ansible "node0*" -m shell -a "chcon -R unconfined_u:object_r:svirt_sandbox_file_t:s0 /mnt/test"
 ```
 ##### # wipe CNS/OCS
 ```
