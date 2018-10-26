@@ -30,7 +30,7 @@ subscription-manager repos --enable=rhel-7-server-extras-rpms --enable=rhel-7-fa
 #yum-config-manager --add-repo http://$SRC_REPO/repo/rhel-7-server-rpms
 #yum-config-manager --add-repo http://$SRC_REPO/repo/rhel-7-server-extras-rpms
 #yum-config-manager --add-repo http://$SRC_REPO/repo/rh-gluster-3-client-for-rhel-7-server-rpms
-#yum-config-manager --add-repo http://$SRC_REPO/repo/rhel-7-server-ansible-2.6-rpms
+#yum-config-manager --add-repo http://$SRC_REPO/repo/rhel-7-server-ansible-2.5-rpms
 ##yum-config-manager --add-repo http://$SRC_REPO/repo/rhaos-beta
 ##yum-config-manager --add-repo http://$SRC_REPO/repo/rhel-server-rhscl-7-rpms
 ##yum-config-manager --add-repo http://$SRC_REPO/repo/rhel-7-server-optional-rpms
