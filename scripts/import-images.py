@@ -74,6 +74,8 @@ for image in list:
 		if args.d: print("- inspected %s/%s"%(args.source, image_string))
 		pass_list.append(image_string)
 
+print("Starting to copy '%s' images"%(len(pass_list)))
+
 # iterate over the pass list and copy the images
 for image in pass_list:
 	cmdline = ['skopeo', '--insecure-policy', 'copy', '--src-tls-verify=false', '--dest-tls-verify=false', "docker://%s/%s"%(args.source, image), "%s/%s"%(uri_string, image)]
