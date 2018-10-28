@@ -80,7 +80,7 @@ systemctl restart docker-distribution
 ```
 ##### # copy the cert to the webroot for your clients to pull from
 ```
-cp -f /etc/docker/certs.d/$MY_REPO/$MY_REPO.cert /var/www/html/repo && restorecon /var/www/html/repo/$MY_REPO.cert
+cp -f /etc/docker/certs.d/$MY_REPO/$MY_REPO.cert /var/www/html/repo
 ```
 ##### # copy cert to local pki store and update
 ```
