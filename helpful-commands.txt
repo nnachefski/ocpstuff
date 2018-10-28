@@ -1,6 +1,6 @@
 ﻿# bootstrap from satellite
 
-cd && wget http://satellite.home.nicknach.net/pub/bootstrap.py && chmod +x bootstrap.py && ./bootstrap.py -l admin -o nicknach -a ocp-metal-key -s satellite.home.nicknach.net -L home -g home/openshift
+cd && rm -rf bootstrap.py; wget http://satellite.home.nicknach.net/pub/bootstrap.py && chmod +x bootstrap.py && ./bootstrap.py -l admin -o nicknach -a ocp-metal-key -s satellite.home.nicknach.net -L home -g home/openshift
 
 # get crt from IPA server
 curl  http://gw.home.nicknach.net/ipa/config/ca.crt >> /etc/origin/master/my-ldap-ca-bundle.crt
