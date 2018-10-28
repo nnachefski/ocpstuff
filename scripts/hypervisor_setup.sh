@@ -1,4 +1,4 @@
-export DHCP_SERVER=10.1.0.5
+export DHCP_SERVER=10.1.11.60
 export REPO_SERVER=http://repo.home.nicknach.net
 
 yum-config-manager --disable \* && rm -rf /etc/yum.repos.d/*.repo && yum clean all
@@ -14,4 +14,5 @@ cp /lib/systemd/system/dhcrelay.service /etc/systemd/system/
 sed 's/pid/pid $DHCP_SERVER/' -i /etc/systemd/system/dhcrelay.service
 systemctl --system daemon-reload
 systemctl enable dhcrelay --now
+firewall-cmd --set-default-zone trusted
 yum -y install cuda-9-0
