@@ -53,7 +53,7 @@ firewall-cmd --set-default-zone trusted
 ### # create the docker image mirror on our repo server
 ##### # install/enable/start docker-distribution on the repo box
 ```
-yum -y install docker-distribution.x86_64 && systemctl enable docker-distribution --now
+yum -y install docker-distribution.x86_64
 ```
 ##### # create certs for this registry (so you can enable https, required for v2 images)
 ```
