@@ -111,7 +111,7 @@ for i in core_images.txt app_images.txt mw_images.txt; do
   ./import-images.py docker $SRC_REPO $MY_REPO -d -l $i
 done
 ```
-###### # you can add a tag alias like this, '-a v4.0.0'  So now the registry will host both v4.0 & v4.0.0 image tags
+###### # you can add a tag alias like this, '-a v4.0.0'  the registry would host both v4.0 & v4.0.0 tagged images
 ##### # install/enable/start httpd
 ```
 yum -y install httpd && systemctl enable httpd --now
