@@ -1,4 +1,4 @@
-FROM rhel7-minimal:latest
+FROM registry.access.redhat.com/rhel7.5:latest
 ## maintained by nnachefski@gmail.com
 
 ENV APP_DIR=/opt/ethminer
