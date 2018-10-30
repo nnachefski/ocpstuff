@@ -1,0 +1,116 @@
+[rhel-server-rhscl-7-rpms]
+metadata_expire = 1
+sslclientcert = /etc/pki/entitlement/4201201795919360918.pem
+baseurl = https://satellite.home.nicknach.net/pulp/repos/nicknach/Library/ocp-node/content/dist/rhel/server/7/$releasever/$basearch/rhscl/1/os
+ui_repoid_vars = releasever basearch
+sslverify = 1
+name = Red Hat Software Collections RPMs for Red Hat Enterprise Linux 7 Server
+sslclientkey = /etc/pki/entitlement/4201201795919360918-key.pem
+gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release,file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+enabled = 1
+sslcacert = /etc/rhsm/ca/katello-server-ca.pem
+gpgcheck = 1
+
+[rhel-7-server-optional-rpms]
+metadata_expire = 1
+sslclientcert = /etc/pki/entitlement/4201201795919360918.pem
+baseurl = https://satellite.home.nicknach.net/pulp/repos/nicknach/Library/ocp-node/content/dist/rhel/server/7/$releasever/$basearch/optional/os
+ui_repoid_vars = releasever basearch
+sslverify = 1
+name = Red Hat Enterprise Linux 7 Server - Optional (RPMs)
+sslclientkey = /etc/pki/entitlement/4201201795919360918-key.pem
+gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+enabled = 1
+sslcacert = /etc/rhsm/ca/katello-server-ca.pem
+gpgcheck = 1
+
+[rhel-7-server-ose-3.11-rpms]
+metadata_expire = 1
+sslclientcert = /etc/pki/entitlement/4201201795919360918.pem
+baseurl = https://satellite.home.nicknach.net/pulp/repos/nicknach/Library/ocp-node/content/dist/rhel/server/7/7Server/$basearch/ose/3.11/os
+ui_repoid_vars = basearch
+sslverify = 1
+name = Red Hat OpenShift Container Platform 3.11 (RPMs)
+sslclientkey = /etc/pki/entitlement/4201201795919360918-key.pem
+gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+enabled = 1
+sslcacert = /etc/rhsm/ca/katello-server-ca.pem
+gpgcheck = 1
+
+[rhel-7-server-ansible-2.6-rpms]
+metadata_expire = 1
+sslclientcert = /etc/pki/entitlement/4201201795919360918.pem
+baseurl = https://satellite.home.nicknach.net/pulp/repos/nicknach/Library/ocp-node/content/dist/rhel/server/7/7Server/$basearch/ansible/2.6/os
+ui_repoid_vars = basearch
+sslverify = 1
+name = Red Hat Ansible Engine 2.6 RPMs for Red Hat Enterprise Linux 7 Server
+sslclientkey = /etc/pki/entitlement/4201201795919360918-key.pem
+gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+enabled = 1
+sslcacert = /etc/rhsm/ca/katello-server-ca.pem
+gpgcheck = 1
+
+[rhel-7-server-rpms]
+metadata_expire = 1
+sslclientcert = /etc/pki/entitlement/4201201795919360918.pem
+baseurl = https://satellite.home.nicknach.net/pulp/repos/nicknach/Library/ocp-node/content/dist/rhel/server/7/$releasever/$basearch/os
+ui_repoid_vars = releasever basearch
+sslverify = 1
+name = Red Hat Enterprise Linux 7 Server (RPMs)
+sslclientkey = /etc/pki/entitlement/4201201795919360918-key.pem
+gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+enabled = 1
+sslcacert = /etc/rhsm/ca/katello-server-ca.pem
+gpgcheck = 1
+
+[rh-gluster-3-client-for-rhel-7-server-rpms]
+metadata_expire = 1
+sslclientcert = /etc/pki/entitlement/4201201795919360918.pem
+baseurl = https://satellite.home.nicknach.net/pulp/repos/nicknach/Library/ocp-node/content/dist/rhel/server/7/$releasever/$basearch/rhs-client/os
+ui_repoid_vars = releasever basearch
+sslverify = 1
+name = Red Hat Storage Native Client for RHEL 7 (RPMs)
+sslclientkey = /etc/pki/entitlement/4201201795919360918-key.pem
+gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+enabled = 1
+sslcacert = /etc/rhsm/ca/katello-server-ca.pem
+gpgcheck = 1
+
+[rhel-7-server-extras-rpms]
+metadata_expire = 1
+sslclientcert = /etc/pki/entitlement/4201201795919360918.pem
+baseurl = https://satellite.home.nicknach.net/pulp/repos/nicknach/Library/ocp-node/content/dist/rhel/server/7/7Server/$basearch/extras/os
+ui_repoid_vars = basearch
+sslverify = 1
+name = Red Hat Enterprise Linux 7 Server - Extras (RPMs)
+sslclientkey = /etc/pki/entitlement/4201201795919360918-key.pem
+gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+enabled = 1
+sslcacert = /etc/rhsm/ca/katello-server-ca.pem
+gpgcheck = 1
+
+[rhel-7-fast-datapath-rpms]
+metadata_expire = 1
+sslclientcert = /etc/pki/entitlement/4201201795919360918.pem
+baseurl = https://satellite.home.nicknach.net/pulp/repos/nicknach/Library/ocp-node/content/dist/rhel/server/7/$releasever/$basearch/fast-datapath/os
+ui_repoid_vars = releasever basearch
+sslverify = 1
+name = Red Hat Enterprise Linux Fast Datapath (RHEL 7 Server) (RPMs)
+sslclientkey = /etc/pki/entitlement/4201201795919360918-key.pem
+gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-beta,file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+enabled = 1
+sslcacert = /etc/rhsm/ca/katello-server-ca.pem
+gpgcheck = 1
+
+[rhel-7-server-satellite-tools-6.4-rpms]
+metadata_expire = 1
+sslclientcert = /etc/pki/entitlement/4201201795919360918.pem
+baseurl = https://satellite.home.nicknach.net/pulp/repos/nicknach/Library/ocp-node/content/dist/rhel/server/7/7Server/$basearch/sat-tools/6.4/os
+ui_repoid_vars = basearch
+sslverify = 1
+name = Red Hat Satellite Tools 6.4 (for RHEL 7 Server) (RPMs)
+sslclientkey = /etc/pki/entitlement/4201201795919360918-key.pem
+gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+enabled = 1
+sslcacert = /etc/rhsm/ca/katello-server-ca.pem
+gpgcheck = 1
