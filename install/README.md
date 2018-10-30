@@ -38,6 +38,8 @@ subscription-manager repos --enable=rhel-7-server-rpms --enable=rhel-7-server-ex
 #wget http://$SRC_REPO/pub/$SRC_REPO.crt && mv -f $SRC_REPO.crt /etc/pki/ca-trust/source/anchors && restorecon /etc/pki/ca-trust/source/anchors/$SRC_REPO.crt && update-ca-trust
 ## if installing beta repo, disable gpgcheck
 #echo gpgcheck=0 >> /etc/yum.repos.d/repo.home.nicknach.net_repo_rhaos-beta.repo
+## grab your LDAP server's cert
+#curl http://satellite.home.nicknach.net/pub/my-ldap-ca-bundle.crt > ~/my-ldap-ca-bundle.crt
 ## install some general pre-req packages
 yum install -d1 -y yum-utils wget git net-tools bind-utils iptables-services bridge-utils bash-completion nfs-utils dstat mlocate screen
 ## install openshift client package (oc)
