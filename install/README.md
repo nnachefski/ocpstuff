@@ -6,7 +6,7 @@ export APPS_DOMAIN=apps.$ROOT_DOMAIN
 export LDAP_SERVER=gw.home.nicknach.net
 export ANSIBLE_HOST_KEY_CHECKING=False
 export SRC_REPO=registry.redhat.io
-#export SRC_REPO=repo.home.nicknach.net
+#export SRC_REPO=satellite.home.nicknach.net
 export OCP_VER=v3.11
 export RHN_ID=nnachefs@redhat.com
 export RHN_POOL=8a85f98260c27fc50160c323263339ff
@@ -35,7 +35,7 @@ subscription-manager repos --enable=rhel-7-server-rpms --enable=rhel-7-server-ex
 ##yum-config-manager --add-repo http://$SRC_REPO/repo/rhel-server-rhscl-7-rpms
 ##yum-config-manager --add-repo http://$SRC_REPO/repo/rhel-7-server-optional-rpms
 ## add the repo cert to the pki store (for disconnected installs)
-#wget http://$SRC_REPO/repo/$SRC_REPO.crt && mv -f $SRC_REPO.crt /etc/pki/ca-trust/source/anchors && restorecon /etc/pki/ca-trust/source/anchors/$SRC_REPO.crt && update-ca-trust
+#wget http://$SRC_REPO/pub/$SRC_REPO.crt && mv -f $SRC_REPO.crt /etc/pki/ca-trust/source/anchors && restorecon /etc/pki/ca-trust/source/anchors/$SRC_REPO.crt && update-ca-trust
 ## if installing beta repo, disable gpgcheck
 #echo gpgcheck=0 >> /etc/yum.repos.d/repo.home.nicknach.net_repo_rhaos-beta.repo
 ## install some general pre-req packages
