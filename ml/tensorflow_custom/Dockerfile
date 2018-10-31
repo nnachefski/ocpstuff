@@ -1,9 +1,6 @@
-FROM rhel7-custom:latest
+FROM rhel7.5:latest
 
-ENV APP_DIR=/opt/ml-on-ocp
-ENV NVIDIA_VISIBLE_DEVICES=all
-ENV NVIDIA_DRIVER_CAPABILITIES=compute,utility
-ENV NVIDIA_REQUIRE_CUDA="cuda>=9.0"
+ENV APP_DIR=/opt/tf
 
 RUN yum -y install python34-pip python34-devel gcc gcc-c++ && yum clean all
 RUN pip3 install --no-cache-dir --upgrade pip
@@ -24,6 +21,6 @@ WORKDIR "$APP_DIR"
 COPY jupyter_notebook_config.py /root/.jupyter/
 COPY run_jupyter.sh /
 
-EXPOSE 8888 6006
+EXPOSE 6006 8888
 
 CMD /run_jupyter.sh --allow-root
