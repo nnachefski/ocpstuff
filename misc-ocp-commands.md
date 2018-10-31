@@ -1,6 +1,7 @@
 ### # misc stuff
 
-##### # work-around for x509 error on private registry.  Add this to master-config.yaml on all masters
+#### # work-around for x509 error on private registry.  
+##### # add this to master-config.yaml on all masters
 ```
 cp /etc/pki/ca-trust/source/anchors/satellite.home.nicknach.net.crt /etc/origin/master
 
@@ -8,6 +9,17 @@ imagePolicyConfig:
   internalRegistryHostname: satellite.home.nicknach.net:8888
     AdditionalTrustedCA=/etc/origin/master/satellite.home.nicknach.net.crt
 ```
+##### # then do this on a master (to patch the registry config)
+```
+oc patch dc docker-registry -p '{"spec":{"template":{"spec":{"containers":[{"name":"registry","volumeMounts":[{"mountPath":"/etc/pki","name":"certs"}]}],"volumes":[{"hostPath":{"path":"/etc/pki","type":"Directory"},"name":"certs"}]}}}}' -n default
+
+oc adm policy add-scc-to-user hostaccess -z registry -n default
+```
+##### # now do this on each infra node to fix SELinux
+```
+chcon -R -t container_file_t  /etc/pki
+```
+
 ##### # attach(patch) a hostMount to a DC
 ```
 oc patch dc pydemo -p '{"spec":{"template":{"spec":{"containers":[{"name":"pydemo","volumeMounts":[{"mountPath":"/mnt/test","name":"data"}]}],"volumes":[{"hostPath":{"path":"/mnt/test","type":"Directory"},"name":"data"}]}}}}'
