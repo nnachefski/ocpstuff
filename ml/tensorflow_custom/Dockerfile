@@ -1,4 +1,6 @@
-FROM rhel7.5:latest
+FROM python3.5:latest
+
+USER root
 
 ENV APP_DIR=/opt/tf
 
@@ -22,5 +24,7 @@ COPY jupyter_notebook_config.py /root/.jupyter/
 COPY run_jupyter.sh /
 
 EXPOSE 6006 8888
+
+USER 1001
 
 CMD /run_jupyter.sh --allow-root
