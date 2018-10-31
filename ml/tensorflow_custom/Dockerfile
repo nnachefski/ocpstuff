@@ -1,4 +1,4 @@
-FROM python3.5:latest
+FROM python:3.5
 
 USER root
 
