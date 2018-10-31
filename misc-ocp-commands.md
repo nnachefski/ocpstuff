@@ -1,5 +1,13 @@
 ### # misc stuff
 
+##### # work-around for x509 error on private registry.  Add this to master-config.yaml on all masters
+```
+cp /etc/pki/ca-trust/source/anchors/satellite.home.nicknach.net.crt /etc/origin/master
+
+imagePolicyConfig:
+  internalRegistryHostname: satellite.home.nicknach.net:8888
+    AdditionalTrustedCA=/etc/origin/master/satellite.home.nicknach.net.crt
+```
 ##### # attach(patch) a hostMount to a DC
 ```
 oc patch dc pydemo -p '{"spec":{"template":{"spec":{"containers":[{"name":"pydemo","volumeMounts":[{"mountPath":"/mnt/test","name":"data"}]}],"volumes":[{"hostPath":{"path":"/mnt/test","type":"Directory"},"name":"data"}]}}}}'
