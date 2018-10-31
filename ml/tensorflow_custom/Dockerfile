@@ -4,7 +4,7 @@ USER root
 
 ENV APP_DIR=/opt/tf
 
-RUN rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+#RUN rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 RUN yum -y install python34-pip python34-devel gcc gcc-c++ && yum clean all
 RUN pip3 install --no-cache-dir --upgrade pip
 RUN pip3 install --no-cache-dir tensorflow-gpu
