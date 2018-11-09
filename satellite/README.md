@@ -1,0 +1,16 @@
+##### # register w/ rhn
+```
+subscription-manager register --username=nnachefs@redhat.com
+```
+##### # subscribe to the proper channels for install
+```
+subscription-manager repos --enable=rhel-7-server-rpms --enable=rhel-server-rhscl-7-rpms --enable=rhel-7-server-satellite-6.4-rpms --enable=rhel-7-server-satellite-maintenance-6-rpms --enable=rhel-7-server-ansible-2.6-rpms
+```
+##### # install the satellite provisioner
+```
+yum install -y satellite
+```
+##### # run the installer
+```
+satellite-installer --scenario satellite --foreman-initial-organization "$ORG" --foreman-initial-location "$LOCATION" --foreman-admin-password welcome1 --foreman-proxy-puppetca true --foreman-proxy-tftp true --enable-foreman-plugin-discovery --foreman-proxy-dhcp true --foreman-proxy-dhcp-managed true --foreman-proxy-dhcp-interface "eth0" 
+```
