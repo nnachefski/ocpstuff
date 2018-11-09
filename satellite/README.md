@@ -1,9 +1,10 @@
 ##### # register w/ rhn
 ```
-subscription-manager register --username=nnachefs@redhat.com
+subscription-manager register --username=nnachefs@redhat.com 
 ```
 ##### # subscribe to the proper channels for install
 ```
+subscription-manager attach --pool 8a85f98260c27fc50160c323263339ff
 subscription-manager repos --enable=rhel-7-server-rpms --enable=rhel-server-rhscl-7-rpms --enable=rhel-7-server-satellite-6.4-rpms --enable=rhel-7-server-satellite-maintenance-6-rpms --enable=rhel-7-server-ansible-2.6-rpms
 ```
 ##### # install the satellite provisioner
