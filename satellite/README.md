@@ -11,7 +11,11 @@ subscription-manager repos --enable=rhel-7-server-rpms --enable=rhel-server-rhsc
 ```
 yum install -y satellite
 ```
+##### # open the gw up 
+```
+firewall-cmd --set-default-zone trusted
+```
 ##### # run the installer
 ```
-satellite-installer --scenario satellite --foreman-initial-organization "$ORG" --foreman-initial-location "$LOCATION" --foreman-admin-password welcome1 --foreman-proxy-puppetca true --foreman-proxy-tftp true --enable-foreman-plugin-discovery --foreman-proxy-dhcp true --foreman-proxy-dhcp-managed true --foreman-proxy-dhcp-interface "eth0" 
+satellite-installer --scenario satellite --foreman-admin-password welcome1 --foreman-proxy-puppetca true --foreman-proxy-tftp true --enable-foreman-plugin-discovery --foreman-proxy-dhcp true --foreman-proxy-dhcp-managed true --foreman-proxy-dhcp-interface "eth0" 
 ```
