@@ -11,7 +11,7 @@ subscription-manager repos --enable=rhel-7-server-rpms --enable=rhel-server-rhsc
 ```
 yum install -y satellite
 ```
-##### # open the gw up 
+##### # open the fw up 
 ```
 firewall-cmd --set-default-zone trusted
 ```
