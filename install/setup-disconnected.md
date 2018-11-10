@@ -107,8 +107,6 @@ wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/mw_imag
 ``` 
 for i in core_images.txt app_images.txt mw_images.txt; do
   ./import-images.py docker $SRC_REPO $MY_REPO -d -l $i
-  ./import-images.py docker $SRC_REPO $MY_REPO -d -l $i
-  ./import-images.py docker $SRC_REPO $MY_REPO -d -l $i
 done
 ```
 ###### # you can add a tag alias like this, '-a v4.0.0'  (the registry would host both v4.0 & v4.0.0 tagged images)
