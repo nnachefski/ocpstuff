@@ -52,7 +52,9 @@ yum install -d1 -y docker
 ## enable container runtime
 systemctl enable docker --now
 #systemctl enable crio --now
-## install gluster packages 
+#wipe the gluster disk
+wipefs --all /dev/sdb -f
+## install gluster packages
 yum install -d1 -y cns-deploy heketi-client
 ## make sure your nodes are up-to-date
 yum -d1 -y update
