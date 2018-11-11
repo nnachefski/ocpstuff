@@ -27,7 +27,6 @@ openshift3/ose-docker-builder:v3.11
 openshift3/ose-docker-registry:v3.11
 openshift3/ose-egress-http-proxy:v3.11
 openshift3/ose-egress-router:v3.11
-openshift3/ose-f5-router:v3.11
 openshift3/ose-haproxy-router:v3.11
 openshift3/ose-keepalived-ipfailover:v3.11
 openshift3/ose-kube-rbac-proxy:v3.11
