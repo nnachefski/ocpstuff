@@ -28,3 +28,7 @@ satellite-installer --scenario satellite --foreman-proxy-dhcp-managed false
 ```
 curl https://satellite.home.nicknach.net:9090/ssh/pubkey >> /root/.ssh/authorized_keys
 ```
+##### # add files to a repo manually
+```
+do hammer repository upload-content --product nicknach-extras --name nicknach-extras --organization "nicknach" --path  $i
+```
