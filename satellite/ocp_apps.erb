@@ -1,0 +1,30 @@
+<%#
+name: ocp_apps
+snippet: false
+model: JobTemplate
+job_category: Miscellaneous
+provider_type: Ansible
+kind: job_template
+organizations:
+- nicknach
+locations:
+- home
+%>
+
+---
+- hosts: all
+  tasks:
+    - shell: |
+        for i in `oc get is -n openshift |awk '{print $1}'`; do oc import-image $i -n openshift --all; done
+        export PROJECT=istio-test
+        oc new-project $PROJECT || oc project $PROJECT
+        oc adm policy add-scc-to-user anyuid -z default
+        oc adm policy add-scc-to-user privileged -z default
+        oc label namespace $PROJECT istio-injection=enabled
+        #oc get namespace -L istio-injection
+        wget https://raw.githubusercontent.com/istio/istio/master/samples/bookinfo/platform/kube/bookinfo.yaml
+        oc create -f bookinfo.yaml
+        oc expose svc productpage
+      register: out
+    - debug: var=out
+
