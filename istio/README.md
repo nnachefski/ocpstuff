@@ -55,3 +55,7 @@ oc expose svc productpage
 ```
 oc apply -f <(istioctl kube-inject -f ~/bookinfo.yaml)
 ```
+##### # or, to manually add the injection annotation to a deploy config
+```
+oc patch deploy productpage-v1 -p '{"metadata": {"annotations": {"sidecar.istio.io/inject": "true"}}}'
+```
