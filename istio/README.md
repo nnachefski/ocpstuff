@@ -59,3 +59,7 @@ oc apply -f <(istioctl kube-inject -f ~/bookinfo.yaml)
 ```
 oc patch deploy productpage-v1 -p '{"metadata": {"annotations": {"sidecar.istio.io/inject": "true"}}}'
 ```
+##### # to install the latest istio client
+```
+curl -L https://git.io/getLatestIstio | sh -
+```
