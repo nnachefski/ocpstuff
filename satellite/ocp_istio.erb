@@ -1,0 +1,23 @@
+<%#
+name: ocp_istio
+snippet: false
+model: JobTemplate
+job_category: Miscellaneous
+provider_type: Ansible
+kind: job_template
+organizations:
+- nicknach
+locations:
+- home
+%>
+
+---
+- hosts: all
+  tasks:
+    - shell: |
+        oc new-project istio-operator
+        oc create -f https://raw.githubusercontent.com/Maistra/openshift-ansible/maistra-0.4/istio/istio_product_operator_template.yaml
+        oc new-app istio-operator-job --param OPENSHIFT_ISTIO_MASTER_PUBLIC_URL=https://ocpapi.home.nicknach.net:8443 --param OPENSHIFT_RELEASE=v3.11.0
+        oc create -f https://satellite.home.nicknach.net/pub/crd-full.yaml
+      register: out
+    - debug: var=out

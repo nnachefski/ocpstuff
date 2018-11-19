@@ -1,0 +1,38 @@
+<%#
+name: ocp_node_pre_3.11
+snippet: false
+model: JobTemplate
+job_category: Miscellaneous
+provider_type: Ansible
+kind: job_template
+organizations:
+- nicknach
+locations:
+- home
+%>
+
+---
+- hosts: all
+  tasks:
+    - shell: |
+        wipefs --all /dev/sdb -f
+        for i in `lsblk /dev/sdb -l |awk '{print $1}' |grep -v NAME |grep -v sdb`; do dmsetup remove $i; done
+        curl http://satellite.home.nicknach.net/pub/satellite.home.nicknach.net.crt > /etc/pki/ca-trust/source/anchors/satellite.home.nicknach.net.crt && update-ca-trust
+        curl http://satellite.home.nicknach.net/pub/my-ldap-ca-bundle.crt > ~/my-ldap-ca-bundle.crt
+        yum install -d1 -y yum-utils wget git net-tools bind-utils iptables-services bridge-utils bash-completion nfs-utils dstat mlocate screen
+        for i in `lsblk /dev/sdb -l |awk '{print $1}' |grep -v NAME |grep -v sdb`; do dmsetup remove $i; done
+        yum install -d1 -y atomic-openshift-clients
+        yum install -d1 -y docker
+        sed -i "s/registry.access.redhat.com'/registry.access.redhat.com\', \'satellite.home.nicknach.net:8888\'/" /etc/containers/registries.conf
+        systemctl enable docker --now
+        yum install -d1 -y cns-deploy heketi-client
+        yum -d1 -y install openshift-ansible-playbooks
+        curl http://satellite.home.nicknach.net/pub/hosts > /etc/ansible/hosts
+        mkdir ~/.ssh
+        curl http://satellite.home.nicknach.net/pub/foreman-key.tar.gz |tar -xzv -C ~/.ssh
+        cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+        echo ANSIBLE_HOST_KEY_CHECKING=False >> /etc/environment
+        sed  -i 's/ rhgb quiet//' /etc/sysconfig/grub
+        grub2-mkconfig -o /boot/grub2/grub.cfg
+      register: out
+    - debug: var=out
