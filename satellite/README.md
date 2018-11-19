@@ -32,3 +32,22 @@ curl https://satellite.home.nicknach.net:9090/ssh/pubkey >> /root/.ssh/authorize
 ```
 do hammer repository upload-content --product nicknach-extras --name nicknach-extras --organization "nicknach" --path  $i
 ```
+##### # list job templates from CLI
+```
+hammer job-template list
+```
+##### # export job template to erb files
+```
+hammer job-template export --id 144 > ocp_apps.erb
+hammer job-template export --id 139 > ocp_install_3.11.erb
+hammer job-template export --id 141 > ocp_istio.erb
+hammer job-template export --id 142 > ocp_node_post_3.11.erb
+hammer job-template export --id 148 > ocp_node_post_3.11_snippet.erb
+hammer job-template export --id 136 > ocp_node_pre_3.11.erb
+hammer job-template export --id 147 > ocp_node_pre_3.11_snippet.erb
+hammer job-template export --id 143 > ocp_nvidia.erb
+```
+##### # import the job templates
+```
+for i in `ls *.erb`; do hammer job-template import $i; done
+```
