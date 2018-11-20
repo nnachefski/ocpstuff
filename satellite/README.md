@@ -39,11 +39,10 @@ hammer job-template list
 ##### # export job template to erb files
 ```
 hammer job-template export --id 144 > ocp_apps.erb
-hammer job-template export --id 139 > ocp_install_3.11.erb
+hammer job-template export --id 139 > ocp_install.erb
 hammer job-template export --id 141 > ocp_istio.erb
-hammer job-template export --id 142 > ocp_node_post_3.11.erb
-hammer job-template export --id 148 > ocp_node_post_3.11_snippet.erb
-hammer job-template export --id 136 > ocp_node_pre_3.11.erb
+hammer job-template export --id 142 > ocp_node_post.erb
+hammer job-template export --id 148 > ocp_node_post_snippet.erb
 hammer job-template export --id 147 > ocp_node_pre_3.11_snippet.erb
 hammer job-template export --id 143 > ocp_nvidia.erb
 ```

@@ -1,0 +1,23 @@
+<%#
+name: ocp_nvidia
+snippet: false
+model: JobTemplate
+job_category: Miscellaneous
+provider_type: Ansible
+kind: job_template
+organizations:
+- nicknach
+locations:
+- home
+%>
+
+---
+- hosts: all
+  tasks:
+    - shell: |
+        oc create serviceaccount nvidia-deviceplugin -n kube-system
+        oc create -f https://raw.githubusercontent.com/nnachefski/ocpstuff/master/nvidia/nvidia-device-plugin-scc.yaml -n kube-system
+        for i in metal3 metal4 metal5; do oc label node $i.home.nicknach.net openshift.com/gpu-accelerator=true; done
+        oc create -f https://raw.githubusercontent.com/nnachefski/ocpstuff/master/nvidia/nvidia-device-plugin.yml -n kube-system
+      register: out
+    - debug: var=out
