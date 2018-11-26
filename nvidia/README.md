@@ -87,6 +87,7 @@ oc label node metal.home.nicknach.net openshift.com/gpu-accelerator=true
 ```
 oc create -f https://raw.githubusercontent.com/nnachefski/ocpstuff/master/nvidia/nvidia-device-plugin.yml -n kube-system
 ```
+###### # for the upstream file, https://raw.githubusercontent.com/NVIDIA/k8s-device-plugin/v1.11/nvidia-device-plugin.yml
 #### # now let's use that GPU-enabled container host.  Here are some more interesting workloads...
 ##### # Tensorflow
 https://github.com/nnachefski/ocpstuff/tree/master/ml/tensorflow
