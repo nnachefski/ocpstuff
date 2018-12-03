@@ -3,7 +3,7 @@
 ##### # It can be used for both multi and single-master installations.
 ###### # You'll want plenty of storage on this host, recommended 200GB. 
 
-##### # first, register the VM w/ rhn (through a proxy is fine).
+##### # first, register the host w/ RHN Network (through a proxy is fine).
 ```
 subscription-manager register --username=nnachefs@redhat.com 
 ```
