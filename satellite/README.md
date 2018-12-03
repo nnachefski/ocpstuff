@@ -1,3 +1,6 @@
+## This howto describes how to setup a Red Hat Satellite Server to be used for disconnected install of Openshift.  This box would serve as a content repo for RPMs and Container Images.
+###### # You'll want plenty of storage on this host, recommended 200GB. 
+
 ##### # register w/ rhn
 ```
 subscription-manager register --username=nnachefs@redhat.com 
@@ -36,17 +39,19 @@ do hammer repository upload-content --product nicknach-extras --name nicknach-ex
 ```
 hammer job-template list
 ```
-##### # export job template to erb files
+##### # export job template to erb files (these are for installing openshift, nvidia, and istio)
 ```
 hammer job-template export --id 144 > ocp_apps.erb
 hammer job-template export --id 139 > ocp_install.erb
 hammer job-template export --id 141 > ocp_istio.erb
 hammer job-template export --id 142 > ocp_node_post.erb
 hammer job-template export --id 148 > ocp_node_post_snippet.erb
-hammer job-template export --id 147 > ocp_node_pre_3.11_snippet.erb
+hammer job-template export --id 147 > ocp_node_pre_ga_snippet.erb
 hammer job-template export --id 143 > ocp_nvidia.erb
 ```
 ##### # import the job templates
 ```
 for i in `ls *.erb`; do hammer job-template import $i; done
 ```
+
+##### # now connect to your satellite Web UI to configure you repos, content views, activation keys, and SDLC Library.
