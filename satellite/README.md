@@ -1,7 +1,8 @@
 ## This howto describes how to setup a Red Hat Satellite Server to be used for disconnected install of Openshift.  This box would serve as a content repo for RPMs and Container Images.
+##### # 
 ###### # You'll want plenty of storage on this host, recommended 200GB. 
 
-##### # register w/ rhn
+##### # first, register the VM w/ rhn (through a proxy is fine).
 ```
 subscription-manager register --username=nnachefs@redhat.com 
 ```
