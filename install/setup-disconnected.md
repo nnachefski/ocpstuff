@@ -1,6 +1,6 @@
 ## This doc describes how setup content mirrors for disconnected Openshift installations (single or multi-master).
 #### # In environments where you do not have access to the public internet (to perform the install), you'll need to make a local copy of rpms and container images.  You would then configure the Openshift installation to pull it's content from this repo.
-###### # You could also use a Red Hat Satellite for this purpose.  This requires additional resources and time to configure the satellite server (which many time is out-of-scope for a quick Openshift PoC).
+###### # You could also use a Red Hat Satellite for this purpose.  This requires additional resources and time to configure the satellite server (which may be out-of-scope for a quick Openshift PoC).
 ###### # If you are interested in setting up RH Satellite for this content mirror, the instruction for that are here:
 ###### # https://github.com/nnachefski/ocpstuff/tree/master/satellite    
 
