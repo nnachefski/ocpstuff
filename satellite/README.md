@@ -57,4 +57,4 @@ hammer job-template export --id 143 > ocp_nvidia.erb
 for i in `ls *.erb`; do hammer job-template import $i; done
 ```
 
-##### # now connect to your satellite Web UI to configure you repos, content views, activation keys, and SDLC Library.
+##### # now connect to your satellite Web UI to configure you repos, content views, activation keys, kickstart templates, and the SDLC Library.
