@@ -1,4 +1,4 @@
-## This howto describes how to setup a Red Hat Satellite Server to be used for disconnected install of Openshift.  
+## This howto describes how to setup a Red Hat Satellite Server to be used for disconnected installs of Openshift.  
 ##### # This box would serve as a content repo for RPMs and Container Images.
 ##### # It can be used for both multi and single-master installations.
 ##### # Included in this repo, are job templates to perform varios Openshift-related tasks.  Such as node-prep, install, post-install steps (IPA integration for SSO and RBAC), istio installatioin, and nvidia driver and CUDA packages.
