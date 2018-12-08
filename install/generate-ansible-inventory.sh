@@ -86,8 +86,12 @@ ansible_ssh_user=root
 openshift_master_identity_providers=[{"name":"myipa","challenge":"true","login":"true","kind":"LDAPPasswordIdentityProvider","attributes":{"id":["dn"],"email":["mail"],"name":["cn"],"preferredUsername":["uid"]},"bindDN":"","bindPassword":"","ca":"my-ldap-ca-bundle.crt","insecure":"false","url":"ldap://$LDAP_SERVER/cn=users,cn=accounts,dc=home,dc=nicknach,dc=net?uid"}]
 openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 
+## web console cert
 #openshift_master_named_certificates=[{"certfile": "/etc/origin/master/ocp.nicknach.net.crt", "keyfile": "/etc/origin/master/ocp.nicknach.net.key", "names": ["console.ocp.nicknach.net"]}]
-#openshift_master_overwrite_named_certificates=false
+#openshift_master_overwrite_named_certificates=true
+
+## router cert
+#openshift_router_hosted_certificate={"certfile": "/etc/origin/master/ocp.nicknach.net.crt", "keyfile": "/etc/origin/master/ocp.nicknach.net.key", "cafile": "/etc/origin/master/ca.pem"}
 
 ##  cloud provider configs
 ##  AWS
