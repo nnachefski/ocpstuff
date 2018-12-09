@@ -17,7 +17,7 @@ rpm -ivh https://developer.download.nvidia.com/compute/cuda/repos/rhel7/x86_64/c
 ```
 ##### # install your nvidia drivers (this should blacklist nouveau)
 ```
-yum -y install xorg-x11-drv-nvidia xorg-x11-drv-nvidia-devel
+yum -y install nvidia-driver
 ```
 ###### # reboot now
 ##### # after reboot, install cuda
