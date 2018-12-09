@@ -15,7 +15,8 @@ subscription-manager repos --enable=rhel-7-server-rpms --enable=rhel-server-rhsc
 ```
 ##### # install the satellite provisioner
 ```
-yum install -y satellite
+yum install -y satellite yum-utils
+
 ```
 ##### # open the fw up 
 ```
