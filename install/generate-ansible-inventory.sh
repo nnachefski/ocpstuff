@@ -122,18 +122,12 @@ openshift_storage_glusterfs_block_host_vol_size=50
 openshift_hosted_registry_storage_kind=glusterfs
 openshift_logging_es_pvc_storage_class_name=glusterfs-storage-block
 openshift_metrics_cassandra_pvc_storage_class_name=glusterfs-storage-block
-openshift_prometheus_sc_name="glusterfs-storage"
-openshift_prometheus_alertmanager_sc_name="glusterfs-storage"
-openshift_prometheus_alertbuffer_sc_name="glusterfs-storage"
 
 ## enable dynamic provisioning
 openshift_master_dynamic_provisioning_enabled=true
 openshift_hosted_etcd_storage_kind=dynamic
 openshift_logging_es_pvc_dynamic=true
 openshift_metrics_cassandra_storage_type=dynamic
-openshift_prometheus_storage_type='pvc'
-openshift_prometheus_alertmanager_storage_type='pvc'
-openshift_prometheus_alertbuffer_storage_type='pvc'
 
 ## registry
 openshift_hosted_manage_registry=true
@@ -158,28 +152,12 @@ openshift_metrics_cassandra_pvc_size=10Gi
 openshift_metrics_cassandra_nodeselector={'node-role.kubernetes.io/infra':'true'}
 openshift_metrics_hawkular_nodeselector={'node-role.kubernetes.io/infra':'true'}
 openshift_metrics_heapster_nodeselector={'node-role.kubernetes.io/infra':'true'}
-## prometheus metrics and alerting
-openshift_hosted_prometheus_deploy=true
-openshift_prometheus_namespace=openshift-metrics
-openshift_prometheus_storage_volume_name=prometheus
-openshift_prometheus_storage_volume_size=10Gi
-openshift_prometheus_alertmanager_storage_volume_name=prometheus-alertmanager
-openshift_prometheus_alertmanager_storage_volume_size=10Gi
-openshift_prometheus_alertbuffer_storage_volume_name=prometheus-alertbuffer
-openshift_prometheus_alertbuffer_storage_volume_size=10Gi
-#openshift_prometheus_node_selector={'node-role.kubernetes.io/infra':'true'}
-## grafana
-openshift_grafana_storage_type='pvc'
-openshift_grafana_sc_name="glusterfs-storage"
-openshift_grafana_storage_volume_size=10Gi
-openshift_grafana_node_exporter=true
-#openshift_grafana_node_selector={'node-role.kubernetes.io/infra':'true'}
-
-## change PV access modes
-#openshift_prometheus_alertbuffer_storage_access_modes=['ReadWriteOnce']
-#openshift_prometheus_alertmanager_storage_access_modes=['ReadWriteOnce']
-#openshift_hosted_etcd_storage_access_modes=["ReadWriteOnce"]
-#openshift_prometheus_storage_access_modes=['ReadWriteOnce']
+## prometheus
+openshift_cluster_monitoring_operator_install=true
+openshift_cluster_monitoring_operator_prometheus_storage_enabled=true
+openshift_cluster_monitoring_operator_alertmanager_storage_enabled=true
+openshift_cluster_monitoring_operator_prometheus_storage_capacity="20Gi"
+openshift_cluster_monitoring_operator_alertmanager_storage_capacity="2Gi"
 
 ## CNS for apps only (no infra)
 #openshift_storage_glusterfs_namespace=app-storage	
