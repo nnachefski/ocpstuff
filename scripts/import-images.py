@@ -1,6 +1,6 @@
 #!/usr/bin/python3
-import sys, os, argparse
-from subprocess import DEVNULL, STDOUT, check_call
+import sys, os, argparse, json
+from subprocess import DEVNULL, STDOUT, check_call, check_output
 
 parser = argparse.ArgumentParser(description='Import images for disconnected OCP installs')
 parser.add_argument('type', action="store", help='type of copy to perform, docker-daemon | docker | tarball, default is docker-daemon')
@@ -64,14 +64,15 @@ for image in list:
 	
 	cmdline = ['skopeo', '--insecure-policy', 'inspect', '--tls-verify=false', "docker://%s/%s"%(args.source, image_string)]
 	#if args.d: print('- '+' '.join(cmdline))
+
 	try:
-		check_call(cmdline, stdout=DEVNULL, stderr=STDOUT)
+		version = json.loads(check_output(cmdline))['Labels']['version']
 	except KeyboardInterrupt:
 		print("\nbye..."); sys.exit(1)
 	except:
 	 	print("- failed to inspect docker://%s/%s"%(args.source, image_string))
 	else:
-		if args.d: print("- inspected %s/%s"%(args.source, image_string))
+		if args.d: print("- inspected %s/%s (%s)"%(args.source, image_string, version))
 		pass_list.append(image_string)
 
 print("Starting to copy '%s' images"%(len(pass_list)))
