@@ -90,10 +90,10 @@ cp -f /etc/docker/certs.d/$MY_REPO/$MY_REPO.cert /var/www/html/repo
 ```
 cp -f /etc/docker/certs.d/$MY_REPO/$MY_REPO.cert /etc/pki/ca-trust/source/anchors/$MY_REPO.cert && restorecon /etc/pki/ca-trust/source/anchors/$MY_REPO.cert && update-ca-trust
 ```
-##### # setup the epel repo so we can get python34 package, then disable it
+##### # setup the epel repo so we can get python36 package, then disable it
 ```
 rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-yum install -y python34 python34-pip
+yum install -y python36 python36-pip
 yum-config-manager --disable epel
 ```
 ##### # make sure skopeo is installed
