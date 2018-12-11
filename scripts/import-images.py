@@ -65,8 +65,6 @@ for image in list:
 	cmdline = ['skopeo', '--insecure-policy', 'inspect', '--tls-verify=false', "docker://%s/%s"%(args.source, image_string)]
 	#if args.d: print('- '+' '.join(cmdline))
 
-	version = json.loads(check_output(cmdline))['Labels']['version']
-
 	try:
 		version = json.loads(check_output(cmdline))['Labels']['version']
 	except KeyboardInterrupt:
