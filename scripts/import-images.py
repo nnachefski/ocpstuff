@@ -66,13 +66,15 @@ for image in list:
     #if args.d: print('- '+' '.join(cmdline))
 
     try:
-        version = json.loads(check_output(cmdline))['Labels']['version']
+        json_data = json.loads(check_output(cmdline))
+        version = json_data['Labels']['version']
+        release = json_data['Labels']['release']
     except KeyboardInterrupt:
         print("\nbye..."); sys.exit(1)
     except:
          print("- failed to inspect docker://%s/%s"%(args.source, image_string))
     else:
-        if args.d: print("- inspected %s/%s (%s)"%(args.source, image_string, version))
+        if args.d: print("- inspected %s/%s (%s-%s)"%(args.source, image_string, version, release))
         pass_list.append(image_string)
 
 print("Starting to copy '%s' images"%(len(pass_list)))
