@@ -11,16 +11,10 @@ locations:
 - home
 %>
 
-<%#
-kind: snippet
-name: ocp_node_ga_snippet
-model: ProvisioningTemplate
-snippet: true
-%>
 wipefs --all /dev/sdb -f
 for i in `lsblk /dev/sdb -l |awk '{print $1}' |grep -v NAME |grep -v sdb`; do dmsetup remove $i; done
 curl http://satellite.home.nicknach.net/pub/satellite.home.nicknach.net.crt > /etc/pki/ca-trust/source/anchors/satellite.home.nicknach.net.crt && update-ca-trust
-curl http://satellite.home.nicknach.net/pub/my-ldap-ca-bundle.crt > /root/my-ldap-ca-bundle.crt
+mkdir -p /etc/origin/master && curl http://satellite.home.nicknach.net/pub/my-ldap-ca-bundle.crt > /etc/origin/master/my-ldap-ca-bundle.crt
 yum install -d1 -y yum-utils wget git net-tools bind-utils iptables-services bridge-utils bash-completion nfs-utils dstat mlocate screen
 for i in `lsblk /dev/sdb -l |awk '{print $1}' |grep -v NAME |grep -v sdb`; do dmsetup remove $i; done
 yum install -d1 -y atomic-openshift-clients
@@ -36,4 +30,3 @@ cat /root/.ssh/id_rsa.pub >> /root/.ssh/authorized_keys
 ANSIBLE_HOST_KEY_CHECKING=False && echo ANSIBLE_HOST_KEY_CHECKING=False >> /etc/environment 
 sed  -i 's/ rhgb quiet//' /etc/sysconfig/grub
 grub2-mkconfig -o /boot/grub2/grub.cfg
-
