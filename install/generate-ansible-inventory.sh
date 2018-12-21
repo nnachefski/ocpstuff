@@ -52,7 +52,6 @@ oreg_auth_password="$RHN_PASSWD"
 #openshift_disable_check=disk_availability,docker_storage,memory_availability,docker_image_availability,package_availability,package_version
 
 ## cluster stuff (uncomment for multi-master mode)
-#openshift_master_cluster_method=native
 #openshift_master_cluster_hostname=api.$ROOT_DOMAIN
 #openshift_master_cluster_public_hostname=console.$ROOT_DOMAIN
 
