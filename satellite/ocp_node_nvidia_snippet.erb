@@ -1,0 +1,23 @@
+<%#
+name: ocp_node_nvidia_snippet
+snippet: true
+model: JobTemplate
+job_category: Miscellaneous
+provider_type: Ansible
+kind: job_template
+organizations:
+- nicknach
+locations:
+- home
+%>
+
+yum -y -d1 install kernel-devel
+rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+#rpm -ivh https://developer.download.nvidia.com/compute/cuda/repos/rhel7/x86_64/cuda-repo-rhel7-9.1.85-1.x86_64.rpm 
+yum -y -d1 install nvidia-driver
+yum -y -d1 install cuda-9-1
+curl -s -L https://nvidia.github.io/nvidia-container-runtime/centos7/x86_64/nvidia-container-runtime.repo | tee /etc/yum.repos.d/nvidia-container-runtime.repo
+yum -y -d1 install nvidia-container-runtime-hook
+curl http://satellite.home.nicknach.net/pub/oci-nvidia-hook > /usr/libexec/oci/hooks.d/oci-nvidia-hook
+chmod +x /usr/libexec/oci/hooks.d/oci-nvidia-hook
+grub2-mkconfig -o /boot/grub2/grub.cfg
