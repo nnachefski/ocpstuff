@@ -1,6 +1,7 @@
 #### # on the master
 ```
 export MAISTRA=https://raw.githubusercontent.com/Maistra/openshift-ansible/maistra-0.6
+```
 ##### # patch the master-config (do this on all masters)
 ```
 cd ~
