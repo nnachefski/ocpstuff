@@ -1,13 +1,9 @@
-openshift3/local-storage-provisioner:v3.11
-openshift3/ose-logging-elasticsearch5:v3.11
-openshift3/ose-logging-fluentd:v3.11
-openshift3/ose-logging-kibana5:v3.11
-openshift3/ose-logging-curator5:v3.11
 openshift3/grafana:v3.11
 openshift3/jenkins-2-rhel7:v3.11
 openshift3/jenkins-slave-base-rhel7:v3.11
 openshift3/jenkins-slave-maven-rhel7:v3.11
 openshift3/jenkins-slave-nodejs-rhel7:v3.11
+openshift3/local-storage-provisioner:v3.11
 openshift3/mediawiki-apb:v3.11
 openshift3/metrics-cassandra:v3.11
 openshift3/metrics-hawkular-metrics:v3.11
@@ -31,6 +27,10 @@ openshift3/ose-haproxy-router:v3.11
 openshift3/ose-keepalived-ipfailover:v3.11
 openshift3/ose-kube-rbac-proxy:v3.11
 openshift3/ose-kube-state-metrics:v3.11
+openshift3/ose-logging-curator5:v3.11
+openshift3/ose-logging-elasticsearch5:v3.11
+openshift3/ose-logging-fluentd:v3.11
+openshift3/ose-logging-kibana5:v3.11
 openshift3/ose-metrics-server:v3.11
 openshift3/ose-node:v3.11
 openshift3/ose-pod:v3.11
