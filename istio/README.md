@@ -1,9 +1,10 @@
 #### # on the master
-
+```
+export MAISTRA=https://raw.githubusercontent.com/Maistra/openshift-ansible/maistra-0.6
 ##### # patch the master-config (do this on all masters)
 ```
 cd ~
-wget https://raw.githubusercontent.com/Maistra/openshift-ansible/maistra-0.6/istio/master-config.patch
+wget $MAISTRA/istio/master-config.patch
 cp -p /etc/origin/master/master-config.yaml master-config.yaml.prepatch
 oc ex config patch master-config.yaml.prepatch -p "$(cat master-config.patch)" > /etc/origin/master/master-config.yaml
 /usr/local/bin/master-restart api && /usr/local/bin/master-restart controllers
@@ -15,19 +16,18 @@ ansible "*" -m shell -a "sysctl vm.max_map_count=262144"
 ```
 ###### # use --private-key= if you are on AWS
 ##### # deploy istio
-###### # if deploying 0.3.0, you'll need this image 
 ###### # brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888/openshift-istio-tech-preview/istio-operator:0.6.0
 ```
 oc new-project istio-operator
-oc create -f https://raw.githubusercontent.com/Maistra/openshift-ansible/maistra-0.6/istio/istio_product_operator_template.yaml
+oc create -f $MAISTRA/istio/istio_product_operator_template.yaml
 oc new-app istio-operator-job --param OPENSHIFT_ISTIO_MASTER_PUBLIC_URL=ocpapi.home.nicknach.net --param OPENSHIFT_RELEASE=v3.11.0
-oc create -f https://raw.githubusercontent.com/Maistra/openshift-ansible/maistra-0.6/istio/cr-full.yaml
+oc create -f $MAISTRA/istio/cr-full.yaml
 ```
 ##### # to uninstall
 ```
 oc project istio-operator
 oc delete -n istio-operator installation istio-installation
-oc process -n istio-operator -f https://raw.githubusercontent.com/Maistra/openshift-ansible/maistra-0.6/istio/istio_product_operator_template.yaml | oc delete -f -
+oc process -n istio-operator -f $MAISTRA/istio/istio_product_operator_template.yaml | oc delete -f -
 oc delete project istio-operator
 oc delete project istio-system 
 ```
