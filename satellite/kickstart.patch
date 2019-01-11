@@ -9,7 +9,7 @@
         <%= snippet('ocp_node_pre_ga_snippet') %>
     <% end -%>
 
-    <% if @host.name == 'metal3.home.nicknach.net' %>
+    <% if host_enc['parameters']['openshift-ansible'] == 'true' %>
         curl http://satellite.home.nicknach.net/pub/firstboot.sh > /root/firstboot.sh && chmod +x /root/firstboot.sh
         curl http://satellite.home.nicknach.net/pub/firstboot.service > /etc/systemd/system/firstboot.service
         systemctl daemon-reload
