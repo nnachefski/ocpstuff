@@ -1,0 +1,23 @@
+[Unit]
+Description=Example oneshot service executing before entering graphical interface
+ConditionPathExists=/root/firstboot.sh
+Before=getty@tty6.service gdm.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+#TTYPath=/dev/tty6
+ExecStartPre=/usr/bin/sleep 5
+ExecStartPre=/usr/bin/chvt 6
+ExecStartPre=/usr/bin/clear
+ExecStart=/bin/bash /root/firstboot.sh
+ExecStopPost=/usr/bin/chvt 1
+ExecStopPost=/usr/bin/rm /root/firstboot.sh
+TimeoutSec=0
+StandardOutput=tty
+StandardInput=tty
+StandardError=tty
+
+[Install]
+WantedBy=default.target
+
