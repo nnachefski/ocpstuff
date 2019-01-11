@@ -1,0 +1,18 @@
+<% if host_param('nvidia-node') %>
+    <%= snippet('ocp_node_nvidia_snippet') %>
+<% end -%>
+
+<% if host_param('ocp-install') %>
+    <% if host_enc['parameters']['ocp-install'] == 'beta' %>
+        <%= snippet('ocp_node_pre_beta_snippet') %>
+    <% else -%>
+        <%= snippet('ocp_node_pre_ga_snippet') %>
+    <% end -%>
+
+    <% if @host.name == 'metal3.home.nicknach.net' %>
+        curl http://satellite.home.nicknach.net/pub/firstboot.sh > /root/firstboot.sh && chmod +x /root/firstboot.sh
+        curl http://satellite.home.nicknach.net/pub/firstboot.service > /etc/systemd/system/firstboot.service
+        systemctl daemon-reload
+        systemctl enable firstboot.service
+    <% end -%>
+<% end -%>
