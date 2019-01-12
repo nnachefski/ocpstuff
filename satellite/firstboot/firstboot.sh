@@ -1,3 +1,4 @@
+cd /root
 export ANSIBLE_HOST_KEY_CHECKING=False
 echo "starting OCP install" && sleep 60
 sed -i 's/#log_path/log_path/' /etc/ansible/ansible.cfg
@@ -19,4 +20,3 @@ oc replace cm node-config-all-in-one -f node-config.patch -n openshift-node
 
 curl https://raw.githubusercontent.com/nnachefski/ocpstuff/master/satellite/firstboot/post-install.sh > post-install.sh && chmod +x post-install.sh
 ansible "*" -m script -a "post-install.sh"
-
