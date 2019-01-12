@@ -19,9 +19,14 @@ yum install -d1 -y yum-utils wget git net-tools bind-utils iptables-services bri
 for i in `lsblk /dev/sdb -l |awk '{print $1}' |grep -v NAME |grep -v sdb`; do dmsetup remove $i; done
 yum install -d1 -y atomic-openshift-clients
 yum install -d1 -y docker
+#yum install -d1 -y crio crio-tools
+#curl http://satellite.home.nicknach.net/pub/oci-nvidia-hook.json > /usr/share/containers/oci/hooks.d/oci-nvidia-hook.json
 sed -i "s/registry.access.redhat.com'/registry.access.redhat.com\', \'satellite.home.nicknach.net:8888\'/" /etc/containers/registries.conf
 systemctl enable docker --now
+#systemctl enable crio --now
+sed -i 's/#log_path/log_path/' /etc/ansible/ansible.cfg
 yum install -d1 -y cns-deploy heketi-client
+yum install -d1 -y ansible-2.6.2
 yum -d1 -y install openshift-ansible-playbooks
 curl http://satellite.home.nicknach.net/pub/hosts > /etc/ansible/hosts
 mkdir /root/.ssh
@@ -30,3 +35,4 @@ cat /root/.ssh/id_rsa.pub >> /root/.ssh/authorized_keys
 ANSIBLE_HOST_KEY_CHECKING=False && echo ANSIBLE_HOST_KEY_CHECKING=False >> /etc/environment 
 sed  -i 's/ rhgb quiet//' /etc/sysconfig/grub
 grub2-mkconfig -o /boot/grub2/grub.cfg
+
