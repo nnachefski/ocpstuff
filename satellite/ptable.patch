@@ -1,0 +1,4 @@
+zerombr
+clearpart --all --initlabel
+ignoredisk --only-use=sda
+autopart --nohome
