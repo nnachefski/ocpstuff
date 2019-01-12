@@ -18,5 +18,5 @@ oc get cm node-config-all-in-one -n openshift-node -o yaml |sed '/RotateKubeletC
 oc replace cm node-config-all-in-one -f node-config.patch -n openshift-node
 
 curl https://raw.githubusercontent.com/nnachefski/ocpstuff/master/satellite/firstboot/post-install.sh > post-install.sh && chmod +x post-install.sh
-ansible "*" -m script -a "post.sh"
+ansible "*" -m script -a "post-install.sh"
 
