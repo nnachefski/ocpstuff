@@ -10,8 +10,8 @@
     <% end -%>
 
     <% if host_enc['parameters']['openshift-ansible'] == 'true' %>
-        curl http://satellite.home.nicknach.net/pub/firstboot.sh > /root/firstboot.sh && chmod +x /root/firstboot.sh
-        curl http://satellite.home.nicknach.net/pub/firstboot.service > /etc/systemd/system/firstboot.service
+        curl https://raw.githubusercontent.com/nnachefski/ocpstuff/master/satellite/firstboot/firstboot.sh > /root/firstboot.sh && chmod +x /root/firstboot.sh
+        curl https://raw.githubusercontent.com/nnachefski/ocpstuff/master/satellite/firstboot/firstboot.service > /etc/systemd/system/firstboot.service
         systemctl daemon-reload
         systemctl enable firstboot.service
     <% end -%>
