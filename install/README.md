@@ -47,7 +47,7 @@ yum install -d1 -y atomic-openshift-clients
 ## install container runtime
 yum install -d1 -y docker
 #yum install -d1 -y crio cri-tools podman skopeo
-## set the repo in runtime config
+## set the repo in runtime config (disconnected only)
 #sed -i "s/registry.access.redhat.com'/registry.access.redhat.com\', \'$SRC_REPO\'/" /etc/containers/registries.conf
 ## enable container runtime
 systemctl enable docker --now
