@@ -14,15 +14,16 @@ oc adm policy add-cluster-role-to-group cluster-admin admins
 oc adm policy add-role-to-group basic-user authenticated
 oc adm policy add-cluster-role-to-user cluster-reader readonly
 oc patch dc docker-registry -p '{"spec":{"template":{"spec":{"containers":[{"name":"registry","volumeMounts":[{"mountPath":"/etc/pki","name":"certs"}]}],"volumes":[{"hostPath":{"path":"/etc/pki","type":"Directory"},"name":"certs"}]}}}}' -n default
-sleep 60
+sleep 30
 oc adm policy add-scc-to-user hostaccess -z registry -n default
 oc get cm node-config-all-in-one -n openshift-node -o yaml |sed '/RotateKubeletClientCertificate/ s/$/,DevicePlugins=true/' > node-config.patch
 oc replace cm node-config-all-in-one -f node-config.patch -n openshift-node 
-sleep 60
+sleep 30
 
 curl https://raw.githubusercontent.com/nnachefski/ocpstuff/master/satellite/firstboot/post-install.sh > post-install.sh && chmod +x post-install.sh
 ansible "*" -m script -a "post-install.sh"
 echo "############ RETURN '$?'"
+sleep 30
 
 # re-import all the images streams
 for i in `oc get is -n openshift |awk '{print $1}'`; do oc import-image $i -n openshift --all; done
