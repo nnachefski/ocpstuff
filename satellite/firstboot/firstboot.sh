@@ -51,3 +51,5 @@ oc create -f https://satellite.home.nicknach.net/pub/cr-full.yaml
 oc new-project crypto
 oc adm policy add-scc-to-user anyuid -z default
 oc new-app https://github.com/nnachefski/ocpstuff.git --context-dir=crypto/ethminer --name=ethminer -e NVIDIA_VISIBLE_DEVICES=all -e NVIDIA_DRIVER_CAPABILITIES="compute,utility" -e NVIDIA_REQUIRE_CUDA="cuda>=9.1" -e APP_VER="0.14.0"
+
+echo `date` > /root/finished.txt
