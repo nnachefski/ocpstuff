@@ -38,13 +38,12 @@ oc create -f https://raw.githubusercontent.com/Maistra/openshift-ansible/maistra
 oc new-app istio-operator-job --param OPENSHIFT_ISTIO_MASTER_PUBLIC_URL=https://ocpapi.home.nicknach.net:8443 --param OPENSHIFT_RELEASE=v3.11.0
 oc create -f https://satellite.home.nicknach.net/pub/cr-full.yaml
 # install istio test app
-export PROJECT=istio-test
-oc new-project $PROJECT || oc project $PROJECT
+oc new-project istio-test
 oc adm policy add-scc-to-user anyuid -z default
 oc adm policy add-scc-to-user privileged -z default
 oc label namespace istio-system istio-injection=enabled
-oc label namespace $PROJECT istio-injection=enabled
-oc get namespace -L istio-injection
+oc label namespace istio-test istio-injection=enabled
+#oc get namespace -L istio-injection
 curl https://raw.githubusercontent.com/istio/istio/master/samples/bookinfo/platform/kube/bookinfo.yaml > bookinfo.yaml
 oc create -f bookinfo.yaml
 oc expose svc productpage
@@ -52,5 +51,7 @@ oc expose svc productpage
 oc new-project crypto
 oc adm policy add-scc-to-user anyuid -z default
 oc new-app https://github.com/nnachefski/ocpstuff.git --context-dir=crypto/ethminer --name=ethminer -e NVIDIA_VISIBLE_DEVICES=all -e NVIDIA_DRIVER_CAPABILITIES="compute,utility" -e NVIDIA_REQUIRE_CUDA="cuda>=9.1" -e APP_VER="0.14.0"
+oc new-project foo
+oc new-app https://raw.githubusercontent.com/nnachefski/pydemo/master/openshift/templates/pydemo-postgresql.yaml --name=pydemo
 
 echo `date` > /root/finished.txt
