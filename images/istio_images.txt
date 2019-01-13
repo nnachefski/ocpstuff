@@ -6,3 +6,4 @@ openshift-istio-tech-preview/pilot:0.6.0
 openshift-istio-tech-preview/citadel:0.6.0
 openshift-istio-tech-preview/sidecar-injector:0.6.0
 openshift-istio-tech-preview/galley:0.6.0
+distributed-tracing-tech-preview/jaeger-agent:1.8.1
