@@ -42,6 +42,7 @@ export PROJECT=istio-test
 oc new-project $PROJECT || oc project $PROJECT
 oc adm policy add-scc-to-user anyuid -z default
 oc adm policy add-scc-to-user privileged -z default
+oc label namespace istio-system istio-injection=enabled
 oc label namespace $PROJECT istio-injection=enabled
 oc get namespace -L istio-injection
 curl https://raw.githubusercontent.com/istio/istio/master/samples/bookinfo/platform/kube/bookinfo.yaml > bookinfo.yaml
