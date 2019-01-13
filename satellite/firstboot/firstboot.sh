@@ -38,15 +38,15 @@ oc create -f https://raw.githubusercontent.com/Maistra/openshift-ansible/maistra
 oc new-app istio-operator-job --param OPENSHIFT_ISTIO_MASTER_PUBLIC_URL=https://ocpapi.home.nicknach.net:8443 --param OPENSHIFT_RELEASE=v3.11.0
 oc create -f https://satellite.home.nicknach.net/pub/cr-full.yaml
 # install istio test app
-#export PROJECT=istio-test
-#oc new-project $PROJECT || oc project $PROJECT
-#oc adm policy add-scc-to-user anyuid -z default
-#oc adm policy add-scc-to-user privileged -z default
-#oc label namespace $PROJECT istio-injection=enabled
-#oc get namespace -L istio-injection
-#curl https://raw.githubusercontent.com/istio/istio/master/samples/bookinfo/platform/kube/bookinfo.yaml > bookinfo.yaml
-#oc create -f bookinfo.yaml
-#oc expose svc productpage
+export PROJECT=istio-test
+oc new-project $PROJECT || oc project $PROJECT
+oc adm policy add-scc-to-user anyuid -z default
+oc adm policy add-scc-to-user privileged -z default
+oc label namespace $PROJECT istio-injection=enabled
+oc get namespace -L istio-injection
+curl https://raw.githubusercontent.com/istio/istio/master/samples/bookinfo/platform/kube/bookinfo.yaml > bookinfo.yaml
+oc create -f bookinfo.yaml
+oc expose svc productpage
 # deploy etherminers
 oc new-project crypto
 oc adm policy add-scc-to-user anyuid -z default
