@@ -1,6 +1,7 @@
+cd /root
 cp /etc/origin/node/pods/apiserver.yaml apiserver.yaml.prepatch
 oc ex config patch apiserver.yaml.prepatch -p '{"spec":{"containers":[{"name":"api","volumeMounts":[{"mountPath":"/etc/pki","name":"certs"}]}],"volumes":[{"hostPath":{"path":"/etc/pki","type":"Directory"},"name":"certs"}]}}' > /etc/origin/node/pods/apiserver.yaml      
-wget https://raw.githubusercontent.com/Maistra/openshift-ansible/maistra-0.6/istio/master-config.patch
+curl https://raw.githubusercontent.com/Maistra/openshift-ansible/maistra-0.6/istio/master-config.patch > master-config.patch
 cp -f /etc/origin/master/master-config.yaml master-config.yaml.prepatch
 oc ex config patch master-config.yaml.prepatch -p "$(cat master-config.patch)" > /etc/origin/master/master-config.yaml
 /usr/local/bin/master-restart api && /usr/local/bin/master-restart controllers

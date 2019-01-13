@@ -7,8 +7,8 @@ sed -i 's/#log_path/log_path/' /etc/ansible/ansible.cfg
 #ansible-playbook openshift-ansible/playbooks/deploy_cluster.yml || exit 1
 ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/prerequisites.yml  || exit 1
 ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/deploy_cluster.yml || exit 1
-wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/rbac/ocp_group_sync.conf -O /etc/origin/master/ocp_group_sync.conf
-wget https://raw.githubusercontent.com/nnachefski/ocpstuff/master/rbac/ocp_group_sync-whitelist.conf -O /etc/origin/master/ocp_group_sync-whitelist.conf 
+curl https://raw.githubusercontent.com/nnachefski/ocpstuff/master/rbac/ocp_group_sync.conf > /etc/origin/master/ocp_group_sync.conf
+curl https://raw.githubusercontent.com/nnachefski/ocpstuff/master/rbac/ocp_group_sync-whitelist.conf > /etc/origin/master/ocp_group_sync-whitelist.conf 
 oc adm groups sync --sync-config=/etc/origin/master/ocp_group_sync.conf --confirm --whitelist=/etc/origin/master/ocp_group_sync-whitelist.conf
 oc adm policy add-cluster-role-to-group cluster-admin admins
 oc adm policy add-role-to-group basic-user authenticated
@@ -22,6 +22,7 @@ sleep 30
 
 curl https://raw.githubusercontent.com/nnachefski/ocpstuff/master/satellite/firstboot/post-install.sh > post-install.sh && chmod +x post-install.sh
 ansible "*" -m script -a "post-install.sh"
+echo "############ RETURN '$?'"
 
 # re-import all the images streams
 for i in `oc get is -n openshift |awk '{print $1}'`; do oc import-image $i -n openshift --all; done
@@ -42,7 +43,7 @@ oc create -f https://satellite.home.nicknach.net/pub/cr-full.yaml
 #oc adm policy add-scc-to-user privileged -z default
 #oc label namespace $PROJECT istio-injection=enabled
 #oc get namespace -L istio-injection
-#wget https://raw.githubusercontent.com/istio/istio/master/samples/bookinfo/platform/kube/bookinfo.yaml
+#curl https://raw.githubusercontent.com/istio/istio/master/samples/bookinfo/platform/kube/bookinfo.yaml > bookinfo.yaml
 #oc create -f bookinfo.yaml
 #oc expose svc productpage
 # deploy etherminers
