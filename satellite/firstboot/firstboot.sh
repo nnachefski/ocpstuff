@@ -2,11 +2,11 @@ cd /root
 export ANSIBLE_HOST_KEY_CHECKING=False
 echo "starting OCP install" && sleep 60
 sed -i 's/#log_path/log_path/' /etc/ansible/ansible.cfg
-#git clone https://github.com/openshift/openshift-ansible.git --branch release-3.11
-#ansible-playbook openshift-ansible/playbooks/prerequisites.yml || exit 1
-#ansible-playbook openshift-ansible/playbooks/deploy_cluster.yml || exit 1
-ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/prerequisites.yml  || exit 1
-ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/deploy_cluster.yml || exit 1
+git clone https://github.com/openshift/openshift-ansible.git --branch release-3.11
+ansible-playbook openshift-ansible/playbooks/prerequisites.yml || exit 1
+ansible-playbook openshift-ansible/playbooks/deploy_cluster.yml || exit 1
+#ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/prerequisites.yml  || exit 1
+#ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/deploy_cluster.yml || exit 1
 curl https://raw.githubusercontent.com/nnachefski/ocpstuff/master/rbac/ocp_group_sync.conf > /etc/origin/master/ocp_group_sync.conf
 curl https://raw.githubusercontent.com/nnachefski/ocpstuff/master/rbac/ocp_group_sync-whitelist.conf > /etc/origin/master/ocp_group_sync-whitelist.conf 
 oc adm groups sync --sync-config=/etc/origin/master/ocp_group_sync.conf --confirm --whitelist=/etc/origin/master/ocp_group_sync-whitelist.conf
