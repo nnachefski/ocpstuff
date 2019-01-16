@@ -18,6 +18,10 @@ Summary: 9 VMs recommended for multi master install.
   * 4 vCPUs 
   * 50GB Disk (for OS)
   * RHEL7.5 upgraded to latest patchset
+* Load Balancer (required)
+  * if load balancer is not available, an additional RHEL VM can be provsioned for this purpose.  
+  * 4GB RAM
+  * 1 vCPU
   
 * Internet connectivity is recommended
   * HTTPS Whitelist these trusted hosts in proxies and/or firewalls (if needed)
