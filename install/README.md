@@ -44,6 +44,7 @@ subscription-manager repos --enable=rhel-7-server-rpms --enable=rhel-7-server-ex
 yum install -d1 -y yum-utils wget git net-tools bind-utils iptables-services bridge-utils bash-completion nfs-utils dstat mlocate screen
 ## install openshift client package (oc)
 yum install -d1 -y atomic-openshift-clients
+sed -i 's/#log_path/log_path/' /etc/ansible/ansible.cfg
 ## install container runtime
 yum install -d1 -y docker
 #yum install -d1 -y crio cri-tools podman skopeo
