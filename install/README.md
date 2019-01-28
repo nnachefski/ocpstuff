@@ -22,7 +22,7 @@ yum install -d1 -y -q subscription-manager yum-utils wget
 subscription-manager register --username=$RHN_ID --password \$1 --force
 subscription-manager attach --pool=$RHN_POOL
 subscription-manager repos --disable="*"
-subscription-manager repos --enable=rhel-7-server-rpms --enable=rhel-7-server-extras-rpms --enable=rhel-7-fast-datapath-rpms --enable=rhel-7-server-ansible-2.6-rpms --enable=rh-gluster-3-client-for-rhel-7-server-rpms --enable=rhel-7-server-ose-3.11-rpms
+subscription-manager repos --enable=rhel-7-server-rpms --enable=rhel-7-server-extras-rpms --enable=rhel-7-server-ansible-2.6-rpms --enable=rh-gluster-3-client-for-rhel-7-server-rpms --enable=rhel-7-server-ose-3.11-rpms
 ## OR add your internal repos (for disconnected installs)
 #rm -rf /etc/yum.repos.d/* && yum clean all
 #yum-config-manager --add-repo http://$SRC_REPO/repo/rhel-7-server-ose-3.11-rpms
@@ -53,8 +53,8 @@ yum install -d1 -y docker
 ## enable container runtime
 systemctl enable docker --now
 #systemctl enable crio --now
-#wipe the gluster disk
-wipefs --all /dev/sdb -f
+## wipe the gluster disk
+#wipefs --all /dev/sdb -f
 ## install gluster packages
 yum install -d1 -y cns-deploy heketi-client
 ## make sure your nodes are up-to-date
