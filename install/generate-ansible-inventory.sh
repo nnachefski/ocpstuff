@@ -107,6 +107,7 @@ openshift_master_ldap_ca_file=~/my-ldap-ca-bundle.crt
 #openshift_cloudprovider_openstack_password=kX7mE10dkX7mE10d
 #openshift_cloudprovider_openstack_tenant_id=f741ba7204ec47c9886c050891dd592e
 #openshift_cloudprovider_openstack_tenant_name=nn-dev
+#openshift_cloudprovider_openstack_domain_name=Default
 ##openshift_cloudprovider_openstack_region=RegionOne
 ##openshift_cloudprovider_openstack_lb_subnet_id=d7c61f2a-d591-461d-af28-308ade046c0d
 
