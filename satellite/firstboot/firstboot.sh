@@ -1,7 +1,6 @@
 cd /root
 export ANSIBLE_HOST_KEY_CHECKING=False
 echo "starting OCP install" && sleep 60
-yum-config-manager --disable epel
 sed -i 's/#log_path/log_path/' /etc/ansible/ansible.cfg
 #git clone https://github.com/openshift/openshift-ansible.git --branch release-3.11
 curl https://raw.githubusercontent.com/openshift/openshift-ansible/master/roles/openshift_storage_glusterfs/files/glusterfs-template.yml > /usr/share/ansible/openshift-ansible/roles/openshift_storage_glusterfs/files/glusterfs-template.yml
