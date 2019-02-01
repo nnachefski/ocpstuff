@@ -6,18 +6,18 @@ Summary: 9 VMs recommended for multi master install.
   * 32GB RAM 
   * 4 vCPUs 
   * 50GB Disk (for OS) **(put all of the space in '/' partition.  Do not bother splitting up /var, /usr, /home, etc...)**
-  * RHEL7.5 upgraded to latest patchset
+  * RHEL7.6 upgraded to latest patchset
 * Infrastructure Nodes (3 VMs required)
   * 32GB RAM 
   * 4 vCPUs 
   * 50GB Disk (for OS)
   * 200GB Disk (for CNS, raw/unformatted)  
-  * RHEL7.5 upgraded to latest patchset
+  * RHEL7.6 upgraded to latest patchset
 * Application Nodes (3 VMs recommended) 
   * 32GB RAM 
   * 4 vCPUs 
   * 50GB Disk (for OS)
-  * RHEL7.5 upgraded to latest patchset
+  * RHEL7.6 upgraded to latest patchset
 * Load Balancer (required)
   * if load balancer is not available, an additional RHEL VM can be provsioned for this purpose.  
   * 4GB RAM
@@ -44,7 +44,7 @@ Activate the Openshift subscriptions provided by Red Hat. If using a Satellite S
    * rhel-7-server-ansible-2.6-rpms
 
 Additional Considerations:
-   1. RHEL7.5 vanilla is recommended (unmodified ISO as it comes from RH)
+   1. RHEL7.6 vanilla is recommended (unmodified ISO as it comes from RH)
     - The “Minimum” installation is recommended
    2. SELinux must be in “Enforcing” (default in vanilla image)
     - Test with 'getenforce'
