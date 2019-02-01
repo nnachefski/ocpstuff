@@ -12,7 +12,7 @@ Summary: 4 VMs recommended for single master install.
   * 4 vCPUs
   * 50GB Disk (for OS)
   * RHEL7.6 upgraded to latest patchset
-  * 200GB Disk (for CNS, raw/unformatted)
+  * 200GB Disk (for OCS, raw/unformatted)
 
 * Internet connectivity is recommended
   * HTTPS Whitelist these trusted hosts in proxies and/or firewalls (if needed)

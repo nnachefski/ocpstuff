@@ -11,7 +11,7 @@ Summary: 9 VMs recommended for multi master install.
   * 32GB RAM 
   * 4 vCPUs 
   * 50GB Disk (for OS)
-  * 200GB Disk (for CNS, raw/unformatted)  
+  * 200GB Disk (for OCS, raw/unformatted)  
   * RHEL7.6 upgraded to latest patchset
 * Application Nodes (3 VMs recommended) 
   * 32GB RAM 
