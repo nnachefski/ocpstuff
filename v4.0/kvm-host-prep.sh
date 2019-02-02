@@ -1,10 +1,10 @@
 yum -y -d1 install libvirt libtool rpm-build qemu-kvm kernel-devel kernel-headers dhcp dstat iotop tcpdump ipa-client xorg-x11-xauth virt-manager libvirt-daemon-kvm libvirt-devel git wget golang-bin gcc-c++ net-tools
-cp /lib/systemd/system/dhcrelay.service /etc/systemd/system/
-sed 's/pid/pid 10.1.11.60/' -i /etc/systemd/system/dhcrelay.service
-systemctl --system daemon-reload
-systemctl enable dhcrelay --now
+#cp /lib/systemd/system/dhcrelay.service /etc/systemd/system/
+#sed 's/pid/pid 10.1.11.60/' -i /etc/systemd/system/dhcrelay.service
+#systemctl --system daemon-reload
+#systemctl enable dhcrelay --now
+#echo "systemctl restart dhcrelay" > /etc/cron.hourly/dhcrelay && chmod +x /etc/cron.hourly/dhcrelay
 firewall-cmd --set-default-zone trusted
-echo "systemctl restart dhcrelay" > /etc/cron.hourly/dhcrelay && chmod +x /etc/cron.hourly/dhcrelay
 sysctl net.ipv4.ip_forward=1
 echo "net.ipv4.ip_forward = 1" | sudo tee /etc/sysctl.d/99-ipforward.conf
 sysctl -p /etc/sysctl.d/99-ipforward.conf
@@ -23,10 +23,10 @@ sudo virsh pool-define /dev/stdin <<EOF
 EOF
 sudo virsh pool-start default
 sudo virsh pool-autostart default
-#echo dns=dnsmasq >> /etc/NetworkManager/NetworkManager.conf
-#echo server=/ocp4.home.nicknach.net/10.1.3.100 | sudo tee /etc/NetworkManager/dnsmasq.d/openshift.conf
-systemctl enable libvirtd
-systemctl restart libvirtd
+sed -i '/[main]/a dns=dnsmasq' /etc/NetworkManager/NetworkManager.conf
+echo server=/tt.testing/192.168.126.1 | sudo tee /etc/NetworkManager/dnsmasq.d/openshift.conf
+systemctl reload NetworkManager && systemctl restart NetworkManager
+systemctl enable libvirtd; systemctl restart libvirtd
 mkdir -p /root/go/src/github.com/openshift && mkdir -p /root/go/bin && mkdir -p /tmp/go/bin
 curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
 export GOPATH=/root/go && echo GOPATH=/root/go >> /etc/environment
