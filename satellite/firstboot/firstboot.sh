@@ -12,9 +12,9 @@ oc adm groups sync --sync-config=/etc/origin/master/ocp_group_sync.conf --confir
 oc adm policy add-cluster-role-to-group cluster-admin admins
 oc adm policy add-role-to-group basic-user authenticated
 oc adm policy add-cluster-role-to-user cluster-reader readonly
-oc patch dc docker-registry -p '{"spec":{"template":{"spec":{"containers":[{"name":"registry","volumeMounts":[{"mountPath":"/etc/pki","name":"certs"}]}],"volumes":[{"hostPath":{"path":"/etc/pki","type":"Directory"},"name":"certs"}]}}}}' -n default
+#oc patch dc docker-registry -p '{"spec":{"template":{"spec":{"containers":[{"name":"registry","volumeMounts":[{"mountPath":"/etc/pki","name":"certs"}]}],"volumes":[{"hostPath":{"path":"/etc/pki","type":"Directory"},"name":"certs"}]}}}}' -n default
 sleep 60
-oc adm policy add-scc-to-user hostaccess -z registry -n default
+#oc adm policy add-scc-to-user hostaccess -z registry -n default
 oc get cm node-config-all-in-one -n openshift-node -o yaml |sed '/RotateKubeletClientCertificate/ s/$/,DevicePlugins=true/' > node-config.patch
 oc replace cm node-config-all-in-one -f node-config.patch -n openshift-node 
 sleep 60
@@ -25,7 +25,7 @@ echo "############ RETURN '$?'"
 sleep 60
 
 # re-import all the images streams
-for i in `oc get is -n openshift |awk '{print $1}'`; do oc import-image $i -n openshift --all; done
+#for i in `oc get is -n openshift |awk '{print $1}'`; do oc import-image $i -n openshift --all; done
 # setup nvidia daemonset
 oc create serviceaccount nvidia-deviceplugin -n kube-system
 oc create -f https://raw.githubusercontent.com/nnachefski/ocpstuff/master/nvidia/nvidia-device-plugin-scc.yaml -n kube-system
@@ -47,10 +47,10 @@ oc create -f https://raw.githubusercontent.com/nnachefski/ocpstuff/master/nvidia
 #oc create -f bookinfo.yaml
 #oc expose svc productpage
 # deploy etherminers
-oc new-project crypto
-oc adm policy add-scc-to-user anyuid -z default
-oc new-app https://github.com/nnachefski/ocpstuff.git --context-dir=crypto/ethminer --name=ethminer -e NVIDIA_VISIBLE_DEVICES=all -e NVIDIA_DRIVER_CAPABILITIES="compute,utility" -e NVIDIA_REQUIRE_CUDA="cuda>=9.1" -e APP_VER="0.14.0"
-oc new-project foo
-oc new-app https://raw.githubusercontent.com/nnachefski/pydemo/master/openshift/templates/pydemo-postgresql.yaml --name=pydemo
+#oc new-project crypto
+#oc adm policy add-scc-to-user anyuid -z default
+#oc new-app https://github.com/nnachefski/ocpstuff.git --context-dir=crypto/ethminer --name=ethminer -e NVIDIA_VISIBLE_DEVICES=all -e NVIDIA_DRIVER_CAPABILITIES="compute,utility" -e NVIDIA_REQUIRE_CUDA="cuda>=9.1" -e APP_VER="0.14.0"
+#oc new-project foo
+#oc new-app https://raw.githubusercontent.com/nnachefski/pydemo/master/openshift/templates/pydemo-postgresql.yaml --name=pydemo
 
 echo `date` > /root/finished.txt
