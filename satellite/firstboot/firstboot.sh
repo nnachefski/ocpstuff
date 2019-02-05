@@ -1,16 +1,4 @@
 cd /root
-
-yum -y -d1 install kernel-devel 
-#rpm -ivh https://developer.download.nvidia.com/compute/cuda/repos/rhel7/x86_64/cuda-repo-rhel7-9.1.85-1.x86_64.rpm 
-yum -y -d1 install nvidia-driver
-yum -y -d1 install cuda-9-1
-curl -s -L https://nvidia.github.io/nvidia-container-runtime/centos7/x86_64/nvidia-container-runtime.repo | tee /etc/yum.repos.d/nvidia-container-runtime.repo
-yum -y -d1 install nvidia-container-runtime-hook
-curl http://satellite.home.nicknach.net/pub/oci-nvidia-hook > /usr/libexec/oci/hooks.d/oci-nvidia-hook
-chmod +x /usr/libexec/oci/hooks.d/oci-nvidia-hook
-grub2-mkconfig -o /boot/grub2/grub.cfg
-subscription-manager repos --disable nicknach_epel_epel
-
 export ANSIBLE_HOST_KEY_CHECKING=False
 echo "starting OCP install" && sleep 60
 sed -i 's/#log_path/log_path/' /etc/ansible/ansible.cfg
