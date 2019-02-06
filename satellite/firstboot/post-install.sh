@@ -9,3 +9,4 @@ cd /root
 #chcon -R -t container_file_t  /dev/nvidia*
 #restorecon -R /dev/nvidia*
 setenforce 0 && sed -i 's/=enforcing/=permissive/' /etc/selinux/config
+dkms autoinstall
