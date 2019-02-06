@@ -1,5 +1,5 @@
 export DHCP_SERVER=10.1.11.60
-export REPO_SERVER=http://repo.home.nicknach.net
+export REPO_SERVER=http://satellite.home.nicknach.net
 
 yum-config-manager --disable \* && rm -rf /etc/yum.repos.d/*.repo && yum clean all
 yum-config-manager --add-repo $REPO_SERVER/repo/rhel-7-server-rpms
