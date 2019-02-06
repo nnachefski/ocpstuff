@@ -1,4 +1,5 @@
 cd /root
+dkms autoinstall
 export ANSIBLE_HOST_KEY_CHECKING=False
 echo "starting OCP install" && sleep 60
 sed -i 's/#log_path/log_path/' /etc/ansible/ansible.cfg
