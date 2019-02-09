@@ -1,9 +1,9 @@
-openshift-istio-tech-preview/istio-operator:0.6.0
-openshift-istio-tech-preview/openshift-ansible:0.6.0
-openshift-istio-tech-preview/proxyv2:0.6.0
-openshift-istio-tech-preview/mixer:0.6.0
-openshift-istio-tech-preview/pilot:0.6.0
-openshift-istio-tech-preview/citadel:0.6.0
-openshift-istio-tech-preview/sidecar-injector:0.6.0
-openshift-istio-tech-preview/galley:0.6.0
+openshift-istio-tech-preview/istio-operator:0.7.0
+openshift-istio-tech-preview/openshift-ansible:0.7.0
+openshift-istio-tech-preview/proxyv2:0.7.0
+openshift-istio-tech-preview/mixer:0.7.0
+openshift-istio-tech-preview/pilot:0.7.0
+openshift-istio-tech-preview/citadel:0.7.0
+openshift-istio-tech-preview/sidecar-injector:0.7.0
+openshift-istio-tech-preview/galley:0.7.0
 distributed-tracing-tech-preview/jaeger-agent:1.8.1
