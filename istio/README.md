@@ -2,7 +2,7 @@
 ```
 export MAISTRA_BASE=https://raw.githubusercontent.com/Maistra/openshift-ansible/maistra-0.7
 ```
-##### # use ansible patch the master-config on all masters
+##### # use ansible to patch the master-config on all masters
 ```
 cat <<EOF > istio.sh
  cd ~
