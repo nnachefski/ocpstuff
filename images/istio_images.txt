@@ -6,4 +6,7 @@ openshift-istio-tech-preview/pilot:0.7.0
 openshift-istio-tech-preview/citadel:0.7.0
 openshift-istio-tech-preview/sidecar-injector:0.7.0
 openshift-istio-tech-preview/galley:0.7.0
-distributed-tracing-tech-preview/jaeger-agent:1.8.1
+distributed-tracing-tech-preview/jaeger-query:1.9.0
+distributed-tracing-tech-preview/jaeger-collector:1.9.0
+kiali/kiali:v0.13.0
+
