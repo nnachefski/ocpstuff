@@ -9,5 +9,5 @@ openshift-istio-tech-preview/galley:0.7.0
 distributed-tracing-tech-preview/jaeger-query:1.9.0
 distributed-tracing-tech-preview/jaeger-collector:1.9.0
 kiali/kiali:v0.13.0
-docker.io/prom/prometheus:v2.3.1"
+docker.io/prom/prometheus:v2.3.1
 
