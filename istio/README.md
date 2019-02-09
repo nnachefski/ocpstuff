@@ -17,8 +17,13 @@ ansible "master*" -m script -a "./istio.sh"
 ```
 #### # use ansible to set elasticsearch vars on *ALL* nodes
 ```
-ansible "*" -m shell -a "echo 'vm.max_map_count = 262144' > /etc/sysctl.d/99-elasticsearch.conf"
-ansible "*" -m shell -a "sysctl vm.max_map_count=262144"
+cat <<EOF > istio-elastic.sh
+ echo 'vm.max_map_count = 262144' > /etc/sysctl.d/99-elasticsearch.conf
+ sysctl vm.max_map_count=262144
+EOF
+
+chmod +x istio-elastic.sh
+ansible "*" -m script -a "./istio-elastic.sh"
 ```
 ###### # use --private-key= if you are on AWS
 ##### # deploy istio
