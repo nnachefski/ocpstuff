@@ -1,6 +1,6 @@
 #### # on the master
 ```
-export MAISTRA=https://raw.githubusercontent.com/Maistra/openshift-ansible/maistra-0.6
+export MAISTRA=https://raw.githubusercontent.com/Maistra/openshift-ansible/maistra-0.7
 ```
 ##### # patch the master-config (do this on all masters)
 ```
@@ -17,7 +17,8 @@ ansible "*" -m shell -a "sysctl vm.max_map_count=262144"
 ```
 ###### # use --private-key= if you are on AWS
 ##### # deploy istio
-###### # brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888/openshift-istio-tech-preview/istio-operator:0.6.0
+###### # if testing puddle/beta bits, use the internal engineering docker registry 'brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888'
+###### # and grab the necessary images:  https://raw.githubusercontent.com/nnachefski/ocpstuff/master/images/istio_images.txt
 ```
 oc new-project istio-operator
 oc create -f $MAISTRA/istio/istio_product_operator_template.yaml
