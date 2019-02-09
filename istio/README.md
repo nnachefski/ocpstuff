@@ -5,11 +5,11 @@ export MAISTRA_BASE=https://raw.githubusercontent.com/Maistra/openshift-ansible/
 ##### # use ansible patch the master-config on all masters
 ```
 cat <<EOF > istio.sh
-	cd ~
-	curl $MAISTRA_BASE/istio/master-config.patch > master-config.patch
-	cp -p /etc/origin/master/master-config.yaml master-config.yaml.prepatch
-	oc ex config patch master-config.yaml.prepatch -p "$(cat master-config.patch)" > /etc/origin/master/master-config.yaml
-	/usr/local/bin/master-restart api && /usr/local/bin/master-restart controllers
+cd ~
+curl $MAISTRA_BASE/istio/master-config.patch > master-config.patch
+cp -p /etc/origin/master/master-config.yaml master-config.yaml.prepatch
+oc ex config patch master-config.yaml.prepatch -p "$(cat master-config.patch)" > /etc/origin/master/master-config.yaml
+/usr/local/bin/master-restart api && /usr/local/bin/master-restart controllers
 EOF
 chmod +x istio.sh
 ansible "master*" -m script -a "./istio.sh"
