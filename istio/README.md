@@ -15,7 +15,7 @@ EOF
 chmod +x istio.sh
 ansible "master*" -m script -a "./istio.sh"
 ```
-#### # use ansible to set elasticsearch vars on all nodes
+#### # use ansible to set elasticsearch vars on *ALL* nodes
 ```
 ansible "*" -m shell -a "echo 'vm.max_map_count = 262144' > /etc/sysctl.d/99-elasticsearch.conf"
 ansible "*" -m shell -a "sysctl vm.max_map_count=262144"
