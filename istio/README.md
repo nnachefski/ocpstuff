@@ -33,8 +33,10 @@ ansible "*" -m script -a "./istio-elastic.sh"
 oc new-project istio-operator
 oc create -f $MAISTRA_BASE/istio/istio_product_operator_template.yaml
 oc new-app istio-operator-job --param OPENSHIFT_ISTIO_MASTER_PUBLIC_URL=api.ocp.nicknach.net --param OPENSHIFT_RELEASE=v3.11.0
-oc create -f $MAISTRA_BASE/istio/cr-full.yaml
+#oc create -f $MAISTRA_BASE/istio/cr-full.yaml
+oc create -f http://satellite.home.nicknach.net/pub/cr-full.yaml
 ```
+###### i keep my cr-full object in a protected repo because it contains my github token
 ##### # to uninstall
 ```
 oc project istio-operator
