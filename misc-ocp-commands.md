@@ -1,5 +1,13 @@
 ### # misc stuff
 
+##### # start a debug pod on the platform for troubleshooting
+```
+oc run rhel-tools --image satellite.home.nicknach.net:8888/rhel7/rhel-tools:latest --command -- sleep 500
+oc create serviceaccount useroot
+oc adm policy add-scc-to-user anyuid -z useroot
+oc patch dc/rhel-tools -p '{"spec":{"template":{"spec":{"serviceAccountName": "useroot"}}}}'
+```
+
 #### # work-around for x509 error on private registry.  
 ##### # add this to master-config.yaml on all masters
 ```
