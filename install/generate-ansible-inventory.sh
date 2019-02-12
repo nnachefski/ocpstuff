@@ -179,9 +179,10 @@ openshift_master_default_subdomain=$APPS_DOMAIN
 #osm_cluster_network_cidr=10.129.0.0/14
 #openshift_portal_net=172.31.0.0/16
 
-## use these if you want to switch the console/api port to something other that 8443
-#openshift_master_public_api_url=https://api.$ROOT_DOMAIN:443
-#openshift_master_public_console_url=https://console.$ROOT_DOMAIN:443/console
+## use these to customize the redirect
+##openshift_master_public_api_url=https://api.$ROOT_DOMAIN:443
+##openshift_master_public_console_url=https://console.$ROOT_DOMAIN:443/console
+## switch the main port from 8443 to 443
 #openshift_master_api_port=443
 #openshift_master_console_port=443
 
