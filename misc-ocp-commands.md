@@ -76,7 +76,7 @@ oc patch dc docker-registry -p '{"spec":{"template":{"spec":{"containers":[{"nam
 
 oc adm policy add-scc-to-user hostaccess -z registry -n default
 
-ansible "infra*" -a "sed -i 's/=enforcing/=permissive/' /etc/sysconfig/selinux"
+ansible "infra*" -a "sed -i 's/=enforcing/=permissive/' /etc/selinux/config"
 
 ansible "infra*" -a "setenforce 0" 
 
