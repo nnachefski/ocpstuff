@@ -19,8 +19,9 @@
   "AUTH_LDAP_GROUP_SEARCH": [
     "cn=tower_users,cn=groups,cn=accounts,dc=home,dc=nicknach,dc=net",
     "SCOPE_SUBTREE",
-    "(objectClass=group)"
+    "(objectClass=ipausergroup)"
   ],
   "AUTH_LDAP_USER_FLAGS_BY_GROUP": {
+    'is_superuser': 'cn=tower_admins,cn=groups,cn=accounts,dc=home,dc=nicknach,dc=net',
   }
 }
