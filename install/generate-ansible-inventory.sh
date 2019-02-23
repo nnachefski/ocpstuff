@@ -33,9 +33,14 @@ openshift_deployment_type=openshift-enterprise
 #openshift_examples_modify_imagestreams=true
 
 ## specify storage images
-#openshift_storage_glusterfs_image="registry.access.redhat.com/rhgs3/rhgs-server-rhel7:v3.11"
-#openshift_storage_glusterfs_block_image="registry.access.redhat.com/rhgs3/rhgs-gluster-block-prov-rhel7:v3.11"
-#openshift_storage_glusterfs_heketi_image="registry.access.redhat.com/rhgs3/rhgs-volmanager-rhel7:v3.11"
+openshift_storage_glusterfs_version=latest
+openshift_storage_glusterfs_block_version=latest
+openshift_storage_glusterfs_s3_version=latest
+openshift_storage_glusterfs_heketi_version=latest
+openshift_storage_glusterfs_registry_version=latest
+openshift_storage_glusterfs_registry_block_version=latest
+openshift_storage_glusterfs_registry_s3_version=latest
+openshift_storage_glusterfs_registry_heketi_version=latest
 
 ## container runtime options
 oreg_auth_user=$RHN_ID
