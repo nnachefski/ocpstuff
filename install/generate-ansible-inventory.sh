@@ -33,14 +33,10 @@ openshift_deployment_type=openshift-enterprise
 #openshift_examples_modify_imagestreams=true
 
 ## specify storage images
-openshift_storage_glusterfs_version=latest
-openshift_storage_glusterfs_block_version=latest
-openshift_storage_glusterfs_s3_version=latest
-openshift_storage_glusterfs_heketi_version=latest
-openshift_storage_glusterfs_registry_version=latest
-openshift_storage_glusterfs_registry_block_version=latest
-openshift_storage_glusterfs_registry_s3_version=latest
-openshift_storage_glusterfs_registry_heketi_version=latest
+openshift_storage_glusterfs_image=satellite.home.nicknach.net:8888/rhgs3/rhgs-server-rhel7:v3.11
+openshift_storage_glusterfs_block_image=satellite.home.nicknach.net:8888/rhgs3/rhgs-gluster-block-prov-rhel7:v3.11
+openshift_storage_glusterfs_s3_image=satellite.home.nicknach.net:8888/rhgs3/rhgs-s3-server-rhel7:v3.11
+openshift_storage_glusterfs_heketi_image=satellite.home.nicknach.net:8888/rhgs3/rhgs-volmanager-rhel7:v3.11
 
 ## container runtime options
 oreg_auth_user=$RHN_ID
