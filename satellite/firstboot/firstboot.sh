@@ -3,7 +3,6 @@ export ANSIBLE_HOST_KEY_CHECKING=False
 echo "starting OCP install" && sleep 60
 sed -i 's/#log_path/log_path/' /etc/ansible/ansible.cfg
 #git clone https://github.com/openshift/openshift-ansible.git --branch release-3.11
-curl https://raw.githubusercontent.com/openshift/openshift-ansible/master/roles/openshift_storage_glusterfs/files/glusterfs-template.yml > /usr/share/ansible/openshift-ansible/roles/openshift_storage_glusterfs/files/glusterfs-template.yml
 ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/prerequisites.yml || exit 1
 ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/deploy_cluster.yml || exit 1
 curl https://raw.githubusercontent.com/nnachefski/ocpstuff/master/rbac/ocp_group_sync.conf > /etc/origin/master/ocp_group_sync.conf
