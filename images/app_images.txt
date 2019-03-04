@@ -1,12 +1,3 @@
-openshift-istio-tech-preview/istio-operator:0.6.0
-openshift-istio-tech-preview/openshift-ansible:0.6.0
-openshift-istio-tech-preview/citadel:0.6.0
-openshift-istio-tech-preview/proxyv2:0.6.0
-openshift-istio-tech-preview/pilot:0.6.0
-openshift-istio-tech-preview/proxy-init:0.6.0
-openshift-istio-tech-preview/sidecar-injector:0.6.0
-openshift-istio-tech-preview/mixer:0.6.0
-openshift-istio-tech-preview/galley:0.6.0
 openshift3/jenkins-1-rhel7:latest
 openshift3/mongodb-24-rhel7:latest
 openshift3/mysql-55-rhel7:latest
