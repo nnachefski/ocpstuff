@@ -82,6 +82,10 @@ sed -i 's/\:5000/\:443/' /etc/docker-distribution/registry/config.yml
 ```
 systemctl restart docker-distribution
 ```
+##### # install apache
+```
+yum install httpd -y
+```
 ##### # copy the cert to the webroot for your clients to pull from
 ```
 cp -f /etc/docker/certs.d/$MY_REPO/$MY_REPO.cert /var/www/html/repo
