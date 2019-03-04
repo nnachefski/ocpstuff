@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/python36
 import sys, os, argparse, json
 from subprocess import DEVNULL, STDOUT, check_call, check_output
 
