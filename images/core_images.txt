@@ -49,6 +49,6 @@ rhel7.5:latest
 rhel7/etcd:3.2.22
 rhel7/etcd:latest
 rhel7/rhel-tools:latest
-rhgs3/rhgs-gluster-block-prov-rhel7:latest
-rhgs3/rhgs-server-rhel7:latest
-rhgs3/rhgs-volmanager-rhel7:latest
+rhgs3/rhgs-gluster-block-prov-rhel7:v3.11
+rhgs3/rhgs-server-rhel7:v3.11
+rhgs3/rhgs-volmanager-rhel7:v3.11
