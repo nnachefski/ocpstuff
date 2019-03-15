@@ -82,6 +82,7 @@ https://raw.githubusercontent.com/nnachefski/ocpstuff/master/install/generate-an
 ###### # if on AWS, use --private-key=your_key.pem
 ```
 ansible "*" -m script -a "prep.sh $RHN_PASSWD"
+ansible "*" -m script -a "prep.sh $RHN_PASSWD"  --private-key ~/.ssh/id_rsa
 ```
 ###### # reboot if necessary
 ```
