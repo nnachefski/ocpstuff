@@ -1,6 +1,6 @@
 #### # on the ansible control host (master01 in my case)
 ```
-export MAISTRA_BASE=https://raw.githubusercontent.com/Maistra/openshift-ansible/maistra-0.7
+export MAISTRA_BASE=https://raw.githubusercontent.com/Maistra/openshift-ansible/maistra-0.9
 ```
 ##### # use ansible to patch the master-config on all masters
 ```
