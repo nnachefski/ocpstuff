@@ -9,16 +9,16 @@ spec:
     authentication: true
     community: false
     prefix: openshift-istio-tech-preview/
-    version: 0.5.0
+    version: 0.9.0
   jaeger:
     prefix: distributed-tracing-tech-preview/
-    version: 1.8.1
+    version: 1.11.0
     elasticsearch_memory: 1Gi
   kiali:
     username: admin
     password: welcome1
     prefix: kiali/
-    version: v0.10.1
+    version: v0.15.0
   launcher:
     openshift:
       user: admin
@@ -28,6 +28,21 @@ spec:
       token: mytoken
     catalog:
       filter: booster.mission.metadata.istio
-      branch: v71
+      branch: v85
       repo: https://github.com/fabric8-launcher/launcher-booster-catalog.git
-
+  threeScale:
+    enabled: false
+    prefix: openshift-istio-tech-preview/
+    version: 0.4.1
+    adapter:
+      listenAddr: 3333
+      logLevel: info
+      logJSON: true
+      reportMetrics: true
+      metricsPort: 8080
+      cacheTTLSeconds: 300
+      cacheRefreshSeconds: 180
+      cacheEntriesMax: 1000
+      cacheRefreshRetries: 1
+      allowInsecureConn: false
+      clientTimeoutSeconds: 10
