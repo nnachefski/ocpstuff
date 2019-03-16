@@ -72,13 +72,11 @@ oc patch dc docker-registry -p ''
 ```
 ##### # work-around host mount the entire /etc/pki dir
 ```
-oc patch dc docker-registry -p '{"spec":{"template":{"spec":{"containers":[{"name":"registry","volumeMounts":[{"mountPath":"/etc/pki","name":"certs"}]}],"volumes":[{"hostPath":{"path":"/etc/pki","type":"Directory"},"name":"certs"}]}}}}' -n default
+#oc patch dc docker-registry -p '{"spec":{"template":{"spec":{"containers":[{"name":"registry","volumeMounts":[{"mountPath":"/etc/pki","name":"certs"}]}],"volumes":[{"hostPath":{"path":"/etc/pki","type":"Directory"},"name":"certs"}]}}}}' -n default
 
 oc adm policy add-scc-to-user hostaccess -z registry -n default
 
-ansible "infra*" -a "sed -i 's/=enforcing/=permissive/' /etc/selinux/config"
-
-ansible "infra*" -a "setenforce 0" 
+ansible "*" -m shell -a "chcon -R -t container_file_t  /etc/pki"
 
 ```
 ##### # change node role
