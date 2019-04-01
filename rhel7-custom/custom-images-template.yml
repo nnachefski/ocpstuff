@@ -30,7 +30,7 @@ items:
         - name: SKIP_REPOS_DISABLE
           value: "true"
         - name: SKIP_REPOS_ENABLE
-          value: "true"
+          value: "false"
         from:
           kind: ImageStreamTag
           name: rhel7.6:latest
@@ -79,7 +79,7 @@ items:
         - name: SKIP_REPOS_DISABLE
           value: "true"
         - name: SKIP_REPOS_ENABLE
-          value: "true"
+          value: "false"
         from:
           kind: ImageStreamTag
           name: rhel7-custom:latest
@@ -129,7 +129,7 @@ items:
         - name: SKIP_REPOS_DISABLE
           value: "true"
         - name: SKIP_REPOS_ENABLE
-          value: "true"
+          value: "false"
         from:
           kind: ImageStreamTag
           name: s2i-custom-core:latest
@@ -179,7 +179,7 @@ items:
         - name: SKIP_REPOS_DISABLE
           value: "true"
         - name: SKIP_REPOS_ENABLE
-          value: "true"
+          value: "false"
         from:
           kind: ImageStreamTag
           name: s2i-custom-base:latest
@@ -229,7 +229,7 @@ items:
         - name: SKIP_REPOS_DISABLE
           value: "true"
         - name: SKIP_REPOS_ENABLE
-          value: "true"
+          value: "false"
         from:
           kind: ImageStreamTag
           name: s2i-custom-base:latest
