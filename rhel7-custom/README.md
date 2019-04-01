@@ -45,9 +45,9 @@ oc start-build s2i-custom-base -n $PROJECT
 ```
 ##### # now lets build our 'builder' images for each runtime
 
-#### # python 3.6
+#### # python 3.7
 ```
-oc new-build https://github.com/sclorg/s2i-python-container.git -i s2i-custom-base --context-dir=3.6 --name=s2i-custom-python37 --strategy=docker -n $PROJECT -e SKIP_REPOS_ENABLE=false -e SKIP_REPOS_DISABLE=true
+oc new-build https://github.com/sclorg/s2i-python-container.git -i s2i-custom-base --context-dir=3.7 --name=s2i-custom-python37 --strategy=docker -n $PROJECT -e SKIP_REPOS_ENABLE=false -e SKIP_REPOS_DISABLE=true
 ```
 ##### # work-around, again
 ```
