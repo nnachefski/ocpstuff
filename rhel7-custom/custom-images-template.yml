@@ -33,7 +33,7 @@ items:
           value: "true"
         from:
           kind: ImageStreamTag
-          name: rhel7.5:latest
+          name: rhel7.6:latest
       type: Docker
     successfulBuildsHistoryLimit: 5
     triggers:
