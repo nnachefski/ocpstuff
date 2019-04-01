@@ -155,15 +155,15 @@ items:
       openshift.io/generated-by: OpenShiftNewBuild
     creationTimestamp: null
     labels:
-      build: s2i-custom-python35
-    name: s2i-custom-python35
+      build: s2i-custom-python36
+    name: s2i-custom-python36
   spec:
     failedBuildsHistoryLimit: 5
     nodeSelector: null
     output:
       to:
         kind: ImageStreamTag
-        name: s2i-custom-python35:latest
+        name: s2i-custom-python36:latest
     postCommit: {}
     resources: {}
     runPolicy: Serial
@@ -331,8 +331,8 @@ items:
     creationTimestamp: null
     generation: 2
     labels:
-      build: s2i-custom-python35
-    name: s2i-custom-python35
+      build: s2i-custom-python36
+    name: s2i-custom-python36
   spec:
     lookupPolicy:
       local: false
@@ -341,7 +341,7 @@ items:
         tags: builder,python
       from:
         kind: DockerImage
-        name: docker-registry.default.svc:5000/openshift/s2i-custom-python35:latest
+        name: docker-registry.default.svc:5000/openshift/s2i-custom-python36:latest
       generation: 2
       importPolicy: {}
       name: latest
