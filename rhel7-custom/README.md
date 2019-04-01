@@ -54,14 +54,14 @@ oc new-build https://github.com/sclorg/s2i-python-container.git -i s2i-custom-ba
 oc patch bc s2i-custom-python36 -p '{"spec":{"strategy":{"dockerStrategy":{"dockerfilePath": "Dockerfile.rhel7"}}}}' -n $PROJECT
 oc start-build s2i-custom-python36 -n $PROJECT
 ```
-##### # now build nodejs 8 custom image
+##### # now build nodejs 10 custom image
 ```
-oc new-build https://github.com/sclorg/s2i-nodejs-container.git -i s2i-custom-base --context-dir=8 --name=s2i-custom-nodejs8 --strategy=docker -n $PROJECT -e SKIP_REPOS_ENABLE=false -e SKIP_REPOS_DISABLE=true
+oc new-build https://github.com/sclorg/s2i-nodejs-container.git -i s2i-custom-base --context-dir=10 --name=s2i-custom-nodejs10 --strategy=docker -n $PROJECT -e SKIP_REPOS_ENABLE=false -e SKIP_REPOS_DISABLE=true
 ```
 ##### # work-around, again
 ```
-oc patch bc s2i-custom-nodejs8 -p '{"spec":{"strategy":{"dockerStrategy":{"dockerfilePath": "Dockerfile.rhel7"}}}}' -n $PROJECT
-oc start-build s2i-custom-nodejs8 -n $PROJECT
+oc patch bc s2i-custom-nodejs10 -p '{"spec":{"strategy":{"dockerStrategy":{"dockerfilePath": "Dockerfile.rhel7"}}}}' -n $PROJECT
+oc start-build s2i-custom-nodejs10 -n $PROJECT
 ```
 #### # build whatever else runtimes you need
 #### # https://github.com/sclorg
@@ -79,7 +79,7 @@ oc policy add-role-to-group system:image-puller system:serviceaccounts:custom-s2
 ##### # add your custom image to the service catalog as a 'builder' image
 ```
 oc patch is s2i-custom-python36 -p '{"spec":{"tags":[{"annotations":{"tags":"builder,python"},"name":"latest"}]}}' -n $PROJECT
-oc patch is s2i-custom-nodejs8 -p '{"spec":{"tags":[{"annotations":{"tags":"builder,nodejs"},"name":"latest"}]}}' -n $PROJECT
+oc patch is s2i-custom-nodejs10 -p '{"spec":{"tags":[{"annotations":{"tags":"builder,nodejs"},"name":"latest"}]}}' -n $PROJECT
 ```
 ##### # and finally, create the app
 ```
