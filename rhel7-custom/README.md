@@ -9,7 +9,7 @@ oc import-image satellite.home.nicknach.net:8888/rhel7.6 --confirm -n openshift
 oc create -f https://raw.githubusercontent.com/nnachefski/ocpstuff/master/rhel7-custom/custom-images-template.yml -n openshift
 ```
 ###### # The command used to generate this template is: 
-###### # oc export bc,is rhel7-custom s2i-custom-core s2i-custom-base s2i-custom-python37 s2i-custom-nodejs10 -n openshift > custom-images-template.yml
+###### # oc export bc,is rhel7-custom s2i-custom-core s2i-custom-base s2i-custom-python36 s2i-custom-nodejs10 -n openshift > custom-images-template.yml
 #### # Begin
 ###### # the idea is to clone and then customize the rhel7-custom folder/image.  Insert your org's certs, gpgkeys, repo files, etc...  Then, you can build (and provide) customized runtime images to your developers and operations teams.
 
@@ -45,14 +45,14 @@ oc start-build s2i-custom-base -n $PROJECT
 ```
 ##### # now lets build our 'builder' images for each runtime
 
-#### # python 3.7
+#### # python 3.6
 ```
-oc new-build https://github.com/sclorg/s2i-python-container.git -i s2i-custom-base --context-dir=3.7 --name=s2i-custom-python37 --strategy=docker -n $PROJECT -e SKIP_REPOS_ENABLE=false -e SKIP_REPOS_DISABLE=true
+oc new-build https://github.com/sclorg/s2i-python-container.git -i s2i-custom-base --context-dir=3.6 --name=s2i-custom-python36 --strategy=docker -n $PROJECT -e SKIP_REPOS_ENABLE=false -e SKIP_REPOS_DISABLE=true
 ```
 ##### # work-around, again
 ```
-oc patch bc s2i-custom-python37 -p '{"spec":{"strategy":{"dockerStrategy":{"dockerfilePath": "Dockerfile.rhel7"}}}}' -n $PROJECT
-oc start-build s2i-custom-python37 -n $PROJECT
+oc patch bc s2i-custom-python36 -p '{"spec":{"strategy":{"dockerStrategy":{"dockerfilePath": "Dockerfile.rhel7"}}}}' -n $PROJECT
+oc start-build s2i-custom-python36 -n $PROJECT
 ```
 ##### # now build nodejs 10 custom image
 ```
@@ -78,12 +78,12 @@ oc policy add-role-to-group system:image-puller system:serviceaccounts:custom-s2
 ```
 ##### # add your custom image to the service catalog as a 'builder' image
 ```
-oc patch is s2i-custom-python37 -p '{"spec":{"tags":[{"annotations":{"tags":"builder,python"},"name":"latest"}]}}' -n $PROJECT
+oc patch is s2i-custom-python36 -p '{"spec":{"tags":[{"annotations":{"tags":"builder,python"},"name":"latest"}]}}' -n $PROJECT
 oc patch is s2i-custom-nodejs10 -p '{"spec":{"tags":[{"annotations":{"tags":"builder,nodejs"},"name":"latest"}]}}' -n $PROJECT
 ```
 ##### # and finally, create the app
 ```
-oc new-app https://github.com/nnachefski/pydemo.git -i s2i-custom-python37 --name=pydemo
+oc new-app https://github.com/nnachefski/pydemo.git -i s2i-custom-python36 --name=pydemo
 ```
 ###### # click to the terminal tab and look for the files that you added to the rhel7-custom base image
 ##### # now make a change to your rhel7-custom base image and watch all the dependent apps/images get rebuilt auto-magically (via ImageChange triggers)
