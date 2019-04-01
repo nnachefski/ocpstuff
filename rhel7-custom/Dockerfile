@@ -1,4 +1,4 @@
-FROM satellite.home.nicknach.net:8888/rhel7.5
+FROM satellite.home.nicknach.net:8888/rhel7.6:latest
 
 ENV SKIP_REPOS_ENABLE=true \
 SKIP_REPOS_DISABLE=true
