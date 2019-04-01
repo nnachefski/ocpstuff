@@ -168,7 +168,7 @@ items:
     resources: {}
     runPolicy: Serial
     source:
-      contextDir: "3.5"
+      contextDir: "3.6"
       git:
         uri: https://github.com/sclorg/s2i-python-container.git
       type: Git
