@@ -155,20 +155,20 @@ items:
       openshift.io/generated-by: OpenShiftNewBuild
     creationTimestamp: null
     labels:
-      build: s2i-custom-python36
-    name: s2i-custom-python36
+      build: s2i-custom-python37
+    name: s2i-custom-python37
   spec:
     failedBuildsHistoryLimit: 5
     nodeSelector: null
     output:
       to:
         kind: ImageStreamTag
-        name: s2i-custom-python36:latest
+        name: s2i-custom-python37:latest
     postCommit: {}
     resources: {}
     runPolicy: Serial
     source:
-      contextDir: "3.6"
+      contextDir: "3.7"
       git:
         uri: https://github.com/sclorg/s2i-python-container.git
       type: Git
@@ -331,8 +331,8 @@ items:
     creationTimestamp: null
     generation: 2
     labels:
-      build: s2i-custom-python36
-    name: s2i-custom-python36
+      build: s2i-custom-python37
+    name: s2i-custom-python37
   spec:
     lookupPolicy:
       local: false
@@ -341,7 +341,7 @@ items:
         tags: builder,python
       from:
         kind: DockerImage
-        name: docker-registry.default.svc:5000/openshift/s2i-custom-python36:latest
+        name: docker-registry.default.svc:5000/openshift/s2i-custom-python37:latest
       generation: 2
       importPolicy: {}
       name: latest
