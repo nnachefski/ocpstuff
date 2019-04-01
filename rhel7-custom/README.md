@@ -5,7 +5,7 @@
 #### # You can either run through these steps one-at-a-time, or take the easy way and import the template below.
 
 ```
-oc import-image repo.home.nicknach.net/rhel7.6 --confirm -n openshift
+oc import-image satellite.home.nicknach.net:8888/rhel7.6 --confirm -n openshift
 oc create -f https://raw.githubusercontent.com/nnachefski/ocpstuff/master/rhel7-custom/custom-images-template.yml -n openshift
 ```
 ###### # The command used to generate this template is: 
