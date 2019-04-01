@@ -9,7 +9,7 @@ oc import-image satellite.home.nicknach.net:8888/rhel7.6 --confirm -n openshift
 oc create -f https://raw.githubusercontent.com/nnachefski/ocpstuff/master/rhel7-custom/custom-images-template.yml -n openshift
 ```
 ###### # The command used to generate this template is: 
-###### # oc export bc,is rhel7-custom s2i-custom-core s2i-custom-base s2i-custom-python36 s2i-custom-nodejs8 -n openshift > custom-images-template.yml
+###### # oc export bc,is rhel7-custom s2i-custom-core s2i-custom-base s2i-custom-python36 s2i-custom-nodejs10 -n openshift > custom-images-template.yml
 #### # Begin
 ###### # the idea is to clone and then customize the rhel7-custom folder/image.  Insert your org's certs, gpgkeys, repo files, etc...  Then, you can build (and provide) customized runtime images to your developers and operations teams.
 
