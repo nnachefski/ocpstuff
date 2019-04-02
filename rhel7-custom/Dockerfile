@@ -14,5 +14,3 @@ COPY certs/*.crt /etc/pki/ca-trust/source/anchors
 
 RUN update-ca-trust extract
 RUN update-ca-trust
-
-USER 1001
