@@ -15,4 +15,4 @@ COPY certs/*.crt /etc/pki/ca-trust/source/anchors
 RUN update-ca-trust extract
 RUN update-ca-trust
 
-RUN yum repolist
+USER 1001
