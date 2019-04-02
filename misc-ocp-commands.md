@@ -8,6 +8,13 @@ oc adm policy add-scc-to-user anyuid -z useroot
 oc patch dc/rhel-tools -p '{"spec":{"template":{"spec":{"serviceAccountName": "useroot"}}}}'
 ```
 
+##### # git commands
+```
+git config credential.helper store
+git add .
+git commit -m "test"
+git push -u origin master
+```
 #### # work-around for x509 error on private registry.  
 ##### # add this to master-config.yaml on all masters
 ```
