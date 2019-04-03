@@ -10,11 +10,16 @@ oc patch dc/rhel-tools -p '{"spec":{"template":{"spec":{"serviceAccountName": "u
 
 ##### # git commands
 ```
+git remote remove origin
 git config credential.helper store
 git config --global http.sslVerify "false"
+git config --global user.email "nick@desktop.home.nicknach.net"
+git config --global user.name "Nick Nachefski"
+
 git add .
 git commit -m "test"
 git push -u origin master
+
 ```
 #### # work-around for x509 error on private registry.  
 ##### # add this to master-config.yaml on all masters
