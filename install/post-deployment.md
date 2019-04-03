@@ -27,3 +27,13 @@ oc adm manage-node --selector=node-role.kubernetes.io/master=true --schedulable=
 
 ### # Now run through the rhel7-custom image build guide
 #### # https://github.com/nnachefski/ocpstuff/tree/master/rhel7-custom
+
+##### # disconnected post-install items
+```
+ansible "*" -m copy -a "src=/etc/origin/master/ca.crt dest=/etc/pki/ca-trust/source/anchors/ca.crt"
+ansible "*" -m shell -a "update-ca-trust"
+
+oc patch dc docker-registry -p '{"spec":{"template":{"spec":{"containers":[{"name":"registry","volumeMounts":[{"mountPath":"/etc/pki","name":"certs"}]}],"volumes":[{"hostPath":{"path":"/etc/pki","type":"Directory"},"name":"certs"}]}}}}' -n default
+oc adm policy add-scc-to-user hostaccess -z registry -n default
+ansible "*" -m shell -a "chcon -R -t container_file_t  /etc/pki"
+```
