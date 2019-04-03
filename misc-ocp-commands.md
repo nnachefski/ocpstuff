@@ -1,5 +1,13 @@
 ### # misc stuff
 
+##### # binary deploy
+```
+oc new-build --name=helloworld --binary=true -i jboss-webserver30-tomcat7-openshift:1.3
+oc start-build helloworld --from-dir=.
+oc new-app helloworld
+oc expose svc/helloworld
+```
+
 ##### # start a debug pod on the platform for troubleshooting
 ```
 oc run rhel-tools --image satellite.home.nicknach.net:8888/rhel7/rhel-tools:latest --command -- sleep 500
