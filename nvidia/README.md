@@ -15,14 +15,9 @@ rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 ```
 rpm -ivh https://developer.download.nvidia.com/compute/cuda/repos/rhel7/x86_64/cuda-repo-rhel7-9.1.85-1.x86_64.rpm 
 ```
-##### # install your nvidia drivers (this should blacklist nouveau)
+##### # install your nvidia drivers and cuda (this should blacklist nouveau)
 ```
-yum -y install nvidia-driver
-```
-###### # reboot now
-##### # after reboot, install cuda
-```
-yum -y install cuda-9-1
+yum -y install cuda-10-1
 ```
 ##### # after reboot, do this to ensure your nvidia drivers have bee properly installed
 ```
