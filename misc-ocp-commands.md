@@ -11,6 +11,7 @@ oc patch dc/rhel-tools -p '{"spec":{"template":{"spec":{"serviceAccountName": "u
 ##### # git commands
 ```
 git config credential.helper store
+git config --global http.sslVerify "false"
 git add .
 git commit -m "test"
 git push -u origin master
