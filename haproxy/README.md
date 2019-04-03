@@ -1,6 +1,7 @@
 #### # To make the [lb] instance also serve the wildcard domain, add this config to /etc/haproxy/haproxy.cfg
 ```
 cat <<EOF >> /etc/haproxy/haproxy.cfg
+
 frontend  atomic-openshift-app-80
     bind *:80
     default_backend atomic-openshift-app-80
