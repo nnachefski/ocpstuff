@@ -18,7 +18,9 @@ oc patch dc/rhel-tools -p '{"spec":{"template":{"spec":{"serviceAccountName": "u
 
 ##### # git commands
 ```
-git remote remove origin
+#git remote remove origin
+git init
+git remote add origin https://gitlab.home.nicknach.net/nick/rhel7-custom.git
 git config credential.helper store
 git config --global http.sslVerify "false"
 git config --global user.email "nick@desktop.home.nicknach.net"
