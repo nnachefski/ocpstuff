@@ -1,6 +1,6 @@
 ##### # 
 ```
-export CODEREADY_TAR=codeready-workspaces-1.1.0.GA-operator-installer.tar.gz
+export CODEREADY_TAR=codeready-workspaces-1.2.1.GA-operator-installer.tar.gz
 cd ~
 wget http://satellite.home.nicknach.net/pub/$CODEREADY_TAR
 tar -xzvf $CODEREADY_TAR
