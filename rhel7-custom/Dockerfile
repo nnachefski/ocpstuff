@@ -1,4 +1,4 @@
-FROM rhel7.6:latest
+FROM openshift/rhel7.6:latest
 
 ENV SKIP_REPOS_ENABLE=true \
 SKIP_REPOS_DISABLE=true
