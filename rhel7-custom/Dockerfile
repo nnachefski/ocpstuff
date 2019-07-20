@@ -1,4 +1,4 @@
-FROM ubi8:latest
+FROM openshift/ubi8:latest
 
 #ENV SKIP_REPOS_ENABLE=true \
 #SKIP_REPOS_DISABLE=true
