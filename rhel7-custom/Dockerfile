@@ -1,4 +1,4 @@
-FROM rhel7.6:latest
+FROM ubi8:latest
 
 ENV SKIP_REPOS_ENABLE=true \
 SKIP_REPOS_DISABLE=true
